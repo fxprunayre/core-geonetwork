@@ -658,7 +658,9 @@ public class LuceneConfig {
 						paramsClass[i] = double.class;
 					} else if ("int".equals(paramType)) {
 						paramsClass[i] = int.class;
-					} else {
+					} else if ("boolean".equals(paramType)) {
+                        paramsClass[i] = boolean.class;
+                    } else {
 						paramsClass[i] = Class.forName(paramType);
 					}
 
@@ -677,7 +679,9 @@ public class LuceneConfig {
 						params[i] = Double.parseDouble(value);
 					} else if ("int".equals(paramType) && value != null) {
 						params[i] = Integer.parseInt(value);
-					} else if (value != null) {
+					} else if ("boolean".equals(paramType) && value != null) {
+                        params[i] = Boolean.parseBoolean(value);
+                    } else if (value != null) {
 						params[i] = value;
 					} else {
 						// No value. eg. Version
