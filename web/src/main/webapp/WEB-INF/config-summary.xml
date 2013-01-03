@@ -16,6 +16,7 @@
 <summary>
 	<def>
 		<hits>
+			<item name="inspiretheme_en" plural="inspirethemes_en" indexKey="inspiretheme_en" sortBy="value" sortOrder="asc" max="35"/>
 			<item name="keyword" plural="keywords" indexKey="keyword" max="15"/>
 			<item name="inspireTheme" plural="inspireThemes" indexKey="inspiretheme" sortBy="value" sortOrder="asc" max="35"/>
 			<item name="denominator" plural="denominators" indexKey="denominator" sortBy="numValue" sortOrder="desc"/>
@@ -26,6 +27,14 @@
 			<item name="type" plural="types" indexKey="type"/>
 			<item name="createDateYear" plural="createDateYears" indexKey="createDateYear"
 				sortBy="value" sortOrder="desc" max="40"/>
+			
+			<item name="icesParamSyn" plural="icesParamSyn" indexKey="icesParamSyn"/>
+			<item name="faoFishSyn" plural="faoFishSyn" indexKey="faoFishSyn"/>
+			<item name="aphiaSpeciesSyn" plural="aphiaSpeciesSyn" indexKey="aphiaSpeciesSyn"/>
+			<item name="aphiaOrderSyn" plural="aphiaOrderSyn" indexKey="aphiaOrderSyn"/>
+			<item name="aphiaGenusSyn" plural="aphiaGenusSyn" indexKey="aphiaGenusSyn"/>
+			<item name="aphiaFamilySyn" plural="aphiaFamilySyn" indexKey="aphiaFamilySyn"/>
+			
 		</hits>
 		<titles>
 			<item name="title" plural="titles" indexKey="title" sortBy="freq" sortOrder="desc" max="100"

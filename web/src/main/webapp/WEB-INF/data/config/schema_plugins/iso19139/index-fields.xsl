@@ -176,12 +176,23 @@
 			</xsl:for-each>
 
 			<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->		
+			<xsl:for-each select="//gmd:thesaurusName">
+				<!-- Extract thesaurus name stored in Anchor or CharacterString usually-->
+				<Field name="thesaurusName" string="{gmd:CI_Citation/gmd:title/*[1]}" store="true" index="true"/>
+			</xsl:for-each>
 
 			<xsl:for-each select="//gmd:MD_Keywords">
 			  
 				<xsl:for-each select="gmd:keyword/gco:CharacterString|gmd:keyword/gmx:Anchor|gmd:keyword/gmd:PT_FreeText/gmd:textGroup/gmd:LocalisedCharacterString">
                     <xsl:variable name="keywordLower" select="lower-case(.)"/>
                     <Field name="keyword" string="{string(.)}" store="true" index="true"/>
+					<Field name="icesParam" string="{string(.)}" store="false" index="true"/>
+					<Field name="faoFish" string="{string(.)}" store="false" index="true"/>
+					<Field name="aphiaSpecies" string="{string(.)}" store="false" index="true"/>
+					
+					<Field name="aphiaOrder" string="{string(.)}" store="false" index="true"/>
+					<Field name="aphiaGenus" string="{string(.)}" store="false" index="true"/>
+					<Field name="aphiaFamily" string="{string(.)}" store="false" index="true"/>
 					
                     <xsl:if test="$inspire='true'">
                         <xsl:if test="string-length(.) &gt; 0">
@@ -198,6 +209,15 @@
                             <!-- Maybe we should add the english version to the index to not take the language into account 
                             or create one field in the metadata language and one in english ? -->
                             <Field name="inspiretheme" string="{string(.)}" store="false" index="true"/>
+                          	
+                          	<xsl:variable name="englishKeywordMixedCase">
+                          		<xsl:call-template name="translateInspireThemeToEnglish">
+                          			<xsl:with-param name="keyword" select="string(.)"/>
+                          			<xsl:with-param name="inspireThemes" select="$inspire-theme"/>
+                          		</xsl:call-template>
+                          	</xsl:variable>
+                          	<Field name="inspiretheme_en" string="{$englishKeywordMixedCase}" store="false" index="true"/>
+                          	
                           	<Field name="inspireannex" string="{$inspireannex}" store="false" index="true"/>
                             <!-- FIXME : inspirecat field will be set multiple time if one record has many themes -->
                           	<Field name="inspirecat" string="true" store="false" index="true"/>

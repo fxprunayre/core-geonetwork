@@ -13,7 +13,7 @@
     <MergeFactor>10</MergeFactor>
 
     <!-- Default Lucene version to use (mainly for Analyzer creation). -->
-    <luceneVersion>36</luceneVersion>
+    <luceneVersion>40</luceneVersion>
     <!-- How often to check if a commit is required -->
     <commitInterval>30000</commitInterval>
     <!-- If true then NRTManagerReopenThread will control how often the reader are reopened.
@@ -113,6 +113,7 @@
       <field name="keyword" tagName="keyword"/>
       <field name="parentUuid" tagName="parentId"/>
       <field name="type" tagName="type"/>
+      <field name="icesParam" tagName="icesParam"/>
       <field name="image" tagName="image"/>
       <field name="link" tagName="link"/>
       <field name="credit" tagName="credit"/>
@@ -194,7 +195,40 @@
     <Field name="subject" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     <Field name="_cat" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     
-
+    <Field name="icesParam" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/icesRecoExport.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    
+    <Field name="faoFish" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/faoFish.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    
+    <Field name="aphiaSpecies" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/aphiaWithVernacularOnly.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    <Field name="aphiaOrder" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/aphiaUpToOrder.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    <Field name="aphiaGenus" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/aphiaUpToGenus.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    <Field name="aphiaFamily" analyzer="org.fao.geonet.kernel.search.analysis.SynonymAnalyzer">
+      <Param name="file" type="java.io.File" value="/tmp/msfd/aphiaUpToFamily.txt"/>
+      <Param name="ignoreCase" type="boolean" value="false"/>
+      <Param name="keepOnlyMatchingTerms" type="boolean" value="true"/>
+    </Field>
+    
+    
     <Field name="keyword" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     <Field name="inspirerelated" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
     <Field name="_groupPublished" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
@@ -210,6 +244,13 @@
       need to add those synonyms for search if users search for Londres, it will match.
       We only need synonym expansion during indexing or during searching, not both.
     -->
+    <Field name="icesParam" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="faoFish" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="aphiaSpecies" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="aphiaOrder" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="aphiaGenus" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    <Field name="aphiaFamily" analyzer="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+    
   </fieldSpecificSearchAnalyzer>
   
   <!-- Document boosting configuration. 
@@ -267,12 +308,20 @@
        is impossible unfortunately from Lucene API to work out which fields are
         tokenized and which aren't unless we read documents and we may not have
         an index to do this on so since most fields are not tokenized we 
-        keep a list of tokenized fields here
+        keep a list of tokenized fields here.
+        
+        True if this field's value should be analyzed by the Analyzer.
    -->
   <tokenized>
     <Field name="any"/>
     <Field name="abstract"/>
     <Field name="title"/>
+    <Field name="aphiaSpecies"/>
+    <Field name="aphiaOrder"/>
+    <Field name="aphiaGenus"/>
+    <Field name="aphiaFamily"/>
+    <Field name="icesParam"/>
+    <Field name="faoFish"/>
     <Field name="altTitle"/>
     <Field name="keywordType"/>
     <!--<Field name="orgName"/>-->
