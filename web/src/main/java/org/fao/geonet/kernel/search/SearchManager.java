@@ -24,6 +24,7 @@ package org.fao.geonet.kernel.search;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +59,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.DocumentStoredFieldVisitor;
 import org.apache.lucene.document.DoubleField;
@@ -175,6 +179,8 @@ public class SearchManager {
 	private final LuceneOptimizerManager _luceneOptimizerManager;
     private LuceneIndexLanguageTracker _tracker;
 
+    // TODO move to Lucene config
+    Set<String> synonymFields = new HashSet<String>();
 
     public SettingInfo get_settingInfo() {
         return _settingInfo;
@@ -495,7 +501,14 @@ public class SearchManager {
 		_luceneConfig = lc;
 		_summaryConfigValues = _luceneConfig.getTaxonomy().get("hits");
         _settingInfo = si;
-
+        
+        this.synonymFields.add("faoFish");
+        this.synonymFields.add("icesParam");
+        this.synonymFields.add("aphiaSpecies");
+        this.synonymFields.add("aphiaFamily");
+        this.synonymFields.add("aphiaGenus");
+        this.synonymFields.add("aphiaOrder");
+        
 		_stylesheetsDir = new File(appPath, SEARCH_STYLESHEETS_DIR_PATH);
         _stopwordsDir = new File(appPath + STOPWORDS_DIR_PATH);
 
@@ -1451,12 +1464,37 @@ public class SearchManager {
                     
                     // Add value to the taxonomy
                     // TODO : Add all facets whatever the types
-                    if(_luceneConfig.getTaxonomy().get("hits").get(name) != null) {
+                    if(_luceneConfig.getTaxonomy().get("hits").get(name) != null ||
+                            _luceneConfig.getTaxonomy().get("hits").get(name + "Syn") != null) {
                         if(Log.isDebugEnabled(Geonet.INDEX_ENGINE)) {
                             Log.debug(Geonet.INDEX_ENGINE, "Add category path: " + name + " with " + string);
                         }
-                        categories.add(new CategoryPath(name, string));
-                    }
+                        
+                        // If a synonym field, analyze the field
+                        // If one match, create a {fieldName}Syn fields and category path for facet
+                        if (synonymFields.contains(name)) {
+                            List<String> tokenList = new ArrayList<String>();
+                            try {
+                                TokenStream localts = getAnalyzer().tokenStream(name, new StringReader(string));
+                                localts.reset();
+                                CharTermAttribute termAtt = localts.addAttribute(CharTermAttribute.class);
+                                while (localts.incrementToken()) {
+                                    String txt = termAtt.toString();
+                                    tokenList.add(txt);
+                                    System.out.println(String.format("For field %s, %s replaced by token %s.", name, string, txt));
+                                    categories.add(new CategoryPath(name + "Syn", txt));
+                                    f = new Field(name, txt, fieldType);
+                                    doc.add(f);
+                                }
+                            }
+                            catch (Exception e) {
+                                // TODO why swallow
+                                e.printStackTrace();
+                            }
+                        } else {
+                            categories.add(new CategoryPath(name, string));
+                        }
+                    } 
             }
         }
         
