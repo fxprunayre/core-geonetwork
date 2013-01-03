@@ -50,9 +50,15 @@ GeoNetwork.hideLoginLabels = true;
 GeoNetwork.Settings.mdStore = GeoNetwork.data.MetadataResultsFastStore;
 
 // List of facet to display. If none, the server configuration is use.
-GeoNetwork.Settings.facetListConfig = [{name: 'orgNames'}, 
+GeoNetwork.Settings.facetListConfig = [{name: 'inspirethemes_en'},
+                                       {name: 'orgNames'}, 
                                        {name: 'types'},  
-                                       {name: 'serviceTypes'}, 
+                                       {name: 'aphiaFamilySyn'},  
+                                       {name: 'aphiaGenusSyn'},  
+                                       {name: 'aphiaOrderSyn'},  
+                                       {name: 'aphiaSpeciesSyn'}, 
+                                       {name: 'icesParamSyn'},   
+                                       {name: 'faoFishSyn'}, 
                                        {name: 'denominators'}, 
                                        {name: 'keywords'}, 
                                        {name: 'createDateYears'}];
