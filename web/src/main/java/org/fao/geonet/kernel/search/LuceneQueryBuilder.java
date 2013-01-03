@@ -819,27 +819,30 @@ public class LuceneQueryBuilder {
 				query.add(clause);
 			}
             else {
-				// tokenize searchParam only if tokenized when indexing
-				StringTokenizer st = new StringTokenizer(searchParam, STRING_TOKENIZER_DELIMITER);
-				if (st.countTokens() == 1) {
-					String token = st.nextToken();
-					Query subQuery = textFieldToken(token, luceneIndexField, similarity);
-					if (subQuery != null) {
-						booleanClause = new BooleanClause(subQuery, occur);
-					}
-				}
-                else {
-					BooleanQuery booleanQuery = new BooleanQuery();
-					while (st.hasMoreTokens()) {
-						String token = st.nextToken();
-						Query subQuery = textFieldToken(token, luceneIndexField, similarity);
-						if (subQuery != null) {
-							BooleanClause subClause = new BooleanClause(subQuery, occur);
-							booleanQuery.add(subClause);
-						}
-					}
-					booleanClause = new BooleanClause(booleanQuery, occur);
-				}
+                Query subQuery = textFieldToken(searchParam, luceneIndexField, similarity);
+                BooleanClause clause = new BooleanClause(subQuery, occur);
+                query.add(clause);
+//				// tokenize searchParam only if tokenized when indexing
+//				StringTokenizer st = new StringTokenizer(searchParam, STRING_TOKENIZER_DELIMITER);
+//				if (st.countTokens() == 1) {
+//					String token = st.nextToken();
+//					Query subQuery = textFieldToken(token, luceneIndexField, similarity);
+//					if (subQuery != null) {
+//						booleanClause = new BooleanClause(subQuery, occur);
+//					}
+//				}
+//                else {
+//					BooleanQuery booleanQuery = new BooleanQuery();
+//					while (st.hasMoreTokens()) {
+//						String token = st.nextToken();
+//						Query subQuery = textFieldToken(token, luceneIndexField, similarity);
+//						if (subQuery != null) {
+//							BooleanClause subClause = new BooleanClause(subQuery, occur);
+//							booleanQuery.add(subClause);
+//						}
+//					}
+//					booleanClause = new BooleanClause(booleanQuery, occur);
+//				}
 			}
 		}
 		if (booleanClause != null) {
