@@ -159,7 +159,7 @@ public class GetRelated implements Service {
             }
 						Element response = new Element("response");
             if (md != null) {
-                List<?> sibs = Xml.selectNodes(md, "*//gmd:aggregationInfo/*[gmd:aggregateDataSetIdentifier/*/gmd:code and gmd:initiativeType/gmd:DS_InitiativeTypeCode and string(gmd:associationType/gmd:DS_AssociationTypeCode/@codeListValue)='crossReference']", nsList);
+                List<?> sibs = Xml.selectNodes(md, "*//gmd:aggregationInfo/*[gmd:aggregateDataSetIdentifier/*/gmd:code and gmd:initiativeType/gmd:DS_InitiativeTypeCode]", nsList);
 								for (Object o : sibs) {
 									if (o instanceof Element) {
 										Element sib = (Element)o;
@@ -171,12 +171,15 @@ public class GetRelated implements Service {
 														.getChildText("CharacterString", gco);
 										String initType = sib.getChild("initiativeType", gmd) 
 																 .getChild("DS_InitiativeTypeCode", gmd).getAttributeValue("codeListValue");
-
+                                        String assoType = sib.getChild("associationType", gmd) 
+                                                                 .getChild("DS_AssociationTypeCode", gmd).getAttributeValue("codeListValue");
+                                        
 										if(dbms == null) dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
 										Element sibContent = getRecord(sibUuid, context, dbms, dm);
 										if (sibContent != null) {
 											Element sibling = new Element("sibling");
 											sibling.setAttribute("initiative",initType);
+                                            sibling.setAttribute("association",assoType);
 											response.addContent(sibling.addContent(sibContent));
 										}
 									}
@@ -285,7 +288,7 @@ public class GetRelated implements Service {
             if ("children".equals(type))
                 parameters.addContent(new Element("parentUuid").setText(uuid));
             else if ("services".equals(type))
-                parameters.addContent(new Element("c").setText(uuid));
+                parameters.addContent(new Element("operatesOn").setText(uuid));
             else if ("hasfeaturecat".equals(type))
                 parameters.addContent(new Element("hasfeaturecat").setText(uuid));
             else if ("datasets".equals(type) || "fcats".equals(type) || "sources".equals(type) || "siblings".equals(type))

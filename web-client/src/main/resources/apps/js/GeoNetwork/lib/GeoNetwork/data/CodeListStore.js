@@ -48,7 +48,9 @@ GeoNetwork.data.CodeListStore = function(config){
         
     var DataRecord = Ext.data.Record.create(model);
     var store = new Ext.data.Store({
-        fields: model
+        fields: model,
+        idIndex: 0,
+        listeners: config.listeners
     });
     
     // Improve ? Here we use OL to load the response (how to POST body using Ext)
@@ -63,10 +65,12 @@ GeoNetwork.data.CodeListStore = function(config){
                 var record = new DataRecord({
                     code: help[i].getElementsByTagName('code')[0].firstChild.nodeValue,
                     label: help[i].getElementsByTagName('label')[0].firstChild.nodeValue,
-                    description: help[i].getElementsByTagName('description')[0].firstChild.nodeValue
+                    description: help[i].getElementsByTagName('description')[0].firstChild && 
+                        help[i].getElementsByTagName('description')[0].firstChild.nodeValue
                 });
                 store.add(record);
             }
+            store.fireEvent('load');
         }
     });
     

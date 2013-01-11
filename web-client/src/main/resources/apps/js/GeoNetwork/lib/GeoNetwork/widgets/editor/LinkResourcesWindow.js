@@ -20,18 +20,19 @@
  * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
  * Rome - Italy. email: geonetwork@osgeo.org
  */
-Ext.namespace('GeoNetwork.view');
+Ext.namespace('GeoNetwork.editor');
 
 /** api: (define)
- *  module = GeoNetwork.view
- *  class = ViewWindow
+ *  module = GeoNetwork.editor
+ *  class = LinkResourcesWindow
  *  base_link = `Ext.Panel <http://extjs.com/deploy/dev/docs/?class=Ext.Panel>`_
  */
 /** api: constructor 
- *  .. class:: ViewWindow(config)
+ *  .. class:: LinkResourcesWindow(config)
  *
  *     Create a GeoNetwork metadata view window composed of a GeoNetwork.view.Panel
- *     to display a metadata record.
+ *     to create relation between the current metadata in editing and different types
+ *     of resources.
  *
  */
 GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
@@ -49,8 +50,18 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
         maximized: false,
         collapsible: true,
         collapsed: false,
+        singleSelect: true,
         uploadThumbnail: true,
+        uploadDocument: false,
+        metadataSchema: 'iso19139',
         protocolForServices: ['application/vnd.ogc.wms_xml', 'application/vnd.ogc.wfs_xml'],
+        /**
+         * URL parameter separator mainly used
+         * when multiple metadata record could be selected 
+         * with extra descriptor (eg. initiative type and association 
+         * type for a sibling.
+         */
+        separator: '%23',
         hiddenParameters: {
             service: [{
                 name: 'E_type',
@@ -65,19 +76,66 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             fcats: [{
                 name: 'E__schema',
                 value: 'iso19110'
+            }],
+            sibling: [{
+                name: 'E__groupPublished',
+                value: ''
+            }],
+            onlinesrc: [{
+                name: 'E__groupPublished',
+                value: null
             }]
+        },
+        /*
+         * Configuration for sibling per profil and per initiative type
+         * Required for MyOcean
+         * Configuration for online source to restrict to a group
+         */
+        hiddenParametersValues: {
+            sibling: {
+                // Depends on schema
+//                'iso19139.myocean': {
+//                    // and depends on codelist value
+//                    // Updated when codelist change
+//                    document: [{
+//                        id: 'E__groupPublished',
+//                        value: 'MYOCEAN-DOCUMENTS'
+//                    }],
+//                    upstream: [{
+//                        id: 'E__groupPublished',
+//                        value: 'MYOCEAN-UPSTREAM-PRODUCTS'
+//                    }]
+//                }
+            },
+            onlinesrc: {
+                // Depends on schema
+                // Updated when window created
+//                'iso19139.myocean': {
+//                    'E__groupPublished': 'MYOCEAN-SERVICES-AND-DATASETS'
+//                }
+            }
         }
     },
     processMap: {
         parent: 'parentIdentifier-update',
         fcats: 'update-attachFeatureCatalogue',
-        service: 'update-srv-attachDataset',
+        service: 'update-onlineSrc',
         dataset: 'update-srv-attachDataset',
         sibling: 'sibling-add',
+        onlinesrc: 'onlinesrc-add',
         thumbnail: 'thumbnail-from-url-add'
     },
+    /**
+     * The URL of the currently selected metadata
+     */
     serviceUrl: undefined,
+    /**
+     * The URL of the current metadata in editing.
+     * Define only if the metadata is a metadata of service.
+     */
+    mdServiceUrl: undefined,
     serviceProtocol: undefined,
+    canEditTarget: false,
     catalogue: undefined,
     metadataUuid: undefined,
     metadataId: undefined,
@@ -85,6 +143,11 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
     idField: undefined,
     versionField: undefined,
     mdStore: undefined,
+    getCapabilitiesCombo: null,
+    /**
+     * Only used if multiple metadata selection form is provided.
+     */
+    mdSelectedStore: undefined,
     selectedMd: undefined,
     associationType: undefined,
     initiativeType: undefined,
@@ -94,7 +157,6 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
     uploadForm: undefined,
     formPanel: undefined,
     panel: undefined,
-    metadataSchema: undefined,
     /** private: method[initComponent] 
      *  Initializes the metadata view window.
      */
@@ -114,7 +176,6 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             store: this.mdStore,
             triggerAction: function (scope) {
                 scope.doSearch();
-                //scope.search('linkedMetadataGrid', null, null, 1, true, this.mdStore, null);
             },
             scope: this
         });
@@ -123,116 +184,117 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
      * Add hidden textfields in an item list.
      */
     getHiddenFormInput: function (items) {
-        var i;
+        var i, self = this;
+        
         Ext.each(this.hiddenParameters[this.type], function (item) {
+            var value = item.value;
+            if (self.hiddenParametersValues[self.type] && self.hiddenParametersValues[self.type][self.metadataSchema]) {
+                value = self.hiddenParametersValues[self.type][self.metadataSchema][item.name];
+            }
             items.push({
                 xtype: 'textfield',
                 name: item.name,
-                value: item.value,
+                value: value,
                 hidden: true
             });
         });
     },
     getInitiativeTypeStore: function () {
-        // TODO : retrieve from codelist
-        return new Ext.data.ArrayStore({
-            id: 0,
-            fields: ['id', 'name'],
-            data: [['campaign', OpenLayers.i18n('campaign')], 
-                    ['collection', OpenLayers.i18n('collection')], 
-                    ['exercise', OpenLayers.i18n('exercise')], 
-                    ['experiment', OpenLayers.i18n('experiment')], 
-                    ['investigtation', OpenLayers.i18n('investigtation')], 
-                    ['mission', OpenLayers.i18n('mission')], 
-                    ['operation', OpenLayers.i18n('operation')], 
-                    ['platform', OpenLayers.i18n('platform')], 
-                    ['process', OpenLayers.i18n('process')], 
-                    ['program', OpenLayers.i18n('program')], 
-                    ['project', OpenLayers.i18n('project')], 
-                    ['sensor', OpenLayers.i18n('sensor')],
-                    ['study', OpenLayers.i18n('study')],
-                    ['task', OpenLayers.i18n('task')],
-                    ['trial', OpenLayers.i18n('trial')] 
-            ]
+        return GeoNetwork.data.CodeListStore({
+            url: catalogue.services.schemaInfo,
+            schema: this.metadataSchema,
+            codeListName: 'gmd:DS_InitiativeTypeCode'
         });
     },
     getAssociationTypeStore: function () {
-        // TODO : retrieve from codelist
-        return new Ext.data.ArrayStore({
-            id: 0,
-            fields: ['id', 'name'],
-            data: [['crossReference', OpenLayers.i18n('crossReference')], 
-                    ['largerWorkCitation', OpenLayers.i18n('largerWorkCitation')], 
-                    ['partOfSeamlessDatabase', OpenLayers.i18n('partOfSeamlessDatabase')], 
-                    ['source', OpenLayers.i18n('source')], 
-                    ['stereoMate', OpenLayers.i18n('stereoMate')]
-            ]
+        return GeoNetwork.data.CodeListStore({
+            url: catalogue.services.schemaInfo,
+            schema: this.metadataSchema,
+            codeListName: 'gmd:DS_AssociationTypeCode'
         });
     },
     getFormFieldForSibling: function (items) {
         if (this.type === 'sibling') {
 
-            var associationType = {
-                xtype: 'combo',
+            var associationTypeCb = new Ext.form.ComboBox({
                 fieldLabel: OpenLayers.i18n('associationType'),
                 store: this.getAssociationTypeStore(),
-                valueField: 'id',
-                displayField: 'name',
+                valueField: 'code',
+                displayField: 'label',
+                triggerAction: 'all',
                 mode: 'local',
                 listeners: {
                     select: function (combo, record, index) {
-                        this.associationType = combo.getValue();
+                        this.associationType = record;
                     },
                     scope: this
                 }
-            };
+            });
             
-            var initiativeType = {
-                xtype: 'combo',
+            associationTypeCb.getStore().on('load', function () {
+                this.associationType = associationTypeCb.getStore().getAt(0);
+                associationTypeCb.setValue(this.associationType.get('code'));
+                // Hide the combo if only one value available
+                if (associationTypeCb.getStore().getCount() === 1) {
+                    associationTypeCb.setVisible(false);
+                }
+            }, this);
+            
+            var initiativeTypeCb = new Ext.form.ComboBox({
                 fieldLabel: OpenLayers.i18n('initiativeType'),
                 store: this.getInitiativeTypeStore(),
-                valueField: 'id',
-                displayField: 'name',
+                valueField: 'code',
+                displayField: 'label',
                 mode: 'local',
+                triggerAction: 'all',
                 listeners: {
                     select: function (combo, record, index) {
-                        this.initiativeType = combo.getValue();
+                        this.initiativeType = record;
+                        
+                        var allValues = this.hiddenParametersValues.sibling[this.metadataSchema];
+                        
+                        var paramsValue = allValues && allValues[this.initiativeType.get('code')];
+                        if (paramsValue) {
+                            this.formPanel.getForm().setValues(paramsValue);
+                            // Refresh search after form filter update
+                            this.doSearch();
+                        }
                     },
                     scope: this
                 }
-            };
+            });
+            initiativeTypeCb.getStore().on('add', function () {
+                var record = initiativeTypeCb.getStore().getAt(0);
+                this.initiativeType = record;
+                initiativeTypeCb.setValue(record.get('code'));
+                initiativeTypeCb.fireEvent('select', initiativeTypeCb, this.initiativeType);
+            }, this);
             
-            items.push([associationType, initiativeType]);
+            items.push([associationTypeCb, initiativeTypeCb]);
         }
     },
+    /**
+     * Create a form to set the layer name. It could be a simple text
+     * or selected from the service GetCapabilities information.
+     * 
+     * Only WMS service are supported.
+     * 
+     * TODO : Add other service type support.
+     */
     getFormFieldForService: function (items) {
-        // TODO : when the current record is a service provide the URL to init the capabiities
+        var self = this;
+        
         if (this.type === 'service' || this.type === 'dataset') {
             this.capabilitiesStore = new GeoExt.data.WMSCapabilitiesStore({
-                url: this.serviceUrl,
+                url: (this.type === 'dataset' ? this.mdServiceUrl : this.serviceUrl),
                 id: 'capabilitiesStore',
-                // FIXME
                 proxy: new Ext.data.HttpProxy({
-                    url: this.serviceUrl,
+                    url: catalogue.services.proxy,
                     method: 'GET'
                 }),
                 listeners: {
                     exception: function (proxy, type, action, options, res, arg) {
                         Ext.MessageBox.alert(OpenLayers.i18n("error"));
-                    },
-                    beforeload: function () {
-                        // Update store URL according to selected service.
-//                        if (this.mode === 'attachService') {
-//                            var selected = Ext.getCmp('linkedMetadataGrid').getSelectionModel().getSelections();
-//                            if (selected === undefined || selected[0].data.uri === '') {
-//                                Ext.MessageBox.alert(OpenLayers.i18n("noServiceURLError"));
-//                            }
-//                            this.capabilitiesStore.baseParams.url = selected[0].data.uri + 
-//                                        "?&SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.1.1";
-//                        } else 
-                        if (this.type === 'service') {
-                            this.capabilitiesStore.baseParams.url = this.serviceUrl;
-                        }
                     },
                     loadexception: function(){
                         Ext.MessageBox.alert(OpenLayers.i18n("GetCapabilitiesDocumentError") + this.capabilitiesStore.baseParams.url);
@@ -240,21 +302,18 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
                     scope: this
                 }
             });
-            var combo = {
-                xtype: 'combo',
-                id: 'getCapabilitiesLayerNameCombo',
+            this.getCapabilitiesCombo = new Ext.form.ComboBox({
                 fieldLabel: OpenLayers.i18n('getCapabilitiesLayer'),
                 store: this.capabilitiesStore,
                 valueField: 'name',
                 displayField: 'title',
                 triggerAction: 'all',
-                //disabled: (serviceUrl==null?true:false),
                 listeners: {
                     select: function(combo, record, index){
                         Ext.getCmp('getCapabilitiesLayerName').setValue(combo.getValue());
                     }
                 }
-            };
+            });
             var layerName = {
                 xtype: 'textfield',
                 id: 'getCapabilitiesLayerName',
@@ -264,15 +323,550 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
                 listeners: {
                     'change': function (field) {
                         this.layerName = field.getValue();
-                        console.log(this.layerName);
                     },
                     scope: this
                 }
             };
             
-            items.push([combo, layerName]);
+            items.push([this.getCapabilitiesCombo, layerName]);
         }
     },
+    /**
+     * Form for online resource. Online resource could be a document to upload 
+     * a reference to a online resource of another metadata record or 
+     * a URL to a document.
+     * 
+     * A document is described by a URL, name, description and protocol.
+     * 
+     */
+    generateOnlineSrcForm: function () {
+        
+    },
+    /**
+     * Thumbnail form
+     */
+    generateThumbnailForm: function (cancelBt) {
+        var self = this;
+        
+        this.createBt = new Ext.Button({
+            text: OpenLayers.i18n('upload'),
+            formBind: true,
+            iconCls: 'thumbnailGoIcon',
+            ctCls: 'gn-bt-main',
+            scope: this,
+            disabled: true,
+            handler: function () {
+                if (this.uploadForm.getForm().isValid()) {
+                    var panel = this;
+                    if (this.uploadThumbnail) {
+                        this.uploadForm.getForm().submit({
+                            url: this.setThumbnail,
+                            waitMsg: OpenLayers.i18n('uploading'),
+                            success: function (fp, o) {
+                                self.editor.init(self.metadataId);
+                                self.hide();
+                            }
+                        });
+                    } else {
+                        this.runProcess();
+                    }
+                }
+            }
+        });
+        
+        this.idField = new Ext.form.TextField({
+            name: 'id',
+            value: this.metadataId,
+            hidden: true
+        });
+        this.versionField = new Ext.form.TextField({
+            name: 'version',
+            value: this.versionId,
+            hidden: true
+        });
+        this.previewImage = new Ext.BoxComponent({
+            autoEl: {
+                tag: 'img',
+                style: 'padding-left: 100px;',
+                'class': 'thumb-small',
+                src: '../../apps/images/default/nopreview.png'
+            }
+        });
+        var radioURL = new Ext.form.Radio({
+                xtype: 'radio',
+                boxLabel: OpenLayers.i18n('setAURL'),
+                name: 'type',
+                inputValue: 'small',
+                checked: !this.uploadThumbnail,
+                listeners: {
+                    check: function (radio, checked) {
+                        this.uploadThumbnail = !checked;
+                        self.createBt.setDisabled(!self.uploadForm.getComponent(11).validate());
+                    },
+                    scope: this
+                }
+            }),
+            urlField = new Ext.form.TextField({
+                name: 'url',
+                value: '',
+                validator: function (value) {
+                    if (self.uploadThumbnail !== true) {
+                        var isUrl = Ext.form.VTypes.url(value);
+                        if (isUrl) {
+                            // Display the image
+                            self.previewImage.getEl().set({'src': value});
+                            return true;
+                        } else {
+                            self.createBt.setDisabled(true);
+                            return false;
+                        }
+                    } else {
+                        return true;
+                    }
+                },
+                listeners: {
+                    change: function (field) {
+                        var value = field.getValue();
+                        this.serviceUrl = value;
+                        
+                        if (value !== "") {
+                            // Set the URL mode on based on the radio position
+                            radioURL.setValue(true);
+                            self.createBt.setDisabled(false);
+                        }
+                    },
+                    scope: this
+                }
+            }),
+            radioUpload = new Ext.form.Radio({
+                xtype: 'radio',
+                checked: this.uploadThumbnail,
+                boxLabel: OpenLayers.i18n('uploadAnImage'),
+                name: 'type',
+                inputValue: 'large',
+                listeners: {
+                    check: function (radio, checked) {
+                        this.uploadThumbnail = checked;
+                        self.createBt.setDisabled(fileUploadField.getValue() === "");
+                    },
+                    scope: this
+                }
+            }), 
+            // A file upload field for the thumbnail
+            fileUploadField = new Ext.form.FileUploadField({
+                emptyText: OpenLayers.i18n('selectImage'),
+                name: 'fname',
+                buttonText: '',
+                buttonCfg: {
+                    iconCls: 'thumbnailAddIcon'
+                },
+                listeners: {
+                    fileselected: function (cmp, value) {
+                        // Set the upload mode on based on the radio
+                        radioUpload.setValue(true);
+                        self.createBt.setDisabled(value === "");
+                    }
+                }
+            });
+        // TODO : deprecate ThumbnailPanel
+        this.uploadForm = new Ext.form.FormPanel({
+            fileUpload: true,
+            anchor: '100%',
+            defaults: {
+                xtype: 'textfield'
+            },
+            items: [this.idField, this.versionField, radioUpload, {
+                name: 'scalingDir',
+                value: 'width',
+                hidden: true
+            }, {
+                name: 'smallScalingDir',
+                value: 'width',
+                hidden: true
+            }, {
+                name: 'type',
+                value: 'large',
+                hidden: true
+            }, {
+                name: 'scalingFactor',
+                value: '1000',
+                hidden: true
+            }, {
+                xtype: 'textfield',
+                name: 'smallScalingFactor',
+                value: '180',
+                hidden: true
+            }, fileUploadField, {
+                xtype: 'checkbox',
+                checked: false,
+                fieldLabel: '',
+                labelSeparator: '',
+                boxLabel: OpenLayers.i18n('createSmall'),
+                name: 'createSmall',
+                value: 'false'
+            }, 
+            radioURL, 
+            urlField,
+            this.previewImage
+            ],
+            buttons: [this.createBt, cancelBt]
+        });
+        return this.uploadForm;
+    },
+    generateDocumentUploadForm: function (cancelBt) {
+        var self = this;
+        
+        this.idField = new Ext.form.TextField({
+            xtype: 'textfield',
+            name: 'id',
+            value: this.metadataId,
+            hidden: true
+        });
+        this.versionField = new Ext.form.TextField({
+            name: 'version',
+            value: this.versionId,
+            hidden: true
+        });
+        
+        // TODO : create a cusom widget to be shared with ThumbnailPanel
+        this.uploadForm = new Ext.form.FormPanel({
+            fileUpload: true,
+            defaults: {
+                width: 350
+            },
+            items: [this.idField, this.versionField, 
+//                    {
+//                xtype: 'radio',
+//                checked: this.uploadDocument,
+//                fieldLabel: OpenLayers.i18n('uploadADocument'),
+//                name: 'type',
+//                listeners: {
+//                    check: function (radio, checked) {
+//                        this.uploadDocument = checked;
+//                        // TODO : protocol is not needed
+//                    },
+//                    scope: this
+//                }
+//            }, {
+//                name: 'access',
+//                allowBlank: false,
+//                hidden: true,
+//                value: 'private' // FIXME
+//            }, {
+//                name: 'overwrite',
+//                fieldLabel: 'Overwrite',
+//                checked: true,
+//                xtype: 'checkbox'
+//            }, {
+//                xtype: 'fileuploadfield',
+//                emptyText: OpenLayers.i18n('selectFile'),
+//                fieldLabel: 'File',
+//                allowBlank: false,
+//                name: 'f_' + ref,
+//                buttonText: '',
+//                buttonCfg: {
+//                    iconCls: 'uploadIconAdd'
+//                }
+//            }, {
+//                xtype: 'radio',
+//                fieldLabel: OpenLayers.i18n('documentURL'),
+//                name: 'type',
+//                checked: !this.uploadDocument,
+//                listeners: {
+//                    check: function (radio, checked) {
+//                        this.uploadDocument = !checked;
+//                    },
+//                    scope: this
+//                }
+//            }, 
+              {
+                xtype: 'textfield',
+                fieldLabel: OpenLayers.i18n('url'),
+                name: 'href',
+                value: ''
+            }, {
+                xtype: 'textfield',
+                fieldLabel: OpenLayers.i18n('name'),
+                name: 'name',
+                value: ''
+            }, {
+                xtype: 'textarea',
+                fieldLabel: OpenLayers.i18n('desc'),
+                name: 'title',
+                value: ''
+            }, {
+                // TODO : should be a combo
+                xtype: 'textfield',
+                fieldLabel: OpenLayers.i18n('protocol'),
+                name: 'protocol',
+                value: ''
+            }],
+            buttons: [{
+                text: OpenLayers.i18n('upload'),
+                formBind: true,
+                iconCls: 'thumbnailGoIcon',
+                scope: this,
+                handler: function () {
+                    if (this.uploadForm.getForm().isValid()) {
+                        var panel = this;
+                        if (this.uploadDocument) {
+//                            TODO This mode require more work
+//                            The service should upload the document
+//                            and update the metadata record
+//                            instead of only returning the URL of the doc 
+//                            to be added to the metadata 
+//                            
+//                            if (this.uploadForm.getForm().isValid()) {
+//                                this.uploadForm.getForm().submit({
+//                                    url: catalogue.services.upload,
+//                                    waitMsg: OpenLayers.i18n('uploading'),
+//                                    success: function(fileUploadPanel, o){
+////                                        var fname = o.result.fname;
+////                                        var name = Ext.getDom('_' + ref);
+////                                        if (name) {
+////                                            name.value = fname;
+////                                        }
+//                                        // Trigger update
+//                                        self.save();
+//                                        self.hide();
+//                                    }
+//                                    // TODO : improve error message
+//                                    // Currently return  Unexpected token < from ext doDecode
+//                                });
+//                            }
+                        } else {
+                            var form = this.uploadForm.getForm();
+                            this.selectedLink = this.uploadForm.getForm().getValues();
+                            this.runProcess();
+                        }
+                    }
+                }
+            }, cancelBt]
+        });
+        return this.uploadForm;
+    },
+    /**
+     * A metadata search form with a grid
+     * to select a record to link (deprecated).
+     */
+    generateMetadataSearchForm: function (cancelBt) {
+        var self = this;
+        
+        // Metadata relation
+        this.mdStore = GeoNetwork.data.MetadataResultsFastStore();
+        // Create grid with template list
+        var checkboxSM = new Ext.grid.CheckboxSelectionModel({
+            singleSelect: self.type === 'onlinesrc' ? false : this.singleSelect,
+            header: ''
+        });
+        
+        var tplDescription = function (value, p, record) {
+            var links = "";
+            if (self.type === 'service') {
+                Ext.each(record.data.links, function (link) {
+                    // FIXME: restrict
+                    if (self.protocolForServices.join(',').indexOf(link.protocol) !== -1) {
+                        links += '<li><a target="_blank" href="' + link.href + '">' + link.href + '</a></li>';
+                        // FIXME : when service contains multiple URL 
+                        record.data.serviceUrl = link.href;
+                        record.data.serviceProtocol = link.protocol;
+                    }
+                });
+            } else if (record.data.links && self.type === 'onlinesrc') {
+                Ext.each(record.data.links, function (link) {
+                    // FIXME: restrict
+                    links += '<li><a target="_blank" href="' + link.href + '">' + link.href + '</a></li>';
+                });
+            }
+            return String.format(
+                    '<span class="tplTitle">{0}</span><div class="tplDesc">{1}</div><ul>{2}</ul>',
+                    record.data.title, record.data['abstract'], links);
+        };
+        // TODO : add URL for services
+        
+        var tplType = function (value, p, record) {
+            var label = OpenLayers.i18n(record.data.type) || '';
+            
+            if (record.data.spatialRepresentationType) {
+                label += " / " + OpenLayers.i18n(record.data.spatialRepresentationType);
+            }
+            
+            return String.format('{0}', label);
+        };
+        
+        var colModel = new Ext.grid.ColumnModel({
+            defaults: {
+                sortable: true
+            },
+            columns: [
+                checkboxSM,
+                {header: OpenLayers.i18n('metadatatype'), renderer: tplType, dataIndex: 'type'},
+                {id: 'title', header: OpenLayers.i18n('title'), renderer: tplDescription, dataIndex: 'title'},
+                {header: 'Schema', dataIndex: 'schema', hidden: true},
+                {header: 'Link', dataIndex: 'link', hidden: true}
+                // TODO add other columns
+            ]
+        });
+        
+        var grid = new Ext.grid.GridPanel({
+            border: false,
+            anchor: '100% 80%',
+            store: this.mdStore,
+            colModel: colModel,
+            sm: checkboxSM,
+            autoExpandColumn: 'title'
+        });
+        
+        grid.getSelectionModel().on('rowselect', function (sm, rowIndex, r) {
+            if (sm.getCount() !== 0) {
+                this.selectedMd = r.data.uuid;
+                this.serviceUrl = r.data.serviceUrl;
+                this.serviceProtocol = r.data.serviceProtocol;
+                this.canEditTarget = r.data.edit === 'true';
+                // FIXME : only the first metadata link is selected
+                this.selectedLink = r.data.links;
+                
+                var url;
+                // If linking a service, the combo needs to be updated
+                // every time user select a new record in the results list.
+                // Disable the getCapabilities combo
+                if (this.type === 'service') {
+                    url = this.serviceUrl;
+                    this.getCapabilitiesCombo.setDisabled(url === undefined);
+                } else if (this.type === 'dataset'){
+                    url = this.mdServiceUrl;
+                }
+                
+                // Reload the capabilities
+                if (url !== undefined) {
+                    if (url.indexOf('GetCapabilities') === -1) {
+                        url += (url.indexOf("?") === -1 ? "?" : "") + "&SERVICE=WMS&REQUEST=GetCapabilities&VERSION=1.1.1";
+                    }
+                    this.capabilitiesStore.baseParams.url = url;
+                    this.capabilitiesStore.reload({params: {url: url}});
+                } else {
+                    this.capabilitiesStore.removeAll();
+                }
+                
+            } else {
+                this.selectedMd = undefined;
+            }
+            //this.validate();
+        }, this);
+        
+        // Focus on first row
+        grid.getStore().on('load', function (store) {
+            grid.getSelectionModel().selectFirstRow();
+            grid.getView().focusEl.focus();
+        }, grid);
+        
+        var cmp = [];
+        this.getHiddenFormInput(cmp);
+        this.getFormFieldForSibling(cmp);
+        cmp.push(this.getSearchInput());
+        cmp.push(grid);
+        this.getFormFieldForService(cmp);
+        
+        this.formPanel = new Ext.form.FormPanel({
+            items: cmp,
+            buttons: [{
+                text: OpenLayers.i18n('link'),
+                iconCls: 'linkIcon',
+                scope: this,
+                handler: function () {
+                    this.runProcess();
+                }
+            }, cancelBt]
+        });
+        return this.formPanel;
+    },
+    getMultipleMetadataSelectorForSibling: function (cancelBt) {
+        var self = this;
+        
+        this.mdSelectedStore = GeoNetwork.data.MetadataResultsFastStore();
+        this.mdStore = GeoNetwork.data.MetadataResultsFastStore();
+        
+        var fromTpl = new Ext.XTemplate(
+                '<tpl for=".">',
+                    // TODO : add keyword definiton ?
+                    '<div class="ux-mselect-item">{title}</div>',
+                '</tpl>'
+            ), toTpl = new Ext.XTemplate(
+                '<tpl for=".">',
+                    // TODO : add keyword definiton ?
+                    '<div class="ux-mselect-item">{title} ({associationTypeLabel} > {initiativeTypeLabel})</div>',
+                '</tpl>'
+            );
+        
+        var cmp = [];
+        this.getHiddenFormInput(cmp);
+        this.getFormFieldForSibling(cmp);
+
+        cmp.push(this.getSearchInput());
+        
+        var itemSelector = new Ext.ux.ItemSelector({
+            dataFields: ["title"],
+            //toData: [],
+            toStore: this.mdSelectedStore,
+            msWidth: 300,
+            msHeight: 260,
+            valueField: "value",
+            hideLabel: true,
+            toSortField: undefined,
+            fromTpl: fromTpl,
+            toTpl: toTpl,
+            toLegend: OpenLayers.i18n('Selected'),
+            fromLegend: OpenLayers.i18n('Found'),
+            fromStore: this.mdStore,
+            fromAllowTrash: false,
+            fromAllowDup: true,
+            toAllowDup: false,
+            drawUpIcon: false,
+            drawDownIcon: false,
+            drawTopIcon: false,
+            drawBotIcon: false,
+            imagePath: '../../apps/js/ext-ux/images',
+            toTBar: [{
+                // control to clear all select keywwords and refresh the XML.
+                text: OpenLayers.i18n('clear'),
+                handler: function () {
+                    var i = itemSelector;
+                    itemSelector.reset.call(i);
+                },
+                scope: this
+            }],
+        });
+        
+        // Add the initiativeType and associationType info to
+        // the added record.
+        this.mdSelectedStore.on('add', function (store, records, index) {
+            Ext.each(records, function (record) {
+                record.data.initiativeType = self.initiativeType.get('code');
+                record.data.associationType = self.associationType.get('code');
+                record.data.initiativeTypeLabel = self.initiativeType.get('label');
+                record.data.associationTypeLabel = self.associationType.get('label');
+            });
+        });
+        
+        cmp.push(itemSelector);
+        
+        this.formPanel = new Ext.form.FormPanel({
+            items: cmp,
+            buttons: [{
+                text: OpenLayers.i18n('link'),
+                iconCls: 'linkIcon',
+                scope: this,
+                handler: function () {
+                    this.runProcess();
+                }
+            }, cancelBt]
+        });
+        return this.formPanel;
+    },
+    /**
+     * According to the type of resource to link build the
+     * form to populate process parameters.
+     */
     generateMode: function () {
         var self = this;
         
@@ -286,241 +880,95 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             };
         
         if (this.type === 'thumbnail') {
-            this.idField = new Ext.form.TextField({
-                xtype: 'textfield',
-                name: 'id',
-                value: this.metadataId,
-                hidden: true
-            });
-            this.versionField = new Ext.form.TextField({
-                name: 'version',
-                value: this.versionId,
-                hidden: true
-            });
-            
-            // TODO : create a cusom widget to be shared with ThumbnailPanel
-            this.uploadForm = new Ext.form.FormPanel({
-                fileUpload: true,
-                items: [this.idField, this.versionField, {
-                    xtype: 'radio',
-                    checked: this.uploadThumbnail,
-                    fieldLabel: OpenLayers.i18n('uploadAnImage'),
-                    name: 'type',
-                    inputValue: 'large',
-                    listeners: {
-                        check: function (radio, checked) {
-                            this.uploadThumbnail = checked;
-                        },
-                        scope: this
-                    }
-                }, {
-                    xtype: 'textfield',
-                    name: 'scalingDir',
-                    value: 'width',
-                    hidden: true
-                }, {
-                    xtype: 'textfield',
-                    name: 'smallScalingDir',
-                    value: 'width',
-                    hidden: true
-                }, {
-                    xtype: 'textfield',
-                    name: 'type',
-                    value: 'large',
-                    hidden: true
-                }, {
-                    xtype: 'textfield',
-                    name: 'scalingFactor',
-                    value: '1000',
-                    hidden: true
-                }, {
-                    xtype: 'textfield',
-                    name: 'smallScalingFactor',
-                    value: '180',
-                    hidden: true
-                }, {
-                    xtype: 'fileuploadfield',
-                    emptyText: OpenLayers.i18n('selectImage'),
-                    //fieldLabel: OpenLayers.i18n('image'),
-                    name: 'fname',
-                    //allowBlank: false,
-                    buttonText: '',
-                    buttonCfg: {
-                        iconCls: 'thumbnailAddIcon'
-                    }
-                }, {
-                    xtype: 'checkbox',
-                    checked: true,
-                    //hideLabel: true,
-                    fieldLabel: '',
-                    labelSeparator: '',
-                    boxLabel: OpenLayers.i18n('createSmall'),
-                    name: 'createSmall',
-                    value: 'true'
-                }, {
-                    xtype: 'radio',
-                    fieldLabel: OpenLayers.i18n('setAURL'),
-                    name: 'type',
-                    inputValue: 'small',
-                    checked: !this.uploadThumbnail,
-                    listeners: {
-                        check: function (radio, checked) {
-                            this.uploadThumbnail = !checked;
-                        },
-                        scope: this
-                    }
-                }, {
-                    xtype: 'textfield',
-                    name: 'url',
-                    value: '',
-                    listeners: {
-                        change: function (field) {
-                            this.serviceUrl = field.getValue();
-                            // TODO If change check the URL box
-                        },
-                        scope: this
-                    }
-                }],
-                buttons: [{
-                    text: OpenLayers.i18n('upload'),
-                    formBind: true,
-                    iconCls: 'thumbnailGoIcon',
-                    scope: this,
-                    handler: function () {
-                        if (this.uploadForm.getForm().isValid()) {
-                            var panel = this;
-                            if (this.uploadThumbnail) {
-                                this.uploadForm.getForm().submit({
-                                    url: this.setThumbnail,
-                                    waitMsg: OpenLayers.i18n('uploading'),
-                                    success: function (fp, o) {
-                                        self.editor.init(self.metadataId);
-                                        self.hide();
-                                    }
-                                });
-                            } else {
-                                this.runProcess();
-                            }
-                        }
-                    }
-                }, cancelBt]
-            });
-            
-            this.add(this.uploadForm);
+            this.add(this.generateThumbnailForm(cancelBt));
+        } else if (this.type === 'onlinesrc') {
+            this.add(this.generateDocumentUploadForm(cancelBt));
+        } else if (this.type === 'sibling') {
+            this.add(this.getMultipleMetadataSelectorForSibling(cancelBt));
         } else {
-            // Metadata relation
-            this.mdStore = GeoNetwork.data.MetadataResultsFastStore();
-         // Create grid with template list
-            var checkboxSM = new Ext.grid.CheckboxSelectionModel({
-                singleSelect: this.singleSelect,
-                header: ''
-            });
             
-            var tplDescription = function (value, p, record) {
-                var links = "";
-                if (self.type === 'service' && record.data.links) {
-                    Ext.each(record.data.links, function (link) {
-                        // FIXME: restrict
-                        if (self.protocolForServices.join(',').indexOf(link.protocol) !== -1) {
-                            links += '<li><a target="_blank" href="' + link.href + '">' + link.href + '</a></li>';
-                            // FIXME : when service contains multiple URL 
-                            record.data.serviceUrl = link.href;
-                            record.data.serviceProtocol = link.protocol;
-                        }
-                    });
-                    
-                }
-                return String.format(
-                        '<span class="tplTitle">{0}</span><div class="tplDesc">{1}</div><ul>{2}</ul>',
-                        record.data.title, record.data['abstract'], links);
-            };
-            // TODO : add URL for services
-            
-            var tplType = function (value, p, record) {
-                var label = OpenLayers.i18n(record.data.type) || '';
-                
-                if (record.data.spatialRepresentationType) {
-                    label += " / " + OpenLayers.i18n(record.data.spatialRepresentationType);
-                }
-                
-                return String.format('{0}', label);
-            };
-            
-            var colModel = new Ext.grid.ColumnModel({
-                defaults: {
-                    sortable: true
-                },
-                columns: [
-                    checkboxSM,
-                    {header: OpenLayers.i18n('metadatatype'), renderer: tplType, dataIndex: 'type'},
-                    {id: 'title', header: OpenLayers.i18n('title'), renderer: tplDescription, dataIndex: 'title'},
-                    {header: 'Schema', dataIndex: 'schema', hidden: true}
-                    // TODO add other columns
-                ]
-            });
-            
-            var grid = new Ext.grid.GridPanel({
-                border: false,
-                anchor: '100% 80%',
-                store: this.mdStore,
-                colModel: colModel,
-                sm: checkboxSM,
-                autoExpandColumn: 'title'
-            });
-            
-            grid.getSelectionModel().on('rowselect', function (sm, rowIndex, r) {
-                if (sm.getCount() !== 0) {
-                    this.selectedMd = r.data.uuid;
-                    this.serviceUrl = r.data.serviceUrl;
-                    this.serviceProtocol = r.data.serviceProtocol;
-                } else {
-                    this.selectedMd = undefined;
-                }
-                //this.validate();
-            }, this);
-            
-            // Focus on first row
-            grid.getStore().on('load', function (store) {
-                grid.getSelectionModel().selectFirstRow();
-                grid.getView().focusEl.focus();
-            }, grid);
-            
-            var cmp = [];
-            cmp.push(this.getSearchInput());
-            cmp.push(grid);
-            this.getHiddenFormInput(cmp);
-            this.getFormFieldForService(cmp);
-            this.getFormFieldForSibling(cmp);
-            
-            this.formPanel = new Ext.form.FormPanel({
-                items: cmp,
-                buttons: [{
-                    text: OpenLayers.i18n('link'),
-                    iconCls: 'linkIcon',
-                    scope: this,
-                    handler: function () {
-                        this.runProcess();
-                    }
-                }, cancelBt]
-            });
-            this.add(this.formPanel);
-            // TODO : add filter
+            this.add(this.generateMetadataSearchForm(cancelBt));
             this.doSearch();
-            //this.catalogue.search({E_template: 'n'}, null, null, 1, true, this.mdStore, null);
         }
     },
     runProcess: function () {
         // Define which metadata to be modified
         // It could be the on in current editing or a related one
-        var targetMetadataUuid = this.metadataUuid;
-        var parameters = "";
+        var targetMetadataUuid = this.metadataUuid, parameters = "";
+        this.layerName = Ext.getCmp('getCapabilitiesLayerName') && Ext.getCmp('getCapabilitiesLayerName').getValue();
+        
         if (this.type === 'parent') {
             // Define the parent metadata record to link to
             parameters += "&parentUuid=" + this.selectedMd;
         } else if (this.type === 'fcats') {
             // Define the target feature catalogue to use
             parameters += "&uuidref=" + this.selectedMd;
-        } else if (this.type === 'service' || this.type === 'dataset') {
+            
+        } else if (this.type === 'service') {
+            // Add a link from the current record to the target service if privileges
+            if (this.canEditTarget) {
+                // Current dataset is a dataset metadata record.
+                // 1. Update service (if current user has privileges), using XHR request
+                var serviceUpdateUrl = this.catalogue.services.mdProcessingXml + 
+                                            "?uuid=" + this.selectedMd + 
+                                            "&process=update-srv-attachDataset" + 
+                                            "&uuidref=" + targetMetadataUuid +
+                                            "&scopedName=" + this.layerName;
+                // TODO : it looks like the dataset identifier and not the 
+                // metadata UUID should be set in the operatesOn element of 
+                // the service metadata record.
+                
+                Ext.Ajax.request({
+                    url: serviceUpdateUrl,
+                    method: 'GET',
+                    success: function (result, request) {
+                        // TODO : use a autohide message instead of a blocking popup
+                        Ext.MessageBox.alert(OpenLayers.i18n("ServiceUpdateSuccess"));
+                    },
+                    failure: function (result, request) {
+                        Ext.MessageBox.alert(OpenLayers.i18n("ServiceUpdateError"));
+                    }
+                });
+            } else {
+                // TODO : add a warning
+            }
+            // And 
+            // Add a link in the distribution section of the dataset record
+            parameters += "&uuidref=" + this.selectedMd;
+            parameters += "&scopedName=" + this.layerName;
+            parameters += "&desc=" + this.layerName;
+            parameters += "&url=" + this.serviceUrl;
+            parameters += "&protocol=" + this.serviceProtocol;
+        } else if (this.type === 'dataset') {
+            // Current dataset is a service metadata record.
+            // 1. Update dataset (if current user has privileges), using XHR request
+            if (this.canEditTarget) {
+                var serviceUpdateUrl = this.catalogue.services.mdProcessingXml + 
+                                            "?uuid=" + this.selectedMd + 
+                                            "&process=update-onlineSrc" + 
+                                            "&desc=" + this.layerName + 
+                                            "&url=" + this.serviceUrl + 
+                                            "&uuidref=" + targetMetadataUuid +
+                                            "&scopedName=" + this.layerName;
+                // TODO : it looks like the dataset identifier and not the 
+                // metadata UUID should be set in the operatesOn element of 
+                // the service metadata record.
+                
+                Ext.Ajax.request({
+                    url: serviceUpdateUrl,
+                    method: 'GET',
+                    success: function (result, request) {
+                        // TODO : use a autohide message instead of a blocking popup
+                        Ext.MessageBox.alert(OpenLayers.i18n("DatasetUpdateSuccess"));
+                    },
+                    failure: function (result, request) {
+                        Ext.MessageBox.alert(OpenLayers.i18n("DatasetUpdateError"));
+                    }
+                });
+            } else {
+                // TODO : add a warning
+            }
+            
             // Add a link from the current record to the target service
             // And 
             // Add a link in the distribution section of the dataset record
@@ -533,9 +981,35 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             parameters += "&thumbnail_url=" + this.serviceUrl;
             // TODO : set name and description
         } else if (this.type === 'sibling') {
-            parameters += "&uuidref=" + this.selectedMd + 
-                            "&initiativeType=" + this.initiativeType + 
-                            "&associationType=" + this.associationType;
+         // Combine all links if multiple selection is available
+            if (this.mdSelectedStore && this.mdSelectedStore.getCount() > 0) {
+                var uuids = [], sep = this.separator;
+                this.mdSelectedStore.each(function (record) {
+                    uuids.push(record.get('uuid') + 
+                            sep + record.get('associationType') + 
+                            sep + record.get('initiativeType'));
+                });
+                parameters += "&uuids=" + uuids.join(',');
+            } 
+            parameters += "&uuidref=" + (this.selectedMd ? this.selectedMd : "") + 
+                            "&initiativeType=" + this.initiativeType.get('code') + 
+                            "&associationType=" + this.associationType.get('code');
+            
+        } else if (this.type === 'onlinesrc') {
+            // Combine all links if multiple selection is available
+            if (this.mdSelectedStore && this.mdSelectedStore.getCount() > 0) {
+                this.mdSelectedStore.each(function (record) {
+                    parameters += "&extra_metadata_uuid=" + record.get('uuid');
+                });
+            } else {
+                parameters += "&extra_metadata_uuid=" + (this.selectedMd ? this.selectedMd : "");
+                if (this.selectedLink.href) {
+                    parameters += "&url=" + this.selectedLink.href + 
+                        "&desc=" + this.selectedLink.title + 
+                        "&protocol=" + this.selectedLink.protocol + 
+                        "&name=" + this.selectedLink.name;
+                }
+            }
         }
         var action = this.catalogue.services.mdProcessing + 
             "?id=" + this.metadataId + 
@@ -558,7 +1032,7 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
 //        this.loadingMask.show();
         
         GeoNetwork.editor.nbResultPerPage = 20;
-        
+        this.mdStore.removeAll();
         GeoNetwork.util.SearchTools.doQueryFromForm(this.formPanel.getId(), this.catalogue, 1, Ext.emptyFn, null, Ext.emptyFn, this.mdStore);
     },
     initComponent: function () {
@@ -569,16 +1043,6 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
         this.setTitle(OpenLayers.i18n('linkAResource-' + this.type));
         
         this.generateMode();
-        
-        
-        //this.panel = 
-//        this.add(this.panel);
-        
-//        this.on('beforeshow', function(el) {
-//            el.setSize(
-//                el.getWidth() > Ext.getBody().getWidth() ? Ext.getBody().getWidth() : el.getWidth(),
-//                el.getHeight() > Ext.getBody().getHeight() ? Ext.getBody().getHeight() : el.getHeight()); 
-//        });
     }
 });
 
