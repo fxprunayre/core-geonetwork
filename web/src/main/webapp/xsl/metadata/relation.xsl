@@ -29,7 +29,7 @@
   <xsl:template mode="relation" match="sibling">
     <xsl:apply-templates mode="relation" select="*">
       <xsl:with-param name="type" select="'sibling'"/>
-      <xsl:with-param name="subType" select="@initiative"/>
+      <xsl:with-param name="subType" select="concat(@association, '-', @initiative)"/>
     </xsl:apply-templates>
   </xsl:template>
 
