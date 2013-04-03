@@ -43,7 +43,7 @@ import java.util.Iterator;
 //=============================================================================
 
 /**
- * Handles the file upload
+ * Handles the file upload when a record is in editing mode.
  */
 
 public class Upload implements Service {

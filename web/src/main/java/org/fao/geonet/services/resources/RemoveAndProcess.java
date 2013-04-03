@@ -1,5 +1,5 @@
 //=============================================================================
-//===	Copyright (C) 2001-2013 Food and Agriculture Organization of the
+//===	Copyright (C) 2001-2007 Food and Agriculture Organization of the
 //===	United Nations (FAO-UN), United Nations World Food Programme (WFP)
 //===	and United Nations Environment Programme (UNEP)
 //===
@@ -24,15 +24,14 @@
 package org.fao.geonet.services.resources;
 
 import java.io.File;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
 import jeeves.constants.Jeeves;
 import jeeves.exceptions.BadParameterEx;
-import jeeves.interfaces.Service;
-import jeeves.resources.dbms.Dbms;
+import jeeves.exceptions.OperationAbortedEx;
 import jeeves.server.ServiceConfig;
-import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import jeeves.utils.Util;
 
@@ -41,59 +40,58 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.lib.Lib;
+import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.fao.geonet.services.Utils;
 import org.fao.geonet.services.metadata.XslProcessing;
 import org.jdom.Element;
 
 /**
- * Handles the file upload and attach the uploaded service to the metadata record
- * using the onlinesrc-add XSL process.
- * 
- * Return a simple JSON response in case of success.
+ * Delete an uploaded file from the data directory and remote its
+ * reference in the metadata record.
  */
-public class UploadAndProcess implements Service {
+public class RemoveAndProcess extends NotInReadOnlyModeService {
     public void init(String appPath, ServiceConfig params) throws Exception {
     }
 
-    public Element exec(Element params, ServiceContext context)
+    public Element serviceSpecificExec(Element params, ServiceContext context)
             throws Exception {
+        String id = Utils.getIdentifierFromParameters(params, context);
+        String url = Util.getParam(params, Params.URL);
+        
+        Lib.resource.checkEditPrivilege(context, id);
+        
+        // Analyze the URL to extract file name and private/public folder
+        URL resourceURL = new URL(url);
+        String[] parameters = resourceURL.getQuery().split("&");
+        String filename = "";
+        String access = "";
+        
+        for (String param : parameters) {
+            if (param.startsWith("fname")) {
+                filename = param.split("=")[1];
+            } else if (param.startsWith("access")) {
+                access = param.split("=")[1];
+            }
+        }
+
+        if ("".equals(filename))
+            throw new OperationAbortedEx("Empty filename. Unable to delete resource.");
+
+        // delete the file
+        File dir = new File(Lib.resource.getDir(context, access, id));
+        File file = new File(dir, filename);
+
+        if (file.exists() && !file.delete())
+            throw new OperationAbortedEx("unable to delete resource");
+
+        // Set parameter and process metadata to remove reference to the uploaded file
+        params.addContent(new Element("name").setText(filename));
+        params.addContent(new Element("protocol")
+                .setText("WWW:DOWNLOAD-1.0-http--download"));
 
         GeonetContext gc = (GeonetContext) context
                 .getHandlerContext(Geonet.CONTEXT_NAME);
         DataManager dataMan = gc.getDataManager();
-
-        String uploadDir = context.getUploadDir();
-
-        String id = Utils.getIdentifierFromParameters(params, context);
-        String filename = Util.getParam(params, Params.FILENAME);
-        String access = Util.getParam(params, Params.ACCESS, "private");
-        String overwrite = Util.getParam(params, Params.OVERWRITE, "no");
-
-        Lib.resource.checkEditPrivilege(context, id);
-
-        // get info to log the upload
-
-        UserSession session = context.getUserSession();
-        Dbms dbms = (Dbms) context.getResourceManager()
-                .open(Geonet.Res.MAIN_DB);
-        String username = session.getUsername();
-        if (username == null)
-            username = "unknown (this shouldn't happen?)";
-
-        Element fnameElem = params.getChild("filename");
-        String fname = fnameElem.getText();
-        
-        File dir = new File(Lib.resource.getDir(context, access, id));
-        Upload.moveFile(context, uploadDir, fname, dir, overwrite);
-
-        context.info("UPLOADED:" + fname + "," + id + ","
-                + context.getIpAddress() + "," + username);
-
-        // Set parameter and process metadata to reference the uploaded file
-        params.addContent(new Element("url").setText(filename));
-        params.addContent(new Element("name").setText(filename));
-        params.addContent(new Element("protocol")
-                .setText("WWW:DOWNLOAD-1.0-http--download"));
 
         Set<Integer> metadata = new HashSet<Integer>();
         Set<Integer> notFound = new HashSet<Integer>();
@@ -102,7 +100,7 @@ public class UploadAndProcess implements Service {
 
         Element processedMetadata;
         try {
-            processedMetadata = XslProcessing.process(id, "onlinesrc-add",
+            processedMetadata = XslProcessing.process(id, "onlinesrc-remove",
                     true, context.getAppPath(), params, context, metadata,
                     notFound, notOwner, notProcessFound, true,
                     dataMan.getSiteURL());
@@ -114,10 +112,9 @@ public class UploadAndProcess implements Service {
         } catch (Exception e) {
             throw e;
         }
-        // -- return the processed metadata id
+
         Element response = new Element(Jeeves.Elem.RESPONSE)
                 .addContent(new Element(Geonet.Elem.ID).setText(id));
-
         return response;
     }
 }

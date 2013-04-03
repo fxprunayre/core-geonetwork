@@ -35,6 +35,8 @@ Ext.namespace('GeoNetwork.editor');
  *     The panel provides action to create the different type of relation
  *     according to the metadata type using the GeoNetwork.editor.LinkResourcesWindow.
  *
+ *  TODO: this panel could be used without a metadata in edit mode. 
+ *  In that case, it will require to not update the related EditorPanel.
  */
 GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
     /** api: property[title] 
@@ -107,13 +109,16 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
         },
         tpl: null
     },
-    /** private: method[clear] 
+    /** public: method[clear] 
      *  Remove all related metadata from the store and clean the panel content.
      */
     clear: function () {
         this.store.removeAll();
         this.update('<div></div>');
     },
+    /** public: method[reload] 
+     *  Reload the relation for the current metadata
+     */
     reload: function (e, id, schema, version) {
         this.metadataId = id || this.metadataId;
         this.metadataUuid = document.mainForm.uuid.value;
@@ -129,8 +134,9 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
             }
         });
     },
-    updateStatus: function (store, records, options) {
-    },
+    /** public: method[getChildrenIds] 
+     *  Return an array of the children's uuid.
+     */
     getChildrenIds: function () {
         var uuidList = [];
         this.store.each(
@@ -143,6 +149,9 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
         );
         return uuidList;
     },
+    /** public: method[addRelation] 
+     *  Open the GeoNetwork.editor.LinkResourcesWindow to add a relation
+     */
     addRelation: function (type) {
         var window, config = {
                 type: type,
@@ -155,9 +164,7 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
                 metadataId: this.metadataId,
                 versionId: this.versionId,
                 metadataSchema: this.metadataSchema,
-                getThumbnail: this.catalogue.services.mdGetThumbnail,
                 setThumbnail: this.catalogue.services.mdSetThumbnail,
-                unsetThumbnail: this.catalogue.services.mdUnsetThumbnail,
                 bodyStyle: 'padding:10px;',
                 imagePath: this.imagePath
             };
@@ -175,6 +182,10 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
         window = new GeoNetwork.editor.LinkResourcesWindow(config);
         window.show();
     },
+    /** public: method[removeThumbnail] 
+     *  Remove a thumbnail. It requires to call a custom service (not an XSL process)
+     *  to properly delete the file.
+     */
     removeThumbnail: function (thumbnailType) {
         var panel = this,
             url = this.catalogue.services.mdUnsetThumbnail + '?id=' + this.metadataId + 
@@ -190,6 +201,25 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
             }
         });
     },
+    /** public: method[removeUploadedFile] 
+     *  Remove an uploaded file
+     */
+    removeUploadedFile: function (label, parameters) {
+        var panel = this,
+            url = this.catalogue.services.delResource + '?id=' + this.metadataId + parameters;
+        
+        OpenLayers.Request.GET({
+            url: url,
+            success: function (response) {
+                panel.editor.init(panel.metadataId);
+            },
+            failure: function (response) {
+            }
+        });
+    },
+    /** public: method[removeRelation] 
+     *  Remove a relation calling the appropiate XSL process with parameters.
+     */
     removeRelation: function (type, uuid, id) {
         // Define which metadata to be modified
         // It could be the on in current editing or a related one
@@ -226,13 +256,19 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
             parameters += "&uuidref=" + uuid;
         } else if (type === 'onlinesrc') {
             parameters += "&url=" + encodeURIComponent(id);
+            
+            // if a file is upload remove the file before removing the link
+            if (uuid.indexOf('WWW:DOWNLOAD-1.0-http--download') !== -1) {
+                this.removeUploadedFile(uuid, parameters);
+                return;
+            }
         }
         
         
-//        console.log('remove:' + uuid + " target: " + targetMetadataUuid +
-//                " type: " + type + 
-//                " process: " + this.processMap[type + '-remove'] +
-//                " param:" + parameters);
+        console.log('remove:' + uuid + " target: " + targetMetadataUuid +
+                " type: " + type + 
+                " process: " + type + '-remove' +
+                " param:" + parameters);
         
         
         var action = this.catalogue.services.mdProcessing + 
@@ -261,7 +297,7 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
             this.editor.process(action);
         }
     },
-    /**
+    /** private: method[generateAddMenu] 
      * Generate a menu of actions to add relation.
      */
     generateAddMenu: function () {
@@ -445,7 +481,6 @@ GeoNetwork.editor.LinkedMetadataPanel = Ext.extend(Ext.Panel, {
         this.editor.on('editorClosed', this.clear, this);
         this.editor.on('metadataUpdated', this.reload, this);
         this.on('expand', this.reload);
-        this.store.on('load', this.updateStatus, this);
     }
 });
 

@@ -694,7 +694,7 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
                         var self = this;
                         if (this.uploadDocument) {
                             this.uploadForm.getForm().submit({
-                                url: catalogue.services.uploadAndProcess,
+                                url: catalogue.services.uploadResource,
                                 waitMsg: OpenLayers.i18n('uploading'),
                                 success: function (fp, o) {
                                     self.editor.init(self.metadataId);
