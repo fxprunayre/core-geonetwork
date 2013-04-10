@@ -446,6 +446,9 @@ GeoNetwork.Lang.en = {
     'notValid': 'Not valid',
     'notDetermined': 'Not determined',
     'addToMap': 'Add to map: ',
+    'map': 'Map',
+    'interactiveMap': 'Interactive map',
+    'staticMap': 'Static map',
     'downloadLink': 'Download: ',
     'webLink': 'Web link: ',
     'viewKml': 'Open in GoogleEarth: ',
@@ -580,6 +583,8 @@ GeoNetwork.Lang.en = {
     'to-iso19139-keyword-as-xlink': 'Linked mode',
     'to-iso19139-keyword-with-anchor': 'Anchor mode',
     'linklabel-application/vnd.ogc.wms_xml': 'Add to map',
+    'linklabel-application/vnd.ogc.wmc': 'Interactive map',
+    'linklabel-OGC:WMC-1.1.0-http-get-capabilities': 'Download Web Map Context',
     'linklabel-application/pdf': 'PDF',
     'linklabel-OGC:WMS': 'Add to map',
     'linklabel-OGC:WFS': 'WFS link',
@@ -591,6 +596,7 @@ GeoNetwork.Lang.en = {
     'linklabel-text/plain': 'Web link',
     'linklabel-image/png': 'Image link',
     'linklabel-website': 'Web link',
+    'linklabel-application/octet-stream': 'Link',
     'linklabel-': 'Link'
 };
 
