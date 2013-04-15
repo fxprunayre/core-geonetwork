@@ -338,17 +338,6 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
         }
     },
     /**
-     * Form for online resource. Online resource could be a document to upload 
-     * a reference to a online resource of another metadata record or 
-     * a URL to a document.
-     * 
-     * A document is described by a URL, name, description and protocol.
-     * 
-     */
-    generateOnlineSrcForm: function () {
-        
-    },
-    /**
      * Thumbnail form
      */
     generateThumbnailForm: function (cancelBt) {
@@ -394,13 +383,14 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             autoEl: {
                 tag: 'img',
                 'class': 'thumb-small',
-                src: this.catalogue.imgPath + 'images/default/nopreview.png'
+                src: catalogue.URL + '/apps/images/default/nopreview.png'
             }
         });
         var urlField = new Ext.form.TextField({
                 name: 'url',
                 value: '',
-                width: 400,
+                anchor: '100%',
+                hideLabel: true,
                 validator: function (value) {
                     if (self.uploadThumbnail !== true) {
                         var isUrl = Ext.form.VTypes.url(value);
@@ -433,6 +423,7 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
                 emptyText: OpenLayers.i18n('selectImage'),
                 name: 'fname',
                 width: 300,
+                hideLabel: true,
                 buttonText: '',
                 buttonCfg: {
                     iconCls: 'thumbnailAddIcon'
@@ -452,6 +443,7 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
                 xtype: 'checkbox',
                 checked: false,
                 fieldLabel: '',
+                hideLabel: true,
                 labelSeparator: '',
                 boxLabel: OpenLayers.i18n('createSmall'),
                 name: 'createSmall',
@@ -482,7 +474,14 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             checkboxToggle: true,
             title: OpenLayers.i18n('setAThumbnailByURL'),
             collapsed: this.uploadThumbnail,
-            items: [urlField, this.previewImage],
+            items: [urlField, this.previewImage, {
+                id: 'thumbnail_desc',
+                name: 'thumbnail_desc',
+                xtype: 'textfield',
+                anchor: '100%',
+                hideLabel: false,
+                fieldLabel: OpenLayers.i18n('Description')
+            }],
             listeners: {
                 collapse: {
                     fn: function () {
@@ -507,9 +506,9 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
         // TODO : deprecate ThumbnailPanel
         this.uploadForm = new Ext.form.FormPanel({
             fileUpload: true,
-            labelWidth: 50,
+            labelWidth: 90,
             defaults: {
-                hideLabels: true,
+//                hideLabels: true,
                 xtype: 'textfield'
             },
             anchor: '80%',
@@ -1061,7 +1060,8 @@ GeoNetwork.editor.LinkResourcesWindow = Ext.extend(Ext.Window, {
             parameters += "&protocol=" + this.serviceProtocol;
         } else if (this.type === 'thumbnail') {
             // Attach a thumbnail by URL
-            parameters += "&thumbnail_url=" + encodeURIComponent(this.serviceUrl);
+            parameters += "&thumbnail_url=" + encodeURIComponent(this.serviceUrl) + 
+                "&thumbnail_desc=" + Ext.getCmp('thumbnail_desc').getValue();
             // TODO : set name and description
         } else if (this.type === 'sibling') {
          // Combine all links if multiple selection is available
