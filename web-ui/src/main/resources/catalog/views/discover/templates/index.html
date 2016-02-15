@@ -1,0 +1,50 @@
+<div class="navbar navbar-default gn-top-bar" role="navigation"
+     data-ng-include="'../../catalog/templates/top-toolbar.html'"
+     xmlns="http://www.w3.org/1999/html">
+</div>
+<div class="gn-search-page">
+  <div class=""
+       data-ng-controller="gnsDefault">
+
+    <form>
+      <div class="input-group gn-form-any">
+        <input type="text"
+               class="form-control input-lg"
+               autofocus=""
+               data-ng-model="anyField"
+               data-ng-model-options="{debounce: 300}"
+               placeholder="{{'anyPlaceHolder' | translate}}"
+               data-ng-keyup="$event.keyCode == 13 && search()"/>
+        <span class="input-group-btn">
+          <a class="btn btn-primary btn-lg"
+             type="button"
+             data-ng-click="search()">
+            <i class="fa fa-search"></i>
+          </a>
+        </span>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-md-7">
+        <div data-ng-repeat="r in results">
+          <h3 data-ng-mouseover="setCurrent(r)">{{r.resourceTitle || r.id}}</h3>
+          <p>{{r.abstract}}</p>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <!--<div id="map" style="width: 200px; height: 200px"/>-->
+        <div id="map" class="map"
+             style="height: 200px"></div>
+
+        <table class="table table-striped" data-ng-if="current">
+          <tr data-ng-repeat="(k, v) in current">
+            <td>{{k}}</td>
+            <td>{{v}}</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
