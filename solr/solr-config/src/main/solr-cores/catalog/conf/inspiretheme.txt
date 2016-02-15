@@ -1,0 +1,34 @@
+Coordinate reference systems
+Elevation
+Land cover
+Orthoimagery
+Geology
+Statistical units
+Buildings
+Soil
+Land use
+Human health and safety
+Utility and governmental services
+Geographical grid systems
+Environmental monitoring facilities
+Production and industrial facilities
+Agricultural and aquaculture facilities
+Population distribution — demography
+Area management/restriction/regulation zones and reporting units
+Natural risk zones
+Atmospheric conditions
+Meteorological geographical features
+Oceanographic geographical features
+Sea regions
+Geographical names
+Bio-geographical regions
+Habitats and biotopes
+Species distribution
+Energy resources
+Mineral resources
+Administrative units
+Addresses
+Cadastral parcels
+Transport networks
+Hydrography
+Protected sites
