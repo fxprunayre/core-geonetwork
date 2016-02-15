@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cm="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.2.xsd
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <context:component-scan base-package="org.fao.geonet.solr"/>
+
+  <bean id="solrConfig"
+        class="org.fao.geonet.solr.SolrConfig">
+    <property name="solrServerUrl" value="${solr.url}"/>
+    <property name="solrServerCore" value="${solr.collection}"/>
+    <!--<property name="solrServerUsername" value="${solr.server.user}"/>-->
+    <!--<property name="solrServerPassword" value="${solr.server.password}"/>-->
+  </bean>
+
+  <bean id="indexerState" class="org.fao.geonet.solr.IndexerState"/>
+
+  <bean id="xsltUtility" class="org.fao.geonet.solr.Utility"/>
+
+  <!-- configure the Camel SQL component to use the JDBC data source -->
+  <bean id="sourceSql" class="org.apache.camel.component.sql.SqlComponent">
+    <property name="dataSource" ref="jdbcDataSource"/>
+  </bean>
+
+  <bean id="indexSynchronizerRouteBuilder"
+        class="org.fao.geonet.solr.CatalogSynchronizer">
+    <property name="dataSource" ref="jdbcDataSource"/>
+  </bean>
+
+  <cm:camelContext id="index"
+                   useMDCLogging="true">
+    <cm:jmxAgent id="agent" disabled="false"/>
+    <cm:routeBuilder ref="indexSynchronizerRouteBuilder"/>
+  </cm:camelContext>
+</beans>

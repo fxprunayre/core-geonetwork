@@ -15,6 +15,7 @@
   <modules>
     <module>solr-config</module>
     <module>solr-bridge</module>
+    <module>indexer</module>
   </modules>
 
   <dependencies>
