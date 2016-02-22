@@ -17,3 +17,9 @@
 [submodule "docs/manuals"]
 	path = docs/manuals
 	url = https://github.com/geonetwork/doc.git
+[submodule "schemas/develop"]
+	path = schemas/iso19115-3
+	url = https://github.com/metadata101/iso19115-3.git
+[submodule "schemas/iso19139.sinp"]
+	path = schemas/iso19139.sinp
+	url = https://github.com/metadata101/iso19139.sinp.git
