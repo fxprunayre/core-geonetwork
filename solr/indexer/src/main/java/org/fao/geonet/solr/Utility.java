@@ -5,6 +5,7 @@ import net.sf.saxon.FeatureKeys;
 import org.apache.camel.Exchange;
 import org.apache.camel.Header;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.fao.geonet.utils.TransformerFactoryFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -43,7 +44,7 @@ public class Utility {
      * Run XSLT transformation on the body of the Exchange
      * and set the output body to the results of the transformation.
      */
-    public StreamResult transform(Exchange exchange, String xslt)  {
+    public StreamResult transform(Exchange exchange, String xslt) throws TransformerConfigurationException {
         String xml = exchange.getIn().getBody(String.class);
 
         exchange.getOut().setHeaders(exchange.getIn().getHeaders());
@@ -72,7 +73,9 @@ public class Utility {
 
         DOMSource source = new DOMSource(document);
 
-        TransformerFactory transFact = TransformerFactory.newInstance();
+        // TODO: Should depends on javax/xml.transform.TransformerFactory file
+        TransformerFactoryFactory.init("net.sf.saxon.TransformerFactoryImpl");
+        TransformerFactory transFact = TransformerFactoryFactory.getTransformerFactory();
 
         InputStream streamSource = this.getClass().getResourceAsStream(xslt);
         URL url = this.getClass().getResource(xslt);
@@ -105,7 +108,10 @@ public class Utility {
             Iterator<String> iterator = headers.keySet().iterator();
             while (iterator.hasNext()) {
                 String key = iterator.next();
-                t.setParameter(key, headers.get(key));
+                Object value = headers.get(key);
+                if (value != null) {
+                    t.setParameter(key, value);
+                }
             }
             try {
                 t.transform(source, result);
