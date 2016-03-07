@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_wfsfilter_directive');
 
@@ -12,8 +35,9 @@
    */
   module.directive('gnWfsFilterFacets', [
     '$http', 'wfsFilterService', '$q', '$rootScope',
-
-    function($http, wfsFilterService, $q, $rootScope) {
+    'gnSolrRequestManager', 'gnSolrService',
+    function($http, wfsFilterService, $q, $rootScope,
+             gnSolrRequestManager, gnSolrService) {
       return {
         restrict: 'A',
         replace: true,
@@ -27,34 +51,114 @@
         },
         link: function(scope, element, attrs) {
 
-          var solrUrl, uuid;
-          var ftName = scope.featureTypeName;
+          var solrUrl, uuid, ftName, appProfile, appProfilePromise;
+          scope.map = scope.$parent.map;
+
+          // Only admin can index the features
           scope.user = $rootScope.user;
 
+          // Display or not the results count
           scope.showCount = angular.isDefined(attrs['showcount']);
 
-          function init() {
-            scope.fields = [];
-            scope.isWfsAvailable = undefined;
-            scope.isFeaturesIndexed = false;
-            scope.status = null;
-            scope.md = scope.layer.get('md');
-            uuid = scope.md && scope.md.getUuid();
-            scope.url = scope.wfsUrl ||
-                scope.layer.get('url').replace(/wms/i, 'wfs');
+          // Get an instance of solr object
+          var solrObject =
+              gnSolrRequestManager.register('WfsFilter', 'facets');
+          var heatmapsRequest =
+              gnSolrRequestManager.register('WfsFilter', 'heatmaps');
 
+          scope.isHeatMapVisible = false;
+          scope.heatmapLayer = null;
+          scope.source = null;
+          if (scope.map) {
+            scope.source = new ol.source.Vector();
+            scope.isHeatMapVisible = true;
+            scope.heatmapLayer = new ol.layer.Heatmap({
+              source: scope.source,
+              radius: 40,
+              blur: 50,
+              opacity: .8,
+              visible: scope.isHeatMapVisible
+            });
+            scope.map.addLayer(scope.heatmapLayer);
+
+            $('body').append('<div id="heatmap-info" data-content=""' +
+                'style="position: absolute; z-index: 100;"/>');
+            var info = $('#heatmap-info');
+            var displayFeatureInfo = function(pixel) {
+              var feature = scope.map.forEachFeatureAtPixel(pixel,
+                  function(feature, layer) {
+                    if (layer == scope.heatmapLayer) {
+                      return feature;
+                    }
+                  });
+              if (feature) {
+                info.css({
+                  left: pixel[0] + 'px',
+                  top: (pixel[1] + 50) + 'px'
+                });
+                info.attr('data-original-title', feature.get('count'))
+                    .tooltip('show');
+              } else {
+                info.tooltip('hide');
+              }
+            };
+
+            scope.map.on('pointermove', function(evt) {
+              if (evt.dragging) {
+                info.tooltip('hide');
+                return;
+              }
+              displayFeatureInfo(scope.map.getEventPixel(evt.originalEvent));
+            });
+          }
+
+          /**
+           * Init the directive when the scope.layer has changed.
+           * If the layer is given through the isolate scope object, the init
+           * is called only once. Otherwise, the same directive is used for
+           * all different feature types.
+           */
+          function init() {
+
+            angular.extend(scope, {
+              fields: [],
+              isWfsAvailable: undefined,
+              isFeaturesIndexed: false,
+              status: null,
+              md: scope.layer.get('md'),
+              url: scope.wfsUrl || scope.layer.get('url').replace(/wms/i, 'wfs')
+            });
+
+            uuid = scope.md && scope.md.getUuid();
             ftName = scope.featureTypeName ||
                 scope.layer.getSource().getParams().LAYERS;
 
-            scope.checkWFSUrl();
-            scope.checkFeatureTypeInSolr();
+            appProfile = null;
+            appProfilePromise = wfsFilterService.getApplicationProfile(uuid,
+                ftName,
+                scope.url,
+                // A WFS URL is in the metadata or we're guessing WFS has
+                // same URL as WMS
+                scope.wfsUrl ? 'WFS' : 'WMS').then(
+                function(response) {
+                  appProfile = response.data;
+                  return appProfile;
+                }).catch (function() {});
 
+            scope.checkWFSServerUrl();
+            scope.initSolrRequest();
+
+            if (scope.map) {
+              resetHeatMap();
+              scope.map.on('moveend', refreshHeatmap);
+            }
           };
 
           /**
-           * Check if the WFS url provided return a response.
+           * Check if the provided WFS server url return a response.
+           * @return {HttpPromise} promise
            */
-          scope.checkWFSUrl = function() {
+          scope.checkWFSServerUrl = function() {
             return $http.get('../../proxy?url=' +
                 encodeURIComponent(scope.url))
               .then(function() {
@@ -64,39 +168,19 @@
                 });
           };
 
-
           /**
-           * Create SOLR request to get facets values
-           * Check if the feature has an applicationDefinition, else get the
-           * indexed fields for the Feature. From this, build the solr request
-           * and retrieve the facet config from solr response.
-           * This config is stored in `scope.fields` and is used to build
-           * the facet UI.
+           * Init the solr Request Object, either from meta index or from
+           * application profile.
            */
-          scope.appProfile = null;
-          scope.docFields = null;
-          function loadAppProfile() {
-            return wfsFilterService.getApplicationProfile(uuid,
-                ftName,
-                scope.url,
-                // A WFS URL is in the metadata or we're guessing WFS has
-                // same URL as WMS
-                scope.wfsUrl ? 'WFS' : 'WMS').success(function(data) {
-              scope.appProfile = data;
-            });
-          }
-
           function loadFields() {
-            var url;
-            if (scope.appProfile && scope.appProfile.fields != null) {
-              url = wfsFilterService.getSolrRequestFromApplicationProfile(
-                  scope.appProfile, ftName, scope.url, scope.docFields);
-            } else {
-              url = wfsFilterService.getSolrRequestFromFields(
-                  scope.docFields, ftName, scope.url);
+
+            // If an app profile is defined, then we update s
+            // `olrObject.initialParams` with external config
+            if (appProfile && appProfile.fields) {
+              wfsFilterService.solrMergeApplicationProfile(
+                  solrObject.filteredDocTypeFieldsInfo, appProfile.fields);
+              solrObject.initBaseParams();
             }
-            solrUrl = url;
-            // Init the facets
             scope.resetFacets();
           }
           function getDataModelLabel(fieldId) {
@@ -108,36 +192,39 @@
             }
             return null;
           }
-          scope.checkFeatureTypeInSolr = function() {
-            wfsFilterService.getWfsIndexFields(
-                ftName, scope.url).then(function(docFields) {
+
+          scope.initSolrRequest = function() {
+            var config = {
+              wfsUrl: scope.url,
+              featureTypeName: ftName
+            };
+            heatmapsRequest.init(config);
+            solrObject.getDocTypeInfo(config).then(function() {
               scope.isFeaturesIndexed = true;
               scope.status = null;
-              scope.docFields = docFields;
+              var docFields = solrObject.filteredDocTypeFieldsInfo;
+              scope.countTotal = solrObject.totalCount;
 
               if (scope.md && scope.md.attributeTable) {
-                for (var i = 0; i < scope.docFields.length; i++) {
-                  var label = getDataModelLabel(scope.docFields[i].attrName);
+                for (var i = 0; i < docFields.length; i++) {
+                  var label = getDataModelLabel(docFields[i].label);
                   if (label) {
                     // TODO: Multilingual
-                    scope.docFields[i].label = label;
+                    docFields[i].label = label;
                   }
                 }
               }
-
-              if (scope.appProfile == null) {
-                loadAppProfile().then(function() {
-                  loadFields();
-                }, function() {
-                  loadFields();
-                });
-              } else {
-                loadFields();
-              }
+              appProfilePromise.then(loadFields);
             }, function(error) {
               scope.status = error.statusText;
             });
           };
+          scope.dropFeatures = function () {
+            return gnSolrService.deleteDocs('+featureTypeId:"' +
+              scope.url + '#' + ftName + '"').then(function() {
+              scope.initSolrRequest();
+            });
+          }
           /**
            * Update the state of the facet search.
            * The `scope.output` structure represent the state of the facet
@@ -176,9 +263,9 @@
            * structure.
            * This method is called each time the user check or uncheck a box
            * from the ui, or when he updates the filter input.
-           * @param {boolean} fromInput the filter comes from input change
+           * @param {boolean} formInput the filter comes from input change
            */
-          scope.filterFacets = function(fromInput) {
+          scope.filterFacets = function(formInput) {
 
             // Update the facet UI
             var collapsedFields = [];
@@ -189,17 +276,11 @@
               }
             });
 
-            scope.layer.set('solrQ', wfsFilterService.updateSolrUrl(
-                solrUrl,
-                scope.output,
-                scope.searchInput));
-            wfsFilterService.getFacetsConfigFromSolr(
-                scope.layer.get('solrQ'), scope.docFields).
-                then(function(facetsInfo) {
-                  scope.fields = facetsInfo.facetConfig;
-                  scope.count = facetsInfo.count;
-                  scope.layer.set('featureCount', scope.count);
-                  if (fromInput) {
+            solrObject.searchWithFacets(scope.output, scope.searchInput).
+                then(function(resp) {
+                  scope.fields = resp.facets;
+                  scope.count = resp.count;
+                  if (formInput) {
                     angular.forEach(scope.fields, function(f) {
                       if (!collapsedFields ||
                           collapsedFields.indexOf(f.name) >= 0) {
@@ -207,8 +288,21 @@
                       }
                     });
                   }
+                  refreshHeatmap();
                 });
           };
+
+          function refreshHeatmap() {
+            if (scope.isFeaturesIndexed) {
+              heatmapsRequest.searchWithFacets(
+                  scope.output, scope.searchInput,
+                  gnSolrService.getHeatmapParams(scope.map)).
+                  then(function(resp) {
+                    scope.heatmaps = resp.solrData.facet_counts.facet_heatmaps;
+                  });
+            }
+          }
+
 
           /**
            * reset and init the facet structure.
@@ -222,17 +316,16 @@
 
             scope.searchInput = '';
 
+
             // load all facet and fill ui structure for the list
-            wfsFilterService.getFacetsConfigFromSolr(solrUrl, scope.docFields).
-                then(function(facetsInfo) {
-                  scope.fields = facetsInfo.facetConfig;
-                  scope.count = facetsInfo.count;
-                  scope.countTotal = facetsInfo.count;
-                  scope.layer.set('featureCount', scope.count);
-                  scope.layer.set('featureCountT', scope.countTotal);
+            solrObject.searchWithFacets(null, null).
+                then(function(resp) {
+                  scope.fields = resp.facets;
+                  scope.count = resp.count;
                   angular.forEach(scope.fields, function(f) {
                     f.collapsed = true;
                   });
+                  refreshHeatmap();
                 });
 
             scope.resetSLDFilters();
@@ -258,7 +351,7 @@
                 // Usually return 414 Request-URI Too Large
                 var useSldBody = false;
                 if (useSldBody) {
-                  $http.get(sldURL).then(function (response) {
+                  $http.get(sldURL).then(function(response) {
                     scope.layer.getSource().updateParams({
                       SLD_BODY: response.data
                     });
@@ -280,48 +373,71 @@
             return defer.promise;
           };
 
+          /**
+           * Trigger the SOLR indexation of the feature type.
+           * Only available for administrators.
+           */
           scope.indexWFSFeatures = function() {
-            if (scope.appProfile == null) {
-              loadAppProfile().then(function() {
-                return wfsFilterService.indexWFSFeatures(
-                    scope.url,
-                    ftName,
-                    scope.appProfile.tokenize);
-              }, function() {
-                return wfsFilterService.indexWFSFeatures(
-                    scope.url,
-                    ftName,
-                    null
-                );
-              });
-            } else {
-              return wfsFilterService.indexWFSFeatures(
+            appProfilePromise.then(function() {
+              wfsFilterService.indexWFSFeatures(
                   scope.url,
                   ftName,
-                  scope.appProfile && scope.appProfile.tokenize ?
-                  scope.appProfile.tokenize : null
-              );
-            }
+                  appProfile ? appProfile.tokenize : null,
+                  uuid);
+            });
           };
 
-
+          /**
+           * Clear the search input
+           */
           scope.clearInput = function() {
             scope.searchInput = '';
             scope.filterFacets();
           };
-
           scope.searchInput = '';
 
+          // Init the directive
           if (scope.layer) {
             init();
           }
           else {
             scope.$watch('layer', function(n, o) {
-              if (n && n != o) {
+              if (n === null && scope.map) {
+                resetHeatMap();
+              } else if (n !== o) {
                 init();
               }
             });
           }
+
+
+          function resetHeatMap() {
+            if (scope.source) {
+              scope.source.clear();
+            }
+            scope.map.un('moveend', refreshHeatmap);
+          }
+
+          scope.$watch('isHeatMapVisible', function(n, o) {
+            if (n != o) {
+              scope.heatmapLayer.setVisible(n);
+            }
+          });
+
+          // Update heatmap layers from Solr response
+          scope.$watch('heatmaps', function(n, o) {
+            if (n != o) {
+              // TODO: May contains multiple heatmaps
+              if (angular.isArray(n.geom)) {
+                scope.source.clear();
+                scope.source.addFeatures(
+                    gnSolrService.heatmapToFeatures(
+                    n.geom,
+                    scope.map.getView().getProjection())
+                );
+              }
+            }
+          });
         }
       };
     }]);

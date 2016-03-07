@@ -59,7 +59,6 @@ public class WFSHarvesterRouteBuilder extends RouteBuilder {
                         "Exception occured: ${exception.message}")
                 .log(LoggingLevel.ERROR, LOGGER_NAME,
                         "Harvesting task terminated due to previous exception (Exchange ${exchangeId}).");
-        final JAXBContext jaxbContext = JAXBContext.newInstance(WFSHarvesterParameter.class);
         JaxbDataFormat jaxb = new JaxbDataFormat(false);
         jaxb.setContextPath(WFSHarvesterParameter.class.getPackage().getName());
 
@@ -83,7 +82,7 @@ public class WFSHarvesterRouteBuilder extends RouteBuilder {
 //                        .setProperty("url", xpath("wfs/@url", String.class))
 //                        .setProperty("typeName", xpath("wfs/@typeName", String.class))
                         .log(LoggingLevel.INFO, LOGGER_NAME, "#${property.CamelSplitIndex}. Harvesting ${property.configuration.url} - start (Exchange ${exchangeId}).")
-                        .bean(FeatureTypeBean.class, "initialize(*, true)")
+                        .bean(SolrWFSFeatureIndexer.class, "initialize(*, true)")
                         .to("direct:delete-wfs-featuretype-features")
                         .to("direct:index-wfs")
                         .log(LoggingLevel.INFO, LOGGER_NAME, "#${property.CamelSplitIndex}. Harvesting ${property.configuration.url} - end (Exchange ${exchangeId}).")
@@ -96,16 +95,16 @@ public class WFSHarvesterRouteBuilder extends RouteBuilder {
          * types and the WFSDatastore.
          * This bean will be pass to next Route.
          */
-        from("activemq:queue:" + MESSAGE_HARVEST_WFS_FEATURES)
+        from("activemq:queue:" + MESSAGE_HARVEST_WFS_FEATURES + "?concurrentConsumers=5")
                 .id("harvest-wfs-start-from-message")
                 .log(LoggingLevel.INFO, LOGGER_NAME, "Harvest features message received.")
                 .log(LoggingLevel.INFO, LOGGER_NAME, "${body}")
                 .setProperty("configuration", simple("${body.parameters}"))
-                .bean(FeatureTypeBean.class, "initialize(*, true)")
+                .bean(SolrWFSFeatureIndexer.class, "initialize(*, true)")
                 .to("direct:delete-wfs-featuretype-features")
                 .to("direct:index-wfs");
 
-        from("activemq:queue:" + MESSAGE_DELETE_WFS_FEATURES)
+        from("activemq:queue:" + MESSAGE_DELETE_WFS_FEATURES + "?concurrentConsumers=5")
                 .id("harvest-wfs-delete-features-from-message")
                 .log(LoggingLevel.INFO, LOGGER_NAME, "Delete features message received.")
                 .setProperty("url", simple("${body.parameters.url}"))

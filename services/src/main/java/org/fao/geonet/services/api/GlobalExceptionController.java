@@ -23,6 +23,7 @@
 
 package org.fao.geonet.services.api;
 
+import org.fao.geonet.exceptions.UserNotFoundEx;
 import org.fao.geonet.services.api.exception.NoResultsFoundException;
 import org.fao.geonet.services.api.exception.ResourceAlreadyExistException;
 import org.fao.geonet.services.api.exception.ResourceNotFoundException;
@@ -38,7 +39,7 @@ import org.springframework.web.multipart.MultipartException;
 
 import java.io.FileNotFoundException;
 import java.util.LinkedHashMap;
-import java.util.ResourceBundle;
+import java.util.MissingResourceException;
 
 /**
  */
@@ -65,7 +66,6 @@ public class GlobalExceptionController {
             MaxUploadSizeExceededException.class
     })
     public Object maxFileExceededHandler(final Exception exception) {
-        exception.printStackTrace();
         return new LinkedHashMap<String, String>() {{
             put("code", "max_file_exceeded");
             put("message", exception.getClass().getSimpleName());
@@ -79,7 +79,6 @@ public class GlobalExceptionController {
             FileNotFoundException.class,
             NoResultsFoundException.class})
     public Object NotFoundHandler(final Exception exception) {
-        exception.printStackTrace();
         return new LinkedHashMap<String, String>() {{
             put("code", "not_found");
             put("message", exception.getClass().getSimpleName());
@@ -90,6 +89,7 @@ public class GlobalExceptionController {
     @ResponseBody
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
     @ExceptionHandler({
+            UserNotFoundEx.class,
             ResourceNotFoundException.class})
     public Object resourceNotFoundHandler(final Exception exception) {
         return new LinkedHashMap<String, String>() {{
@@ -132,6 +132,18 @@ public class GlobalExceptionController {
     public Object unsatisfiedParameterHandler(final Exception exception) {
         return new LinkedHashMap<String, String>() {{
             put("code", "unsatisfied_request_parameter");
+            put("message", exception.getClass().getSimpleName());
+            put("description", exception.getMessage());
+        }};
+    }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({
+            MissingResourceException.class
+    })
+    public Object missingResourceHandler(final Exception exception) {
+        return new LinkedHashMap<String, String>() {{
+            put("code", "missing_resource_parameter");
             put("message", exception.getClass().getSimpleName());
             put("description", exception.getMessage());
         }};

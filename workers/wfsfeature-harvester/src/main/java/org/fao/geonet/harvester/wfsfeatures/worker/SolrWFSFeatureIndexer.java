@@ -25,19 +25,26 @@ package org.fao.geonet.harvester.wfsfeatures.worker;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.apache.camel.Exchange;
+import org.apache.commons.lang.StringUtils;
+import org.apache.jcs.access.exception.InvalidArgumentException;
 import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
+import org.fao.geonet.harvester.wfsfeatures.model.WFSHarvesterParameter;
+import org.fao.geonet.schema.iso19139.ISO19139Namespaces;
 import org.geotools.data.FeatureSource;
+import org.geotools.data.Query;
 import org.geotools.data.wfs.WFSDataStore;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.referencing.CRS;
+import org.jdom.Namespace;
 import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 import org.opengis.feature.simple.SimpleFeature;
@@ -45,16 +52,61 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.metadata.extent.Extent;
 import org.opengis.metadata.extent.GeographicBoundingBox;
 import org.opengis.metadata.extent.GeographicExtent;
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SolrWFSFeatureIndexer {
     public static final String MULTIVALUED_SUFFIX = "s";
     private SolrClient solr;
+
+
+    /**
+     * Create exchange states for this feature type.
+     *
+     * Load configuration from exchange properties.
+     * Could be a {@link WFSHarvesterParameter} or url and typeName
+     * exchange properties.
+     *
+     * @param exchange
+     * @param connect   Init datastore ie. connect to WFS, retrieve schema
+     */
+    public void initialize(
+            Exchange exchange,
+            boolean connect) throws InvalidArgumentException {
+        WFSHarvesterParameter configuration =
+                (WFSHarvesterParameter) exchange.getProperty("configuration");
+        if (configuration == null) {
+            throw new InvalidArgumentException("Missing WFS harvester configuration.");
+        }
+
+        logger.info(
+                String.format(
+                        "Initializing harvester configuration for uuid '%s', url '%s', feature type '%s'. Exchange id is '%s'.",
+                        configuration.getMetadataUuid(),
+                        configuration.getUrl(),
+                        configuration.getTypeName(),
+                        exchange.getExchangeId()
+                ));
+
+        WFSHarvesterExchangeState config = new WFSHarvesterExchangeState(configuration);
+        if (connect) {
+            try {
+                config.initDataStore();
+            } catch (Exception e) {
+                String errorMsg = String.format(
+                        "Failed to connect to server '%s'. Error is %s",
+                        configuration.getUrl(),
+                        e.getMessage());
+                logger.error(errorMsg);
+                throw new RuntimeException(errorMsg);
+            }
+        }
+        exchange.setProperty("featureTypeConfig", config);
+    }
 
     /**
      * Define for each attribute type the Solr field suffix.
@@ -79,6 +131,7 @@ public class SolrWFSFeatureIndexer {
                 .put("double", "_d")
                 .put("boolean", "_b")
                 .put("date", "_dt")
+                .put("dateTime", "_dt")
                 .build();
     }
 
@@ -123,8 +176,9 @@ public class SolrWFSFeatureIndexer {
      * @param exchange
      */
     public void deleteFeatures(Exchange exchange) {
-        final String url = (String) exchange.getProperty("url");
-        final String typeName = (String) exchange.getProperty("typeName");
+        WFSHarvesterExchangeState state = (WFSHarvesterExchangeState) exchange.getProperty("featureTypeConfig");
+        final String url = state.getParameters().getUrl();
+        final String typeName = state.getParameters().getTypeName();
 
         logger.info(String.format(
                 "Deleting features previously index from service '%s' and feature type '%s' in '%s'",
@@ -190,8 +244,8 @@ public class SolrWFSFeatureIndexer {
     public void indexFeatures(Exchange exchange) throws Exception {
         WFSHarvesterExchangeState state = (WFSHarvesterExchangeState) exchange.getProperty("featureTypeConfig");
 
-        final String url = state.getUrl();
-        final String typeName = state.getTypeName();
+        final String url = state.getParameters().getUrl();
+        final String typeName = state.getParameters().getTypeName();
         logger.info(String.format(
                 "Indexing WFS features from service '%s' and feature type '%s'",
                 url, typeName));
@@ -204,7 +258,7 @@ public class SolrWFSFeatureIndexer {
         harvesterReportFields.put("id", url + "#" + typeName);
         harvesterReportFields.put("docType", "harvesterReport");
 
-        final Map<String, String> tokenizedFields = state.getTokenize();
+        final Map<String, String> tokenizedFields = state.getParameters().getTokenize();
         final boolean hasTokenizedFields = tokenizedFields != null;
 
         List<String> docColumns = new ArrayList<>(fields.size());
@@ -214,19 +268,26 @@ public class SolrWFSFeatureIndexer {
             if (hasTokenizedFields) {
                 separator = tokenizedFields.get(attributeName);
             }
-            boolean isTokenized = separator != null;
-            String suffix = attributeType.equals("geometry") ?
-                                "" :
-                                XSDTYPES_TO_SOLRFIELDSUFFIX.get(attributeType) +
-                                (isTokenized ? MULTIVALUED_SUFFIX : "");
-            docColumns.add(attributeName + suffix);
+            if (attributeType.equals("geometry")) {
+                docColumns.add("geom");
+            } else {
+                boolean isTokenized = separator != null;
+                docColumns.add(attributeName +
+                               XSDTYPES_TO_SOLRFIELDSUFFIX.get(attributeType) +
+                               (isTokenized ? MULTIVALUED_SUFFIX : "")
+                );
+            }
         }
         harvesterReportFields.put("ftColumns_s", Joiner.on("|").join(fields.keySet()));
         harvesterReportFields.put("docColumns_s", Joiner.on("|").join(docColumns));
+        if (state.getParameters().getMetadataUuid() != null) {
+            harvesterReportFields.put("parent", state.getParameters().getMetadataUuid());
+        }
+
+        CoordinateReferenceSystem wgs84 = CRS.decode("EPSG:4326");
 
         try {
             FeatureSource<SimpleFeatureType, SimpleFeature> source = wfs.getFeatureSource(typeName);
-            CoordinateReferenceSystem wgs84 = CRS.decode("EPSG:4326");
             Extent crsExtent = wgs84.getDomainOfValidity();
             ReferencedEnvelope wgs84bbox = null;
             for (GeographicExtent element : crsExtent.getGeographicElements()) {
@@ -237,18 +298,29 @@ public class SolrWFSFeatureIndexer {
                             bounds.getNorthBoundLatitude(),
                             bounds.getWestBoundLongitude(),
                             bounds.getEastBoundLongitude(),
-                            CRS.decode("EPSG:4326")
+                            wgs84
                     );
                 }
             }
 
-            // TODO : retrieve features in WGS 84
-            FeatureCollection<SimpleFeatureType, SimpleFeature> featuresCollection = source.getFeatures();
-            boolean isWGS84 = CRS.lookupEpsgCode(source.getBounds().getCoordinateReferenceSystem(), false) == 4326;
+
+            // TODO: GeoServer WFS 1.0.0 in some case return
+//            Feb 18, 2016 12:04:22 PM org.geotools.data.wfs.v1_0_0.NonStrictWFSStrategy createFeatureReaderGET
+//            WARNING: java.io.IOException: org.xml.sax.SAXException: cannot merge two target namespaces. http://www.openplans.org/topp http://www.openplans.org/spearfish
+            // Retrieve features in WGS 84
+            Query query = new Query();
+            query.setCoordinateSystem(wgs84);
+
+            FeatureCollection<SimpleFeatureType, SimpleFeature> featuresCollection = source.getFeatures(query);
 
             final FeatureIterator<SimpleFeature> features = featuresCollection.features();
             int numInBatch = 0, nbOfFeatures = 0;
             Collection<SolrInputDocument> docCollection = new ArrayList<SolrInputDocument>();
+
+            saveHarvesterReport();
+
+            String titleExpression = state.getParameters().getTitleExpression();
+            String defaultTitleAttribute = titleExpression == null ? guessFeatureTitleAttribute(fields) : null;
 
             while (features.hasNext()) {
                 SimpleFeature feature = features.next();
@@ -257,31 +329,26 @@ public class SolrWFSFeatureIndexer {
 
                 document.addField("id", feature.getID());
                 document.addField("docType", "feature");
+                document.addField("resourceType", "feature");
                 document.addField("featureTypeId", url + "#" + typeName);
+
+                if (titleExpression != null) {
+                    document.addField("resourceTitle",
+                            buildFeatureTitle(feature, fields, titleExpression));
+                }
+
+                if (state.getParameters().getMetadataUuid() != null) {
+                    document.addField("parent", state.getParameters().getMetadataUuid());
+                }
 
                 for (String attributeName : fields.keySet()) {
                     String attributeType = fields.get(attributeName);
                     Object attributeValue = feature.getAttribute(attributeName);
 
-                    // TODO : tokenize
-                    // state.getTokenize();
                     if (attributeValue != null) {
                         if (attributeType.equals("geometry")) {
-//                            !CRS.equalsIgnoreMetadata(
-//                                    feature.getBounds().getCoordinateReferenceSystem(),
-//                                    wgs84)
                             try {
-//                                if (!isWGS84) {
-//                                    // Geometry is not in WGS84
-//                                    // TODO: reproject feature ?
-//                                } else if (wgs84bbox.contains(feature.getBounds())) {
-//                                    document.addField("geom", attributeValue);
-//                                } else {
-//                                    // Geometry is out of CRS extent
-//                                }
-                                if (isWGS84) {
-                                    document.addField("geom", attributeValue);
-                                }
+                             document.addField("geom", attributeValue);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -306,6 +373,12 @@ public class SolrWFSFeatureIndexer {
                                         attributeName + XSDTYPES_TO_SOLRFIELDSUFFIX.get(attributeType),
                                         attributeValue);
                             }
+
+
+                            if (defaultTitleAttribute != null &&
+                                defaultTitleAttribute.equals(attributeName)) {
+                                document.addField("resourceTitle", attributeValue);
+                            }
                         }
                     }
                 }
@@ -313,22 +386,34 @@ public class SolrWFSFeatureIndexer {
                 docCollection.add(document);
                 numInBatch++;
                 if (numInBatch >= featureCommitInterval) {
-                    UpdateResponse response = solr.add(docCollection, solrCommitWithinMs);
+                    if (logger.isDebugEnabled()) {
+                        logger.debug(String.format(
+                                "  %d features to index.",
+                                nbOfFeatures));
+                    }
+                    UpdateResponse response = solr.add(docCollection);
+                    solr.commit();
                     docCollection.clear();
                     numInBatch = 0;
                     if (logger.isDebugEnabled()) {
                         logger.debug(String.format(
-                                "  %d features indexed (commit within %dms).",
-                                nbOfFeatures, solrCommitWithinMs));
+                                "  %d features indexed.",
+                                nbOfFeatures));
                     }
                 }
             }
             if (docCollection.size() > 0) {
-                UpdateResponse response = solr.add(docCollection, solrCommitWithinMs);
                 if (logger.isDebugEnabled()) {
                     logger.debug(String.format(
-                            "  %d features indexed (commit within %dms).",
-                            nbOfFeatures, solrCommitWithinMs));
+                            "  %d features to index.",
+                            nbOfFeatures));
+                }
+                UpdateResponse response = solr.add(docCollection);
+                solr.commit();
+                if (logger.isDebugEnabled()) {
+                    logger.debug(String.format(
+                            "  %d features indexed.",
+                            nbOfFeatures));
                 }
             }
             logger.info(String.format("Total number of features indexed is %d.", nbOfFeatures));
@@ -346,18 +431,78 @@ public class SolrWFSFeatureIndexer {
             harvesterReportFields.put("error_s", e.getMessage());
             logger.error(e.getMessage());
             throw e;
-        } catch (NoSuchAuthorityCodeException e) {
-            harvesterReportFields.put("status_s", "error");
-            harvesterReportFields.put("error_s", e.getMessage());
-            logger.error(e.getMessage());
-            throw e;
-        } catch (FactoryException e) {
-            harvesterReportFields.put("status_s", "error");
-            harvesterReportFields.put("error_s", e.getMessage());
-            logger.error(e.getMessage());
-            throw e;
         } finally {
             saveHarvesterReport();
         }
+    }
+
+    private static Pattern pt = Pattern.compile("\\{\\{([^}]*)\\}\\}");
+    /**
+     * Build a title for the feature. The title expression could be
+     * an attribute name or could contain expression were attributes
+     * will be substituted. eg. "{{TITLE_FR}} ({{ID}})"
+     *
+     * @param feature   A simple feature
+     * @param fields    List of columns
+     * @param titleExpression A title expression based on one or more attributes
+     * @return
+     */
+    public static String buildFeatureTitle(SimpleFeature feature,
+                                    Map<String, String> fields,
+                                    String titleExpression) {
+        if (StringUtils.isNotEmpty(titleExpression)) {
+            if (titleExpression.contains("{{")) {
+                Matcher m = pt.matcher(titleExpression);
+                while (m.find()) {
+                    String attributeName = m.group(1);
+                    String attributeValue = (String) feature.getAttribute(attributeName);
+                    titleExpression = titleExpression.replaceAll(
+                            "\\{\\{" + attributeName + "\\}\\}",
+                            attributeValue);
+
+                }
+                return titleExpression;
+            } else {
+                String attributeValue = (String) feature.getAttribute(titleExpression);
+                if (attributeValue != null) {
+                    return attributeValue;
+                } else {
+                    return null;
+                }
+            }
+        } else {
+            for (String attributeName : fields.keySet()) {
+                String attributeType = fields.get(attributeName);
+                String attributeValue = (String) feature.getAttribute(attributeName);
+                if (attributeValue != null && !attributeType.equals("geometry")) {
+                    return attributeValue;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static Pattern titleColumnShouldMatchPattern =
+            Pattern.compile(
+                    ".*(TITLE|LABEL|NAME|TITRE|NOM|LIBELLE).*",
+                    Pattern.CASE_INSENSITIVE);
+
+    /**
+     * From the list of attributes try to find the best one
+     * for a title. If not found, return the first attribute.
+     * If none, return null.
+     *
+     * @param fields List of attributes
+     * @return
+     */
+    public static String guessFeatureTitleAttribute(Map<String, String> fields) {
+        Set<String> keySet = fields.keySet();
+        for (String attributeName : keySet) {
+            Matcher m = titleColumnShouldMatchPattern.matcher(attributeName);
+            if (m.find()) {
+                return attributeName;
+            }
+        }
+        return keySet.size() > 0 ? (String)keySet.toArray()[0] : null;
     }
 }

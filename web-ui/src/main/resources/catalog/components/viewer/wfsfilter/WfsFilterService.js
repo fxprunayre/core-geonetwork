@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_wfsfilter_service');
 
@@ -5,15 +28,19 @@
   ]);
 
   module.service('wfsFilterService', [
+    'gnSolrRequestManager',
     'gnHttp',
     'gnUrlUtils',
     'gnGlobalSettings',
     '$http',
     '$q',
     '$translate',
-    function(gnHttp, gnUrlUtils, gnGlobalSettings, $http, $q, $translate) {
+    function(gnSolrRequestManager, gnHttp, gnUrlUtils, gnGlobalSettings,
+             $http, $q, $translate) {
 
       var solrProxyUrl = gnHttp.getService('solrproxy');
+
+      var solrObject = gnSolrRequestManager.register('WfsFilter', 'facets');
 
       var buildSolrUrl = function(params) {
         return gnUrlUtils.append(solrProxyUrl + '/query',
@@ -33,6 +60,9 @@
         }
         else if (solrPropName == 'facet_dates') {
           type = 'date';
+        }
+        else if (solrPropName == 'facet_heatmaps') {
+          type = 'heatmap';
         }
         return type;
       };
@@ -54,7 +84,7 @@
             var fNameObj = getIdxNameObj(fieldProp, docFields);
             var facetField = {
               name: fieldProp,
-              label: fNameObj.label || fNameObj.attrName,
+              label: fNameObj.label || fNameObj.label,
               values: [],
               type: facetType
             };
@@ -107,7 +137,7 @@
        */
       var getIdxNameObj = function(name, idxFields) {
         for (var i = 0; i < idxFields.length; i++) {
-          if (idxFields[i].attrName == name ||
+          if (idxFields[i].label == name ||
               idxFields[i].idxName == name) {
             return idxFields[i];
           }
@@ -167,53 +197,6 @@
       };
 
       /**
-       * Get the indexed fields for the given feature. We get an array of both
-       * featureType names and indexed names with the suffix.
-       *
-       * @param {string} featureTypeName featuretype name
-       * @param {string} wfsUrl url of the wfs service
-       * @return {httpPromise} return array of field names
-       */
-      this.getWfsIndexFields = function(featureTypeName, wfsUrl) {
-        var url = buildSolrUrl({
-          rows: 1,
-          q: 'id:"' + wfsUrl + '#' + featureTypeName.replace(':', '\\:') + '"',
-          wt: 'json'
-        });
-
-        var defer = $q.defer();
-        $http.get(url).then(function(response) {
-          var indexInfos = [];
-          try {
-            var ftF = response.data.response.docs[0].ftColumns_s.split('|');
-            var docF = response.data.response.docs[0].docColumns_s.split('|');
-
-            for (var i = 0; i < docF.length; i++) {
-              indexInfos.push({
-                attrName: ftF[i],
-                idxName: docF[i]
-              });
-            }
-          }
-          catch (e) {
-            var msg = $translate('wfsFeatureNotIndexed', {
-              wfsUrl: wfsUrl,
-              featureTypeName: featureTypeName
-            });
-            defer.reject({statusText: msg});
-          }
-          defer.resolve(indexInfos);
-        }, function(r) {
-          if (r.status === 404) {
-            defer.reject({statusText: $translate('indexNotRunning')});
-          } else {
-            defer.reject(r);
-          }
-        });
-        return defer.promise;
-      };
-
-      /**
        * Get the applicationProfile content from the metadata of the given
        * online resource.
        *
@@ -231,41 +214,6 @@
       };
 
       /**
-       * Build the solr request that will be used for generating the facet ui.
-       * The request is build from features attributes index fields.
-       * This is the generic way used if the application profile is null
-       *
-       * @param {Array} fields array of the field names
-       * @param {string} ftName featuretype name
-       * @param {string} wfsUrl url of the wfs service
-       * @return {string} solr url
-       */
-      this.getSolrRequestFromFields = function(fields, ftName, wfsUrl) {
-        var url = buildSolrUrl({
-          rows: 0,
-          q: 'featureTypeId:"' + wfsUrl + '#' +
-              ftName.replace(':', '\\:') + '"',
-          wt: 'json',
-          facet: 'true',
-          'facet.mincount' : 1
-        });
-
-        // don't build facet on useless fields
-        // * manager field eg. id
-        // * common field irrelevant for facet like the_geom
-        var listOfFieldsToExclude = ['geom', 'the_geom', 'ms_geometry',
-          'msgeometry', 'id_s', '_version_', 'featuretypeid', 'doctype'];
-        angular.forEach(fields, function(field) {
-          var f = field.idxName;
-          var fname = f.toLowerCase();
-          if ($.inArray(fname, listOfFieldsToExclude) === -1) {
-            url += '&facet.field=' + f;
-          }
-        });
-        return url;
-      };
-
-      /**
        * Build solr request from config of the applicationProfile.
        * This config determines what fields to have in facet, and gives
        * interval and range properties.
@@ -275,40 +223,29 @@
        * @param {string} wfsUrl url of the wfs service
        * @param {array} idxFields info about doc fields
        */
-      this.getSolrRequestFromApplicationProfile =
-          function(config, ftName, wfsUrl, idxFields) {
+      this.solrMergeApplicationProfile = function(fields, newFields) {
 
-        var url = buildSolrUrl({
-          rows: 0,
-          q: 'featureTypeId:"' + wfsUrl + '#' +
-              ftName.replace(':', '\\:') + '"',
-          wt: 'json',
-          facet: 'true',
-          'facet.mincount' : 1
-        });
+        var toRemoveIdx = [];
 
-        angular.forEach(config.fields, function(field) {
-          var fNameObj = getIdxNameObj(field.name, idxFields);
-          if (field.label) {
-            fNameObj.label = field.label[gnGlobalSettings.lang];
+        fields.forEach(function(field, idx) {
+          var keep;
+          for (var i = 0; i < newFields.length; i++) {
+            if (field.label == newFields[i].name) {
+              keep = true;
+              if (newFields[i].label) {
+                field.label = newFields[i].label[gnGlobalSettings.lang];
+              }
+              break;
+            }
           }
-          var docName = fNameObj.idxName;
-          var p = '&facet.field=' + docName;
-
-          angular.forEach(field.fq, function(v, k) {
-            if (angular.isString(v)) {
-              p += '&' + k + '=' + v;
-            }
-            else if (angular.isArray(v)) {
-              angular.forEach(v, function(range) {
-                p += '&f.' + docName + '.' + k + '=' + range;
-              });
-            }
-          });
-          url += p;
+          if (!keep) {
+            toRemoveIdx.unshift(idx);
+          }
         });
 
-        return url;
+        toRemoveIdx.forEach(function(i) {
+          fields.splice(i, 1);
+        });
       };
 
       /**
@@ -319,12 +256,13 @@
        * @param {array} docFields info of indexed fields.
        * @return {httpPromise} return facet ui config
        */
-      this.getFacetsConfigFromSolr = function(url, docFields) {
+      this.getFacetsConfigFromSolr____ = function(url, docFields) {
 
         return $http.get(url).then(function(solrResponse) {
           return {
             facetConfig: createFacetConfigFromSolr(solrResponse.data,
                 docFields),
+            heatmaps: solrResponse.data.facet_counts.facet_heatmaps,
             count: solrResponse.data.response.numFound
           };
         });
@@ -344,7 +282,7 @@
        * @param {string} filter the any filter from input
        * @return {string} the updated url
        */
-      this.updateSolrUrl = function(url, facetState, filter) {
+      this.updateSolrUrl___ = function(url, facetState, filter) {
         var fieldsQ = [];
 
         angular.forEach(facetState, function(field, fieldName) {
@@ -399,11 +337,13 @@
        * @param {string} featuretype name
        * @return {httpPromise} when indexing is done
        */
-      this.indexWFSFeatures = function(url, type, idxConfig) {
+      this.indexWFSFeatures = function(url, type, idxConfig, uuid) {
         return $http.put('../api/0.1/workers/data/wfs/actions/start', {
           url: url,
           typeName: type,
-          tokenize: idxConfig
+          //version: '1.1.0',
+          tokenize: idxConfig,
+          metadataUuid: uuid
         }
         ).then(function(data) {
           console.log(data);
