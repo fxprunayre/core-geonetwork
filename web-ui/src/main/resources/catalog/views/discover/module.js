@@ -4,27 +4,61 @@
 
   goog.require('gn_search');
   goog.require('gn_search_discover_config');
+  goog.require('gn_solr');
 
   var module = angular.module('gn_search_discover',
-      ['gn_search', 'gn_search_discover_config']);
+      ['gn_search', 'gn_search_discover_config', 'gn_solr']);
 
 
-  module.controller('gnsDefault', ['$scope', '$http',
-    function($scope, $http) {
+  module.controller('gnsDefault', ['$scope', '$http', 'gnSolrRequestManager',
+    function($scope, $http, gnSolrRequestManager) {
 
       $scope.anyField = '';
       $scope.current = null;
-      $scope.search = function () {
-        $scope.current = null;
-        $http.get('../api/0.1/search/query', {params: {
-          q: $scope.anyField || '*:*',
-          wt: 'json',
-          facet.field: 'docType',
-          rows: 30
-        }}).then(function (r) {
-          $scope.results = r.data.response.docs;
-        })
+
+      var facetConfig = {
+        feature: 'parent',
+        dataset: 'codelist_spatialRepresentationType',
+        service: 'serviceType'
       };
+      var searchObj =
+        gnSolrRequestManager.register('Default', 'facets');
+      searchObj.init();
+      $scope.search = function () {
+        searchObj.searchWithFacets(null, $scope.anyField, {
+          facet: true,
+          'facet.field': 'resourceType'
+        }).then(function (resp) {
+          $scope.results = resp;
+        });
+      };
+      $scope.filter = function(filter, value) {
+        var p = {}, v = {};
+        v[value] = ''
+        p[filter] = {values: v};
+
+        var facet = {};
+        if (facetConfig[value]) {
+          facet = {
+            facet: true,
+            'facet.field': facetConfig[value]
+          }
+        }
+
+        searchObj.searchWithFacets(p, $scope.anyField, facet).then(function (resp) {
+          $scope.results = resp;
+          console.log(resp);
+        });
+      };
+      $scope.previous = function() {
+        searchObj.previous(null, $scope.anyField);
+      };
+      $scope.next = function() {
+        searchObj.next(null, $scope.anyField);
+      };
+      searchObj.on('search', function(resp) {
+        $scope.results = resp;
+      });
       $scope.setCurrent = function(r) {
         $scope.current = r;
         if ($scope.current.geom) {

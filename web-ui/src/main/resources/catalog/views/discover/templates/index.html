@@ -15,22 +15,45 @@
                data-ng-model-options="{debounce: 300}"
                placeholder="{{'anyPlaceHolder' | translate}}"
                data-ng-keyup="$event.keyCode == 13 && search()"/>
+
         <span class="input-group-btn">
           <a class="btn btn-primary btn-lg"
              type="button"
              data-ng-click="search()">
             <i class="fa fa-search"></i>
           </a>
+          <button type="button"
+                  data-ng-click="search();"
+                  title="{{'ClearTitle' | translate}}"
+                  class="btn btn-link btn-lg">
+            <i class="fa fa-times"></i>
+          </button>
         </span>
       </div>
     </form>
 
     <div class="row">
       <div class="col-md-7">
-        <div data-ng-repeat="r in results">
+        <ul class="nav nav-pills"
+            data-ng-show="results.facets" data-ng-repeat="f in results.facets">
+          <li role="presentation"
+              data-ng-repeat="v in f.values">
+            <a data-ng-click="filter(f.name, v.value)">
+              {{v.value}} ({{v.count}})
+            </a>
+          </li>
+        </ul>
+        <div data-ng-repeat="r in results.records">
           <h3 data-ng-mouseover="setCurrent(r)">{{r.resourceTitle || r.id}}</h3>
           <p>{{r.abstract}}</p>
         </div>
+
+        <nav data-ng-show="results.records">
+          <ul class="pager">
+            <li><a data-ng-click="previous()">Previous</a></li>
+            <li><a data-ng-click="next()">Next</a></li>
+          </ul>
+        </nav>
       </div>
       <div class="col-md-5">
         <!--<div id="map" style="width: 200px; height: 200px"/>-->
