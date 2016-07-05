@@ -26,8 +26,8 @@ package org.fao.geonet.harvester.wfsfeatures.worker;
 import org.apache.log4j.Logger;
 import org.apache.solr.common.StringUtils;
 import org.fao.geonet.harvester.wfsfeatures.model.WFSHarvesterParameter;
-import org.geotools.data.wfs.WFSDataStore;
-import org.geotools.data.wfs.WFSDataStoreFactory;
+import org.geotools.data.DataStore;
+import org.geotools.data.DataStoreFinder;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.AttributeDescriptor;
 
@@ -71,13 +71,13 @@ public class WFSHarvesterExchangeState {
         return fields;
     }
 
-    private WFSDataStore wfsDatastore = null;
+    private DataStore wfsDatastore = null;
 
-    public void setWfsDatastore(WFSDataStore wfsDatastore) {
+    public void setWfsDatastore(DataStore wfsDatastore) {
         this.wfsDatastore = wfsDatastore;
     }
 
-    public WFSDataStore getWfsDatastore() {
+    public DataStore getWfsDatastore() {
         return wfsDatastore;
     }
 
@@ -112,7 +112,6 @@ public class WFSHarvesterExchangeState {
      * all schema infos (attributes names and types).
      */
     public void initDataStore() throws Exception {
-        WFSDataStoreFactory factory = new WFSDataStoreFactory();
         Map m = new HashMap();
 
         // See http://docs.geotools.org/latest/userguide/library/referencing/order.html
@@ -126,16 +125,13 @@ public class WFSHarvesterExchangeState {
                     "Connecting using GetCatapbilities URL '%s'.",
                     getCapUrl));
 
-            m.put(WFSDataStoreFactory.URL.key, getCapUrl);
-            m.put(WFSDataStoreFactory.TIMEOUT.key, parameters.getTimeOut());
-            m.put(WFSDataStoreFactory.TRY_GZIP, true);
-            m.put(WFSDataStoreFactory.ENCODING, parameters.getEncoding());
-            m.put(WFSDataStoreFactory.USEDEFAULTSRS, false);
-            if (parameters.getMaxFeatures() != -1) {
-                m.put(WFSDataStoreFactory.MAXFEATURES.key, parameters.getMaxFeatures());
-            }
-
-            wfsDatastore = factory.createDataStore(m);
+            m.put("WFSDataStoreFactory:GET_CAPABILITIES_URL", getCapUrl);
+            m.put("WFSDataStoreFactory:TIMEOUT", parameters.getTimeOut());
+            m.put("WFSDataStoreFactory:TRY_GZIP", true);
+            m.put("WFSDataStoreFactory:ENCODING",  parameters.getEncoding());
+            m.put("WFSDataStoreFactory:USEDEFAULTSRS", false);
+            m.put("WFSDataStoreFactory:PROTOCOL", false);
+            wfsDatastore = DataStoreFinder.getDataStore(m);
 
             logger.info(String.format(
                     "Reading feature type '%s' schema structure.",

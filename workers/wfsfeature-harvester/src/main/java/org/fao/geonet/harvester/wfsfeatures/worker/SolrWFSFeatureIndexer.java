@@ -36,6 +36,7 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.fao.geonet.harvester.wfsfeatures.model.WFSHarvesterParameter;
+import org.geotools.data.DataStore;
 import org.geotools.data.FeatureSource;
 import org.geotools.data.Query;
 import org.geotools.data.wfs.WFSDataStore;
@@ -251,7 +252,7 @@ public class SolrWFSFeatureIndexer {
                 "Indexing WFS features from service '%s' and feature type '%s'",
                 url, typeName));
 
-        WFSDataStore wfs = state.getWfsDatastore();
+        DataStore wfs = state.getWfsDatastore();
         // Feature attribute name and type
         Map<String, String> featureAttributes = state.getFields();
         // Feature attribute name and document field name
