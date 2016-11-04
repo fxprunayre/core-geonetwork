@@ -23,8 +23,8 @@
 
 package org.fao.geonet.monitor.health;
 
-import com.yammer.metrics.core.HealthCheck;
 
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
 
@@ -37,7 +37,7 @@ import org.fao.geonet.repository.SettingRepository;
  */
 public class DatabaseHealthCheck implements HealthCheckFactory {
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Database Connection") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 try {

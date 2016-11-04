@@ -27,8 +27,9 @@ import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.DailyRollingFileAppender;
-import org.apache.log4j.PatternLayout;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.appender.RollingFileAppender;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.Logger;
 import org.fao.geonet.constants.Geonet;
@@ -208,17 +209,20 @@ public abstract class AbstractHarvester<T extends HarvestResult> {
             directory = d.getParent() + File.separator;
         }
 
-        DailyRollingFileAppender fa = new DailyRollingFileAppender();
-        fa.setName(harvesterName);
         String logfile = directory + "harvester_" + packageType + "_"
             + harvesterName + "_"
             + dateFormat.format(new Date(System.currentTimeMillis()))
             + ".log";
-        fa.setFile(logfile);
-        fa.setLayout(new PatternLayout("%d{ISO8601} %-5p [%c] - %m%n"));
-        fa.setThreshold(log.getThreshold());
-        fa.setAppend(true);
-        fa.activateOptions();
+        RollingFileAppender fa = RollingFileAppender.newBuilder()
+            .withName(harvesterName)
+            .withFileName(logfile)
+            .withLayout(
+                PatternLayout.newBuilder().withPattern("%d{ISO8601} %-5p [%c] - %m%n").build()
+            )
+            .withAppend(true)
+            .build();
+//        fa.setThreshold(log.getThreshold());
+//        fa.activateOptions();
 
         log.setAppender(fa);
 

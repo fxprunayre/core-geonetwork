@@ -29,7 +29,8 @@ import com.google.common.collect.ImmutableMap;
 import org.apache.camel.Exchange;
 import org.apache.commons.lang.StringUtils;
 import org.apache.jcs.access.exception.InvalidArgumentException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -121,7 +122,7 @@ public class SolrWFSFeatureIndexer {
     private static Map<String, String> XSDTYPES_TO_SOLRFIELDSUFFIX;
 
 
-    Logger logger = Logger.getLogger(WFSHarvesterRouteBuilder.LOGGER_NAME);
+    Logger logger = LogManager.getLogger(WFSHarvesterRouteBuilder.LOGGER_NAME);
     // TODO: Move attributeType / solr dynamic index field suffix to config
     // maybe make a bean taking care of this which could also do more
     // complex mapping like based on feature type column name defined suffix

@@ -482,14 +482,24 @@
         <version>1.7.5</version>
       </dependency>
       <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>1.7.5</version>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j.version}</version>
       </dependency>
       <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.17</version>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-1.2-api</artifactId>
+        <version>${log4j.version}</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
@@ -549,13 +559,13 @@
         <version>1.3</version> <!-- TODO check version -->
       </dependency>
       <!-- May be required to register connection unwrappers with
-			     geotools
+                 geotools
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-jdbc</artifactId>
         <version>2.5.3</version>
       </dependency>
-			-->
+            -->
       <dependency>
         <groupId>org.eclipse.core</groupId>
         <artifactId>org.eclipse.core.runtime</artifactId>
@@ -602,6 +612,11 @@
       </dependency>
       <dependency>
         <groupId>org.geotools</groupId>
+        <artifactId>gt-geojson</artifactId>
+        <version>${geotools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
         <artifactId>gt-shapefile</artifactId>
         <version>${geotools.version}</version>
       </dependency>
@@ -611,7 +626,7 @@
         <version>${geotools.version}</version>
         <exclusions>
           <exclusion>
-					<!-- org.apache.xml:xml-commons-resolver:jar:1.2 -->
+            <!-- org.apache.xml:xml-commons-resolver:jar:1.2 -->
             <groupId>org.apache.xml</groupId>
             <artifactId>xml-commons-resolver</artifactId>
           </exclusion>
@@ -706,6 +721,10 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
           </exclusion>
+          <exclusion>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+          </exclusion>
         </exclusions>
       </dependency>
       <dependency>
@@ -765,23 +784,28 @@
 
       <!-- Monitoring libraries -->
       <dependency>
-        <groupId>com.yammer.metrics</groupId>
+        <groupId>io.dropwizard.metrics</groupId>
         <artifactId>metrics-core</artifactId>
         <version>${metrics.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.yammer.metrics</groupId>
-        <artifactId>metrics-servlet</artifactId>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-healthchecks</artifactId>
         <version>${metrics.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.yammer.metrics</groupId>
-        <artifactId>metrics-web</artifactId>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-jvm</artifactId>
         <version>${metrics.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.yammer.metrics</groupId>
-        <artifactId>metrics-log4j</artifactId>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-servlets</artifactId>
+        <version>${metrics.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.dropwizard.metrics</groupId>
+        <artifactId>metrics-log4j2</artifactId>
         <version>${metrics.version}</version>
       </dependency>
       <!-- Tests -->
@@ -839,7 +863,7 @@
         <artifactId>ojdbc</artifactId>
         <version>14</version>
       </dependency>
-			-->
+            -->
       <dependency>
         <groupId>org.codehaus.izpack</groupId>
         <artifactId>izpack-standalone-compiler</artifactId>
@@ -1012,6 +1036,18 @@
         <artifactId>jaxb-impl</artifactId>
         <version>2.2.7</version>
       </dependency>
+
+
+      <dependency>
+        <groupId>org.elasticsearch</groupId>
+        <artifactId>elasticsearch</artifactId>
+        <version>${es.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.elasticsearch.client</groupId>
+        <artifactId>transport</artifactId>
+        <version>${es.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -1145,6 +1181,7 @@
     <module>wro4j</module>
     <module>inspire-atom</module>
     <module>solr</module>
+    <module>es</module>
     <module>workers</module>
     <module>messaging</module>
   </modules>
@@ -1200,12 +1237,23 @@
     <solr.url>http://localhost:${solr.port}/solr</solr.url>
     <solr.collection>catalog_srv</solr.collection>
 
+
+    <es.version>5.0.0</es.version>
+    <es.version.md5>17275e4d3a1fd95d591d504af1a0fd0c</es.version.md5>
+    <es.port>9200</es.port>
+    <es.host>localhost</es.host>
+    <es.url>http://${es.host}:${es.port}</es.url>
+    <es.index.features>features</es.index.features>
+    <es.username></es.username>
+    <es.password></es.password>
+
+
     <jms.url>tcp://localhost:61616</jms.url>
     <activemq.version>5.6.0</activemq.version>
 
     <spring.version>4.2.4.RELEASE</spring.version>
     <spring.security.version>3.2.0.RELEASE</spring.security.version>
-    <metrics.version>2.1.1</metrics.version>
+    <metrics.version>3.1.2</metrics.version>
     <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format>
     <build.timestamp>${maven.build.timestamp}</build.timestamp>
     <rootProjectDir>..</rootProjectDir>
@@ -1216,7 +1264,7 @@
     <print-lib.version>2.1.1</print-lib.version>
     <flying-saucer>9.0.7</flying-saucer>
     <camel.version>2.14.0</camel.version>
-    <log4j.version>1.2.17</log4j.version>
+    <log4j.version>2.7</log4j.version>
     <slf4j.version>1.7.7</slf4j.version>
     <xbean.version>3.18</xbean.version>
   </properties>

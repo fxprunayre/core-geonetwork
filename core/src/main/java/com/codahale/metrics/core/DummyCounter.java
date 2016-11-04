@@ -21,24 +21,37 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package jeeves.monitor.timer;
+package com.codahale.metrics.core;
 
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
-
-import jeeves.monitor.MetricsFactory;
-import jeeves.server.context.ServiceContext;
-import jeeves.server.dispatchers.ServiceManager;
-
-import static com.codahale.metrics.MetricRegistry.name;
+import com.codahale.metrics.Counter;
 
 /**
- * Tracks the time that guiServices take to execute
- *
- * User: jeichar Date: 4/3/12 Time: 8:50 AM
+ * A Counter that ignores input User: jeichar Date: 4/3/12 Time: 11:55 AM
  */
-public class ServiceManagerGuiServicesTimer implements MetricsFactory<Timer> {
-    public Timer create(MetricRegistry metricsRegistry, ServiceContext context) {
-        return metricsRegistry.timer(name(ServiceManager.class, "Gui_services_Timer"));
+public class DummyCounter extends Counter {
+    public static final Counter INSTANCE = new DummyCounter();
+
+    DummyCounter() {
+        super();
+    }
+
+    @Override
+    public void dec() {
+        // nothing
+    }
+
+    @Override
+    public void dec(long n) {
+        // nothing
+    }
+
+    @Override
+    public void inc() {
+        // nothing
+    }
+
+    @Override
+    public void inc(long n) {
+        // nothing
     }
 }

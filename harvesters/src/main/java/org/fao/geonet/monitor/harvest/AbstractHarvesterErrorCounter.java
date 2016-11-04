@@ -23,13 +23,14 @@
 
 package org.fao.geonet.monitor.harvest;
 
-import com.yammer.metrics.core.Counter;
-import com.yammer.metrics.core.MetricsRegistry;
-
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.MetricRegistry;
 import jeeves.monitor.MetricsFactory;
 import jeeves.server.context.ServiceContext;
 
 import org.fao.geonet.kernel.harvest.harvester.AbstractHarvester;
+
+import static com.codahale.metrics.MetricRegistry.name;
 
 /**
  * Counts the number of errors raised by a Harvester
@@ -37,7 +38,7 @@ import org.fao.geonet.kernel.harvest.harvester.AbstractHarvester;
  * User: jeichar Date: 4/3/12 Time: 5:18 PM
  */
 public class AbstractHarvesterErrorCounter implements MetricsFactory<Counter> {
-    public Counter create(MetricsRegistry metricsRegistry, ServiceContext context) {
-        return metricsRegistry.newCounter(AbstractHarvester.class, "HarvestingErrors");
+    public Counter create(MetricRegistry metricsRegistry, ServiceContext context) {
+        return metricsRegistry.counter(name(AbstractHarvester.class, "HarvestingErrors"));
     }
 }

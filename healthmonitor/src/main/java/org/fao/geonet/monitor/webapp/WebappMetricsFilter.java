@@ -23,8 +23,10 @@
 
 package org.fao.geonet.monitor.webapp;
 
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.*;
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.Meter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +38,8 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+
+import static com.codahale.metrics.MetricRegistry.name;
 
 /**
  * {@link Filter} implementation which captures request information and a breakdown of the response
@@ -71,43 +75,40 @@ public abstract class WebappMetricsFilter implements Filter {
 
 
     public void init(FilterConfig filterConfig) throws ServletException {
-        final MetricsRegistry metricsRegistry = getMetricsFactory(filterConfig);
+        final MetricRegistry metricsRegistry = getMetricsFactory(filterConfig);
 
         this.metersByStatusCode = new ConcurrentHashMap<Integer, Meter>(meterNamesByStatusCode
             .size());
         for (Entry<Integer, String> entry : meterNamesByStatusCode.entrySet()) {
             metersByStatusCode.put(entry.getKey(),
-                metricsRegistry.newMeter(WebappMetricsFilter.class,
-                    entry.getValue(),
-                    "responses",
-                    TimeUnit.SECONDS));
+                metricsRegistry.meter(name(
+                    WebappMetricsFilter.class,
+                    entry.getValue())));
         }
-        this.otherMeter = metricsRegistry.newMeter(WebappMetricsFilter.class,
-            otherMetricName,
-            "responses",
-            TimeUnit.SECONDS);
-        this.activeRequests = metricsRegistry.newCounter(WebappMetricsFilter.class, "activeRequests");
-        this.requestTimer = metricsRegistry.newTimer(WebappMetricsFilter.class,
-            "requests",
-            TimeUnit.MILLISECONDS,
-            TimeUnit.SECONDS);
+        this.otherMeter = metricsRegistry.meter(name(
+            WebappMetricsFilter.class,
+            otherMetricName));
+        this.activeRequests = metricsRegistry.counter(name(
+            WebappMetricsFilter.class, "activeRequests"));
+        this.requestTimer = metricsRegistry.timer(name(WebappMetricsFilter.class,
+            "requests"));
 
     }
 
-    private MetricsRegistry getMetricsFactory(FilterConfig filterConfig) {
-        final MetricsRegistry metricsRegistry;
+    private MetricRegistry getMetricsFactory(FilterConfig filterConfig) {
+        final MetricRegistry metricsRegistry;
 
         final Object o = filterConfig.getServletContext().getAttribute(this.registryAttribute);
-        if (o instanceof MetricsRegistry) {
-            metricsRegistry = (MetricsRegistry) o;
+        if (o instanceof MetricRegistry) {
+            metricsRegistry = (MetricRegistry) o;
         } else {
-            metricsRegistry = Metrics.defaultRegistry();
+            metricsRegistry = new MetricRegistry();
         }
         return metricsRegistry;
     }
 
     public void destroy() {
-        Metrics.defaultRegistry().shutdown();
+//        Metrics.defaultRegistry().shutdown();
     }
 
     public void doFilter(ServletRequest request,
@@ -116,7 +117,7 @@ public abstract class WebappMetricsFilter implements Filter {
         final StatusExposingServletResponse wrappedResponse =
             new StatusExposingServletResponse((HttpServletResponse) response);
         activeRequests.inc();
-        final TimerContext context = requestTimer.time();
+        final Timer.Context context = requestTimer.time();
         try {
             chain.doFilter(request, wrappedResponse);
         } finally {

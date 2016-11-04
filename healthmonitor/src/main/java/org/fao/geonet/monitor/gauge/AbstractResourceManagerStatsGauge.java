@@ -23,9 +23,8 @@
 
 package org.fao.geonet.monitor.gauge;
 
-import com.yammer.metrics.core.Gauge;
-import com.yammer.metrics.core.MetricsRegistry;
-
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import jeeves.monitor.MetricsFactory;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.resources.Stats;
@@ -48,10 +47,10 @@ public abstract class AbstractResourceManagerStatsGauge<T> implements MetricsFac
 
     protected abstract T defaultValue();
 
-    public Gauge<T> create(MetricsRegistry metricsRegistry, final ServiceContext context) {
-        return metricsRegistry.newGauge(DataSource.class, name, new Gauge<T>() {
+    public Gauge<T> create(MetricRegistry metricsRegistry, final ServiceContext context) {
+        return metricsRegistry.register(MetricRegistry.name(DataSource.class, name), new Gauge<T>() {
             @Override
-            public T value() {
+            public T getValue() {
                 T finalValue;
                 try {
                     T val = valueImpl(new Stats(context));

@@ -23,6 +23,7 @@
 
 package org.fao.geonet.monitor.health;
 
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.local.LocalServiceRequest;
@@ -33,8 +34,6 @@ import org.fao.geonet.utils.Xml;
 import org.fao.geonet.csw.common.Csw;
 import org.jdom.Element;
 
-import com.yammer.metrics.core.HealthCheck;
-
 /**
  * Checks to ensure that the CSW subsystem is accessible and functioning
  * <p/>
@@ -42,7 +41,7 @@ import com.yammer.metrics.core.HealthCheck;
  */
 public class CswGetRecordsHealthCheck implements HealthCheckFactory {
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Csw GetRecords") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 try {

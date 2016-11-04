@@ -23,8 +23,8 @@
 
 package jeeves.monitor.healthcheck;
 
+import com.codahale.metrics.health.HealthCheck;
 import com.sun.management.UnixOperatingSystemMXBean;
-import com.yammer.metrics.core.HealthCheck;
 
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
@@ -43,7 +43,7 @@ public class FreeFileHandlesHealthCheck implements HealthCheckFactory {
 
     @Override
     public HealthCheck create(ServiceContext context) {
-        return new HealthCheck("Free file handles") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 try {

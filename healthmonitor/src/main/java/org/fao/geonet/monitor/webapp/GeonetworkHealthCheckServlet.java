@@ -33,21 +33,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.codahale.metrics.health.HealthCheck;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
-
-import com.yammer.metrics.HealthChecks;
-import com.yammer.metrics.core.HealthCheck;
-import com.yammer.metrics.core.HealthCheckRegistry;
 
 /**
  * An HTTP servlet which runs the health checks registered with a given {@link HealthCheckRegistry}
  * and prints the results as a {@code text/plain} entity. Only responds to {@code GET} requests.
  * <p/>
- * If the servlet context has an attribute named {@code com.yammer.metrics.reporting.HealthCheckServlet.registry}
+ * If the servlet context has an attribute named {@code io.dropwizard.metrics.reporting.HealthCheckServlet.registry}
  * which is a {@link HealthCheckRegistry} instance, {@link GeonetworkHealthCheckServlet} will use it
- * instead of {@link HealthChecks}.
+ * instead of HealthChecks.
  */
 public class GeonetworkHealthCheckServlet extends HttpServlet {
     /**

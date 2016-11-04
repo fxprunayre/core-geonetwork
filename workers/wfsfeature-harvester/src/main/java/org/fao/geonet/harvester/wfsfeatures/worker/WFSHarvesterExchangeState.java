@@ -23,7 +23,8 @@
 
 package org.fao.geonet.harvester.wfsfeatures.worker;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.solr.common.StringUtils;
 import org.fao.geonet.harvester.wfsfeatures.model.WFSHarvesterParameter;
 import org.geotools.data.wfs.WFSDataStore;
@@ -41,7 +42,7 @@ import java.util.Map;
  * Created by fgravin on 11/5/15.
  */
 public class WFSHarvesterExchangeState {
-    Logger logger = Logger.getLogger(WFSHarvesterRouteBuilder.LOGGER_NAME);
+    Logger logger = LogManager.getLogger(WFSHarvesterRouteBuilder.LOGGER_NAME);
 
     private WFSHarvesterParameter parameters;
 

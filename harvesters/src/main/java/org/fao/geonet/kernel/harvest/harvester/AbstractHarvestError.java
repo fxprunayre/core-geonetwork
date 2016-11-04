@@ -1,14 +1,14 @@
 package org.fao.geonet.kernel.harvest.harvester;
 
+import com.codahale.metrics.Counter;
 import org.fao.geonet.monitor.harvest.AbstractHarvesterErrorCounter;
 
-import com.yammer.metrics.core.Counter;
 
 import jeeves.monitor.MonitorManager;
 import jeeves.server.context.ServiceContext;
 
 public class AbstractHarvestError {
-	
+
 	public AbstractHarvestError(ServiceContext context) {
 		super();
 		// we don't catch anything because this is not critical
@@ -19,6 +19,6 @@ public class AbstractHarvestError {
 			Counter harvestError = mm.getCounter(AbstractHarvesterErrorCounter.class);
 			harvestError.inc();
 		} finally {}
-		
+
 	}
 }

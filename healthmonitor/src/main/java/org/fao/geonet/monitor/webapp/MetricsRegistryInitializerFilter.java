@@ -23,9 +23,8 @@
 
 package org.fao.geonet.monitor.webapp;
 
-import com.yammer.metrics.core.HealthCheckRegistry;
-import com.yammer.metrics.core.MetricsRegistry;
-
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import jeeves.monitor.MonitorManager;
 import org.fao.geonet.utils.Log;
 
@@ -40,7 +39,7 @@ import java.io.IOException;
  * User: jeichar Date: 4/17/12 Time: 5:32 PM
  */
 public class MetricsRegistryInitializerFilter implements Filter {
-    private MetricsRegistry metricsRegistry;
+    private MetricRegistry metricsRegistry;
 
     public void init(FilterConfig filterConfig) throws ServletException {
         ServletContext context = filterConfig.getServletContext();
@@ -49,7 +48,7 @@ public class MetricsRegistryInitializerFilter implements Filter {
         context.setAttribute(MonitorManager.WARNING_HEALTH_CHECK_REGISTRY, new HealthCheckRegistry());
         context.setAttribute(MonitorManager.EXPENSIVE_HEALTH_CHECK_REGISTRY, new HealthCheckRegistry());
 
-        metricsRegistry = new MetricsRegistry();
+        metricsRegistry = new MetricRegistry();
         context.setAttribute(MonitorManager.METRICS_REGISTRY, metricsRegistry);
         context.setAttribute(DefaultWebappMetricsFilter.REGISTRY_ATTRIBUTE, metricsRegistry);
     }
@@ -60,6 +59,6 @@ public class MetricsRegistryInitializerFilter implements Filter {
 
     public void destroy() {
         Log.info(Log.WEBAPP, "Shutdown metricsRegistry");
-        metricsRegistry.shutdown();
+//        metricsRegistry.shutdown();
     }
 }

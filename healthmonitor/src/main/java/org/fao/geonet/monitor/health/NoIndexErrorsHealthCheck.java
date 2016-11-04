@@ -23,8 +23,7 @@
 
 package org.fao.geonet.monitor.health;
 
-import com.yammer.metrics.core.HealthCheck;
-
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.ServiceConfig;
 import jeeves.server.context.ServiceContext;
@@ -43,7 +42,7 @@ import org.jdom.Element;
  */
 public class NoIndexErrorsHealthCheck implements HealthCheckFactory {
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Metadata Index Errors") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);

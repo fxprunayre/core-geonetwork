@@ -25,9 +25,6 @@ package jeeves.server.overrides;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.spi.LoggerRepository;
 import org.fao.geonet.Constants;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
@@ -203,51 +200,6 @@ public class ConfigurationOverrides {
         this._overrides = overrides;
     }
 
-    /**
-     * Update the logging configuration so that it uses the configuration defined in the overrides
-     * rather than the defaults
-     *
-     * @param context the servlet context that is loaded (maybe null.  If null appPath is used to
-     *                resolve configuration files like: /WEB-INF/configuration-overrides.xml
-     * @param appPath The path to the webapplication root.  If servlet is null (and therefore
-     *                getResource cannot be used, this path is used to file files)
-     */
-    public void updateLoggingAsAccordingToOverrides(ServletContext context, Path appPath) throws JDOMException, IOException {
-        String resource = lookupOverrideParameter(context, appPath);
-
-        ServletResourceLoader loader = new ServletResourceLoader(context, appPath);
-        Element xml = loader.loadXmlResource(resource);
-        if (xml != null) {
-            doUpdateLogging(xml, loader);
-        }
-    }
-
-    /**
-     * This method is default visibility for testing
-     */
-    void doUpdateLogging(Element overrides, ResourceLoader loader) throws JDOMException, IOException {
-        List<?> logOverides = Xml.selectNodes(overrides, LOGFILE_XPATH);
-        Properties p = new Properties();
-        for (Object logOveride : logOverides) {
-            String value = ((Content) logOveride).getValue();
-            InputStream in = loader.loadInputStream(value);
-            if (in != null) {
-                try {
-                    p.load(in);
-                } finally {
-                    in.close();
-                }
-            } else {
-                throw new IllegalArgumentException("log configuration file " + value + " was not found");
-            }
-        }
-        if (logOverides.size() > 0) {
-            LoggerRepository loggerRepo = Logger.getRootLogger().getLoggerRepository();
-            loggerRepo.resetConfiguration();
-            PropertyConfigurator configurator = new PropertyConfigurator();
-            configurator.doConfigure(p, loggerRepo);
-        }
-    }
 
     /**
      * @param configFile    the path to the configuration file that has been loaded (and is the

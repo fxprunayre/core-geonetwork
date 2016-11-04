@@ -23,8 +23,8 @@
 
 package jeeves.monitor;
 
-import com.yammer.metrics.core.HealthCheck;
 
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.server.context.ServiceContext;
 
 /**

@@ -23,9 +23,9 @@
 
 package org.fao.geonet;
 
-import org.apache.log4j.FileAppender;
 
-//=============================================================================
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.Appender;
 
 public interface Logger {
     public boolean isDebugEnabled();
@@ -44,13 +44,10 @@ public interface Logger {
 
     public String getModule();
 
-    public void setAppender(FileAppender fa);
+    public void setAppender(Appender fa);
 
     public String getFileAppender();
 
-    public org.apache.log4j.Level getThreshold();
+    public Level getThreshold();
 
 }
-
-//=============================================================================
-

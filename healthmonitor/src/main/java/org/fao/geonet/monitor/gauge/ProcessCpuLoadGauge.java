@@ -41,7 +41,7 @@ public class ProcessCpuLoadGauge extends AbstractOSMxBeanGauge<Double> {
     }
 
     @Override
-    protected Double getValue(com.sun.management.OperatingSystemMXBean operatingSystemMXBean) {
+    protected Double getRealValue(com.sun.management.OperatingSystemMXBean operatingSystemMXBean) {
         return operatingSystemMXBean.getProcessCpuLoad();
     }
 }

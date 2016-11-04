@@ -32,7 +32,7 @@ import java.util.Map;
  * <pre>{@code
  * <filter>
  *     <filter-name>webappMetricsFilter</filter-name>
- *     <filter-class>com.yammer.metrics.web.DefaultWebappMetricsFilter</filter-class>
+ *     <filter-class>io.dropwizard.metrics.web.DefaultWebappMetricsFilter</filter-class>
  * </filter>
  * <filter-mapping>
  *     <filter-name>webappMetricsFilter</filter-name>

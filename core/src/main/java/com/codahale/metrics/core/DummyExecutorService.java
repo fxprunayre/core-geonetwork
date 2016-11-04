@@ -21,7 +21,7 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package com.yammer.metrics.core;
+package com.codahale.metrics.core;
 
 import java.util.Collection;
 import java.util.List;

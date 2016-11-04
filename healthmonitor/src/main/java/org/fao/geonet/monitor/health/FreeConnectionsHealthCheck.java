@@ -23,13 +23,13 @@
 
 package org.fao.geonet.monitor.health;
 
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.resources.Stats;
 
 import org.fao.geonet.constants.Geonet;
 
-import com.yammer.metrics.core.HealthCheck;
 
 /**
  * Checks that 1% of the connections are free of the main database is free. This is normally a
@@ -42,7 +42,7 @@ public class FreeConnectionsHealthCheck implements HealthCheckFactory {
 
     @Override
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Available Database Connections") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 Stats stats;

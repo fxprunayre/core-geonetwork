@@ -21,50 +21,19 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package com.yammer.metrics.core;
+package com.codahale.metrics.core;
+
+import com.codahale.metrics.Clock;
+import com.codahale.metrics.Meter;
+
 
 /**
- * A Counter that ignores input User: jeichar Date: 4/3/12 Time: 11:55 AM
+ * User: jeichar Date: 4/3/12 Time: 1:18 PM
  */
-public class DummyCounter extends Counter {
-    public static final Counter INSTANCE = new DummyCounter();
+public class DummyMeter extends Meter {
+    public static final Meter INSTANCE = new DummyMeter();
 
-    DummyCounter() {
-        super();
-    }
-
-    @Override
-    public void clear() {
-        // nothing
-    }
-
-    @Override
-    public long count() {
-        return 0L;
-    }
-
-    @Override
-    public void dec() {
-        // nothing
-    }
-
-    @Override
-    public void dec(long n) {
-        // nothing
-    }
-
-    @Override
-    public void inc() {
-        // nothing
-    }
-
-    @Override
-    public void inc(long n) {
-        // nothing
-    }
-
-    @Override
-    public <T> void processWith(MetricProcessor<T> processor, MetricName name, T context) throws Exception {
-        // nothing
+    DummyMeter() {
+        super(Clock.defaultClock());
     }
 }

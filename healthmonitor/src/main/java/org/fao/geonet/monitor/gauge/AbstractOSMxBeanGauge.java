@@ -23,9 +23,8 @@
 
 package org.fao.geonet.monitor.gauge;
 
-import com.yammer.metrics.core.Gauge;
-import com.yammer.metrics.core.MetricsRegistry;
-
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import jeeves.monitor.MetricsFactory;
 import jeeves.server.context.ServiceContext;
 
@@ -44,17 +43,18 @@ public abstract class AbstractOSMxBeanGauge<T> implements MetricsFactory<Gauge<T
     }
 
     @Override
-    public Gauge<T> create(MetricsRegistry metricsRegistry, ServiceContext context) {
-        return metricsRegistry.newGauge(OperatingSystemMXBean.class, name, new Gauge<T>() {
+    public Gauge<T> create(MetricRegistry metricsRegistry, ServiceContext context) {
+        return metricsRegistry.register(MetricRegistry.name(OperatingSystemMXBean.class, name),
+            new Gauge<T>() {
 
             @Override
-            public T value() {
+            public T getValue() {
                 OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
                 if (operatingSystemMXBean instanceof com.sun.management.OperatingSystemMXBean) {
                     com.sun.management.OperatingSystemMXBean mxBean = (com.sun.management.OperatingSystemMXBean)
                         operatingSystemMXBean;
 
-                    return getValue(mxBean);
+                    return getRealValue(mxBean);
                 }
                 return getDefaultValue();
             }
@@ -64,5 +64,5 @@ public abstract class AbstractOSMxBeanGauge<T> implements MetricsFactory<Gauge<T
 
     protected abstract T getDefaultValue();
 
-    protected abstract T getValue(com.sun.management.OperatingSystemMXBean operatingSystemMXBean);
+    protected abstract T getRealValue(com.sun.management.OperatingSystemMXBean operatingSystemMXBean);
 }

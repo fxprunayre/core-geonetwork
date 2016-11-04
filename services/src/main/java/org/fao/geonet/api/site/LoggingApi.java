@@ -27,8 +27,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.appender.FileAppender;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.api.API;
 import org.fao.geonet.constants.Geonet;
@@ -51,7 +52,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -141,7 +144,7 @@ public class LoggingApi {
         String lastActivity = null;
 
         if (isAppenderLogFileLoaded(fileAppender)) {
-            lastActivity = FileUtil.readLastLines(new File(fileAppender.getFile()),
+            lastActivity = FileUtil.readLastLines(new File(fileAppender.getFileName()),
                 Math.min(lines, maxLines));
         } else {
             throw new RuntimeException("No log file found. Check logger configuration.");
@@ -162,7 +165,7 @@ public class LoggingApi {
     @ResponseBody
     public void getLastActivityInAZip(HttpServletResponse response) throws IOException {
         if (isAppenderLogFileLoaded(fileAppender)) {
-            File file = new File(fileAppender.getFile());
+            File file = new File(fileAppender.getFileName());
 
             // create ZIP FILE
 
@@ -207,23 +210,35 @@ public class LoggingApi {
     private static final String fileAppenderName = "fileAppender";
     private static final int maxLines = 20000;
     private FileAppender fileAppender = null;
+    boolean isAppenderLogFileLoaded(org.apache.logging.log4j.core.appender.FileAppender fileAppender) {
+        if (fileAppender == null || fileAppender.getFileName() == null) {
 
-    private boolean isAppenderLogFileLoaded(FileAppender fileAppender) {
-        if (fileAppender == null || fileAppender.getFile() == null) {
-            this.fileAppender = (FileAppender) Logger.getLogger(Geonet.GEONETWORK).getAppender(fileAppenderName);
+            org.apache.logging.log4j.Logger logger = LogManager.getLogger(Geonet.GEONETWORK);
+            Map<String, Appender> appenders =
+                ((org.apache.logging.log4j.core.Logger) logger).getAppenders();
 
-            if (fileAppender == null) {
-                this.fileAppender = (FileAppender) Logger.getLogger(Log.JEEVES).getAppender(fileAppenderName);
+            if (appenders.size() == 0) {
+                logger = LogManager.getLogger(Log.JEEVES);
+                appenders =
+                    ((org.apache.logging.log4j.core.Logger) logger).getAppenders();
             }
 
-            if (fileAppender == null) {
+            if (appenders.size() == 0) {
                 Log.error(Geonet.GEONETWORK,
                     "Error when getting appender named 'fileAppender'. " +
                         "Check your log configuration file. " +
                         "No appender found.");
                 return false;
             } else {
-                String logFileName = fileAppender.getFile();
+                String logFileName = null;
+                Iterator<Map.Entry<String, Appender>> iterator = appenders.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Appender a = iterator.next().getValue();
+                    if (a instanceof org.apache.logging.log4j.core.appender.FileAppender) {
+                        logFileName += ((FileAppender)a).getFileName();
+                    }
+                }
+
                 if (logFileName == null) {
                     Log.error(Geonet.GEONETWORK,
                         "Error when getting logger file for the " +
@@ -237,5 +252,6 @@ public class LoggingApi {
         }
         return true;
     }
+
 
 }

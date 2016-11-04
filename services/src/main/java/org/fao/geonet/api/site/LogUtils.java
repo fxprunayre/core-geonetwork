@@ -23,7 +23,8 @@
 
 package org.fao.geonet.api.site;
 
-import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.logging.log4j.core.config.ConfigurationSource;
+import org.apache.logging.log4j.core.config.Configurator;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.domain.Setting;
 import org.fao.geonet.exceptions.OperationAbortedEx;
@@ -31,6 +32,9 @@ import org.fao.geonet.kernel.setting.Settings;
 import org.fao.geonet.repository.SettingRepository;
 import org.fao.geonet.services.config.DoActions;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 
 /**
@@ -39,13 +43,13 @@ import java.net.URL;
  * @author bmaire
  */
 public class LogUtils {
-    public static final String DEFAULT_LOG_FILE = "log4j.xml";
+    public static final String DEFAULT_LOG_FILE = "log4j2.xml";
 
     /**
      * Refresh logger configuration. If settings is not set in database, using default log4j.xml
      * file. If requested file does not exist, using default log4j.xml file.
      */
-    public static void refreshLogConfiguration() {
+    public static void refreshLogConfiguration() throws IOException {
         SettingRepository repository =
             ApplicationContextHolder.get().getBean(SettingRepository.class);
         Setting setting = repository.findOne(Settings.SYSTEM_SERVER_LOG);
@@ -55,12 +59,18 @@ public class LogUtils {
         URL url = DoActions.class.getResource("/" + log4jProp);
         if (url != null) {
             // refresh configuration
-            DOMConfigurator.configure(url);
+            ConfigurationSource source = new ConfigurationSource(
+                new FileInputStream(url.toString()));
+            Configurator.initialize(null, source);
         } else {
-            DOMConfigurator.configure(
-                LogUtils.class.getResource("/" + DEFAULT_LOG_FILE));
-            throw new OperationAbortedEx("Can't refresh log configuration because file '" +
-                log4jProp + "' doesn't exist. Using log4j.xml.");
+
+            ConfigurationSource source = new ConfigurationSource(
+                new FileInputStream(
+                    LogUtils.class.getResource("/" + DEFAULT_LOG_FILE).toString()));
+            Configurator.initialize(null, source);
+            throw new OperationAbortedEx(String.format(
+                "Can't refresh log configuration because file '%s ' doesn't exist. Using '%s'.",
+                log4jProp, DEFAULT_LOG_FILE));
         }
     }
 }

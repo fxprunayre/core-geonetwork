@@ -23,18 +23,33 @@
 
 package jeeves.monitor;
 
-import com.yammer.metrics.core.*;
-import com.yammer.metrics.log4j.InstrumentedAppender;
-import com.yammer.metrics.reporting.JmxReporter;
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.Histogram;
+import com.codahale.metrics.JmxReporter;
+import com.codahale.metrics.Meter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 
+import com.codahale.metrics.core.DummyCounter;
+import com.codahale.metrics.core.DummyHistogram;
+import com.codahale.metrics.core.DummyMeter;
+import com.codahale.metrics.core.DummyTimer;
+import com.codahale.metrics.health.HealthCheck;
+import com.codahale.metrics.health.HealthCheckRegistry;
+import com.codahale.metrics.log4j2.InstrumentedAppender;
 import jeeves.constants.ConfigFile;
 import jeeves.server.context.ServiceContext;
 
-import org.apache.log4j.LogManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Filter;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 import org.fao.geonet.Util;
 import org.fao.geonet.utils.Log;
 import org.jdom.Element;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.ServletContext;
@@ -52,11 +67,11 @@ import static jeeves.constants.ConfigFile.Monitors.Child.*;
  * User: jeichar Date: 3/29/12 Time: 3:42 PM
  */
 public class MonitorManager {
-    public static final String HEALTH_CHECK_REGISTRY = "com.yammer.metrics.reporting.HealthCheckServlet.registry";
-    public static final String CRITICAL_HEALTH_CHECK_REGISTRY = "com.yammer.metrics.reporting.HealthCheckServlet.registry.critical";
-    public static final String WARNING_HEALTH_CHECK_REGISTRY = "com.yammer.metrics.reporting.HealthCheckServlet.registry.warning";
-    public static final String EXPENSIVE_HEALTH_CHECK_REGISTRY = "com.yammer.metrics.reporting.HealthCheckServlet.registry.expensive";
-    public static final String METRICS_REGISTRY = "com.yammer.metrics.reporting.MetricsServlet.registry";
+    public static final String HEALTH_CHECK_REGISTRY = "io.dropwizard.metrics.reporting.HealthCheckServlet.registry";
+    public static final String CRITICAL_HEALTH_CHECK_REGISTRY = "io.dropwizard.metrics.reporting.HealthCheckServlet.registry.critical";
+    public static final String WARNING_HEALTH_CHECK_REGISTRY = "io.dropwizard.metrics.reporting.HealthCheckServlet.registry.warning";
+    public static final String EXPENSIVE_HEALTH_CHECK_REGISTRY = "io.dropwizard.metrics.reporting.HealthCheckServlet.registry.expensive";
+    public static final String METRICS_REGISTRY = "io.dropwizard.metrics.reporting.MetricsServlet.registry";
     private final List<HealthCheckFactory> criticalServiceContextHealthChecks = new LinkedList<HealthCheckFactory>();
     private final List<HealthCheckFactory> warningServiceContextHealthChecks = new LinkedList<HealthCheckFactory>();
     private final List<HealthCheckFactory> expensiveServiceContextHealthChecks = new LinkedList<HealthCheckFactory>();
@@ -71,7 +86,7 @@ public class MonitorManager {
     private HealthCheckRegistry warningHealthCheckRegistry;
     private HealthCheckRegistry expensiveHealthCheckRegistry;
 
-    private MetricsRegistry metricsRegistry;
+    private MetricRegistry metricsRegistry;
     private JmxReporter jmxReporter;
 
     public void init(ServletContext context, String baseUrl) {
@@ -89,31 +104,37 @@ public class MonitorManager {
             warningHealthCheckRegistry = warningTmpHealthCheckRegistry;
             expensiveHealthCheckRegistry = expensiveTmpHealthCheckRegistry;
 
-            MetricsRegistry tmpMetricsRegistry = (MetricsRegistry) context.getAttribute(METRICS_REGISTRY);
+            MetricRegistry tmpMetricsRegistry = (MetricRegistry) context.getAttribute(METRICS_REGISTRY);
             if (tmpMetricsRegistry == null) {
-                tmpMetricsRegistry = new MetricsRegistry();
+                tmpMetricsRegistry = new MetricRegistry();
             }
 
             metricsRegistry = tmpMetricsRegistry;
             context.setAttribute(METRICS_REGISTRY, tmpMetricsRegistry);
-
-
-            jmxReporter = new GeonetworkJmxReporter(metricsRegistry, webappName);
+            jmxReporter = JmxReporter.forRegistry(metricsRegistry).inDomain(webappName).build();
             jmxReporter.start();
         } else {
             healthCheckRegistry = new HealthCheckRegistry();
             criticalHealthCheckRegistry = new HealthCheckRegistry();
             warningHealthCheckRegistry = new HealthCheckRegistry();
             expensiveHealthCheckRegistry = new HealthCheckRegistry();
-            metricsRegistry = new MetricsRegistry();
+            metricsRegistry = new MetricRegistry();
 
-            jmxReporter = new GeonetworkJmxReporter(metricsRegistry, webappName);
+            jmxReporter = JmxReporter.forRegistry(metricsRegistry).inDomain(webappName).build();
             jmxReporter.start();
 
         }
+        Filter filter = null;        // That's fine if we don't use filters; https://logging.apache.org/log4j/2.x/manual/filters.html
+        PatternLayout layout = null; // The layout isn't used in InstrumentedAppender
+        InstrumentedAppender appender =
+            new InstrumentedAppender(metricsRegistry, filter, layout, false);
+        appender.start();
 
-
-        LogManager.getRootLogger().addAppender(new InstrumentedAppender(metricsRegistry));
+        LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
+        Configuration config = loggerContext.getConfiguration();
+        config.getLoggerConfig(LogManager.ROOT_LOGGER_NAME)
+            .addAppender(appender, Level.WARN, filter);
+        loggerContext.updateLoggers(config);
     }
 
     private HealthCheckRegistry lookUpHealthCheckRegistry(ServletContext context, String attributeKey) {
@@ -161,8 +182,8 @@ public class MonitorManager {
         for (HealthCheckFactory healthCheck : checks) {
             Log.info(Log.ENGINE, "Registering " + type + ": " + healthCheck.getClass().getName());
             HealthCheck check = healthCheck.create(context);
-            healthCheckRegistry.register(check);
-            registry.register(check);
+            healthCheckRegistry.register(context.getNodeId(), check);
+            registry.register(context.getNodeId(), check);
         }
     }
 
@@ -305,7 +326,7 @@ public class MonitorManager {
             resourceTracker.clean();
         }
         if (jmxReporter != null) {
-            jmxReporter.shutdown();
+            jmxReporter.close();
         }
     }
 }

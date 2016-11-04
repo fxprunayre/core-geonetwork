@@ -21,12 +21,11 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package jeeves.monitor.guage;
+package jeeves.monitor.gauge;
 
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import com.sun.management.UnixOperatingSystemMXBean;
-import com.yammer.metrics.core.Gauge;
-import com.yammer.metrics.core.MetricsRegistry;
-
 import jeeves.monitor.MetricsFactory;
 import jeeves.server.JeevesEngine;
 import jeeves.server.context.ServiceContext;
@@ -40,13 +39,14 @@ import java.lang.management.OperatingSystemMXBean;
  *
  * @author jeichar
  */
-public class FreeFileDescriptorsGuage implements MetricsFactory<Gauge<Long>> {
+public class FreeFileDescriptorsGauge implements MetricsFactory<Gauge<Long>> {
 
     @Override
-    public Gauge<Long> create(MetricsRegistry metricsRegistry, final ServiceContext context) {
-        return metricsRegistry.newGauge(JeevesEngine.class, "Free files descriptors", new Gauge<Long>() {
+    public Gauge<Long> create(MetricRegistry metricsRegistry, final ServiceContext context) {
+        return metricsRegistry.register(MetricRegistry.name(JeevesEngine.class, "Free files descriptors"),
+            new Gauge<Long>() {
             @Override
-            public Long value() {
+            public Long getValue() {
                 try {
                     OperatingSystemMXBean osMbean = ManagementFactory.getOperatingSystemMXBean();
                     if (osMbean instanceof UnixOperatingSystemMXBean) {

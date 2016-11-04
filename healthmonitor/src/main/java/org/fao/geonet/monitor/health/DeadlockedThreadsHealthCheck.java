@@ -23,8 +23,7 @@
 
 package org.fao.geonet.monitor.health;
 
-import com.yammer.metrics.core.HealthCheck;
-
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
 
@@ -38,7 +37,7 @@ import java.lang.management.ThreadMXBean;
  */
 public class DeadlockedThreadsHealthCheck implements HealthCheckFactory {
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Deadlocked Threads") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 ThreadMXBean bean = ManagementFactory.getThreadMXBean();

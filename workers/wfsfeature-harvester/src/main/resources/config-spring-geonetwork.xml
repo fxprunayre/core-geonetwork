@@ -31,6 +31,12 @@
         http://camel.apache.org/schema/spring
         http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+  <!--<bean id="esClient"
+        class="org.fao.geonet.harvester.wfsfeatures.worker.EsClient">
+    <property name="serverUrl" value="${es.url}"/>
+    <property name="collection" value="${es.index.features}"/>
+  </bean>-->
+
   <bean id="wfsfeaturesHarvesterRouteBuilder"
         class="org.fao.geonet.harvester.wfsfeatures.worker.WFSHarvesterRouteBuilder">
     <property name="startsFromXMLConfigurationFile" value="false"/>

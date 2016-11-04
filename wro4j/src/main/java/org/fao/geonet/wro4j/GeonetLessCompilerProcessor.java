@@ -2,6 +2,7 @@ package org.fao.geonet.wro4j;
 
 import org.apache.commons.io.IOUtils;
 
+import org.apache.logging.log4j.LogManager;
 import ro.isdc.wro.extensions.processor.css.Less4jProcessor;
 import ro.isdc.wro.model.resource.Resource;
 import ro.isdc.wro.model.resource.ResourceType;
@@ -30,7 +31,8 @@ public class GeonetLessCompilerProcessor
         try {
             super.process(reader, writer);
         } catch (Throwable t) {
-            Logger.getLogger(getClass().getPackage().getName()).fine("Unable to compile a stylesheet");
+            LogManager.getLogger(getClass().getPackage().getName())
+                .debug("Unable to compile a stylesheet");
         }
     }
 

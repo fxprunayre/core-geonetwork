@@ -23,7 +23,7 @@
 
 package jeeves.monitor;
 
-import com.yammer.metrics.core.MetricsRegistry;
+import com.codahale.metrics.MetricRegistry;
 
 import jeeves.server.context.ServiceContext;
 
@@ -46,5 +46,5 @@ public interface MetricsFactory<Type> {
     /**
      * Create a metrics object of type Type
      */
-    Type create(MetricsRegistry metricsRegistry, ServiceContext context);
+    Type create(MetricRegistry metricsRegistry, ServiceContext context);
 }

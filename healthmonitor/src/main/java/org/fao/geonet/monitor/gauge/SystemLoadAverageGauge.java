@@ -23,14 +23,15 @@
 
 package org.fao.geonet.monitor.gauge;
 
-import com.yammer.metrics.core.Gauge;
-import com.yammer.metrics.core.MetricsRegistry;
-
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import jeeves.monitor.MetricsFactory;
 import jeeves.server.context.ServiceContext;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+
+import static com.codahale.metrics.MetricRegistry.name;
 
 /**
  * Abstract super class for all Gauges that use the Main database Stats.
@@ -39,13 +40,17 @@ import java.lang.management.OperatingSystemMXBean;
  */
 public class SystemLoadAverageGauge implements MetricsFactory<Gauge<Double>> {
 
-    public Gauge<Double> create(MetricsRegistry metricsRegistry, final ServiceContext context) {
-        return metricsRegistry.newGauge(OperatingSystemMXBean.class, "systemLoadAverage", new Gauge<Double>() {
-            @Override
-            public Double value() {
-                OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
-                return operatingSystemMXBean.getSystemLoadAverage();
-            }
+    public Gauge<Double> create(MetricRegistry metricsRegistry, final ServiceContext context) {
+        return metricsRegistry.register(
+            name(OperatingSystemMXBean.class, "systemLoadAverage"),
+            new Gauge<Double>() {
+                @Override
+                public Double getValue() {
+                    OperatingSystemMXBean operatingSystemMXBean = ManagementFactory.getOperatingSystemMXBean();
+                    return operatingSystemMXBean.getSystemLoadAverage();
+                }
         });
     }
+
+
 }

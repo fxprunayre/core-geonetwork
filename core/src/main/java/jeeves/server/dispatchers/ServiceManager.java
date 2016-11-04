@@ -23,45 +23,7 @@
 
 package jeeves.server.dispatchers;
 
-import java.io.ByteArrayOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.lang.StringUtils;
-import org.eclipse.jetty.io.EofException;
-import org.fao.geonet.ApplicationContextHolder;
-import org.fao.geonet.Constants;
-import org.fao.geonet.NodeInfo;
-import org.fao.geonet.Util;
-import org.fao.geonet.exceptions.JeevesException;
-import org.fao.geonet.exceptions.NotAllowedEx;
-import org.fao.geonet.exceptions.ServiceNotFoundEx;
-import org.fao.geonet.exceptions.ServiceNotMatchedEx;
-import org.fao.geonet.kernel.GeonetworkDataDirectory;
-import org.fao.geonet.utils.BLOB;
-import org.fao.geonet.utils.BinaryFile;
-import org.fao.geonet.utils.IO;
-import org.fao.geonet.utils.Log;
-import org.fao.geonet.utils.SOAPUtil;
-import org.fao.geonet.utils.Xml;
-import org.jdom.Element;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import com.yammer.metrics.core.TimerContext;
-
+import com.codahale.metrics.Timer;
 import jeeves.component.ProfileManager;
 import jeeves.constants.ConfigFile;
 import jeeves.constants.Jeeves;
@@ -81,8 +43,39 @@ import jeeves.server.sources.ServiceRequest.InputMethod;
 import jeeves.server.sources.ServiceRequest.OutputMethod;
 import jeeves.server.sources.http.HttpServiceRequest;
 import jeeves.server.sources.http.JeevesServlet;
+import org.eclipse.jetty.io.EofException;
+import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.Constants;
+import org.fao.geonet.NodeInfo;
+import org.fao.geonet.Util;
+import org.fao.geonet.exceptions.JeevesException;
+import org.fao.geonet.exceptions.NotAllowedEx;
+import org.fao.geonet.exceptions.ServiceNotFoundEx;
+import org.fao.geonet.exceptions.ServiceNotMatchedEx;
+import org.fao.geonet.kernel.GeonetworkDataDirectory;
+import org.fao.geonet.utils.BLOB;
+import org.fao.geonet.utils.BinaryFile;
+import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
+import org.fao.geonet.utils.SOAPUtil;
+import org.fao.geonet.utils.Xml;
+import org.jdom.Element;
+import org.springframework.context.ConfigurableApplicationContext;
 
-//=============================================================================
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class ServiceManager {
     private Map<String, ArrayList<ServiceInfo>> htServices = new HashMap<String, ArrayList<ServiceInfo>>(100);
     private Map<String, Object> htContexts = new HashMap<String, Object>();
@@ -447,7 +440,8 @@ public class ServiceManager {
                 //---------------------------------------------------------------------
                 //--- check access
 
-                TimerContext timerContext = getMonitorManager().getTimer(ServiceManagerServicesTimer.class).time();
+                Timer.Context timerContext = getMonitorManager()
+                    .getTimer(ServiceManagerServicesTimer.class).time();
                 try {
                     response = srvInfo.execServices(req.getParams(), context);
                 } finally {
@@ -656,7 +650,7 @@ public class ServiceManager {
                     //--- build the xml data for the XSL/FO translation
                     Path styleSheet = IO.toPath(outPage.getStyleSheet());
                     Element guiElem;
-                    TimerContext guiServicesTimerContext = context.getMonitorManager().getTimer(ServiceManagerGuiServicesTimer.class)
+                    Timer.Context guiServicesTimerContext = context.getMonitorManager().getTimer(ServiceManagerGuiServicesTimer.class)
                         .time();
                     try {
                         guiElem = outPage.invokeGuiServices(context, response, vDefaultGui);
@@ -686,7 +680,7 @@ public class ServiceManager {
                         info(" -> transforming with stylesheet : " + styleSheet);
 
                         try {
-                            TimerContext timerContext = context.getMonitorManager().getTimer(ServiceManagerXslOutputTransformTimer.class)
+                            Timer.Context timerContext = context.getMonitorManager().getTimer(ServiceManagerXslOutputTransformTimer.class)
                                 .time();
                             Path file;
                             try {
@@ -756,7 +750,7 @@ public class ServiceManager {
 
                 Path styleSheet = IO.toPath(outPage.getStyleSheet());
                 Element guiElem;
-                TimerContext guiServicesTimerContext = getMonitorManager().getTimer(ServiceManagerGuiServicesTimer.class).time();
+                Timer.Context guiServicesTimerContext = getMonitorManager().getTimer(ServiceManagerGuiServicesTimer.class).time();
                 try {
                     guiElem = outPage.invokeGuiServices(context, response, vDefaultGui);
                 } finally {
@@ -793,8 +787,8 @@ public class ServiceManager {
                             // If JSON output requested, run the XSLT transformation and the JSON
                             if (req.hasJSONOutput()) {
                                 Element xsltResponse = null;
-                                TimerContext timerContext = context.getMonitorManager().getTimer(ServiceManagerXslOutputTransformTimer
-                                    .class).time();
+                                Timer.Context timerContext = context.getMonitorManager()
+                                    .getTimer(ServiceManagerXslOutputTransformTimer.class).time();
                                 try {
                                     //--- first we do the transformation
                                     xsltResponse = Xml.transform(rootElem, styleSheet);
@@ -806,7 +800,7 @@ public class ServiceManager {
                                 req.endStream();
                             } else {
                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                TimerContext timerContext = context.getMonitorManager().getTimer(ServiceManagerXslOutputTransformTimer
+                                Timer.Context timerContext = context.getMonitorManager().getTimer(ServiceManagerXslOutputTransformTimer
                                     .class).time();
                                 try {
                                     //--- first we do the transformation

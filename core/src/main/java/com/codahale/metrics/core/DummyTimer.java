@@ -21,17 +21,42 @@
  * Rome - Italy. email: geonetwork@osgeo.org
  */
 
-package com.yammer.metrics.core;
+package com.codahale.metrics.core;
 
+import com.codahale.metrics.Snapshot;
+import com.codahale.metrics.Timer;
+
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 /**
- * User: jeichar Date: 4/3/12 Time: 1:18 PM
+ * Performs no action. User: jeichar Date: 4/3/12 Time: 12:02 PM
  */
-public class DummyMeter extends Meter {
-    public static final Meter INSTANCE = new DummyMeter();
+public class DummyTimer extends Timer {
+    public static final DummyTimer INSTANCE = new DummyTimer();
 
-    DummyMeter() {
-        super(DummyExecutorService.INSTANCE, "Dumb", TimeUnit.MILLISECONDS, Clock.defaultClock());
+    DummyTimer() {
+        super();
+    }
+
+    @Override
+    public Snapshot getSnapshot() {
+        return null;
+    }
+
+
+    @Override
+    public Context time() {
+        return super.time();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public <T> T time(Callable<T> event) throws Exception {
+        return super.time(event);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void update(long duration, TimeUnit unit) {
+        super.update(duration, unit);    //To change body of overridden methods use File | Settings | File Templates.
     }
 }

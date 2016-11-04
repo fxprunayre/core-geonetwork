@@ -24,26 +24,7 @@
 package jeeves.server.overrides;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.Collection;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import jeeves.config.springutil.JeevesApplicationContext;
-
-import org.apache.log4j.Level;
 import org.fao.geonet.Constants;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Xml;
@@ -52,6 +33,17 @@ import org.jdom.JDOMException;
 import org.junit.Test;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ConfigurationOverridesTest {
     private static final ClassLoader classLoader;
@@ -69,14 +61,6 @@ public class ConfigurationOverridesTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Test //@Ignore
-    public void updateLoggingConfig() throws JDOMException, IOException {
-        final Element overrides = Xml.loadFile(classLoader.getResource("correct-webapp/WEB-INF/overrides-config.xml"));
-
-        ConfigurationOverrides.DEFAULT.doUpdateLogging(overrides, loader);
-        assertEquals(Level.ERROR, org.apache.log4j.Logger.getRootLogger().getLevel());
     }
 
     @Test //@Ignore

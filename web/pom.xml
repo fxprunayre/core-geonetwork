@@ -54,8 +54,8 @@
   <!-- FIXME set common dependencies to the root pom.xml  -->
   <dependencies>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
     </dependency>
     <!-- rewrite url servletfilter -->
     <dependency>
@@ -299,6 +299,30 @@
       <groupId>org.mapfish.print</groupId>
       <artifactId>print-lib</artifactId>
       <version>${print-lib.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.codahale.metrics</groupId>
+          <artifactId>metrics-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.codahale.metrics</groupId>
+          <artifactId>metrics-httpclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.codahale.metrics</groupId>
+          <artifactId>metrics-log4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.codahale.metrics</groupId>
+          <artifactId>metrics-servlets</artifactId>
+        </exclusion>
+      </exclusions>
+      <!--<exclusions>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>-->
     </dependency>
 
     <!-- ====================== -->
@@ -391,20 +415,24 @@
 
     <!-- Monitoring libraries -->
     <dependency>
-      <groupId>com.yammer.metrics</groupId>
+      <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-core</artifactId>
     </dependency>
+    <!--<dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-servlets</artifactId>
+    </dependency>-->
     <dependency>
-      <groupId>com.yammer.metrics</groupId>
-      <artifactId>metrics-servlet</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-healthchecks</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.yammer.metrics</groupId>
-      <artifactId>metrics-web</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jvm</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.yammer.metrics</groupId>
-      <artifactId>metrics-log4j</artifactId>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-log4j2</artifactId>
     </dependency>
 
     <!-- language detection -->
@@ -584,6 +612,11 @@
                 <resource>
                   <directory>${project.basedir}/../schemas/csw-record/src/main/plugin</directory>
                   <targetPath>${basedir}/src/main/webapp/WEB-INF/data/config/schema_plugins
+                  </targetPath>
+                </resource>
+                <resource>
+                  <directory>${project.basedir}/../web-ui/src/main/resources</directory>
+                  <targetPath>${basedir}/src/main/webapp
                   </targetPath>
                 </resource>
                 <!-- Copy the documentation in the webapp. -->

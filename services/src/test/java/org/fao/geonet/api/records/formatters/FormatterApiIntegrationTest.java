@@ -26,12 +26,10 @@ package org.fao.geonet.api.records.formatters;
 import com.google.common.collect.Lists;
 
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Level;
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.MockRequestFactoryGeonet;
 import org.fao.geonet.SystemInfo;
 import org.fao.geonet.api.records.formatters.groovy.EnvironmentProxy;
-import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.domain.MetadataType;
@@ -221,39 +219,6 @@ public class FormatterApiIntegrationTest extends AbstractServiceIntegrationTest 
         formatService.exec("eng", "html", "" + id, null, formatterName, null, null, _100, webRequest);
     }
 
-    @Test
-    public void testLoggingNullPointerBug() throws Exception {
-        final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Geonet.FORMATTER);
-        Level level = logger.getLevel();
-        logger.setLevel(Level.ALL);
-        try {
-            MockHttpServletRequest webRequest = new MockHttpServletRequest();
-            webRequest.getSession();
-            final ServletWebRequest request = new ServletWebRequest(webRequest, new MockHttpServletResponse());
-            final FormatterParams fparams = new FormatterParams();
-            fparams.context = this.serviceContext;
-            fparams.webRequest = request;
-            // make sure context is cleared
-            EnvironmentProxy.setCurrentEnvironment(fparams);
-
-
-            final String formatterName = "logging-null-pointer";
-            final URL testFormatterViewFile = FormatterApiIntegrationTest.class.getResource(formatterName + "/view.groovy");
-            final Path testFormatter = IO.toPath(testFormatterViewFile.toURI()).getParent();
-            final Path formatterDir = this.dataDirectory.getFormatterDir();
-            IO.copyDirectoryOrFile(testFormatter, formatterDir.resolve(formatterName), false);
-            final String functionsXslName = "functions.xsl";
-            Files.deleteIfExists(formatterDir.resolve(functionsXslName));
-            IO.copyDirectoryOrFile(testFormatter.getParent().resolve(functionsXslName), formatterDir.resolve(functionsXslName), false);
-
-
-            formatService.exec("eng", "html", "" + id, null, formatterName, null, null, _100, request);
-
-            // no Error is success
-        } finally {
-            logger.setLevel(level);
-        }
-    }
 
     @Test
     public void testExec() throws Exception {

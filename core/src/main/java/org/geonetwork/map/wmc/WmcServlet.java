@@ -28,7 +28,8 @@ import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fao.geonet.Constants;
 import org.geonetwork.http.proxy.util.RequestUtil;
 
@@ -53,7 +54,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class WmcServlet extends HttpServlet {
-    public static final Logger LOGGER = Logger.getLogger(WmcServlet.class);
+    public static final Logger LOGGER = LogManager.getLogger(WmcServlet.class);
     protected static final String TEMP_FILE_PREFIX = "geonetwork-wmc";
     protected static final String TEMP_FILE_SUFFIX = ".cml";
     private static final long serialVersionUID = 1L;

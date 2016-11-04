@@ -24,13 +24,17 @@
 package org.fao.geonet.utils;
 
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.config.Configurator;
 
 import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 //=============================================================================
 
@@ -65,70 +69,70 @@ public final class Log {
     //---------------------------------------------------------------------------
 
     public static void debug(String module, Object message) {
-        Logger.getLogger(module).debug(message);
+        LogManager.getLogger(module).debug(message);
     }
 
     public static void debug(String module, Object message, Exception e) {
-        Logger.getLogger(module).debug(message, e);
+        LogManager.getLogger(module).debug(message, e);
     }
 
     public static boolean isDebugEnabled(String module) {
-        return Logger.getLogger(module).isDebugEnabled();
+        return LogManager.getLogger(module).isDebugEnabled();
     }
 
     @SuppressWarnings("deprecation")
-    public static boolean isEnabledFor(String module, int priority) {
-        return Logger.getLogger(module).isEnabledFor(Priority.toPriority(priority));
+    public static boolean isEnabledFor(String module, Level level) {
+        return LogManager.getLogger(module).isEnabled(level);
     }
     //---------------------------------------------------------------------------
 
     public static void trace(String module, Object message) {
-        Logger.getLogger(module).trace(message);
+        LogManager.getLogger(module).trace(message);
     }
 
     public static void trace(String module, Object message, Exception e) {
-        Logger.getLogger(module).trace(message, e);
+        LogManager.getLogger(module).trace(message, e);
     }
 
     public static boolean isTraceEnabled(String module) {
-        return Logger.getLogger(module).isTraceEnabled();
+        return LogManager.getLogger(module).isTraceEnabled();
     }
 
     //---------------------------------------------------------------------------
 
     public static void info(String module, Object message) {
-        Logger.getLogger(module).info(message);
+        LogManager.getLogger(module).info(message);
     }
 
     public static void info(String module, Object message, Throwable t) {
-        Logger.getLogger(module).info(message, t);
+        LogManager.getLogger(module).info(message, t);
     }
 
     //---------------------------------------------------------------------------
 
     public static void warning(String module, Object message) {
-        Logger.getLogger(module).warn(message);
+        LogManager.getLogger(module).warn(message);
     }
 
     public static void warning(String module, Object message, Throwable e) {
-        Logger.getLogger(module).warn(message, e);
+        LogManager.getLogger(module).warn(message, e);
     }
 
 
     //---------------------------------------------------------------------------
 
     public static void error(String module, Object message) {
-        Logger.getLogger(module).error(message);
+        LogManager.getLogger(module).error(message);
     }
 
     public static void error(String module, Object message, Throwable t) {
-        Logger.getLogger(module).error(message, t);
+        LogManager.getLogger(module).error(message, t);
     }
 
     //---------------------------------------------------------------------------
 
     public static void fatal(String module, Object message) {
-        Logger.getLogger(module).fatal(message);
+        LogManager.getLogger(module).fatal(message);
     }
 
     //--------------------------------------------------------------------------
@@ -172,29 +176,43 @@ public final class Log {
                 Log.error(module, t.getMessage(), t);
             }
 
-            public void setAppender(FileAppender fa) {
-                Logger.getLogger(module).removeAllAppenders();
-                Logger.getLogger(module).addAppender(fa);
+            public void setAppender(Appender fa) {
+                if (fa != null) {
+                    Logger logger = LogManager.getLogger(module);
+                    Map<String, Appender> appenders =
+                        ((org.apache.logging.log4j.core.Logger) logger).getAppenders();
+                    Iterator<Map.Entry<String, Appender>> iterator = appenders.entrySet().iterator();
+                    while (iterator.hasNext()) {
+                        Appender a = iterator.next().getValue();
+                        ((org.apache.logging.log4j.core.Logger) logger).removeAppender(a);
+                    }
+                    ((org.apache.logging.log4j.core.Logger) logger).addAppender(fa);
+                }
             }
 
             public String getFileAppender() {
                 // Set effective level to be sure it writes the log
-                Logger.getLogger(module).setLevel(getThreshold());
+                Configurator.setLevel(module, getThreshold());
 
                 @SuppressWarnings("rawtypes")
-                Enumeration appenders = Logger.getLogger(module)
-                    .getAllAppenders();
-                while (appenders.hasMoreElements()) {
-                    Appender a = (Appender) appenders.nextElement();
+                Logger logger = LogManager.getLogger(module);
+                Map<String, Appender> appenders =
+                    ((org.apache.logging.log4j.core.Logger) logger).getAppenders();
+                Iterator<Map.Entry<String, Appender>> iterator = appenders.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Appender a = iterator.next().getValue();
                     if (a instanceof FileAppender) {
-                        return ((FileAppender) a).getFile();
+                        return ((FileAppender) a).getFileName();
                     }
                 }
-                appenders = Logger.getLogger(fallbackModule).getAllAppenders();
-                while (appenders.hasMoreElements()) {
-                    Appender a = (Appender) appenders.nextElement();
+                logger = LogManager.getLogger(fallbackModule);
+                appenders =
+                    ((org.apache.logging.log4j.core.Logger) logger).getAppenders();
+                iterator = appenders.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Appender a = iterator.next().getValue();
                     if (a instanceof FileAppender) {
-                        return ((FileAppender) a).getFile();
+                        return ((FileAppender) a).getFileName();
                     }
                 }
 
@@ -203,7 +221,8 @@ public final class Log {
             }
 
             public Level getThreshold() {
-                return Logger.getLogger(fallbackModule).getEffectiveLevel();
+
+                return LogManager.getLogger(fallbackModule).getLevel();
             }
 
             @Override
@@ -212,8 +231,4 @@ public final class Log {
             }
         };
     }
-
 }
-
-//=============================================================================
-

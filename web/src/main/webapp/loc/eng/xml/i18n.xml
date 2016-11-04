@@ -23,4 +23,6 @@
     <span>Return to the<a href="../..">search page</a>.
     </span>
   </linkToHome>
+  <search>Search</search>
+  <signIn>Sign in</signIn>
 </i18n>

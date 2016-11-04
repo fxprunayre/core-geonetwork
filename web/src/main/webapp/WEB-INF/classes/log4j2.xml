@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Properties>
+    <Property name="filename">logs/geonetwork.log</Property>
+  </Properties>
+  <Appenders>
+    <Console name="console"
+             target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{ISO8601} %-5p [%c] - %m%n"/>
+    </Console>
+    <File name="file"
+          fileName="${filename}"
+          append="false">
+      <PatternLayout pattern="%d{ISO8601} %-5p [%c] - %m%n"/>
+    </File>
+  </Appenders>
+  <Loggers>
+    <Logger name="geonetwork" level="WARN">
+      <!--<AppenderRef ref="file"/>-->
+    </Logger>
+    <Logger name="geonetwork.databasemigration" level="WARN"/>
+    <Logger name="geonetwork.data.directory" level="WARN"/>
+    <Logger name="geonetwork.schemamanager" level="WARN"/>
+    <Logger name="thumbnail.maker" level="WARN"/>
+    <Logger name="MetadataNotifierManager" level="WARN"/>
+    <Logger name="jeeves" level="WARN"/>
+    <Logger name="jeeves.engine" level="WARN"/>
+    <Logger name="jeeves.xmlresolver" level="WARN"/>
+    <Logger name="jeeves.apphand" level="WARN"/>
+    <Logger name="jeeves.geonetwork.schemamanager" level="WARN"/>
+    <Logger name="jeeves.monitor" level="WARN"/>
+    <Logger name="ro.isdc.wro.http.*" level="WARN"/>
+    <Logger name="org.springframework.*" level="WARN"/>
+    <Logger name="org.hibernate.*" level="WARN"/>
+    <Logger name="org.apache.camel.*" level="WARN"/>
+    <Root level="debug">
+      <AppenderRef ref="console"/>
+    </Root>
+  </Loggers>
+</Configuration>

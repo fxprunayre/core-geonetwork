@@ -23,8 +23,7 @@
 
 package org.fao.geonet.monitor.health;
 
-import com.yammer.metrics.core.HealthCheck;
-
+import com.codahale.metrics.health.HealthCheck;
 import jeeves.monitor.HealthCheckFactory;
 import jeeves.server.context.ServiceContext;
 
@@ -52,7 +51,7 @@ import java.util.List;
  */
 public class HarvestersHealthCheck implements HealthCheckFactory {
     public HealthCheck create(final ServiceContext context) {
-        return new HealthCheck("Harvesting Errors") {
+        return new HealthCheck() {
             @Override
             protected Result check() throws Exception {
                 final HarvesterSettingRepository repository = context.getBean(HarvesterSettingRepository.class);

@@ -25,8 +25,9 @@ package jeeves.server.context;
 
 import jeeves.monitor.MonitorManager;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Level;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.appender.FileAppender;
+import org.apache.logging.log4j.core.appender.RollingFileAppender;
 import org.fao.geonet.Logger;
 import org.fao.geonet.NodeInfo;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
@@ -167,9 +168,10 @@ public class BasicContext implements Logger {
     }
 
     @Override
-    public void setAppender(FileAppender fa) {
+    public void setAppender(Appender fa) {
         logger.setAppender(fa);
     }
+
 
     @Override
     public String getFileAppender() {
@@ -177,7 +179,7 @@ public class BasicContext implements Logger {
     }
 
     @Override
-    public Level getThreshold() {
+    public org.apache.logging.log4j.Level getThreshold() {
         return logger.getThreshold();
     }
 
