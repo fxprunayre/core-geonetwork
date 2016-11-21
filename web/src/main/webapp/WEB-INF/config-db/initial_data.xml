@@ -39,15 +39,15 @@
       <constructor-arg value="WEB-INF/classes/setup/sql/data"/>
       <constructor-arg value="data-db-"/>
     </bean>
-    <bean class="org.fao.geonet.domain.Pair" factory-method="read">
+    <!--<bean class="org.fao.geonet.domain.Pair" factory-method="read">
       <constructor-arg value="WEB-INF/classes/setup/sql/data"/>
       <constructor-arg value="loc-eng-"/>
-    </bean>
+    </bean>-->
     <bean class="org.fao.geonet.domain.Pair" factory-method="read">
       <constructor-arg value="WEB-INF/classes/setup/sql/data"/>
       <constructor-arg value="loc-fre-"/>
     </bean>
-    <bean class="org.fao.geonet.domain.Pair" factory-method="read">
+    <!--<bean class="org.fao.geonet.domain.Pair" factory-method="read">
       <constructor-arg value="WEB-INF/classes/setup/sql/data"/>
       <constructor-arg value="loc-ger-"/>
     </bean>
@@ -102,7 +102,7 @@
     <bean class="org.fao.geonet.domain.Pair" factory-method="read">
       <constructor-arg value="WEB-INF/classes/setup/sql/data"/>
       <constructor-arg value="loc-pol-"/>
-    </bean>
+    </bean>-->
   </util:list>
 
 </beans>
