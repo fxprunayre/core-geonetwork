@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <skos:ConceptScheme
+            rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage">
+        <dc:title>Type d’unités d’échantillonnage</dc:title>
+        <dc:description/>
+        <dcterms:issued>2015-11-27</dcterms:issued>
+        <dcterms:modified>2015-11-27</dcterms:modified>
+    </skos:ConceptScheme>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Individus'>
+        <skos:prefLabel xml:lang='fr'>Individus</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Points'>
+        <skos:prefLabel xml:lang='fr'>Points</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Quadrats'>
+        <skos:prefLabel xml:lang='fr'>Quadrats</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Surface impérativement carrée.</skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Placettes'>
+        <skos:prefLabel xml:lang='fr'>Placettes</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Transects'>
+        <skos:prefLabel xml:lang='fr'>Transects</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Mesure en continu le long d’un tracé entre deux points
+            (Désigne parfois une série de placettes effectuées le long d’un parcours entre deux
+            points, mais c’est un abus de langage : dans ce cas, l’unité d’échantillonnage est la
+            placette).
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-d-unite-echantillonnage#Transects'>
+        <skos:prefLabel xml:lang='fr'>Autre</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Autre type d’unités d’échantillonnage.</skos:definition>
+    </skos:Concept>
+</rdf:RDF>

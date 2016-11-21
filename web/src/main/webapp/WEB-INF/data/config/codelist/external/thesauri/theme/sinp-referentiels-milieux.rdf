@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux">
+    <dc:title>Référentiels Milieux</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#eunis'>
+    <skos:prefLabel xml:lang='fr'>EUNIS</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel des habitats européens établis
+      dans le cadre du Système d'information européen sur la nature.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#corine-biotope'>
+    <skos:prefLabel xml:lang='fr'>CORINE Biotope</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel des habitats européens établis
+      dans le cadre du programme CORINE Biotope.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#eur-15-eur-25-eur-27'>
+    <skos:prefLabel xml:lang='fr'>EUR 15 / EUR 25 / EUR 27</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel des habitats de la directive
+      ""Habitats"" (Natura 2000).
+      EUR 25 = évolution de EUR 15 suite au passage de l’UE à 25 États membres.
+      EUR 27 = évolution de EUR 25 suite au passage de l’UE à 27 États membres
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#corine-land-cover'>
+    <skos:prefLabel xml:lang='fr'>CORINE Land Cover</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Classes d'occupation des terres.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#rousteau-alain-1995-carte-ecologique-de-la-guadeloupe'>
+    <skos:prefLabel xml:lang='fr'>ROUSTEAU Alain, 1995 - Carte Ecologique de la
+      Guadeloupe
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel utilisé en Guadeloupe
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#codes-habitats-stoc-eps'>
+    <skos:prefLabel xml:lang='fr'>Codes habitats STOC EPS</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#prodrome-des-vegetations-de-france'>
+    <skos:prefLabel xml:lang='fr'>Prodrome des végétations de France
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-milieux#guide-des-groupements-vegetaux-de-la-region-parisienne'>
+    <skos:prefLabel xml:lang='fr'>Guide des groupements végétaux de la région
+      parisienne
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

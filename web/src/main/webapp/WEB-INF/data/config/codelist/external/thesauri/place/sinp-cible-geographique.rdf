@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <skos:ConceptScheme
+            rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/cible-geographique">
+        <dc:title>Cible géographique</dc:title>
+        <dc:description/>
+        <dcterms:issued>2015-11-27</dcterms:issued>
+        <dcterms:modified>2015-11-27</dcterms:modified>
+
+        <skos:hasTopConcept
+                rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mondial"/>
+        <skos:hasTopConcept
+                rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine"/>
+        <skos:hasTopConcept
+                rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion"/>
+        <skos:hasTopConcept
+                rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur"/>
+        <skos:hasTopConcept
+                rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial"/>
+    </skos:ConceptScheme>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mondial'>
+        <skos:prefLabel xml:lang='fr'>Mondiale</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'>
+        <skos:prefLabel xml:lang='fr'>Région marine(UNEP)</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'>
+        <skos:prefLabel xml:lang='fr'>Sous-région(LME Regional Seas, OSPAR, ZEE incluse)
+        </skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'>
+        <skos:prefLabel xml:lang='fr'>Secteur(déclinaison de la sous-région en secteurs
+            biogéographiques/administratifs à valider par les experts locaux)
+        </skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#local'>
+        <skos:prefLabel xml:lang='fr'>Local(unité de gestion)</skos:prefLabel>
+        <skos:definition xml:lang='fr'></skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'>
+        <skos:prefLabel xml:lang='fr'>Océan mondial</skos:prefLabel>
+        <skos:definition xml:lang='fr'>mondial</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordest'>
+        <skos:prefLabel xml:lang='fr'>Atlantique nord-est</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterranee'>
+        <skos:prefLabel xml:lang='fr'>Méditerranée et mer Noire</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#indiensudouest'>
+        <skos:prefLabel xml:lang='fr'>Indien sud-ouest</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#antarctique'>
+        <skos:prefLabel xml:lang='fr'>Antarctique</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'>
+        <skos:prefLabel xml:lang='fr'>Pacifique sud</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquenordest'>
+        <skos:prefLabel xml:lang='fr'>Pacifique nord-est</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#caraibes'>
+        <skos:prefLabel xml:lang='fr'>Caraïbes large</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordouest'>
+        <skos:prefLabel xml:lang='fr'>Atlantique nord-ouest</skos:prefLabel>
+        <skos:definition xml:lang='fr'>regionmarine</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#regionmarine'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#oceanmondial'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#manchemerdunord'>
+        <skos:prefLabel xml:lang='fr'>Manche-Mer du Nord</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mersceltiques'>
+        <skos:prefLabel xml:lang='fr'>Mers celtiques</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#lusitanie'>
+        <skos:prefLabel xml:lang='fr'>Lusitanie</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterraneeocc'>
+        <skos:prefLabel xml:lang='fr'>Méditerranée occidentale</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterranee'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mascareignessud'>
+        <skos:prefLabel xml:lang='fr'>Mascareignes sud</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#indiensudouest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'>
+        <skos:prefLabel xml:lang='fr'>Mozambique</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#indiensudouest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#saintpaul'>
+        <skos:prefLabel xml:lang='fr'>Saint-Paul et Amsterdam</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#indiensudouest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#kerguelen'>
+        <skos:prefLabel xml:lang='fr'>Kerguelen</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#antarctique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#crozet'>
+        <skos:prefLabel xml:lang='fr'>Crozet</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#antarctique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#terreadelie'>
+        <skos:prefLabel xml:lang='fr'>Terre Adélie</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#antarctique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#nouvellecaledonie'>
+        <skos:prefLabel xml:lang='fr'>Nouvelle Calédonie</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#wallisetfutuna'>
+        <skos:prefLabel xml:lang='fr'>Wallis et Futuna</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#societe'>
+        <skos:prefLabel xml:lang='fr'>Société</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#toamotu'>
+        <skos:prefLabel xml:lang='fr'>Tuamotu-Gambier</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#australes'>
+        <skos:prefLabel xml:lang='fr'>Australes</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#marquises'>
+        <skos:prefLabel xml:lang='fr'>Marquises</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquesud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#clipperton'>
+        <skos:prefLabel xml:lang='fr'>Clipperton</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#pacifiquenordest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#petitesantielles'>
+        <skos:prefLabel xml:lang='fr'>Petites Antilles</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#caraibes'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#guyanes'>
+        <skos:prefLabel xml:lang='fr'>Guyanes</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#caraibes'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#newfoundlandsud'>
+        <skos:prefLabel xml:lang='fr'>Newfoundland sud</skos:prefLabel>
+        <skos:definition xml:lang='fr'>sousregion</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#sousregion'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#atlantiquenordouest'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#cotesnords'>
+        <skos:prefLabel xml:lang='fr'>Côtes nord(Cherbourg à frontière belge)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#manchemerdunord'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#bretagnenord'>
+        <skos:prefLabel xml:lang='fr'>Bretagne nord(Cherbourg à Aber Wrac'h)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mersceltiques'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#iroise'>
+        <skos:prefLabel xml:lang='fr'>Iroise(Aber Wrac'h à Penmarc'h)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mersceltiques'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#bretagnesud'>
+        <skos:prefLabel xml:lang='fr'>Bretagne sud(Penmac'h à Loire)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mersceltiques'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#vendeecharente'>
+        <skos:prefLabel xml:lang='fr'>Vendée-Charente(Loire à Gironde)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mersceltiques'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#aquitaine'>
+        <skos:prefLabel xml:lang='fr'>Aquitaine(Gironde à frontière espagnole)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#lusitanie'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#golfedulyon'>
+        <skos:prefLabel xml:lang='fr'>Golfe du Lion(Languedoc-Roussillon)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterraneeocc'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#cotedazur'>
+        <skos:prefLabel xml:lang='fr'>Côte d'Azur(PACA)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterraneeocc'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#corse'>
+        <skos:prefLabel xml:lang='fr'>Corse</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mediterraneeocc'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#lareunion'>
+        <skos:prefLabel xml:lang='fr'>La Réunion</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mascareignessud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#tromelin'>
+        <skos:prefLabel xml:lang='fr'>Tromelin</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mascareignessud'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#lesglorieuses'>
+        <skos:prefLabel xml:lang='fr'>Les Glorieuses</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mayotte'>
+        <skos:prefLabel xml:lang='fr'>Mayotte</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#juandenova'>
+        <skos:prefLabel xml:lang='fr'>Juan de Nova</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#bassasdaindia'>
+        <skos:prefLabel xml:lang='fr'>Bassas da India</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#europa'>
+        <skos:prefLabel xml:lang='fr'>Europa</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#mozambique'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#saintpaulamstsoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Saint-Paul et Amsterdam</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#saintpaul'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#kerguelensoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Kerguelen</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#kerguelen'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#crozetsoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Crozet</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#crozet'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#terradeliesoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Terre Adélie</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#terreadelie'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#merdecorail'>
+        <skos:prefLabel xml:lang='fr'>Mer de Corail ou Côte ouest calédonienne</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#nouvellecaledonie'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#loyaute'>
+        <skos:prefLabel xml:lang='fr'>Loyauté ou Côte est calédonienne</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#nouvellecaledonie'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#wallis'>
+        <skos:prefLabel xml:lang='fr'>Wallis</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#wallisetfutuna'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#futuna'>
+        <skos:prefLabel xml:lang='fr'>Futuna</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#wallisetfutuna'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#societesoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Société</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#societe'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#touamotusoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Tuamotu</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#toamotu'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#gambier'>
+        <skos:prefLabel xml:lang='fr'>Gambier</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#toamotu'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#australesnord'>
+        <skos:prefLabel xml:lang='fr'>Australes nord</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#australes'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#australessud'>
+        <skos:prefLabel xml:lang='fr'>Australes sud(Rapa)</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#australes'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#marquisessoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Marquises</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#marquises'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#clippertonsoussecteur'>
+        <skos:prefLabel xml:lang='fr'>Clipperton</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#clipperton'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#guadeloupe'>
+        <skos:prefLabel xml:lang='fr'>Guadeloupe</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#petitesantielles'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#martinique'>
+        <skos:prefLabel xml:lang='fr'>Martinique</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#petitesantielles'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#saintmartin'>
+        <skos:prefLabel xml:lang='fr'>St-Martin et St-Barthélemy</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#petitesantielles'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#guyanesfrancaise'>
+        <skos:prefLabel xml:lang='fr'>Guyane française</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#guyanes'/>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#stpierreetmiquelon'>
+        <skos:prefLabel xml:lang='fr'>St-Pierre et Miquelon</skos:prefLabel>
+        <skos:definition xml:lang='fr'>secteur</skos:definition>
+        <skos:related rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#secteur'/>
+        <skos:broader rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/ciblegeographique#newfoundlandsud'/>
+    </skos:Concept>
+</rdf:RDF>

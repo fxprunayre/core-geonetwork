@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques">
+    <dc:title>Référentiels taxonomiques</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt1'>
+    <skos:prefLabel xml:lang='fr'>TAXREF v.1.2 + TAXREF SYNONYMES v.1.1 (6
+      Septembre 2005) - Validé MNHN
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Liste de référence de la faune continentale
+      de France (mammifères marins inclus). Validé MNHN. Téléchargeable sur le
+      site de l'INPN. En accord avec Fauna Europaea. Dernière version disponible
+      : TAXREF v.1.2 + TAXREF SYNONYMES v.1.1 du 6 septembre 2005.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt2'>
+    <skos:prefLabel xml:lang='fr'>Référentiel MNHN des plantes vasculaires de
+      Métropole (v.01aa du 10 Février 2005) - Validé MNHN
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel taxonomique des plantes
+      vasculaires de France métropolitaine. Version 01aa du 10 février 2005.
+      Légère évolution de la BDNFF (v3.02 de septembre 2003). Téléchargeable sur
+      le site de l'INPN.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt3'>
+    <skos:prefLabel xml:lang='fr'>Référentiel des mollusques continentaux de
+      France (2002) - Validé MNHN
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Liste de référence. Référentiel papier publié
+      (2002 : Patrimoine Naturel, 52). Validé MNHN.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt4'>
+    <skos:prefLabel xml:lang='fr'>EMBL Reptile Database</skos:prefLabel>
+    <skos:definition xml:lang='fr'>EMBL = European Molecular Biology
+      Laboratory.Niveau global.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt5'>
+    <skos:prefLabel xml:lang='fr'>Fauna Europaea (v.1.2 du 7 mars 2005)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dernière version disponible en ligne :
+      version 1.2 du 7 mars 2005.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt6'>
+    <skos:prefLabel xml:lang='fr'>CLENAM - Validé MNHN</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Check List of European MArine
+      Mollusca.Référentiel électronique des mollusques marins des mers d'Europe.
+      Validé MNHN.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt7'>
+    <skos:prefLabel xml:lang='fr'>Référentiel des crustacés décapodes d'Europe
+      (1999) - Validé MNHN
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Crustacés Décapodes européens marins et d'eau
+      douce. Référentiel papier publié (1999 : Patrimoine Naturel, 40). Validé
+      MNHN.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt8'>
+    <skos:prefLabel xml:lang='fr'>FishBase - Validé MNHN</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel électronique des Poissons. Validé
+      MNHN. Niveau global. 28000 espèces.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt9'>
+    <skos:prefLabel xml:lang='fr'>CephBase - Validé MNHN</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel électronique des Céphalopodes.
+      Validé MNHN. Niveau global.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt10'>
+    <skos:prefLabel xml:lang='fr'>ERMS</skos:prefLabel>
+    <skos:definition xml:lang='fr'>European Register of Marine Species.Faune et
+      flore marine, niveau européen. 29 000 espèces cataloguées.
+      http://www.marbef.org/data/erms.php
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt11'>
+    <skos:prefLabel xml:lang='fr'>WoRMS</skos:prefLabel>
+    <skos:definition xml:lang='fr'>World Register of Marine Species.Faune et
+      flore marine, niveau européen. 154 706 espèces cataloguées.
+      http://www.marinespecies.org/
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt12'>
+    <skos:prefLabel xml:lang='fr'>Référentiel taxonomique du SIH (Ifremer)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel taxonomique du Système
+      d'Information halieutique de l'Ifremer. Plus de 4000 taxons et 6500
+      synonymes.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt13'>
+    <skos:prefLabel xml:lang='fr'>Index des Neuropterida du Monde (TAMU) (v.1.0
+      du 15 juillet 2003)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Index to the Neuropterida Species of the
+      world.Neuroptera, Megaloptera, Rhaphidioptera. Version 1.00 du 15 juillet
+      2003. Texas A&amp;M University, Laboratoire d'Entomologie. Niveau global.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt14'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) - Ephémères
+      (juillet 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Liste de référence de l'Observatoire National
+      des Invertébrés (OPIE : Office Pour les Insectes et leur Environnement).
+      France métropolitaine. Ephémères (juillet 2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt15'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Coléoptères Lucanoidea et Scarabaeoidea (juin 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Coléoptères Lucanoidea et
+      Scarabaeoidea (juin 2002)
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt16'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Coléoptères Buprestidae (juin 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Coléoptères Buprestidae (juin
+      2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt17'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Coléoptères Cerambycidae (juin 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Coléoptères Cerambycidae (juin
+      2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt18'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Coléoptères Curculionoidea (juin 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Coléoptères Curculionoidea (juin
+      2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt19'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Coléoptères Scolytidae (juillet 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Coléoptères Scolytidae (juillet
+      2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt20'>
+    <skos:prefLabel xml:lang='fr'>Liste de référence de l'ONI (OPIE) -
+      Lépidoptères (juillet 2002)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Listes de référence de l'Observatoire
+      National des Invertébrés (OPIE : Office Pour les Insectes et leur
+      Environnement). France métropolitaine. Lépidoptères (juillet 2002).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt21'>
+    <skos:prefLabel xml:lang='fr'>Liste Leraut, 1997</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Liste systématique et synonymique des
+      Lépidoptères de France, Belgique et Corse. Publiée (Alexanor). 2ème
+      édition (1997).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt22'>
+    <skos:prefLabel xml:lang='fr'>Liste Leraut, 1980</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Liste systématique et synonymique des
+      Lépidoptères de France, Belgique et Corse. Publiée (Alexanor). 1ère
+      édition (1980).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt23'>
+    <skos:prefLabel xml:lang='fr'>ISFF (Index de Kerguelen) - Octobre 1999
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Index Synonymique de la Flore de France.
+      INRA, MNHN. Mise à jour Octobre 1999 (version consultable en ligne sur le
+      site de l'INRA de Dijon).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt24'>
+    <skos:prefLabel xml:lang='fr'>ISFF (Index de Kerguelen) - Juin 1998
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Index Synonymique de la Flore de France.
+      INRA, MNHN. Mise à jour Juin 1998 (version téléchargeable sur le site de
+      l'INRA de Dijon).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt25'>
+    <skos:prefLabel xml:lang='fr'>Flora Europaea</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt26'>
+    <skos:prefLabel xml:lang='fr'>Référentiel floristique de la base AUBLET2
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel pour la flore de Guyane
+      Française. Base de données sur la flore du plateau des Guyanes (AUBLET2,
+      Herbier de Guyane, IRD).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt27'>
+    <skos:prefLabel xml:lang='fr'>AlgaeBase - Validé MNHN</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel électronique des Algues. Validé
+      MNHN. Niveau global.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt28'>
+    <skos:prefLabel xml:lang='fr'>Référentiel des Algues Desmidiées de France
+      (1999) - Validé MNHN
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Référentiel papier publié (1999 : Patrimoine
+      Naturel, 41). Validé MNHN.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt29'>
+    <skos:prefLabel xml:lang='fr'>PEGLER D.N. Agaric Flora of the Lesser
+      Antilles
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt30'>
+    <skos:prefLabel xml:lang='fr'>FOURNET Jacques, 2002. Flore illustrée des
+      phanérogames de Guadeloupe et de Martinique
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt31'>
+    <skos:prefLabel xml:lang='fr'>FOURNET J., HOFF M., 1999. Index floristique
+      des Antilles françaises (Patrimoines naturels 36, MNHN)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt32'>
+    <skos:prefLabel xml:lang='fr'>Feldmann P., Barré N., 2001. Atlas des
+      orchidées sauvages de la Guadeloupe
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt33'>
+    <skos:prefLabel xml:lang='fr'>Hostache G., 1992. La vie dans les eaux douces
+      de la Guadeloupe, poissons et crustacés.
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt34'>
+    <skos:prefLabel xml:lang='fr'>Sibley 2007. Guide des oiseaux de l’Est de
+      l’Amérique du Nord
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt35'>
+    <skos:prefLabel xml:lang='fr'>Raffaele &amp; al. 1998. Birds of the West
+      Indies
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt36'>
+    <skos:prefLabel xml:lang='fr'>De Foucault B., 1976. Flore des bryophytes de
+      Guadeloupe
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt37'>
+    <skos:prefLabel xml:lang='fr'>Buck W.R. 1998. Pleurocarpus Mossus of the
+      West Indies
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt38'>
+    <skos:prefLabel xml:lang='fr'>FAO 1998. World reference base for soils
+      resources
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt39'>
+    <skos:prefLabel xml:lang='fr'>Liste des Oiseaux de France (CRBPO, 2007)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt40'>
+    <skos:prefLabel xml:lang='fr'>TAXREF v.8.0 (01/12/2014)</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt41'>
+    <skos:prefLabel xml:lang='fr'>Nouvelle flore de la Belgique, du Grand-Duché
+      de Luxembourg, du Nord de la France et des régions voisines, 4e édition,
+      1992
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt42'>
+    <skos:prefLabel xml:lang='fr'>OZENDA P., CLAUZADE G. – Les Lichens : Etude
+      biologique et flore illustrée – éd. Masson et Cie, Paris, 1970 – 801 p.
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt43'>
+    <skos:prefLabel xml:lang='fr'>Handbook of the Marine Fauna of North-west
+      europe
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt44'>
+    <skos:prefLabel xml:lang='fr'>Annexes de la Directive Oiseaux
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt45'>
+    <skos:prefLabel xml:lang='fr'>Annexes de la Directive Habitats
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt46'>
+    <skos:prefLabel xml:lang='fr'>Inventaire de la flore vasculaire de
+      Haute-Normandie (CBNBL, 2005)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt47'>
+    <skos:prefLabel xml:lang='fr'>Roberts M.J., 2010 - Guide des araignées de
+      France et d'Europe
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt48'>
+    <skos:prefLabel xml:lang='fr'>Liste des orthoptères de France (ASCETE,
+      2008)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt49'>
+    <skos:prefLabel xml:lang='fr'>Boudot J.-P., Dommanget J.-L., 2010. Liste de
+      référence des Odonates de France métropolitaine. Version 02/2010.
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt50'>
+    <skos:prefLabel xml:lang='fr'>Aulagnier S., Liste des mammifères de France
+      métropolitaine, 2009, ARVICOLA, Tome XIX, n° 1
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt51'>
+    <skos:prefLabel xml:lang='fr'>Henri Tachet et al, 2010 - Invertébrés d'eau
+      douce.
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt52'>
+    <skos:prefLabel xml:lang='fr'>Nouvelle flore de la Belgique, du G.-D. de
+      Luxembourg, du nord de la France et des régions voisines, 5e édition, 2004
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt53'>
+    <skos:prefLabel xml:lang='fr'>Liste des végétaux hygrophiles, arrêté du 24
+      juin 2008, Annexe II table A
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt54'>
+    <skos:prefLabel xml:lang='fr'>Liste des végétaux hygrophiles de
+      Haute-Normandie, 2011
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt55'>
+    <skos:prefLabel xml:lang='fr'>« Conservatoire Botanique du Mascarin (BOULLET
+      V., GIGORD L. coord.) 2010. - Index de la flore vasculaire de la Réunion
+      (Trachéophytes) : statuts, menaces et protections. » - . Disponible à
+      ""http://flore.cbnm.org"".
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt56'>
+    <skos:prefLabel xml:lang='fr'>Eckert, K. L., K. A. Bjorndal, F. A.
+      Abreu-Grobois, and M. Donnelly (Editors). 1999. Research and Management
+      Techniques for the Conservation of Sea Turtles. IUCN/SSC Marine Turtle
+      Specialist Group Publication No. 4.
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt57'>
+    <skos:prefLabel xml:lang='fr'>
+      http://reptile-database.reptarium.cz/search.php MNHN-Liste des Reptiles
+      terrestres de la Réunion-Jean Lescure
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt58'>
+    <skos:prefLabel xml:lang='fr'>Keith, P., Marquet G, Valade P,Vigneux, E. &amp;
+      Bosc, P. 2006. Atlas des poissons et des crustacés d'eau douce des
+      Comores, Mascareignes et Seychelles. Patrimoines naturels, 65: 1-250
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-taxonomiques#rt59'>
+    <skos:prefLabel xml:lang='fr'>Autre</skos:prefLabel>
+    <skos:definition xml:lang='fr'>
+    </skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

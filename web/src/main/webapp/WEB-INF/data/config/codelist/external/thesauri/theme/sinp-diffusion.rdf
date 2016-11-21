@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/diffusion">
+    <dc:title>Mode de diffusion</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/diffusion#papier'>
+    <skos:prefLabel xml:lang='fr'>Papier</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/diffusion#numeric'>
+    <skos:prefLabel xml:lang='fr'>Support informatique</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/diffusion#viewonly'>
+    <skos:prefLabel xml:lang='fr'>Visualisation sans téléchargement</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/diffusion#download'>
+    <skos:prefLabel xml:lang='fr'>Téléchargement</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

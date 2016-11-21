@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial">
+    <dc:title>Niveau territorial</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+    <skos:hasTopConcept rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+    <skos:hasTopConcept rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:ConceptScheme>
+
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre'>
+    <skos:prefLabel xml:lang='fr'>Terrestre</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:inScheme rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/international'>
+    <skos:prefLabel xml:lang='fr'>International</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif impliquant la France et un ou
+      plusieurs pays extérieur(s) à l’Union européenne. Exemple : réseau
+      d’observation paneuropéen.
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/europeen'>
+    <skos:prefLabel xml:lang='fr'>Européen</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif mis en place dans le cadre de
+      l’Union européenne et impliquant la France. Il s’agit de dispositifs qui
+      concernent l’ensemble ou une partie de l’Union européenne dont la France
+      (le territoire sur lequel portent les données correspond à l’ensemble ou
+      une partie de l’Union européenne dont la France).
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/national'>
+    <skos:prefLabel xml:lang='fr'>National</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif français (outre-mer compris). Il
+      s’agit de dispositifs qui généralement concernent l’ensemble du territoire
+      français, tout au moins l’ensemble de la métropole et/ou l’ensemble de
+      l’outre-mer ; dans ce cas, le territoire sur lequel portent les données
+      correspond à l’ensemble de la métropole ou à l’ensemble de l’outre-mer ou
+      à la France toute entière.
+      Il peut s’agir aussi de dispositifs d’ampleur nationale, piloté /
+      coordonné / organisé au niveau national, qui concernent potentiellement
+      tout le territoire mais qui dans les faits ne s’appliquent qu’à une partie
+      seulement du territoire ; c’est par exemple le cas du suivi national des
+      grands prédateurs (ours, loup, lynx) sous la responsabilité de l’ONCFS qui
+      ne concerne de fait que les zones de présence de ces espèces (zones où
+      l’ONCFS organise effectivement le suivi).
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/interregional'>
+    <skos:prefLabel xml:lang='fr'>Interrégional</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif qui ne concerne qu’un nombre
+      limité de régions. Il s’agit de dispositifs qui généralement concernent
+      deux régions limitrophes, par exemple dans le cadre d’un suivi naturaliste
+      organisé sur un site protégé / géré à cheval sur deux régions tel qu’un
+      PNR transrégional. Le territoire sur lequel porte les données peut
+      correspondre à la totalité des différentes régions concernées ou bien à
+      une partie seulement de chacune de ces régions.
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/regional'>
+    <skos:prefLabel xml:lang='fr'>Régional</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif qui ne concerne qu’une seule
+      région. Il s’agit en général de dispositifs mis en place par la région,
+      par une autorité déconcentrée de l’état de niveau régional (une DREAL par
+      exemple) ou par une association de portée régionale ; dans ce cas, le
+      territoire sur lequel portent les données est généralement celui de la
+      région toute entière.
+      Il peut également s’agir de dispositifs locaux concernant au moins deux
+      départements (ou une partie de deux départements), mais pas tous les
+      départements de la région, par exemple dans le cadre d’un suivi
+      naturaliste organisé sur un site protégé / géré à cheval sur plusieurs
+      départements d’une même région (tel que la Sologne) ; dans ce cas, le
+      territoire sur lequel portent les données n’est qu’une partie seulement de
+      la région.
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/departemental-ou-intercommunal'>
+    <skos:prefLabel xml:lang='fr'>Départemental ou intercommunal
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif qui ne concerne qu’un seul
+      département, dans sa totalité ou en partie seulement. Il s’agit en général
+      de dispositifs mis en place par le département, par une autorité
+      déconcentrée de l’état de niveau départemental ou par une association ;
+      dans ce cas, le territoire sur lequel portent les données est généralement
+      celui du département tout entier.
+      Il peut également s’agir de dispositifs locaux ne concernant qu’une partie
+      d’un département ; dans ce cas, le territoire sur lequel portent les
+      données n’est qu’une partie seulement du département.
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre/communal'>
+    <skos:prefLabel xml:lang='fr'>Communal</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Dispositif qui ne concerne qu’une seule
+      commune, dans sa totalité ou en partie seulement. Il s’agit en général de
+      dispositifs mis en place à l ‘échelle d’une commune ou sur un site bien
+      définit dont l’emprise est entièrement comprise dans les limites
+      communales.
+    </skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Terrestre"/>
+  </skos:Concept>
+
+
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin'>
+    <skos:prefLabel xml:lang='fr'>Marin</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:inScheme rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin/Mondiale'>
+    <skos:prefLabel xml:lang='fr'>Mondiale</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin/regionmarine'>
+    <skos:prefLabel xml:lang='fr'>Région marine (UNEP)</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin/sousregion'>
+    <skos:prefLabel xml:lang='fr'>Sous région(LME Regional Seas, OSPAR, ZEE incluse)</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin/secteur'>
+    <skos:prefLabel xml:lang='fr'>Secteur (déclinaison de la sous-region en secteurs biogéographiques/administratifs à valider par les experts locaux)</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin/local'>
+    <skos:prefLabel xml:lang='fr'>Local (unité de gestion)</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial#Marin"/>
+  </skos:Concept>
+</rdf:RDF>
+

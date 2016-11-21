@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/volet">
+    <dc:title>Volet SINP</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/volet#terre'>
+    <skos:prefLabel xml:lang='fr'>Terre</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Toutes les données relatives à la nature /
+      biodiversité française du domaine terrestre (outre-mer compris) :
+      habitats, flore, faune, champignons…, les données relatives aux espaces
+      naturels (protégés / gérés ou non), aux sites géologiques, aux écosystèmes
+      et leur fonctionnement.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/volet#mer'>
+    <skos:prefLabel xml:lang='fr'>Mer</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Toutes les données relatives à la nature /
+      biodiversité française du domaine marin (outre-mer compris) : habitats,
+      flore, faune, champignons…, les données relatives aux espaces naturels
+      (protégés / gérés ou non), aux sites géologiques, aux écosystèmes et leur
+      fonctionnement.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/volet#paysage'>
+    <skos:prefLabel xml:lang='fr'>Paysage</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Toutes les données relatives aux paysages,
+      c’est-à-dire des données relatives aux formes du territoire, aux
+      perceptions sociales et aux dynamiques du territoire. Elles intègrent
+      également des inventaires particuliers. Elles concernent les espaces
+      naturels, ruraux, urbains et périurbains. Elles incluent les espaces
+      terrestres, les eaux intérieures et maritimes. Elles concernent tant les
+      paysages pouvant être considérés comme remarquables que les paysages du
+      quotidien et les paysages dégradés.
+    </skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

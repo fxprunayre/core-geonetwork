@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+    rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/type-espace">
+    <dc:title>Type d'espace concerné</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+
+    <skos:hasTopConcept
+      rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire"/>
+    <skos:hasTopConcept
+      rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-contractuelle"/>
+    <skos:hasTopConcept
+      rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-fonciere"/>
+    <skos:hasTopConcept
+      rdf:resource="http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng"/>
+
+  </skos:ConceptScheme>
+
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'>
+    <skos:prefLabel xml:lang='fr'>Protection réglementaire</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#arretedeprotectiondebiotope'>
+    <skos:prefLabel xml:lang='fr'>Arrêté de protection de biotope, d'habitat naturel ou de site
+      d'intérêt géologique
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-integrale-de-parc-national'>
+    <skos:prefLabel xml:lang='fr'>Réserve intégrale de Parc national</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#parc-national-zone-coeur'>
+    <skos:prefLabel xml:lang='fr'>Parc national, zone coeur</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-biologique-dirigee'>
+    <skos:prefLabel xml:lang='fr'>Réserve biologique dirigée</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-biologique-integrale'>
+    <skos:prefLabel xml:lang='fr'>Réserve biologique intégrale</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-nationale-chasse-faune-sauvage'>
+    <skos:prefLabel xml:lang='fr'>Réserve nationale de chasse et faune sauvage</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-naturelle-nationale'>
+    <skos:prefLabel xml:lang='fr'>Réserve naturelle nationale</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-naturelle-regionale'>
+    <skos:prefLabel xml:lang='fr'>Réserve naturelle régionale</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-naturelle-de-corse'>
+    <skos:prefLabel xml:lang='fr'>Réserve naturelle de Corse</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-reglementaire'/>
+  </skos:Concept>
+
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-contractuelle'>
+    <skos:prefLabel xml:lang='fr'>Protection contractuelle</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#parcnational-aire-adhesion'>
+    <skos:prefLabel xml:lang='fr'>Parc national, aire d'adhésion
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-contractuelle'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#parc-naturel-regional'>
+    <skos:prefLabel xml:lang='fr'>Parc naturel régional</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-contractuelle'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#parc-naturel-marin'>
+    <skos:prefLabel xml:lang='fr'>Parc naturel marin</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-contractuelle'/>
+  </skos:Concept>
+
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-fonciere'>
+    <skos:prefLabel xml:lang='fr'>Protection par la maîtrise foncière</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#terrain-acquis-conservatoire-du-littoral'>
+    <skos:prefLabel xml:lang='fr'>Terrain acquis par le Conservatoire du Littoral</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-fonciere'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#terrain-acquis-conservatoire-espaces-naturels'>
+    <skos:prefLabel xml:lang='fr'>Terrain acquis (ou assimilé) par un Conservatoire d'Espaces
+      Naturels
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-fonciere'/>
+  </skos:Concept>
+
+
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'>
+    <skos:prefLabel xml:lang='fr'>Protection au titre de conventions et engagements européens ou
+      internationaux
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#zone-humide-protegee-convention-ramsar'>
+    <skos:prefLabel xml:lang='fr'>Zone humide protégée par la convention de Ramsar</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-biospherezonecentrale'>
+    <skos:prefLabel xml:lang='fr'>Réserve de Biosphère, zone centrale</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-biosphere-zonetransition'>
+    <skos:prefLabel xml:lang='fr'>Réserve de Biosphère, zone de transition</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#reserve-biospherezonetampon'>
+    <skos:prefLabel xml:lang='fr'>Réserve de Biosphère, zone tampon</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#bieninscrit-patrimoinemondial'>
+    <skos:prefLabel xml:lang='fr'>Bien inscrit sur la liste du patrimoine mondial de l'UNESCO
+      (naturel
+      ou mixte)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#zone-marine-protegee-ospar'>
+    <skos:prefLabel xml:lang='fr'>Zone marine protégée de la convention OSPAR (Atlantique Nord-est)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#zone-protegee-convention-carthagène'>
+    <skos:prefLabel xml:lang='fr'>Zone protégée de la convention de Carthagène (Caraïbes)
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+  <skos:Concept
+    rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#zone-specialement-protegee-convention-barcelone'>
+    <skos:prefLabel xml:lang='fr'>Zone spécialement protégée d'intérêt méditerranéen de la
+      convention de Barcelone
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+    <skos:broader
+      rdf:resource='http://inventaire.naturefrance.fr/thesaurus/sinp/espace#protection-conv-eng'/>
+  </skos:Concept>
+</rdf:RDF>

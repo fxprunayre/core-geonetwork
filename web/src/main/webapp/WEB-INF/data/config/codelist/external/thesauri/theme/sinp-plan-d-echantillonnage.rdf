@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <skos:ConceptScheme
+            rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage">
+        <dc:title>Type de plan d'échantillonnage</dc:title>
+        <dc:description/>
+        <dcterms:issued>2015-11-27</dcterms:issued>
+        <dcterms:modified>2015-11-27</dcterms:modified>
+    </skos:ConceptScheme>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#aleatoire'>
+        <skos:prefLabel xml:lang='fr'>Aléatoire simple</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Les tirages des unités sont équiprobables et indépendants.
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#systematique'>
+        <skos:prefLabel xml:lang='fr'>Systématique</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Les unités sont ordonnées (par ex. selon leurs coordonnées).
+            Une première unité est tirée au hasard et les suivantes s’en déduisent en respectant
+            l’agencement.
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#stratifie'>
+        <skos:prefLabel xml:lang='fr'>Stratifié</skos:prefLabel>
+        <skos:definition xml:lang='fr'>La zone d’étude est découpée en strates plus homogènes (selon
+            les grands types de milieux par ex.), et les unités d’échantillonnage sont sélectionnées
+            au sein de chaque strate selon un plan d’échantillonnage secondaire.
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#adaptative-sampling'>
+        <skos:prefLabel xml:lang='fr'>Adaptative sampling</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Tirage aléatoire d’un premier lot d’unités, puis de nouvelles
+            unités sont ajoutées selon les résultats obtenus sur les premières.
+        </skos:definition>
+    </skos:Concept>
+
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#proba-integrales'>
+        <skos:prefLabel xml:lang='fr'>Probabilités inégales (distance sampling, relascope)
+        </skos:prefLabel>
+        <skos:definition xml:lang='fr'>Tirage aléatoire d’un premier lot d’unités, puis de nouvelles
+            unités sont ajoutées selon les résultats obtenus sur les premières.
+        </skos:definition>
+    </skos:Concept>
+
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#pardegres-pargrappes'>
+        <skos:prefLabel xml:lang='fr'>Par degrés, par grappes</skos:prefLabel>
+        <skos:definition xml:lang='fr'>La sélection des unités s’effectue dans un système
+            hiérarchisé d’unités primaires, composées d’unités secondaires, etc.
+            Par exemple, des arbres sont sélectionnés au sein de placettes, elles-mêmes
+            sélectionnées au sein de peuplements forestiers, etc.
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#subjectif'>
+        <skos:prefLabel xml:lang='fr'>Subjectif</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Le choix des unités d’échantillonnage est effectué selon des
+            critères propres à l’observateur (pas toujours précisés).
+        </skos:definition>
+    </skos:Concept>
+    <skos:Concept
+            rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/plan-d-echantillonnage#autre'>
+        <skos:prefLabel xml:lang='fr'>Autre</skos:prefLabel>
+        <skos:definition xml:lang='fr'>Autre type de plan d’échantillonnage
+        </skos:definition>
+    </skos:Concept>
+</rdf:RDF>
+

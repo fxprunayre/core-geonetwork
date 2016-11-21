@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif">
+    <dc:title>Type de dispositif</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif#etude'>
+    <skos:prefLabel xml:lang='fr'>Etude</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Une études se définit comme « la collecte
+      systématique de données dans l’objectif de comprendre des processus
+      écologiques et dans certains cas, de déterminer la cause des changements
+      observées par les suivis. Un tel protocole implique généralement une
+      approche expérimentale, dans laquelle une hypothèse concernant la cause
+      probable des changements est testée dans des conditions avec ou sans la
+      cause spécifiée (National Park Service, 2010).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif#inventaire'>
+    <skos:prefLabel xml:lang='fr'>Inventaire</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Un inventaire est un « recensement le plus
+      exhaustif possible d’un ensemble de données taxonomiques sur une aire
+      géographique précise et durant une période de temps limitée » (Lhonoré,
+      2000. Il correspond donc à une campagne de collecte de données. La donnée
+      minimale que l’on tire d’un tel inventaire est de type « présence » (par
+      exemple la présence de taxons végétaux, dans un endroit donné et à un
+      moment donné). Des informations quantitatives (effectifs, poids…) ou
+      qualitatives (comportement…) peuvent toutefois compléter cette donnée
+      minimale (National Park Service, 2010). Une telle opération est effectuée«
+      sans idées préconçues quant à la teneur des résultats » (Finlayson, 1996).
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif#suivi'>
+    <skos:prefLabel xml:lang='fr'>Suivi</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Un suivi est « la collection et l’analyse
+      d’observations et de mesures répétées dans le but de détecter des
+      tendances d’évolution », généralement pour évaluer les effets d’actions de
+      gestion sur une population, sur la dynamique d’une communauté ou sur des
+      processus écologiques (Elzinga et al., 1998 ; Yoccoz et al., 2001). Un
+      suivi possède au moins implicitement une hypothèse de base à vérifier.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif#collection'>
+    <skos:prefLabel xml:lang='fr'>Collection</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Les données de collection correspondent aux
+      données bancarisées dans des collections, comme les herbiers, ou encore
+      des collections photographiques dans le cas du paysage.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/type-de-dispositif#experimentation'>
+    <skos:prefLabel xml:lang='fr'>Expérimentation</skos:prefLabel>
+    <skos:definition xml:lang='fr'>
+    </skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil">
+    <dc:title>Méthode de recueil</dc:title>
+    <dc:description>Ensemble de techniques, savoir-faire et outils mobilisés de manière logique (règles, étapes, principes) pour collecter des données associées à une cible (taxons, …). Le domaine de valeur de cet élément de métadonnées est défini en annexe I.9.
+      Exemple : Observation par point, Observation par transect, Observation directe</dc:description>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#non-renseigne'>
+    <skos:prefLabel xml:lang='fr'>Non renseigné</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#pas-de-methode particulière de prospection'>
+    <skos:prefLabel xml:lang='fr'>Pas de méthode particulière de prospection
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#enquetes-entretiens'>
+    <skos:prefLabel xml:lang='fr'>Enquêtes / entretiens</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#teledetection'>
+    <skos:prefLabel xml:lang='fr'>Télédétection</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#telemetrie'>
+    <skos:prefLabel xml:lang='fr'>Télémétrie</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#observation-par-point'>
+    <skos:prefLabel xml:lang='fr'>Observation par point</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#observation-par-transect'>
+    <skos:prefLabel xml:lang='fr'>Observation par transect</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#observation-directe'>
+    <skos:prefLabel xml:lang='fr'>Observation directe</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#observation-indirecte'>
+    <skos:prefLabel xml:lang='fr'>Observation indirecte</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#piegeage-capture'>
+    <skos:prefLabel xml:lang='fr'>Piégeage, capture</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#interpretation-de-cartographies'>
+    <skos:prefLabel xml:lang='fr'>Interprétation de cartographies
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/methode-de-recueil#interpretation-de-representations-iconographiques-et-ou-textuelles'>
+    <skos:prefLabel xml:lang='fr'>Interprétation de représentations
+      iconographiques et/ou textuelles
+    </skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+</rdf:RDF>
+

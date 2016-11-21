@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:dcterms="http://purl.org/dc/terms/"
+         xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+  <skos:ConceptScheme
+          rdf:about="http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques">
+    <dc:title>Référentiels Cartographiques</dc:title>
+    <dc:description/>
+    <dcterms:issued>2015-11-27</dcterms:issued>
+    <dcterms:modified>2015-11-27</dcterms:modified>
+  </skos:ConceptScheme>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#coordonnees-gps'>
+    <skos:prefLabel xml:lang='fr'>Coordonnées GPS</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Les données sont géoréférencées par leurs
+      coordonnées GPS lues dans un système géodésique connu.
+    </skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#bd-carto'>
+    <skos:prefLabel xml:lang='fr'>BD Carto</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#bd-ortho'>
+    <skos:prefLabel xml:lang='fr'>BD Ortho</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#bd-parcellaire'>
+    <skos:prefLabel xml:lang='fr'>BD Parcellaire</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#bd-topo'>
+    <skos:prefLabel xml:lang='fr'>BD Topo</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#bd-carthage'>
+    <skos:prefLabel xml:lang='fr'>BD Carthage</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#scan-100-ign'>
+    <skos:prefLabel xml:lang='fr'>Scan 100 IGN</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#scan-50-ign'>
+    <skos:prefLabel xml:lang='fr'>Scan 50 IGN</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#scan-25-ign'>
+    <skos:prefLabel xml:lang='fr'>Scan 25 IGN</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#carte-shom'>
+    <skos:prefLabel xml:lang='fr'>Carte SHOM</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#carte-topo-1/25-000e-ign'>
+    <skos:prefLabel xml:lang='fr'>Carte topo 1/25 000e IGN</skos:prefLabel>
+    <skos:definition xml:lang='fr'></skos:definition>
+  </skos:Concept>
+  <skos:Concept
+          rdf:about='http://inventaire.naturefrance.fr/thesaurus/sinp/referentiels-cartoragphiques#indirect'>
+    <skos:prefLabel xml:lang='fr'>Indirect</skos:prefLabel>
+    <skos:definition xml:lang='fr'>Les données ne sont pas géoréférencées
+      directement mais sont associées à un ""objet"" qui, lui, est géoréférencé.
+    </skos:definition>
+  </skos:Concept>
+  "
+</rdf:RDF>
+
