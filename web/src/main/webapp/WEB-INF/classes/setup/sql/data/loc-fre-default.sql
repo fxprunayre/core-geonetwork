@@ -9,7 +9,7 @@ INSERT INTO CswServerCapabilitiesInfo (idfield, langid, field, label) VALUES (24
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (-1,'fre','Invité');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (0,'fre','Intranet');
 INSERT INTO GroupsDes (iddes, langid, label) VALUES (1,'fre','Tous');
-INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','Groupe exemple');
+INSERT INTO GroupsDes (iddes, langid, label) VALUES (2,'fre','IDCNP');
 
 INSERT INTO IsoLanguagesDes  (iddes, langid, label) VALUES (137,'fre','Français');
 

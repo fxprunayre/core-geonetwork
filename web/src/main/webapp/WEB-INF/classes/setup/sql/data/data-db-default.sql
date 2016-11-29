@@ -7,7 +7,7 @@
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (-1,'GUEST','self-registered users',NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (0,'intranet',NULL,NULL,NULL);
 INSERT INTO Groups (id, name, description, email, referrer) VALUES (1,'all',NULL,NULL,NULL);
-INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'sample',NULL,NULL,NULL);
+INSERT INTO Groups (id, name, description, email, referrer) VALUES (2,'idcnp',NULL,NULL,NULL);
 
 -- ======================================================================
 -- === Table: IsoLanguages
