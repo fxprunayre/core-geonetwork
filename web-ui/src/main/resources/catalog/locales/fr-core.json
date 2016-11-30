@@ -68,6 +68,7 @@
     "createDateYear": "Année de création",
     "createDateYears": "Années",
     "dataset": "Jeu de données",
+    "collectionSystem": "Dispositif de collecte",
     "day": "Jour",
     "deleteRecordConfirm": "Voulez-vous vraiment supprimer '{{title}}' ?",
     "deleteSelectedRecordConfirm": "Voulez-vous vraiment supprimer les {{selectedCount}} fiches sélectionnée(s) ?",
