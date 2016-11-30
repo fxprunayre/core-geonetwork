@@ -164,6 +164,37 @@
         class="org.fao.geonet.kernel.search.classifier.Split" lazy-init="true">
     <constructor-arg name="regex" value="\s*?/\s*?"/>
   </bean>
+
+  <bean id="cibleGeoKeywordClassifier"
+        class="org.fao.geonet.kernel.search.classifier.TermLabel" lazy-init="true">
+    <constructor-arg name="finder"
+                     ref="ThesaurusManager"/>
+    <constructor-arg name="conceptScheme"
+                     value="http://inventaire.naturefrance.fr/thesaurus/sinp/cible-geographique"/>
+    <constructor-arg name="langCode"
+                     value="fre"/>
+  </bean>
+
+  <bean id="typeEspaceKeywordClassifier"
+        class="org.fao.geonet.kernel.search.classifier.TermLabel" lazy-init="true">
+    <constructor-arg name="finder"
+                     ref="ThesaurusManager"/>
+    <constructor-arg name="conceptScheme"
+                     value="http://inventaire.naturefrance.fr/thesaurus/sinp/type-espace"/>
+    <constructor-arg name="langCode"
+                     value="fre"/>
+  </bean>
+
+  <bean id="niveauKeywordClassifier"
+        class="org.fao.geonet.kernel.search.classifier.TermLabel" lazy-init="true">
+    <constructor-arg name="finder"
+                     ref="ThesaurusManager"/>
+    <constructor-arg name="conceptScheme"
+                     value="http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial"/>
+    <constructor-arg name="langCode"
+                     value="fre"/>
+  </bean>
+
   <!--
   Example configuration for hierarchical facet based on
   the GeoNetwork region thesaurus or GEMET.

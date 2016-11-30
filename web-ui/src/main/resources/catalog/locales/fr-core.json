@@ -291,5 +291,19 @@
     "directoryManager": "Gestion des annuaires",
     "typeOfRecord": "Type de fiche",
     "load": "Charger",
-    "solrAccessError": "Erreur lors de l'accès à l'index."
+    "solrAccessError": "Erreur lors de l'accès à l'index.",
+    "sinp-niveau-territorial": "Niveau territorial",
+    "sinp-type-de-dispositif": "Type de dispositif",
+    "sinp-type-de-financement": "Type de financement",
+    "sinp-type-espace": "Type d'espace concerné",
+    "sinp-volet": "Volet SINP",
+    "sinp-cible-geographique": "Cible géographique",
+    "sinp-referentiels-milieux": "Référentiels milieux",
+    "sinp-referentiels-taxonomiques": "Référentiels taxonomiques",
+    "sinp-referentiels-cartographiques": "Référentiels cartographiques",
+    "sinp-stockage": "Mode de stockage",
+    "sinp-type-de-dispositif": "Type de dispositif",
+    "sinp-plan-d-echantillonnage": "Plan d'échantillonnage",
+    "sinp-type-d-unites-echantillonage": "Type d'unité d'échantillonnage",
+    "sinp-thematique": "Thématique SINP"
 }

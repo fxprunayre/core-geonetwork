@@ -108,6 +108,66 @@
     <facet name="subTemplateType" indexKey="_root" label="subTemplateTypes"/>
     <facet name="groupOwner" indexKey="_groupOwner" label="groupOwners"/>
     <facet name="publishedForGroup" indexKey="_groupPublished" label="publishedForGroup"/>
+
+
+    <facet name="sinp-diffusion"
+           label="sinp-diffusion"
+           indexKey="thesaurus-external.theme.sinp-diffusion"/>
+    <facet name="sinp-habref"
+           label="sinp-habref"
+           indexKey="thesaurus-external.theme.sinp-habref"/>
+    <facet name="sinp-methode-de-recueil"
+           label="sinp-methode-de-recueil"
+           indexKey="thesaurus-external.theme.sinp-methode-de-recueil"/>
+    <facet name="sinp-niveau-territorial"
+           label="sinp-niveau-territorial"
+           indexKey="keyword"
+           classifier="niveauKeywordClassifier"/>
+    <facet name="sinp-plan-d-echantillonnage"
+           label="sinp-plan-d-echantillonnage"
+           indexKey="thesaurus-external.theme.sinp-plan-d-echantillonnage"/>
+    <facet name="sinp-referentiels-cartographiques"
+           label="sinp-referentiels-cartographiques"
+           indexKey="thesaurus-external.theme.sinp-referentiels-cartographiques"/>
+    <facet name="sinp-referentiels-milieux"
+           label="sinp-referentiels-milieux"
+           indexKey="thesaurus-external.theme.sinp-referentiels-milieux"/>
+    <facet name="sinp-referentiels-taxonomiques"
+           label="sinp-referentiels-taxonomiques"
+           indexKey="thesaurus-external.theme.sinp-referentiels-taxonomiques"/>
+    <facet name="sinp-stockage"
+           label="sinp-stockage"
+           indexKey="thesaurus-external.theme.sinp-stockage"/>
+    <facet name="sinp-taxref"
+           label="sinp-taxref"
+           indexKey="thesaurus-external.theme.sinp-taxref"/>
+    <facet name="sinp-thematique"
+           label="sinp-thematique"
+           indexKey="thesaurus-external.theme.sinp-thematique"/>
+    <facet name="sinp-type-d-unites-echantillonage"
+           label="sinp-type-d-unites-echantillonage"
+           indexKey="thesaurus-external.theme.sinp-type-d-unites-echantillonage"/>
+    <facet name="sinp-type-de-dispositif"
+           label="sinp-type-de-dispositif"
+           indexKey="thesaurus-external.theme.sinp-type-de-dispositif"/>
+    <facet name="sinp-type-de-donnees"
+           label="sinp-type-de-donnees"
+           indexKey="thesaurus-external.theme.sinp-type-de-donnees"/>
+    <facet name="sinp-type-de-financement"
+           label="sinp-type-de-financement"
+           indexKey="thesaurus-external.theme.sinp-type-de-financement"/>
+    <facet name="sinp-type-espace"
+           label="sinp-type-espace"
+           indexKey="keyword"
+           classifier="typeEspaceKeywordClassifier"/>
+    <facet name="sinp-volet"
+           label="sinp-volet"
+           indexKey="thesaurus-external.theme.sinp-volet"/>
+    <facet name="sinp-cible-geographique"
+           label="sinp-cible-geographique"
+           indexKey="keyword"
+           classifier="cibleGeoKeywordClassifier"/>
+
     <!--
     Example configuration for hierarchical facet based on
     the GeoNetwork region thesaurus or GEMET.
@@ -135,7 +195,33 @@
             translator="term:http://geonetwork-opensource.org/inspire-theme"/>
       <!--<item facet="inspireTheme" sortBy="value" sortOrder="asc" max="35"/>-->
       <!--<item facet="inspireThemeWithAc" sortBy="value" sortOrder="asc" max="35"/>-->
-      <item facet="keyword" max="15"/>
+      <!--<item facet="keyword" max="15"/>-->
+
+      <item facet="sinp-diffusion" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-habref" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-methode-de-recueil" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-niveau-territorial"
+            translator="term:http://inventaire.naturefrance.fr/thesaurus/sinp/niveau-territorial"
+            max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-plan-d-echantillonnage" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-referentiels-cartographiques" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-referentiels-milieux" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-referentiels-taxonomiques" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-stockage" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-taxref" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-thematique" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-type-d-unites-echantillonage" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-type-de-dispositif" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-type-de-donnees" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-type-de-financement" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-type-espace"
+            translator="term:http://inventaire.naturefrance.fr/thesaurus/sinp/type-espace"
+            max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-volet" max="200" sortBy="value" sortOrder="asc"/>
+      <item facet="sinp-cible-geographique"
+            translator="term:http://inventaire.naturefrance.fr/thesaurus/sinp/cible-geographique"
+            max="200" sortBy="value" sortOrder="asc"/>
+
       <item facet="orgName" max="25"/>
       <item facet="sourceCatalog"
             translator="db:org.fao.geonet.repository.SourceRepository:findOneByUuid"/>
@@ -149,6 +235,7 @@
       <item facet="serviceType"/>
       <item facet="denominator" sortBy="numValue" sortOrder="desc"/>
       <item facet="resolution" sortBy="numValue" sortOrder="desc"/>
+
       <!--
       <item facet="region"
             translator="term:http://geonetwork-opensource.org/thesaurus/naturalearth-and-seavox"/>
