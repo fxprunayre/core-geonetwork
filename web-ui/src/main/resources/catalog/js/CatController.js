@@ -55,15 +55,15 @@
 
   module.constant('gnLangs', {
     langs: {
-      'eng': 'en',
-      'dut': 'du',
-      'fre': 'fr',
-      'ger': 'ge',
-      'kor': 'ko',
-      'spa': 'es',
-      'cze': 'cz',
-      'cat': 'ca',
-      'fin': 'fi'
+      // 'eng': 'en',
+      // 'dut': 'du',
+      'fre': 'fr'
+      // 'ger': 'ge',
+      // 'kor': 'ko',
+      // 'spa': 'es',
+      // 'cze': 'cz',
+      // 'cat': 'ca',
+      // 'fin': 'fi'
     },
     getIso2Lang: function(iso3lang) {
       return this.langs[iso3lang];
