@@ -1,3 +1,108 @@
 @import "gn_search_default.less";
 @import "../../../style/gn_editor";
 @import "gn_view.less";
+
+
+.nav-tabs:empty {
+  border-bottom: 0;
+}
+// text in the top bar
+.navbar-text {
+  margin-top: 6px;
+  margin-bottom: 8px;
+  color: #333 !important;
+}
+
+// text and button in `my metadata`
+.gn-editor-board {
+  background: #fff;
+  padding-top: 80px;
+	.table.gn-results-editor {
+		h1 {
+	    font-size: 16px !important;
+	    margin: 7px 0 5px 0;
+	    a {
+	    	color: #333;
+	    }
+		}
+    .gn-selectrecord {
+      // margin-top: 15px;
+    }
+    .gn-recordtype {
+      display: block;
+      margin-top: 5px;
+    }
+	 	td {
+			.btn-group {
+				margin-bottom: 5px;
+			}
+			.gn-record-details {
+			  padding-left: 0px;
+			}
+			:nth-of-type(1) {
+			  font-size: 100%;
+			  padding-top: 6px;
+			}
+		}
+	}
+}
+
+// editor
+form.gn-editor {
+  // toggle button
+  form.gn-editor div[data-gn-toggle] {
+    right: 0;
+    top: 0;
+  }
+  // styling on row hover
+  .field-bg {
+    background: transparent;
+    color: 
+  }
+  .gn-required > label:after {
+    font-size: 1.8em;
+    margin: 0px 0 0 7px;
+  } 
+	fieldset {
+    padding: 0px;
+    border: 1px solid #ebebeb;
+    border-radius: 2px;
+    margin-top: 10px;
+    legend {
+    	border: 1px solid #ebebeb;
+      background: #f9f9f9; 
+    	margin-left: -1px;
+    	margin-right: -1px;
+      width: ~"calc(100% + 2px)";
+    	font-size: 18px;
+      padding: 10px 23px;
+    }
+    table {
+      .col-sm-2, .col-sm-9 {
+        padding-right: 0;
+        padding-left: 0;
+      }
+      .btn [data-gn-click-and-spin] {
+        margin-right: 3px;
+      }
+    }
+    fieldset {
+    	margin: 10px;
+      padding-left: 0;
+      legend {
+        padding-right: 11px;
+      }
+    }
+  }
+  // override deafult bootstrap widths for the editor
+  .col-sm-2 {
+    width: 25%;
+  }
+  .col-sm-9 {
+    width: 66%;
+    .col-sm-12 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

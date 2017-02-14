@@ -1,3 +1,416 @@
 /* Defined here any custom style for the view
    which has to be applied for all apps
    (ie. admin, search, login, editor). */
+   
+@import "gn_variables_default.less"; // must be first
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import "gn_layout_default.less";
+@import "gn_bar_default.less";
+@import "gn_map_default.less";
+
+body, html {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+[ng-app="gn_search_default"] body, [ng-app="gn_login"] body {
+	background-image: @gnBackgroundImage; 
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.gn-full {
+  min-height: 100%;
+  position: absolute;
+}
+
+// home page
+// 
+// ----- main
+.gn-row-main {
+  margin-top: 30px
+}
+// ----- welcome text
+.gn-welcome {
+  .gn-logo {
+    max-height: 1008% !important;
+    margin-right: 5px;
+  }
+}
+// ----- search
+.gn-row-search {
+  margin-bottom: 90px;
+}
+.search-over {
+  color: #333;
+  text-align: left;
+  margin-top: 5px;
+}
+// ----- info (new & most popular)
+.gn-row-info {
+  background-color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+// ----- topics
+.gn-row-topics {
+  background-color: #ddd;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    label {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.gn-row-footer {
+  background: #e5e5e5;
+  color: #999;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  h4 {
+    font-size: 16px;
+  }
+  p {
+    width: 90%;
+  }
+  ul {
+    padding: 0px 15px;
+  }
+  li {
+    padding: 3px;
+  }
+  a {
+    color: #999;
+  }
+}
+
+// list of records
+.gn-info-list {
+  padding: 5px 0px;
+  margin: auto -10px;
+  li {
+    width: 100%;
+    zoom: 1;
+    list-style: none;
+    float: left;
+    padding: 10px;
+    cursor: pointer;
+  }
+  li.gn-more {
+    position: relative;
+    float: right;
+  }
+
+  // info lists
+  // 
+  // ----- general
+  .resultcard {
+    padding: 0 0 10px 0;
+    background-color: #fff;
+    .title {
+      min-height: 40%;
+      padding: 10px;
+      h4 {
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+    .abstract {
+      overflow: auto;
+      padding: 0 10px 0 10px;
+      height: 60%;
+    }
+    .gn-md-thumbnail {
+      display: none;
+      float: left;
+      width: 150px;
+      height: 150px;
+      margin: 5px 10px;
+      border: 1px solid #ccc;
+      .gn-img-thumbnail {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        filter: grayscale(100%); /* Current draft standard */
+      }
+    }
+  }
+  li:hover {
+    .title {
+      color: #000;
+    }
+  }
+}
+
+// info lists
+// 
+// ----- small
+.gn-info-list-small {
+  .gn-info-list {
+    li {
+      padding: 5px 10px;
+      .resultcard {
+        .abstract {
+          max-height: 1.5em !important;
+          overflow: hidden;
+        }
+        .abstract:after {
+          content: "..."
+        }
+      }
+    }
+  }
+}
+// ----- large
+.gn-info-list-large {
+  .gn-info-list {
+    .resultcard {
+      .abstract {
+        max-height: auto !important;
+        max-height: 250px;
+      }
+      .gn-md-thumbnail {
+        display: block;
+      }
+      &:hover {
+        .gn-img-thumbnail {
+          filter: none !important;
+        }
+      }
+    }
+  }
+}
+// ----- blocks
+.gn-info-list-blocks {
+  .gn-info-list {
+    li {
+      width: 33%;
+      height: 250px;
+      .resultcard {
+        .title {
+          h4 {
+            font-size: 16px;
+            margin: 0;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        .abstract {
+          display: none !important;
+        }
+        .gn-md-thumbnail {
+          display: block;
+          width: 100%;
+        }
+        .gn-img-thumbnail {
+          
+        }
+        &:hover {
+          .gn-img-thumbnail {
+            filter: none !important;
+          }
+        }
+      }
+    }
+    li:hover:before {
+      content: "";
+    }
+  }
+}
+
+// badges
+// 
+// ----- image/icon
+.badge-result {
+  border-radius: 20px !important;
+  float: left;
+  height: 40px;
+  line-height: 43px;
+  text-align: center;
+  vertical-align: bottom;
+  width: auto;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background: transparent;
+  a {
+    color: #fff;
+    border-radius: 20px; 
+    padding-right: 10px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .badge {
+    margin-top: -5px;
+  }
+}
+// ----- colors
+.badge-result-topic a {
+  background: #428bca;
+}
+.badge-result-type a {
+  background: #5cb85c;
+}
+// ----- icon
+.badge-icon {
+  font-size: 7px;
+  color: #fff;
+  background: #333;
+  width: 40px;
+  height: 40px;
+  display: block;
+  padding: 0;
+  border-radius: 50%;
+  line-height: 48px;
+  min-width: 0;
+}
+// ----- text
+.badge-text {
+  height: 100%;
+  line-height: 100%;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 13px;
+  font-size: 13px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+
+// dropdown
+// 
+// ----- grid
+.dropdown-grid {
+  margin-left: -151px;
+  width: 302px;
+  padding: 0;
+  li {
+    float: left;
+    text-align: center;
+    width: 150px;
+    a {
+      padding: 20px 0 20px 0;
+    }
+    i {
+      font-size: 24px;
+    }
+    span {
+      color: #999;
+      font-size: 12px;
+    }
+  }
+}
+
+// 3 columns
+.dropdown-grid-3 {
+  margin-left: -225px;
+  width: 452px;
+}
+
+// general styles
+//
+// padding
+.gn-padding-top {
+  padding-top: @gnSpacing !important;
+}
+.gn-padding-right {
+  padding-right: @gnSpacing !important;
+}
+.gn-padding-bottom {
+  padding-bottom: @gnSpacing !important;
+}
+.gn-padding-left {
+  padding-left: @gnSpacing !important;
+}
+// no padding
+.gn-nopadding {
+  padding: 0 !important;
+}
+.gn-nopadding-tablet {
+  @media (min-width: 800px) and (max-width: 1024px) {
+    padding: 0 !important;
+  }
+}
+.gn-nopadding-top {
+  padding-top: 0 !important;
+}
+.gn-nopadding-right {
+  padding-right: 0 !important;
+}
+.gn-nopadding-bottom {
+  padding-bottom: 0 !important;
+}
+.gn-nopadding-left {
+  padding-left: 0 !important;
+}
+
+// extra padding for columns
+@media (min-width: @screen-sm-max) {
+  .gn-padding-left-extra {
+    padding-left: 25px;
+  }
+}
+
+// margin
+.gn-margin-top {
+  margin-top: @gnSpacing;
+}
+.gn-margin-right {
+  margin-right: @gnSpacing;
+}
+.gn-margin-bottom {
+  margin-bottom: @gnSpacing;
+}
+.gn-margin-left {
+  margin-left: @gnSpacing;
+}
+// margin for small devices
+@media (max-width: 750px) {
+  .gn-xs-margin-bottom {
+    margin-bottom: @gnSpacing;
+  }
+}
+
+// widths
+.gn-width-80 {
+  width: 80%;
+}
+.gn-width-60 {
+  width: 60%;
+}
+
+// styling for the scrollbar
+::-webkit-scrollbar {
+  width: 2px;
+}
+// ----- track
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+// ----- handle
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background: #efefef; 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0,0,0,0.4); 
+}

@@ -1,0 +1,210 @@
+
+.gn-row-sort {
+  background: #fff;
+  padding-top: 30px;
+}
+.gn-row-results {
+  background: #fff;
+  padding-top: 20px;
+}
+.gn-row-pagination {
+  background: #fff;
+}
+
+// ----- sort options
+.gn-sort-by .btn-group > button, .gn-sort-by .btn-group > button:hover, 
+.gn-sort-by .btn-group > button:focus, .gn-sort-by .btn-group > button:active {
+  border: 1px solid #ccc;
+  color: @gnTextColor;
+  text-decoration: none;
+  border-radius: 0;
+}
+
+ul.gn-resultview {
+  @thumbnail-width: 170px;
+
+  margin-top: 10px;
+  p {
+    font-size: 1em;
+  }
+  input[type="checkbox"] {
+    margin: 6px 10px 0 0;
+    float: left;
+  }
+  .metadata {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2050;
+  }
+  li.list-group-item {
+    padding: 0 0 15px 0;
+    line-height: 1.5em;
+    border: none;
+    margin-bottom: 10px;
+    &:hover {
+      background-color: #fff;
+      cursor: default;
+    }
+    .row:first-of-type {
+      padding-left: 3px;
+    }
+
+    .gn-md-thumbnail {
+      .gn-img-thumbnail {
+        max-width: @thumbnail-width;
+        max-height: 140px;
+        min-height: 40px;
+        height: auto;
+      }
+    }
+    .media {
+      a {
+        margin-left: 0;
+        &.gn-md-edit-btn {
+          width: 12px;
+          margin-left: 10px;
+          
+        }
+      }
+      h4 {
+        margin-top: 0;
+        font-weight: 700;
+        a {
+          color: rgb(51, 51, 51);
+          width: 95%;
+          line-height: 1.5em;
+        }
+        .fa {
+          margin-right: 5px;
+          margin-top: 4px;
+        }
+      }
+    }
+    .pull-right .media-object {
+    	margin-left: 15px;
+    }
+    blockquote {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  .gn-md-links {
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 2px 0 5px 0;
+    line-height: auto;
+    font-size: 90%;
+    margin: 0;
+    .btn {
+      border-color: #eee;
+    }
+    .btn-default:hover {
+      border-color: #ccc;
+    }
+    .dropdown-menu li a {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+
+  li.gn-grid {
+    @grid-bottom-margin: 2px;
+
+    .gn-md-col2 {
+      margin-left: 25px;
+    }
+    .gn-md-details {
+      color: #6a6a6a;
+      max-height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    /* Properly align category icons */
+    .fa img {
+      vertical-align: text-bottom;
+    }
+    .gn-md-title {
+      margin-top: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      float: left;
+      max-width: 95%;
+      h3 {
+        font-size: 22px;
+        margin-top: 0px;
+        a {
+          color: #333333;
+          text-overflow: ellipsis; 
+          overflow: hidden;
+          display: block;
+        }
+        a:hover {
+          color: #428bca;
+          text-decoration: none;
+        }
+      }
+    }
+    .gn-source-logo {
+      z-index: 10;
+      height: 20px;
+      float: right;
+    }
+    .gn-md-thumbnail {
+      overflow: hidden;
+      cursor: pointer;
+      .gn-img-thumbnail {
+        max-width: @thumbnail-width;
+        max-height: 140px;
+        min-height: 40px;
+        height: auto;
+      }
+    }
+    .gn-md-abstract {
+      cursor: pointer;
+      // max-height: 160px;
+      overflow: auto;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      padding-right: 10px;
+      &:hover {
+        color: #333;
+      }
+    }
+    .gn-md-abstract.ellipsis:after {
+      background: none;
+    }
+    .gn-md-links {
+      border: 0;
+      padding: 5px 0;
+    }
+    .gn-md-category {
+      padding: 10px 0;
+      a {
+        margin-right: 3px;
+        color: @gnBlue;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+    .gn-md-footer {
+      border-top: 1px solid #eee;
+    }
+    .badge {
+      display: inline-block;
+      min-width: 10px;
+      padding: 5px 10px;
+      font-weight: normal; 
+      color: #999;
+      border: 1px solid #999;
+      line-height: 1;
+      background-color: #fff;
+      margin-bottom: 5px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+  }
+}

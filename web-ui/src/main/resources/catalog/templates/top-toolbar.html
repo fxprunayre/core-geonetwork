@@ -25,14 +25,12 @@
       <li data-ng-if="gnCfg.mods.search.enabled">
         <a data-gn-active-tb-item="{{gnCfg.mods.search.appUrl}}"
            title="{{'search' | translate}}">
-          <i class="fa fa-search"></i>
           <span class="visible-lg" data-translate="">search</span>
         </a>
       </li>
       <li data-ng-if="gnCfg.mods.map.enabled">
         <a data-gn-active-tb-item="{{gnCfg.mods.map.appUrl}}"
            title="{{'map' | translate}}">
-          <i class="fa fa-globe"></i>
           <span class="visible-lg" data-translate="">makeYourMap</span>
 
           <span data-gnv-layer-indicator=""/>
@@ -42,13 +40,12 @@
           data-ng-show="authenticated && user.isEditorOrMore()">
         <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}"
            title="{{'editorBoard' | translate}}">
-          <i class="fa fa-plus"></i>
           <span class="visible-lg" data-translate="">contribute</span>
         </a>
       </li>
       <li data-ng-if="gnCfg.mods.editor.enabled"
           class="dropdown" data-ng-show="authenticated && user.isEditorOrMore()">
-        <a href="" class="dropdown-toggle" data-toggle="dropdown"
+        <a href="" class="dropdown-toggle gn-nopadding-left gn-nopadding-right" data-toggle="dropdown"
            role="button" aria-expanded="false"><span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
           <li>
@@ -78,7 +75,6 @@
       <li data-ng-show="user.isUserAdminOrMore()">
         <a data-gn-active-tb-item="admin.console"
            title="{{'adminConsole' | translate}}">
-          <i class="fa fa-th"></i>
           <span class="visible-lg" data-translate="">adminConsole</span>
         </a>
       </li>
@@ -131,7 +127,6 @@
       <li data-ng-show="authenticated">
         <a href="{{gnCfg.mods.signout.appUrl}}"
            title="{{'signout' | translate}}">
-          <i class="fa fa-sign-out"></i>&nbsp;
           {{'signout' | translate}}
         </a>
       </li>
@@ -139,7 +134,6 @@
         <a href="{{gnCfg.mods.signin.appUrl}}"
            title="{{'signIn'|translate}}"
            data-ng-keypress="$event">
-          <i class="fa fa-sign-in"/>&nbsp;
           {{'signIn' | translate}}
         </a>
       </li>
