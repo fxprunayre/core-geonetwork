@@ -80,7 +80,20 @@
                  $filter('gnLocalized')(link.title) || link.title;
               if (layerName) {
                 gnMap.addWmsFromScratch(gnSearchSettings.viewerMap,
-                   url, layerName, false, md);
+                   url, layerName, false, md).
+                    then(function(result){
+                       gnAlertService.addAlert({
+                          msg: "Layer "+layerName+" added.",
+                          type: 'success'
+                        }); 
+                    }, function(error){
+                        gnAlertService.addAlert({
+                          msg: error.msg,
+                          type: 'warning'
+                        });
+                        //now load the service so a user can select a layer
+                        gnMap.addOwsServiceToMap(url, 'WMS');
+                    });
               } else {
                 gnMap.addOwsServiceToMap(url, 'WMS');
               }

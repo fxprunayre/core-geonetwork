@@ -153,9 +153,9 @@
             gnMdView.openMdFromLayer(scope.layer);
           };
           function resetPopup() {
-            // Hack to remove popup on layer remove eg.
-            $('[gn-popover-dropdown] .btn').each(function(i, button) {
-              $(button).popover('hide');
+            // Stronger hack to remove popup on layer remove eg.
+            $('div.popover').each(function(i, mnu) {
+              $(mnu).remove();
             });
           };
           scope.removeLayer = function(layer, map) {

@@ -589,12 +589,12 @@
             gnSearchLocation.setMap();
             // open dialog for WMS
             switch (type.toLowerCase()) {
-              case 'wms':
-                gnViewerService.openWmsTab(url);
-                break;
-
               case 'wmts':
                 gnViewerService.openWmtsTab(url);
+                break;
+
+              default:
+                gnViewerService.openWmsTab(url);
                 break;
             }
           },
@@ -1198,6 +1198,8 @@
                   if (version) {
                     o.version = version;
                   }
+                  /* it seems this adds an empty layer containing an error
+                     however we defer the error to the caller to manage display it to the user
                   olL = $this.addWmsToMap(map, o);
 
                   if (!angular.isArray(olL.get('errors'))) {
@@ -1214,7 +1216,7 @@
                   olL.get('errors').push(errors);
 
                   gnWmsQueue.error(o);
-                  o.layer = olL;
+                  o.layer = olL;*/
                   defer.reject(o);
                 } else {
                   olL = $this.createOlWMSFromCap(map, capL, url);

@@ -308,6 +308,7 @@
                       scope.addLayerUrl[openedTool.tab] = openedTool.url;
                       break;
                   }
+                  scope.addLayerTabs.services = true;
                 }
 
                 // handle processes tool
