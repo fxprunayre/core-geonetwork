@@ -34,7 +34,7 @@
   goog.require('gn_wmts');
 
   var module = angular.module('gn_related_directive', [
-    'gn_relatedresources_service', 'gn_related_observer_directive', 'gn_wms', 
+    'gn_relatedresources_service', 'gn_related_observer_directive', 'gn_wms',
     'gn_wmts', 'gn_atom'
   ]);
 
@@ -187,10 +187,7 @@
                 return angular.isFunction(fn);
               };
 
-              scope.isLayerProtocol = function(mainType) {
-                return gnSearchSettings.mapProtocols.layers.
-                   indexOf(mainType) > -1;
-              };
+              scope.isLayerProtocol = gnRelatedService.isLayerProtocol;
 
               scope.config = gnRelatedResources;
 
