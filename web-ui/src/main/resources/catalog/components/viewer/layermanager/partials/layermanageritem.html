@@ -1,7 +1,7 @@
 <div ng-if="::!layer.get('loading')" class="flex-col">
   <div class="flex-row width-100 flex-align-stretch">
     <div class="flex-col">
-      <input type="checkbox" ng-model="layer.visible" title="{{'layerVisible'|translate}}"/>
+      <input type="checkbox" id="layer-{{$index}}" ng-model="layer.visible" title="{{'layerVisible'|translate}}"/>
 
       <div class="gn-layer-actions">
         <div ngeo-popover ngeo-popover-placement="bottom">
@@ -103,12 +103,14 @@
             ng-click="moveLayer(layer, -1)"
             title="{{'layerMoveDown'|translate}}"></a>
         </span>
-        <span data-ng-class="layer.get('errors').length > 0 ? 'text-danger' : ''">
-          {{layer.get('label')}}&nbsp;
-          <small><em>
-            {{layer.get('currentStyle') ? '(' + layer.get('currentStyle').Title || layer.get('currentStyle').Name + ')' : ''}}
-          </em></small>
-        </span>
+        <label for="layer-{{$index}}">
+          <span data-ng-class="layer.get('errors').length > 0 ? 'text-danger' : ''">
+            {{layer.get('label')}}&nbsp;
+            <small><em>
+              {{layer.get('currentStyle') ? '(' + layer.get('currentStyle').Title || layer.get('currentStyle').Name + ')' : ''}}
+            </em></small>
+          </span>
+        </label>
       </div>
       <a href class="width-100 text-right small"
          ng-if="layer.get('legend') || layer.get('attribution')"
