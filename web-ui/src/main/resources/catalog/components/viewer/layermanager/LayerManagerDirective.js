@@ -154,8 +154,8 @@
           };
           function resetPopup() {
             // Hack to remove popup on layer remove eg.
-            $('[gn-popover-dropdown] .btn').each(function(i, button) {
-              $(button).popover('hide');
+            $('div.popover').each(function(i, mnu) {
+              $(mnu).remove();
             });
           };
           scope.removeLayer = function(layer, map) {
