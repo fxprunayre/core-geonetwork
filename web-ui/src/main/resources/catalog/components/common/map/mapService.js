@@ -74,29 +74,37 @@
          * @param {ol.Map} map obj
          * @param {string} name of the layer
          * @param {string} url of the service
+         * @return {boolean} true if layer is in the map
          */
         var isLayerInMap = function(map, name, url) {
+          return getLayerInMap(map, name, url) !== null;
+        };
+        var getLayerInMap = function(map, name, url) {
           if (gnWmsQueue.isPending(url, name)) {
             return true;
           }
           for (var i = 0; i < map.getLayers().getLength(); i++) {
             var l = map.getLayers().item(i);
             var source = l.getSource();
-            if (source instanceof ol.source.WMTS &&
-                l.get('url') == url) {
+            if (url && source instanceof ol.source.WMTS &&
+              l.get('url') == url) {
               if (l.get('name') == name) {
-                return true;
+                return l;
               }
             }
-            else if (source instanceof ol.source.TileWMS ||
-                source instanceof ol.source.ImageWMS) {
+            else if (url && (source instanceof ol.source.TileWMS ||
+              source instanceof ol.source.ImageWMS)) {
               if (source.getParams().LAYERS == name &&
-                  l.get('url').split('?')[0] == url.split('?')[0]) {
-                return true;
+                l.get('url').split('?')[0] == url.split('?')[0]) {
+                return l;
+              }
+            } else if (angular.isUndefined(url)) {
+              if (l.get('name') == name) {
+                return l;
               }
             }
           }
-          return false;
+          return null;
         };
 
         var getImageSourceRatio = function(map, maxWidth) {
@@ -820,6 +828,12 @@
               }
               if (requestedStyle) {
                 layerParam.STYLES = requestedStyle.Name;
+              } else {
+                // STYLES is mandatory parameter.
+                // ESRI will complain on this.
+                // Even &STYLES&... return an error on ESRI.
+                // TODO: Fix or workaround
+                layerParam.STYLES = '';
               }
 
               var projCode = map.getView().getProjection().getCode();
@@ -1186,14 +1200,15 @@
                   // information only. A tile error loading
                   // may be reported after the layer is added
                   // to the map and will give more details.
+                  var errormsg = $translate.instant(
+                    'layerNotfoundInCapability', {
+                      layer: name,
+                      url: url
+                    });
                   var o = {
                     url: url,
                     name: name,
-                    msg: $translate.instant(
-                        'layerNotfoundInCapability', {
-                          layer: name,
-                          url: url
-                        })
+                    msg: errormsg
                   }, errors = [];
                   if (version) {
                     o.version = version;
@@ -1203,11 +1218,6 @@
                   if (!angular.isArray(olL.get('errors'))) {
                     olL.set('errors', []);
                   }
-                  var errormsg = $translate.instant(
-                      'layerNotfoundInCapability', {
-                        layer: name,
-                        url: url
-                      });
                   errors.push(errormsg);
                   console.warn(errormsg);
 
@@ -1245,7 +1255,7 @@
                 var o = {
                   url: url,
                   name: name,
-                  msg: 'getCapFailure'
+                  msg: $translate.instant('getCapFailure')
                 };
                 gnWmsQueue.error(o);
                 defer.reject(o);
@@ -1324,7 +1334,7 @@
                   var o = {
                     url: url,
                     name: name,
-                    msg: 'layerNotInCap'
+                    msg: $translate.instant('layerNotInCap')
                   };
                   gnWmsQueue.error(o);
                   defer.reject(o);
@@ -1353,7 +1363,7 @@
                 var o = {
                   url: url,
                   name: name,
-                  msg: 'getCapFailure'
+                  msg: $translate.instant('getCapFailure')
                 };
                 gnWmsQueue.error(o);
                 defer.reject(o);
@@ -1404,20 +1414,21 @@
                 // information only. A tile error loading
                 // may be reported after the layer is added
                 // to the map and will give more details.
+                var errormsg = $translate.instant('layerNotfoundInCapability', {
+                  layer: name,
+                  url: url
+                });
                 var o = {
                   url: url,
                   name: name,
-                  msg: 'layerNotInCap'
+                  msg: errormsg
                 }, errors = [];
                 olL = $this.addWmsToMap(map, o);
 
                 if (!angular.isArray(olL.get('errors'))) {
                   olL.set('errors', []);
                 }
-                var errormsg = $translate.instant('layerNotfoundInCapability', {
-                  layer: name,
-                  url: url
-                });
+
                 errors.push(errormsg);
                 console.warn(errormsg);
 
@@ -1445,7 +1456,7 @@
               var o = {
                 url: url,
                 name: name,
-                msg: 'getCapFailure'
+                msg: $translate.instant('getCapFailure')
               };
               gnWmsQueue.error(o);
               defer.reject(o);
@@ -1804,6 +1815,20 @@
            * @param {string} url of the service
            */
           isLayerInMap: isLayerInMap,
+
+          /**
+           * @ngdoc method
+           * @methodOf gn_map.service:gnMap
+           * @name gnMap#getLayerInMap
+           *
+           * @description
+           * Return a layer if one found with same name and service
+           *
+           * @param {ol.Map} map obj
+           * @param {string} name of the layer
+           * @param {string} url of the service
+           */
+          getLayerInMap: getLayerInMap,
 
           /**
            * @ngdoc method

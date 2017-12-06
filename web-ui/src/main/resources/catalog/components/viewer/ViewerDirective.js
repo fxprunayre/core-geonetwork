@@ -213,13 +213,17 @@
 
                   angular.forEach(addCmd, function(config) {
 
-                    if (gnMap.isLayerInMap(scope.map,
-                        config.name, config.url)) {
+                    var layer = gnMap.getLayerInMap(scope.map,
+                      config.name, config.url);
+                    if (layer !== null) {
+                      var extent = layer.get('cextent') || layer.get('extent');
                       gnAlertService.addAlert({
                         msg: $translate.instant('layerIsAlreadyInMap', {
                           layer: config.name,
-                          url: config.url
+                          url: config.url,
+                          extent: extent.join(',')
                         }),
+                        delay: 5000,
                         type: 'warning'});
                       // TODO: You may want to add more than one time
                       // a layer with different styling for example ?
@@ -256,13 +260,33 @@
                       addLayerFromLocation(config);
                     }
                   });
-                  $location.search('add', null);
                 }
+
+                var activateCmd = $location.search()['activate'];
+                if (activateCmd) {
+                  var layers = activateCmd.split(',');
+                  for (var i = 0; i < layers.length; i ++) {
+                    var layer = gnMap.getLayerInMap(scope.map, layers[i]);
+                    layer.visible = true;
+                  }
+                }
+
+                if (activateCmd || addCmd) {
+                  // Replace location with action by a stateless path
+                  // to not being able to replay the action with browser
+                  // history.
+                  $location.path('/map')
+                    .search('add', null)
+                    .search('activate', null)
+                    .replace();
+                }
+
 
                 // Define which tool is active
                 if ($location.search()['tool']) {
                   scope.activeTools[$location.search()['tool']] = true;
                 }
+
                 if ($location.search()['extent']) {
                   scope.map.getView().fit(
                     $location.search()['extent'].split(','),
