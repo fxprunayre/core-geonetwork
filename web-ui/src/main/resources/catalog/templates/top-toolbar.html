@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="navbar-header">
     <button type="button"
             class="navbar-toggle collapsed"
@@ -15,35 +15,26 @@
   </div>
   <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li class="clearfix" data-ng-if="gnCfg.mods.home.enabled">
-        <a class="pull-left" data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}" data-ng-hide="{{gnCfg.mods.header.isLogoInHeader}}">
-          <img class="gn-logo"
-                alt="{{'siteLogo' | translate}}"
-                data-ng-src="{{gnUrl}}../images/logos/{{info['system/site/siteId']}}.png?random{{info['system/site/lastUpdate']}}"/>
-        </a>
-        <a class="hidden-sm hidden-md pull-left"
-           data-ng-class="gnCfg.mods.header.isLogoInHeader ? '' : 'gn-nopadding-left'"
-           data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}">
-          <span class="gn-name"
-                data-ng-class="authenticated && user.isEditorOrMore() ? 'gn-truncate' : ''"
-                title="{{info['system/site/name']}}">{{info['system/site/name']}}</span>
+      <li class="clearfix"  data-ng-if="gnCfg.mods.home.enabled">
+        <a class="pull-left" data-gn-active-tb-item="{{gnCfg.mods.home.appUrl}}">
+          <span class="hidden-sm hidden-md">{{info['system/site/name']}}</span>
         </a>
       </li>
       <li data-ng-if="gnCfg.mods.search.enabled">
         <a data-gn-active-tb-item="{{gnCfg.mods.search.appUrl}}"
            title="{{'search' | translate}}">
-          <i class="fa fa-fw fa-search hidden-sm"></i>
-          <span translate>search</span>
+          <i class="fa fa-search"></i>
+          <span class="hidden-sm" data-translate="">search</span>
         </a>
       </li>
-      <li data-ng-if="gnCfg.mods.map.enabled">
+      <!--<li data-ng-if="gnCfg.mods.map.enabled">
         <a data-gn-active-tb-item="{{isExternalViewerEnabled ? externalViewerUrl : gnCfg.mods.map.appUrl}}"
            title="{{'map' | translate}}">
           <i class="fa fa-fw fa-globe hidden-sm"></i>
           <span translate>makeYourMap</span>
           <span data-gnv-layer-indicator=""/>
         </a>
-      </li>
+      </li> -->
       <li class="dropdown dropdown-hover open" data-ng-if="gnCfg.mods.editor.enabled"
           data-ng-show="authenticated && user.isEditorOrMore()"
           id="gn-login-dropdown">
@@ -55,6 +46,7 @@
           <span translate>contribute</span>
         </a>
         <ul class="dropdown-menu" role="menu">
+          <!-- merge, no need for the two following li ? -->
           <li>
             <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/board">
               <i class="fa fa-fw fa-bars"></i>&nbsp;<span translate>editorHome</span>
@@ -68,7 +60,7 @@
           </li>
           <li>
             <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/import">
-              <i class="fa fa-fw fa-upload"></i>&nbsp;<span translate>ImportRecord</span>
+              <i class="fa fa-fw fa-upload"/>&nbsp;<span data-translate="">ImportRecord</span>
             </a>
           </li>
           <li>
@@ -79,11 +71,6 @@
           <li>
             <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/batchedit">
               <i class="fa fa-fw fa-pencil"></i>&nbsp;<span translate>batchEditing</span>
-            </a>
-          </li>
-          <li ng-if="user.isAdministratorOrMore() && healthCheck.IndexHealthCheck === true">
-            <a data-gn-active-tb-item="{{gnCfg.mods.editor.appUrl}}#/accessManager">
-              <i class="fa fa-fw fa-lock"/>&nbsp;<span data-translate="">accessManager</span>
             </a>
           </li>
         </ul>
@@ -97,6 +84,7 @@
           <span translate>adminConsole</span>
         </a>
         <ul data-ng-if="user.isUserAdmin()" class="dropdown-menu" role="menu">
+          <!-- merge, no need for following li ? -->
           <li>
             <a data-gn-active-tb-item="admin.console#/home">
               <i class="fa fa-fw fa-th"></i>&nbsp;<span translate>adminHome</span>
@@ -110,6 +98,7 @@
           </li>
         </ul>
         <ul data-ng-if="user.isAdministrator()" class="dropdown-menu" role="menu">
+          <!-- merge, no need for the two following li ? -->
           <li>
             <a data-gn-active-tb-item="admin.console#/home">
               <i class="fa fa-fw fa-th"></i>&nbsp;<span translate>adminHome</span>
@@ -123,11 +112,12 @@
           </li>
         </ul>
       </li>
+      <!-- merge, no need for following li ? -->
       <li gn-static-pages-list-viewer data-section="top" data-language="{{lang}}" />
     </ul>
 
 
-    <form class="navbar-form navbar-right">
+    <!-- <form class="navbar-form navbar-right">
       <div class="form-group"
            data-gn-language-switcher="lang"
            data-langs="langs"
@@ -231,6 +221,6 @@
           </li>
         </ul>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
