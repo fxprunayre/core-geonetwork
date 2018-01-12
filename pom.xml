@@ -1219,6 +1219,7 @@
     <module>release</module>
     <module>workers</module>
     <module>messaging</module>
+    <module>georchestra-utils</module>
   </modules>
 
   <profiles>
