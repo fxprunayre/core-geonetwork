@@ -516,12 +516,15 @@ INSERT INTO OperationsDes  (iddes, langid, label) VALUES (3,'fre','Notifier');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (5,'fre','Carte interactive');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (6,'fre','Epingler');
 
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (-1,'fre','Créé');
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (0,'fre','Inconnu');
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (1,'fre','Brouillon');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (2,'fre','Validé');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (3,'fre','Retiré');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (4,'fre','A valider');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (5,'fre','Rejeté');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (2,'fre','Mettre à jour une section');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (3,'fre','Valider une section');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (4,'fre','Valider une fiche');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (5,'fre','Publier une fiche');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (6,'fre','Approuver');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (7,'fre','Retirer');
 
 INSERT INTO SelectionsDes (iddes, langid, label) VALUES (0,'fre','Fiches préférées');
 INSERT INTO SelectionsDes (iddes, langid, label) VALUES (1,'fre','Fiches observées');

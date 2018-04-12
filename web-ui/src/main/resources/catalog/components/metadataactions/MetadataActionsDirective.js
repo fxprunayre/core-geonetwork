@@ -47,8 +47,7 @@
 
           var metadataId = scope.md.getId();
           function init() {
-            return $http.get('md.status.list?' +
-                '_content_type=json&id=' + metadataId).
+            return $http.get('../api/records/' + metadataId + '/tasks').
                 success(function(data) {
                   scope.status =
                      data !== 'null' ? data.statusvalue : null;
@@ -64,7 +63,7 @@
 
           scope.updateStatus = function() {
             return $http.put('../api/records/' + metadataId +
-                '/status?status=' + scope.newStatus.value +
+                '/tasks?status=' + scope.newStatus.value +
                 '&comment=' + (scope.changeMessage || '')
             ).then(
                 function(data) {

@@ -133,7 +133,7 @@ public class DefaultStatusActions implements StatusActions {
             ResourceBundle messages = ResourceBundle.getBundle("org.fao.geonet.api.Messages", new Locale(this.language));
             String changeMessage = String.format(messages.getString("status_email_text"), replyToDescr, replyTo, id);
             unsetAllOperations(id);
-            dm.setStatus(context, id, Integer.valueOf(Params.Status.DRAFT), new ISODate(), changeMessage);
+            dm.setStatus(context, id, Integer.valueOf(Params.Status.DRAFT), null, new ISODate(), null, changeMessage, null);
         }
     }
 
@@ -143,13 +143,17 @@ public class DefaultStatusActions implements StatusActions {
 
     /**
      * Called when need to set status on a set of metadata records.
-     *
-     * @param status        The status to set.
+     *  @param status        The status to set.
      * @param metadataIds   The set of metadata ids to set status on.
+     * @param ownerId
      * @param changeDate    The date the status was changed.
+     * @param dueDate
      * @param changeMessage The message explaining why the status has changed.
+     * @param target
      */
-    public Set<Integer> statusChange(String status, Set<Integer> metadataIds, ISODate changeDate, String changeMessage) throws Exception {
+    public Set<Integer> statusChange(String status, Set<Integer> metadataIds,
+                                     Integer ownerId, ISODate changeDate, ISODate dueDate,
+                                     String changeMessage, String target) throws Exception {
 
         Set<Integer> unchanged = new HashSet<Integer>();
 
@@ -171,7 +175,7 @@ public class DefaultStatusActions implements StatusActions {
             }
 
             // --- set status, indexing is assumed to take place later
-            dm.setStatusExt(context, mid, Integer.valueOf(status), changeDate, changeMessage);
+            dm.setStatusExt(context, mid, Integer.valueOf(status), ownerId, changeDate, dueDate, changeMessage, target);
         }
 
         // --- inform content reviewers if the status is submitted

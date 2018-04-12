@@ -35,6 +35,7 @@ public interface StatusActions {
 
     public void onEdit(int id, boolean minorEdit) throws Exception;
 
-    public Set<Integer> statusChange(String status, Set<Integer> metadataIds, ISODate changeDate, String changeMessage) throws Exception;
+    public Set<Integer> statusChange(String status, Set<Integer> metadataIds, Integer ownerId,
+                                     ISODate changeDate, ISODate dueDate, String changeMessage, String target) throws Exception;
 
 }

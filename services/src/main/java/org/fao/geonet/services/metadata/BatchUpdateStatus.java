@@ -51,6 +51,7 @@ import java.util.Set;
 /**
  * Assigns status to metadata.
  */
+@Deprecated
 public class BatchUpdateStatus extends NotInReadOnlyModeService {
     //--------------------------------------------------------------------------
     //---
@@ -110,7 +111,7 @@ public class BatchUpdateStatus extends NotInReadOnlyModeService {
 
         StatusActions sa = saf.createStatusActions(context);
 
-        Set<Integer> noChange = sa.statusChange(status, metadata, changeDate, changeMessage);
+        Set<Integer> noChange = sa.statusChange(status, metadata, null, changeDate, null, changeMessage, null);
 
         //--- reindex metadata
         context.info("Re-indexing metadata");

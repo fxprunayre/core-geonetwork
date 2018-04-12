@@ -523,12 +523,15 @@ INSERT INTO IsoLanguages (id, code, shortcode) VALUES  (484,'zza', NULL);
 -- === Table: StatusValues
 -- ======================================================================
 
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (0,'unknown','y', 0);
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (1,'draft','y', 1);
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (2,'approved','y', 3);
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (3,'retired','y', 5);
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (4,'submitted','y', 2);
-INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (5,'rejected','y', 4);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (-1,'created','y', -1);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (0,'unknown','n', 0);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (1,'draft','n', 1);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (2,'sectionChangeRequested','n', 2);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (3,'sectionValidationRequested','n', 3);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (4,'validationRequested','n', 4);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (5,'publicationRequested','n', 5);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (6,'approved','n', 6);
+INSERT INTO StatusValues (id, name, reserved, displayorder) VALUES  (7,'retired','n', 7);
 
 -- ======================================================================
 -- === Table: StatusValuesDes

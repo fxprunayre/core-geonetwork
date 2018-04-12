@@ -516,12 +516,15 @@ INSERT INTO OperationsDes  (iddes, langid, label) VALUES (3,'eng','Notify');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (5,'eng','Interactive Map');
 INSERT INTO OperationsDes  (iddes, langid, label) VALUES (6,'eng','Featured');
 
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (-1,'eng','Created');
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (0,'eng','Unknown');
 INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (1,'eng','Draft');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (2,'eng','Approved');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (3,'eng','Retired');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (4,'eng','Submitted');
-INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (5,'eng','Rejected');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (2,'eng','Section change requested');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (3,'eng','Section validation requested');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (4,'eng','Validation requested');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (5,'eng','Publication requested');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (6,'eng','Approved');
+INSERT INTO StatusValuesDes  (iddes, langid, label) VALUES (7,'eng','Retired');
 
 INSERT INTO SelectionsDes (iddes, langid, label) VALUES (0,'eng','Preferred records');
 INSERT INTO SelectionsDes (iddes, langid, label) VALUES (1,'eng','Watch list');

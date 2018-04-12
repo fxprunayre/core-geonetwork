@@ -102,18 +102,18 @@ public class MetadataStatusId implements Serializable {
     }
 
     /**
-     * Get the user who is responsible for changing the status.
+     * Get the user who set the status.
      *
-     * @return the user who is responsible for changing the status.
+     * @return the user who set the status.
      */
     public int getUserId() {
         return _userId;
     }
 
     /**
-     * Set the user who is responsible for changing the status.
+     * Set the user who set the status.
      *
-     * @param userId the user who is responsible for changing the status.
+     * @param userId the user who set the status.
      * @return this id object
      */
     public MetadataStatusId setUserId(int userId) {

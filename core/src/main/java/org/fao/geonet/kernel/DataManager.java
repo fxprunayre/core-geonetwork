@@ -2776,8 +2776,8 @@ public class DataManager implements ApplicationEventPublisherAware {
      *
      * @return the saved status entity object
      */
-    public MetadataStatus setStatus(ServiceContext context, int id, int status, ISODate changeDate, String changeMessage) throws Exception {
-        MetadataStatus statusObject = setStatusExt(context, id, status, changeDate, changeMessage);
+    public MetadataStatus setStatus(ServiceContext context, int id, int status, Integer ownerId, ISODate changeDate, ISODate dueDate, String changeMessage, String target) throws Exception {
+        MetadataStatus statusObject = setStatusExt(context, id, status, ownerId, changeDate, dueDate, changeMessage, target);
         indexMetadata(Integer.toString(id), true, null);
         return statusObject;
     }
@@ -2787,11 +2787,15 @@ public class DataManager implements ApplicationEventPublisherAware {
      *
      * @return the saved status entity object
      */
-    public MetadataStatus setStatusExt(ServiceContext context, int id, int status, ISODate changeDate, String changeMessage) throws Exception {
+    public MetadataStatus setStatusExt(ServiceContext context, int id, int status,
+                                       Integer ownerId, ISODate changeDate, ISODate dueDate, String changeMessage, String target) throws Exception {
         final StatusValueRepository statusValueRepository = getApplicationContext().getBean(StatusValueRepository.class);
 
         MetadataStatus metatatStatus = new MetadataStatus();
         metatatStatus.setChangeMessage(changeMessage);
+        metatatStatus.setOwnerId(ownerId);
+        metatatStatus.setDueDate(dueDate);
+        metatatStatus.setTargetSection(target);
         metatatStatus.setStatusValue(statusValueRepository.findOne(status));
         int userId = context.getUserSession().getUserIdAsInt();
         MetadataStatusId mdStatusId = new MetadataStatusId()
@@ -2828,11 +2832,12 @@ public class DataManager implements ApplicationEventPublisherAware {
             final Pattern pattern = Pattern.compile(groupMatchingRegex);
             final Matcher matcher = pattern.matcher(groupName);
             if (matcher.find()) {
+                // TODO: We should make this a config in the StatusActionClass
                 setStatus(context, Integer.valueOf(newId),
                     Integer.valueOf(Params.Status.DRAFT),
-                    new ISODate(),
-                    String.format("Workflow automatically enabled for record in group %s. Record status is set to %s.",
-                        groupName, Params.Status.DRAFT));
+                    null, new ISODate(),
+                    null, String.format("Workflow automatically enabled for record in group %s. Record status is set to %s.",
+                        groupName, Params.Status.DRAFT), null);
             }
         }
     }

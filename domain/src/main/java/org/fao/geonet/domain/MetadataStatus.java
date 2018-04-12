@@ -31,8 +31,13 @@ import javax.persistence.*;
 /**
  * An entity that represents a status change of a metadata.
  * <p/>
- * Note: I am not the author of metadata status, but it appears that this tracks the history as well
- * since the Id consists of the User, date, metadata and statusvalue of the metadata status change.
+ *
+ * The status tracking is disabled by default. This can be used
+ * to tracks the history of user actions on a metadata record (aka workflow).
+ * It is composed of a set of steps defined in StatusValue entity.
+ *
+ *
+ * The Id consists of the User, date, metadata and statusvalue of the metadata status change.
  *
  * @author Jesse
  */
@@ -67,7 +72,11 @@ public class MetadataStatus extends GeonetEntity {
     public static final String EL_NAME = "name";
     private MetadataStatusId id = new MetadataStatusId();
     private String changeMessage;
+    private String targetSection;
     private StatusValue statusValue;
+    private int _ownerId;
+    private ISODate _duedate;
+    private ISODate _closeddate;
 
     /**
      * Get the id object of this metadata status object.
@@ -94,7 +103,7 @@ public class MetadataStatus extends GeonetEntity {
      *
      * @return the change message
      */
-    @Column(length = 2048, nullable = false)
+    @Column(length = 2048, nullable = true)
     public String getChangeMessage() {
         return changeMessage;
     }
@@ -108,6 +117,108 @@ public class MetadataStatus extends GeonetEntity {
     public void setChangeMessage(String changeMessage) {
         this.changeMessage = changeMessage;
     }
+
+
+
+    /**
+     * Get the target section. This is a section that has to be covered by
+     * the status task. It could be a tab identifier in the editor.
+     * Usually a permalink to the editor app.
+     *
+     * @return the target section
+     */
+    @Column(length = 2048, nullable = true)
+    public String getTargetSection() {
+        return targetSection;
+    }
+
+    /**
+     * Set the target section.
+     *
+     * @param targetSection the target section to update
+     */
+    public void setTargetSection(String targetSection) {
+        this.targetSection = targetSection;
+    }
+
+
+
+    /**
+     * Get the user who is responsible of doing this status task.
+     *
+     * @return the user who is responsible of this status task.
+     */
+    @Column(nullable = true)
+    public int getOwnerId() {
+        return _ownerId;
+    }
+
+    /**
+     * Set the user who is responsible of doing this status task.
+     *
+     * @param userId the user who is responsible of this status task.
+     * @return this id object
+     */
+    public MetadataStatus setOwnerId(int userId) {
+        this._ownerId = userId;
+        return this;
+    }
+
+
+
+    /**
+     * Get the date of this task status due date in string form.
+     *
+     * @return the date of this task status due date in string form.
+     */
+    @AttributeOverride(
+        name = "dateAndTime",
+        column = @Column(
+            name = "dueDate",
+            nullable = true,
+            length = 30))
+    public ISODate getDueDate() {
+        return _duedate;
+    }
+
+    /**
+     * Set the date of this task status due date in string form.
+     *
+     * @param duedate the date of this task status due date in string form.
+     */
+    public MetadataStatus setDueDate(ISODate duedate) {
+        this._duedate = duedate;
+        return this;
+    }
+
+
+    /**
+     * Get the date when this task was closed in string form.
+     *
+     * @return the date when this task was closed in string form.
+     */
+    @AttributeOverride(
+        name = "dateAndTime",
+        column = @Column(
+            name = "closedDate",
+            nullable = true,
+            length = 30))
+    public ISODate getClosedDate() {
+        return _closeddate;
+    }
+
+    /**
+     * Set the date when this task was closed in string form.
+     *
+     * @param closeddate the date when this task was closed in string form.
+     */
+    public MetadataStatus setClosedDate(ISODate closeddate) {
+        this._closeddate = closeddate;
+        return this;
+    }
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "statusId", nullable = false, insertable = false, updatable = false)
