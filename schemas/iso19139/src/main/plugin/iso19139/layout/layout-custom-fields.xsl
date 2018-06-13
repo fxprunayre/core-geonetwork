@@ -37,7 +37,6 @@
                 extension-element-prefixes="saxon"
                 exclude-result-prefixes="#all">
 
-  <xsl:include href="layout-custom-fields-keywords.xsl"/>
   <xsl:include href="layout-custom-fields-sds.xsl"/>
 
   <!-- Readonly elements -->

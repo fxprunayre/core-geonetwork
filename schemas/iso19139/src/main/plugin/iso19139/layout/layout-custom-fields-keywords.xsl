@@ -57,11 +57,6 @@
                   select="gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title"/>
 
     <!--Add all Thesaurus as first block of keywords-->
-    <xsl:if test="name(preceding-sibling::*[1]) != name()">
-      <xsl:call-template name="addAllThesaurus">
-        <xsl:with-param name="ref" select="../gn:element/@ref"/>
-      </xsl:call-template>
-    </xsl:if>
 
     <xsl:variable name="thesaurusTitle">
       <xsl:choose>
