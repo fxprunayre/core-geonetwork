@@ -55,9 +55,7 @@
           </title>
           <date>
             <CI_Date>
-              <date>
-                <gco:DateTime></gco:DateTime>
-              </date>
+              <date/>
               <dateType>
                 <CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
                                      codeListValue="publication"/>
@@ -107,10 +105,6 @@
           </maintenanceAndUpdateFrequency>
         </MD_MaintenanceInformation>
       </resourceMaintenance>
-      <descriptiveKeywords>
-        <MD_Keywords>
-        </MD_Keywords>
-      </descriptiveKeywords>
       <resourceConstraints>
         <MD_LegalConstraints>
           <accessConstraints>
@@ -127,17 +121,6 @@
       <spatialRepresentationType>
         <MD_SpatialRepresentationTypeCode codeListValue="grid" codeList="./resources/codeList.xml#MD_SpatialRepresentationTypeCode"/>
       </spatialRepresentationType>
-      <!-- language has to be defined to help topic category to be validated -->
-      <language>
-        <gco:CharacterString>eng</gco:CharacterString>
-      </language>
-      <topicCategory>
-        <MD_TopicCategoryCode></MD_TopicCategoryCode>
-      </topicCategory>
-      <characterSet>
-        <MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode"
-                                 codeListValue=""/>
-      </characterSet>
       <spatialResolution>
         <MD_Resolution>
           <equivalentScale>
@@ -149,7 +132,16 @@
           </equivalentScale>
         </MD_Resolution>
       </spatialResolution>
-
+      <!-- language has to be defined to help topic category to be validated -->
+      <language>
+        <gco:CharacterString>eng</gco:CharacterString>
+      </language>
+      <characterSet>
+        <MD_CharacterSetCode codeListValue="" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
+      </characterSet>
+      <topicCategory>
+        <MD_TopicCategoryCode></MD_TopicCategoryCode>
+      </topicCategory>
       <extent>
         <EX_Extent>
           <temporalElement>

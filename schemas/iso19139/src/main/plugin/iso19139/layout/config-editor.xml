@@ -2096,26 +2096,30 @@
       <tab id="default" default="true" mode="flat">
         <section name="identificationInfo">
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:title"/>
-          <field name="date" templateModeOnly="true" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date">
-            <template>
+
+
+          <field name="refDate"
+                 templateModeOnly="true"
+                 xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date">
+            <template >
               <values>
-                <key label="refDate" xpath="gmd:CI_Date/gmd:date" use="gn-date-picker">
-                </key>
+                <key label="refDate" xpath="replace(gmd:CI_Date/gmd:date, 'T(\d{2}):(\d{2}):\d{2}$', 'T$1:$2')" use="datetime-local"/>
               </values>
               <snippet>
                 <gmd:date>
-
                   <gmd:CI_Date>
-                      <gmd:date>{{refDate}}
-                      </gmd:date>
-                      <gmd:dateType>
-                        <gmd:CI_DateTypeCode codeListValue="publication" codeList="./resources/codeList.xml#CI_DateTypeCode"/>
-                      </gmd:dateType>
-                    </gmd:CI_Date>
+                    <gmd:date>
+                      <gco:DateTime>{{refDate}}:00</gco:DateTime>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="publication" codeList="./resources/codeList.xml#CI_DateTypeCode"/>
+                    </gmd:dateType>
+                  </gmd:CI_Date>
                 </gmd:date>
               </snippet>
             </template>
           </field>
+
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:purpose"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:status"/>
@@ -2141,7 +2145,7 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useConstraints"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints"/>
-          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory"/>
+          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent"/>
