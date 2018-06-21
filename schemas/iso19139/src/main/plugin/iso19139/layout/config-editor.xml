@@ -2155,13 +2155,36 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude"/>
         </section>
         <section xpath="/gmd:MD_Metadata/gmd:referenceSystemInfo"/>
-        <section xpath="/gmd:MD_Metadata/gmd:spatialRepresentationInfo"/>
         <section name="distributionInfo">
           <field xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage"/>
           <field xpath="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:protocol"/>
         </section>
+        <section name="spatialRepresentationInfo" displayIfRecord="count(gmd:MD_Metadata/gmd:spatialRepresentationInfo/gmd:MD_GridSpatialRepresentation) > 0">
+          <fieldset xpath="/gmd:MD_Metadata/gmd:spatialRepresentationInfo/gmd:MD_GridSpatialRepresentation/gmd:axisDimensionProperties/gmd:MD_Dimension"/>
+        </section>
         <section name="dataQualityInfo">
           <field xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement"/>
+          <section name="gmd:processStep">
+          <field name="LI_ProcessStep" notDisplayedIfMissing="true" templateModeOnly="true" xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:processStep">
+            <template>
+              <values>
+                <key label="description" xpath="gmd:LI_ProcessStep/gmd:description/gco:CharacterString">
+                  <helper name="gmd:description"  context="LI_ProcessStep"/>
+                </key>
+              </values>
+              <snippet>
+                <gmd:processStep>
+                  <gmd:LI_ProcessStep>
+                    <gmd:description>
+                      <gco:CharacterString>{{description}}</gco:CharacterString>
+                    </gmd:description>
+                  </gmd:LI_ProcessStep>
+                </gmd:processStep>
+              </snippet>
+            </template>
+            </field>
+            </section>
+          <section name="gmd:report">
           <field name="report" templateModeOnly="true" notDisplayedIfMissing="true"
                  xpath="/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report"
                  del=".">
@@ -2211,6 +2234,7 @@
               </snippet>
             </template>
           </action>
+          </section>
         </section>
       <section name="gmd:MD_Metadata">
           <field xpath="/gmd:MD_Metadata/gmd:fileIdentifier"/>

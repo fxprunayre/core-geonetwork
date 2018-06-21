@@ -973,6 +973,10 @@
     <description>Description of the event, including related parameters or
       tolerances
     </description>
+    <helper>
+      <option value="fme_6.7">FME gene 1/25000</option>
+      <option value="actinia_989">Actinia Core 3.2.0G</option>
+    </helper>
   </element>
   <element name="gmd:description" id="93.0" context="LI_Source">
     <label>Description</label>
