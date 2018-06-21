@@ -3204,6 +3204,10 @@
     <condition/>
     <description>Beschreibung des Bearbeitungsschritts einschliesslich wichtiger Parameter oder
       Toleranzen</description>
+    <helper>
+      <option value="fme_6.7">FME gene 1/25000</option>
+      <option value="actinia_989">Actinia Core 3.2.0G</option>
+    </helper>
   </element>
   <element name="gmd:rationale" context="gmd:LI_ProcessStep" id="88">
     <label>Veranlassung</label>

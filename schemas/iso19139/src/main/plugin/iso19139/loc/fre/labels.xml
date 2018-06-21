@@ -2325,6 +2325,10 @@ date de mise en ligne du service, en tant que date de publication.
     <help>Description du processus (étape de traitement) pouvant inclure la description de
       paramètres ou de tolérances.
     </help>
+    <helper>
+      <option value="fme_6.7">FME gene 1/25000</option>
+      <option value="actinia_989">Actinia Core 3.2.0G</option>
+    </helper>
     <condition>Obligatoire</condition>
 
   </element>
