@@ -92,7 +92,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-16
+            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-17
             </gco:CharacterString>
           </title>
           <date>
@@ -222,6 +222,16 @@
   </identificationInfo>
   <distributionInfo>
     <MD_Distribution>
+      <distributionFormat>
+        <MD_Format>
+          <name>
+            <gco:CharacterString></gco:CharacterString>
+          </name>
+          <version>
+            <gco:CharacterString></gco:CharacterString>
+          </version>
+        </MD_Format>
+    </distributionFormat>
       <transferOptions>
         <MD_DigitalTransferOptions>
           <onLine>
