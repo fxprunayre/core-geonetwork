@@ -448,8 +448,10 @@
                   XPATH mode which will create the new element at the
                   correct location. -->
             <xsl:variable name="id" select="concat('_X', gn:element/@ref, '_replace')"/>
+            <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', gn-fn-metadata:getXPath(.))"/>
+
             <xsl:call-template name="render-element-template-field">
-              <xsl:with-param name="name" select="$strings/*[name() = $name]"/>
+              <xsl:with-param name="name" select="$labelConfig/label|$strings/*[name() = $name]"/>
               <xsl:with-param name="id" select="$id"/>
               <xsl:with-param name="isExisting" select="true()"/>
               <xsl:with-param name="template" select="$templateCombinedWithNode"/>
