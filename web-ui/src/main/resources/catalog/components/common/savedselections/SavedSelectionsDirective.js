@@ -28,8 +28,8 @@
       []);
 
   module.factory('gnSavedSelectionConfig', [
-    '$location', 'Metadata', 'gnMap', 'gnSearchSettings', 'gnExternalViewer',
-    function($location, Metadata, gnMap, gnSearchSettings, gnExternalViewer) {
+    '$location', 'Metadata', 'gnMap', 'gnSearchSettings', 'gnExternalViewer', 'gnViewerSettings',
+    function($location, Metadata, gnMap, gnSearchSettings, gnExternalViewer, gnViewerSettings) {
       var viewerMap = gnSearchSettings.viewerMap;
 
       var searchRecordsInSelection = function(uuid, records) {
@@ -51,6 +51,22 @@
             label: 'searchSelectedRecord',
             fn: searchRecordsInSelection,
             icon: 'fa-search'
+          },
+          'MapExtractList': {
+            label: 'addToExtract',
+            fn: searchRecordsInSelection,
+            icon: 'fa-search',
+            fn: function(uuids, records) {
+              var layers = [];
+              for (var i = 0; i < uuids.length; i++) {
+                var uuid = uuids[i], record = records[uuid];
+                var md = new Metadata(record);
+                angular.forEach(md.getLinksByType('OGC:WMS'), function(link) {
+                  layers.push({link: link, md: md});
+                });
+              }
+              gnViewerSettings.resultviewFns.addWMSLayers(layers, true);
+            }
           },
           'MapLayerlist': {
             label: 'addToMap',
@@ -117,6 +133,11 @@
           //   name: 'DataDownloaderlist',
           //   records: [],
           //   storage: null
+        },{
+          id: -30,
+          name: 'MapExtractList',
+          records: [],
+          storage: null
         }]
       };
     }]);
@@ -167,7 +188,6 @@
           defer.resolve(selections);
           return;
         }
-
         // TODO: Handle case when there is
         // too many items in the saved selections
         gnSearchManagerService.search(
