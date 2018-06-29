@@ -50,7 +50,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Vector data in ISO19139, FTTH-17
+            <gco:CharacterString>Template for Vector data in ISO19139, FTTH-18
             </gco:CharacterString>
           </title>
           <date>
@@ -125,9 +125,7 @@
         <MD_Resolution>
           <equivalentScale>
             <MD_RepresentativeFraction>
-              <denominator>
-                <gco:Integer/>
-              </denominator>
+              <denominator/>
             </MD_RepresentativeFraction>
           </equivalentScale>
         </MD_Resolution>
@@ -139,9 +137,6 @@
       <characterSet>
         <MD_CharacterSetCode codeListValue="" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
       </characterSet>
-      <topicCategory>
-        <MD_TopicCategoryCode></MD_TopicCategoryCode>
-      </topicCategory>
       <extent>
         <EX_Extent>
           <temporalElement>
