@@ -92,7 +92,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-19
+            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-20
             </gco:CharacterString>
           </title>
           <date>
@@ -172,7 +172,7 @@
           </equivalentScale>
         </MD_Resolution>
       </spatialResolution>
-      <!-- language has to be defined to help topic category to be validated -->
+      <!-- language has to be defined for charset to be validated ??? -->
       <language>
         <gco:CharacterString>eng</gco:CharacterString>
       </language>
