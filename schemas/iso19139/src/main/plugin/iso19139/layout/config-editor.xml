@@ -2125,7 +2125,22 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:status"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceMaintenance/gmd:MD_MaintenanceInformation/gmd:maintenanceAndUpdateFrequency"/>
-          <field name="keyword" xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword"/>
+          <field templateModeOnly="true" notDisplayedIfMissing="true" name="keyword" xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:descriptiveKeywords" del=".">
+            <template>
+              <values>
+                <key label="keyword" xpath="gmd:MD_Keywords/gmd:keyword/gco:CharacterString"/>
+              </values>
+              <snippet>
+                <gmd:descriptiveKeywords>
+                  <gmd:MD_Keywords>
+                      <gmd:keyword>
+                        <gco:CharacterString>{{keyword}}</gco:CharacterString>
+                      </gmd:keyword>
+                  </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+              </snippet>
+            </template>
+            </field>
           <action type="add"
                   name="descriptiveKeywords"
                   or="descriptiveKeywords"
