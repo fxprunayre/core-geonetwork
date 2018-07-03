@@ -63,7 +63,7 @@
         <gco:CharacterString/>
       </purpose>
       <status>
-        <MD_ProgressCode codeListValue="onGoing" codeList="./resources/codeList.xml#MD_ProgressCode"/>
+        <MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode"/>
       </status>
       <pointOfContact>
         <CI_ResponsibleParty>

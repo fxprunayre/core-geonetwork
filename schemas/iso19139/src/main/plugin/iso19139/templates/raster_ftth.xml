@@ -113,7 +113,7 @@
         <gco:CharacterString/>
       </purpose>
       <status>
-        <MD_ProgressCode codeListValue="onGoing" codeList="./resources/codeList.xml#MD_ProgressCode"/>
+        <MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode"/>
       </status>
       <pointOfContact>
         <CI_ResponsibleParty>
@@ -150,10 +150,10 @@
       <resourceConstraints>
         <MD_LegalConstraints>
           <accessConstraints>
-            <MD_RestrictionCode codeListValue="copyright" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
+            <MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
           </accessConstraints>
           <useConstraints>
-            <MD_RestrictionCode codeListValue="otherRestictions" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
+            <MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
           </useConstraints>
           <otherConstraints>
             <gco:CharacterString/>
@@ -177,7 +177,7 @@
         <gco:CharacterString>eng</gco:CharacterString>
       </language>
       <characterSet>
-        <MD_CharacterSetCode codeListValue="" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
+        <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
       </characterSet>
       <extent>
         <EX_Extent>
