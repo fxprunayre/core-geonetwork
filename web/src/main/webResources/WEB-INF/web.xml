@@ -31,6 +31,12 @@
          metadata-complete="true">
 
   <display-name>${application.name}</display-name>
+
+  <context-param>
+    <param-name>org.eclipse.jetty.servlet.Default.dirAllowed</param-name>
+    <param-value>false</param-value>
+  </context-param>
+
   <listener>
     <listener-class>jeeves.config.springutil.JeevesContextLoaderListener</listener-class>
   </listener>
@@ -447,11 +453,8 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ESProxy</servlet-name>
-    <url-pattern>/index/all</url-pattern>
+    <url-pattern>/index/*</url-pattern>
   </servlet-mapping>
--->
-
-
 
   <servlet>
     <servlet-name>HttpDashboardProxy</servlet-name>
@@ -469,7 +472,7 @@
     <servlet-name>HttpDashboardProxy</servlet-name>
     <url-pattern>/dashboards/*</url-pattern>
   </servlet-mapping>
-
+  -->
 
   <servlet>
     <servlet-name>jolokia-agent</servlet-name>
