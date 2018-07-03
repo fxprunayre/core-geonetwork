@@ -3265,6 +3265,8 @@
                     </gmd:nameOfMeasure>
                     <gmd:result>
                       <gmd:DQ_QuantitativeResult>
+                        <gmd:valueType/>
+                        <gmd:valueUnit/>
                         <gmd:value>
                           <gco:Record/>
                         </gmd:value>
