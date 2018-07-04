@@ -63,6 +63,7 @@
 
   <field name="gfc:FC_ListedValue">
     <suggest name="gfc:code"/>
+    <suggest name="gfc:definition"/>
   </field>
 
   <field name="gfc:FC_AssociationRole">
@@ -83,7 +84,6 @@
 
   <field name="gfc:code">
     <suggest name="gco:CharacterString"/>
-    <suggest name="gmx:Anchor"/>
   </field>
 
   <field name="gfc:inheritsTo">
@@ -93,4 +93,5 @@
   <field name="gfc:inheritsFrom">
     <suggest name="gfc:FC_InheritanceRelation"/>
   </field>
+
 </fields>
