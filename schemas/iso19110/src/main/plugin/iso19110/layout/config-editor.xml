@@ -23,7 +23,9 @@
   -->
 
 <editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../config-editor.xsd">
+        xsi:noNamespaceSchemaLocation="../../config-editor.xsd"
+        xmlns:gfc="http://www.isotc211.org/2005/gfc"
+        xmlns:gco="http://www.isotc211.org/2005/gco">
 
   <!-- Form field type configuration. Default is text. -->
   <fields>
@@ -37,15 +39,7 @@
     <for name="gfc:functionalLanguage" use="data-gn-language-picker"/>
     <for name="gmd:languageCode" use="data-gn-language-picker"/>
 
-    <for name="gfc:producer" addDirective="data-gn-directory-entry-selector">
-      <directiveAttributes
-        data-template-add-action="true"
-        data-search-action="true"
-        data-popup-action="true"
-        data-template-type="contact"
-        data-insert-modes=""
-        data-variables="gmd:role/gmd:CI_RoleCode/@codeListValue~{role}"/>
-    </for>
+    <for name="gfc:producer" addDirective="data-gn-directory-entry-selector"/>
   </fields>
 
   <fieldsWithFieldset>
@@ -55,39 +49,16 @@
     <name>gfc:constrainedBy</name>
     <name>gfc:inheritsFrom</name>
     <name>gfc:inheritsTo</name>
-    <name>gco:range</name>
   </fieldsWithFieldset>
-
-  <fieldsWithAnchorOption>
-    <name>gfc:code</name>
-  </fieldsWithAnchorOption>
 
   <!-- View configuration -->
   <views>
     <view name="default">
       <tab id="default" default="true" mode="flat">
         <section name="gfc:FC_FeatureCatalogue">
-          <!-- Preserve gmx:* in editor for backward compatibility. -->
-          <field xpath="/gfc:FC_FeatureCatalogue/gmx:name" or="name" in="/gfc:FC_FeatureCatalogue"/>
           <field xpath="/gfc:FC_FeatureCatalogue/gfc:name"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gmx:scope" or="scope" in="/gfc:FC_FeatureCatalogue"
-                 ifNotExist="true"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:scope"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gmx:fieldOfApplication" or="fieldOfApplication"
-                 in="/gfc:FC_FeatureCatalogue" ifNotExist="true"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:fieldOfApplication"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gmx:versionNumber" or="versionNumber"
-                 in="/gfc:FC_FeatureCatalogue"/>
           <field xpath="/gfc:FC_FeatureCatalogue/gfc:versionNumber"/>
           <field xpath="/gfc:FC_FeatureCatalogue/gmx:versionDate"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:producer" or="producer"
-                 in="/gfc:FC_FeatureCatalogue"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:functionalLanguage" or="functionalLanguage"
-                 in="/gfc:FC_FeatureCatalogue"/>
-          <field
-            xpath="/gfc:FC_FeatureCatalogue/gfc:featureType/gfc:FC_FeatureType/gfc:typeName"
-            or="typeName"
-            in="/gfc:FC_FeatureCatalogue/gfc:featureType/gfc:FC_FeatureType"/>
           <field
             xpath="/gfc:FC_FeatureCatalogue/gfc:featureType/gfc:FC_FeatureType/gfc:carrierOfCharacteristics"
             or="carrierOfCharacteristics"
@@ -95,7 +66,6 @@
         </section>
       </tab>
       <flatModeExceptions>
-        <for name="gfc:code"/>
         <for name="gfc:listedValue"/>
       </flatModeExceptions>
     </view>
