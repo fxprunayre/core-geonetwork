@@ -75,9 +75,7 @@
   </field>
 
   <field name="gfc:FC_FeatureAttribute">
-    <suggest name="gfc:code"/>
     <suggest name="gfc:memberName"/>
-    <suggest name="gfc:definition"/>
     <suggest name="gfc:valueType"/>
     <suggest name="gfc:featureType"/>
   </field>
