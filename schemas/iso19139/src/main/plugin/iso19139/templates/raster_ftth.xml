@@ -34,48 +34,6 @@
   <dataSetURI>
     <gco:CharacterString></gco:CharacterString>
   </dataSetURI>
-  <spatialRepresentationInfo>
-    <MD_GridSpatialRepresentation>
-      <numberOfDimensions>
-        <gco:Integer>3</gco:Integer>
-      </numberOfDimensions>
-      <axisDimensionProperties>
-        <MD_Dimension>
-          <dimensionName>
-            <MD_DimensionNameTypeCode codeListValue="row"
-                                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_DimensionNameTypeCode"/>
-          </dimensionName>
-          <dimensionSize>
-            <gco:Integer/>
-          </dimensionSize>
-          <resolution>
-            <gco:Measure uom=""/>
-          </resolution>
-        </MD_Dimension>
-      </axisDimensionProperties>
-      <axisDimensionProperties>
-        <MD_Dimension>
-          <dimensionName>
-            <MD_DimensionNameTypeCode codeListValue="column"
-                                          codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_DimensionNameTypeCode"/>
-          </dimensionName>
-          <dimensionSize>
-            <gco:Integer/>
-          </dimensionSize>
-          <resolution>
-            <gco:Measure uom=""/>
-          </resolution>
-        </MD_Dimension>
-      </axisDimensionProperties>
-      <cellGeometry>
-        <MD_CellGeometryCode codeListValue="area"
-                                 codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CellGeometryCode"/>
-      </cellGeometry>
-      <transformationParameterAvailability>
-        <gco:Boolean>true</gco:Boolean>
-      </transformationParameterAvailability>
-    </MD_GridSpatialRepresentation>
-  </spatialRepresentationInfo>
   <referenceSystemInfo>
     <MD_ReferenceSystem>
       <referenceSystemIdentifier>
@@ -92,7 +50,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-20
+            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-21
             </gco:CharacterString>
           </title>
           <date>

@@ -25,7 +25,8 @@
 <editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="../../config-editor.xsd"
         xmlns:gfc="http://www.isotc211.org/2005/gfc"
-        xmlns:gco="http://www.isotc211.org/2005/gco">
+        xmlns:gco="http://www.isotc211.org/2005/gco"
+        xmlns:gmx="http://www.isotc211.org/2005/gmx">
 
   <!-- Form field type configuration. Default is text. -->
   <fields>
