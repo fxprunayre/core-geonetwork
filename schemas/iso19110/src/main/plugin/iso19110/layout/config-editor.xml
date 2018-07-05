@@ -55,10 +55,19 @@
   <!-- View configuration -->
   <views>
     <view name="default">
+      <sidePanel>
+        <directive gn-geo-publisher=""
+                   data-ng-if="gnCurrentEdit.geoPublisherConfig"
+                   data-config="{{gnCurrentEdit.geoPublisherConfig}}"
+                   data-lang="lang"/>
+        <directive data-gn-validation-report=""/>
+        <directive data-gn-suggestion-list=""/>
+        <directive data-gn-need-help="user-guide/describing-information/creating-metadata.html"/>
+      </sidePanel>
       <tab id="default" default="true" mode="flat">
         <section name="gfc:FC_FeatureCatalogue">
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:name"/>
-          <field xpath="/gfc:FC_FeatureCatalogue/gfc:versionNumber"/>
+          <field xpath="/gfc:FC_FeatureCatalogue/gmx:name"/>
+          <field xpath="/gfc:FC_FeatureCatalogue/gmx:versionNumber"/>
           <field xpath="/gfc:FC_FeatureCatalogue/gmx:versionDate"/>
           <field
             xpath="/gfc:FC_FeatureCatalogue/gfc:featureType/gfc:FC_FeatureType/gfc:carrierOfCharacteristics"

@@ -27,17 +27,25 @@
                          xmlns:gco="http://www.isotc211.org/2005/gco"
                          xmlns:gmd="http://www.isotc211.org/2005/gmd"
                          xmlns:gmx="http://www.isotc211.org/2005/gmx">
-  <gfc:name>
-    <gco:CharacterString>Feature catalogue template in ISO19110, FTTH-2</gco:CharacterString>
-  </gfc:name>
-  <gfc:versionNumber>
+  <gmx:name>
+    <gco:CharacterString>Feature catalogue template in ISO19110, FTTH-3</gco:CharacterString>
+  </gmx:name>
+  <gmx:scope/>
+  <gmx:versionNumber>
     <gco:CharacterString>1.0</gco:CharacterString>
-  </gfc:versionNumber>
+  </gmx:versionNumber>
   <gmx:versionDate>
     <gco:DateTime>2009-10-12T13:11:25</gco:DateTime>
   </gmx:versionDate>
+  <gmx:language/>
+  <gmx:locale/>
+  <gfc:producer/>
   <gfc:featureType>
     <gfc:FC_FeatureType>
+      <gfc:typeName/>
+      <gfc:code/>
+      <gfc:isAbstract/>
+      <gfc:featureCatalogue/>
       <gfc:carrierOfCharacteristics>
         <gfc:FC_FeatureAttribute>
           <gfc:featureType/>
@@ -58,12 +66,6 @@
               </gco:range>
             </gco:Multiplicity>
           </gfc:cardinality>
-          <gfc:valueMeasurementUnit>
-            <gml:UnitDefinition xmlns:gml="http://www.opengis.net/gml" gml:id="unknown">
-              <gml:description/>
-              <gml:identifier codeSpace="unknown"/>
-            </gml:UnitDefinition>
-          </gfc:valueMeasurementUnit>
           <gfc:valueType>
             <gco:TypeName>
               <gco:aName>
