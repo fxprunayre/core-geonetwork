@@ -450,8 +450,19 @@
             <xsl:variable name="id" select="concat('_X', gn:element/@ref, '_replace')"/>
             <xsl:variable name="labelConfig" select="gn-fn-metadata:getLabel($schema, name(), $labels, name(..), '', gn-fn-metadata:getXPath(.))"/>
 
+            <xsl:variable name="label">
+              <xsl:choose>
+                <xsl:when test="$labelConfig">
+                  <xsl:copy-of select="$labelConfig/label"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:copy-of select="$strings/*[name() = $name]"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+
             <xsl:call-template name="render-element-template-field">
-              <xsl:with-param name="name" select="$labelConfig/label|$strings/*[name() = $name]"/>
+              <xsl:with-param name="name" select="$label"/>
               <xsl:with-param name="id" select="$id"/>
               <xsl:with-param name="isExisting" select="true()"/>
               <xsl:with-param name="template" select="$templateCombinedWithNode"/>
