@@ -137,6 +137,9 @@
       <characterSet>
         <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
       </characterSet>
+      <topicCategory>
+        <MD_TopicCategoryCode></MD_TopicCategoryCode>
+      </topicCategory>
       <extent>
         <EX_Extent>
           <temporalElement>

@@ -102,6 +102,9 @@
            </fees>
         </MD_StandardOrderProcess>
       </srv:accessProperties>
+      <topicCategory>
+        <MD_TopicCategoryCode></MD_TopicCategoryCode>
+      </topicCategory>
       <srv:extent>
         <EX_Extent>
           <geographicElement>
