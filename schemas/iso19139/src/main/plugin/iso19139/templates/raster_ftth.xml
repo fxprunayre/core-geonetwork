@@ -50,7 +50,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-21
+            <gco:CharacterString>Template for Raster data in ISO19139, FTTH-22
             </gco:CharacterString>
           </title>
           <date>
@@ -93,7 +93,7 @@
             </CI_Contact>
           </contactInfo>
           <role>
-            <CI_RoleCode codeListValue="originator" codeList="./resources/codeList.xml#CI_RoleCode"/>
+            <CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode"/>
           </role>
         </CI_ResponsibleParty>
       </pointOfContact>
