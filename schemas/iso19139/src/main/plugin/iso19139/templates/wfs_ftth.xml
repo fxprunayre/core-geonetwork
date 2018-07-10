@@ -43,7 +43,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for WFS service in ISO19139, FTTH-22</gco:CharacterString>
+            <gco:CharacterString>Template for WFS service in ISO19139, FTTH-23</gco:CharacterString>
           </title>
           <date>
             <CI_Date>
@@ -85,7 +85,7 @@
             </CI_Contact>
           </contactInfo>
           <role>
-            <CI_RoleCode codeListValue="originator" codeList="./resources/codeList.xml#CI_RoleCode"/>
+            <CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode"/>
           </role>
         </CI_ResponsibleParty>
       </pointOfContact>
