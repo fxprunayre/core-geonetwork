@@ -50,7 +50,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for Vector data in ISO19139, FTTH-21
+            <gco:CharacterString>Template for Vector data in ISO19139, FTTH-22
             </gco:CharacterString>
           </title>
           <date>
@@ -196,7 +196,7 @@
                 <URL/>
               </linkage>
               <protocol>
-                <gco:CharacterString/>
+                <gco:CharacterString>DB:POSTGIS</gco:CharacterString>
               </protocol>
             </CI_OnlineResource>
           </onLine>
