@@ -2084,6 +2084,7 @@
 
     <view name="default">
       <sidePanel>
+        <directive data-gn-onlinesrc-list=""/>
         <directive gn-geo-publisher=""
                    data-ng-if="gnCurrentEdit.geoPublisherConfig"
                    data-config="{{gnCurrentEdit.geoPublisherConfig}}"
