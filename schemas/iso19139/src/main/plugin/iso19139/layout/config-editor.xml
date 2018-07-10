@@ -3159,33 +3159,8 @@
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:useConstraints"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints"/>
+          <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialRepresentationType"/>
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/*/gmd:topicCategory/gmd:MD_TopicCategoryCode"/>
-          <action type="add" btnLabel="topicCategory"
-                  name="topicCategory" or="topicCategory"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode) = 0">
-            <template>
-              <snippet>
-                <gmd:topicCategory>
-                  <gmd:MD_TopicCategoryCode></gmd:MD_TopicCategoryCode>
-                </gmd:topicCategory>
-              </snippet>
-            </template>
-          </action>
-
-          <action type="add" btnLabel="topicCategory"
-                  name="topicCategory" or="topicCategory"
-                  in="/gmd:MD_Metadata/gmd:identificationInfo/srv:SV_ServiceIdentification"
-                  if="count(gmd:MD_Metadata/gmd:identificationInfo/srv:SV_ServiceIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode) = 0">
-            <template>
-              <snippet>
-                <gmd:topicCategory>
-                  <gmd:MD_TopicCategoryCode></gmd:MD_TopicCategoryCode>
-                </gmd:topicCategory>
-              </snippet>
-            </template>
-          </action>
-
 
           <field xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:characterSet"/>
           <field templateModeOnly="true" xpath="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator"
