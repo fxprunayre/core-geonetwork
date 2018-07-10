@@ -1661,6 +1661,22 @@
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
     <entry>
+      <code>point</code>
+      <label>Point</label>
+      <description>Vector, point.</description>
+    </entry>
+    <entry>
+      <code>line</code>
+      <label>Line</label>
+      <description>Vector, line.</description>
+    </entry>
+    <entry>
+      <code>polygon</code>
+      <label>Polygon</label>
+      <description>Vector, polygon.</description>
+    </entry>
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <entry>
       <code>grid</code>
       <label>Grid</label>
       <description>Grid data is used to represent geographic data</description>
