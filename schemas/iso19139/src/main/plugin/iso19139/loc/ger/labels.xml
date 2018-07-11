@@ -2220,7 +2220,7 @@
       Ressource
     </description>
   </element>
-  <element name="gmd:date" context="gmd:CI_Citation" id="362">
+  <element name="gmd:date" id="362">
     <label>Datumsangaben</label>
     <help/>
     <condition/>
@@ -3150,7 +3150,7 @@
     <condition/>
     <description>Für die Metadaten verantwortliche Stelle</description>
   </element>
-  <element name="gmd:report" context="gmd:DQ_DataQuality" id="80">
+  <element name="gmd:report" id="80">
     <label>Qualitätsbericht</label>
     <help/>
     <condition>Für Datenbestand muss entweder &quot;Qualitätsbericht&quot; oder &quot;Herkunft&quot; ausgefüllt werden.</condition>
@@ -3177,7 +3177,7 @@
     <condition>Inhalt obligatorisch für Datenbestand oder Serie</condition>
     <description>Allgemeine Aussagen des Datenerzeugers zur Herkunft des Datenbestands</description>
   </element>
-  <element name="gmd:processStep" context="gmd:LI_Lineage" id="84">
+  <element name="gmd:processStep" id="84">
     <label>Bearbeitungsschritt</label>
     <help/>
     <condition>Obligatorisch wenn Erläuterung und Datenquelle nicht ausgefüllt sind.</condition>
@@ -3198,7 +3198,7 @@
     <description>Information über einen Schritt im Erstellungs- oder Transformationsprozess der
       Daten einschliesslich der Datenpflege</description>
   </element>
-  <element name="gmd:description" context="gmd:LI_ProcessStep" id="87">
+  <element name="gmd:description" context="LI_ProcessStep" id="87">
     <label>Beschreibung</label>
     <help/>
     <condition/>
