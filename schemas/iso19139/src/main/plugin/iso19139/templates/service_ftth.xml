@@ -43,7 +43,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for WFS service in ISO19139, FTTH-23</gco:CharacterString>
+            <gco:CharacterString>Template for service in ISO19139, FTTH-1</gco:CharacterString>
           </title>
           <date>
             <CI_Date>
@@ -90,7 +90,7 @@
         </CI_ResponsibleParty>
       </pointOfContact>
       <srv:serviceType>
-        <gco:LocalName codeSpace="www.w3c.org">OGC:WFS</gco:LocalName>
+        <gco:LocalName codeSpace="www.w3c.org"></gco:LocalName>
       </srv:serviceType>
       <srv:serviceTypeVersion>
         <gco:CharacterString>1.1.1</gco:CharacterString>
@@ -154,13 +154,13 @@
                <onLine>
                   <CI_OnlineResource>
                      <linkage>
-                        <URL>http://localhost:8080/geoserver/wfs?SERVICE=WFS</URL>
+                        <URL>http://localhost:8080/...</URL>
                      </linkage>
                      <protocol>
-                        <gco:CharacterString>OGC:WFS</gco:CharacterString>
+                        <gco:CharacterString></gco:CharacterString>
                      </protocol>
                      <name>
-                        <gco:CharacterString>My WFS service</gco:CharacterString>
+                        <gco:CharacterString>My service</gco:CharacterString>
                      </name>
                   </CI_OnlineResource>
                </onLine>
