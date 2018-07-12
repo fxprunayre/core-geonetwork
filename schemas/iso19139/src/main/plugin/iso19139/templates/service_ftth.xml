@@ -169,9 +169,6 @@
     <DQ_DataQuality>
     <scope>
       <DQ_Scope>
-        <level>
-          <gmx:MX_ScopeCode xmlns:gmx="http://www.isotc211.org/2005/gmx" codeList="" codeListValue=""/>
-        </level>
         <levelDescription>
           <MD_ScopeDescription>
             <other>
