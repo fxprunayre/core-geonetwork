@@ -208,6 +208,9 @@
     <DQ_DataQuality>
     <scope>
       <DQ_Scope>
+        <level>
+          <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue=""/>
+        </level>
         <levelDescription>
           <MD_ScopeDescription>
             <other>
