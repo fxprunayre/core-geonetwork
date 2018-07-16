@@ -1601,6 +1601,8 @@
       <description></description>
     </entry>
   </codelist>
+  <!--
+
   <codelist name="gmd:MD_ScopeCode"
             displayIf="/ancestor::node()[name()='gmd:MD_Metadata']/gmd:identificationInfo/srv:SV_ServiceIdentification">
     <entry>
@@ -1612,6 +1614,8 @@
       </description>
     </entry>
   </codelist>
+
+  -->
   <!-- ==================================================== -->
   <codelist name="gmd:MD_SpatialRepresentationTypeCode">
     <entry>
