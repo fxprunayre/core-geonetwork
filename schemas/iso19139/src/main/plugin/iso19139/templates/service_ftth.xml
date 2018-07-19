@@ -13,9 +13,6 @@
   <characterSet>
     <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
   </characterSet>
-  <hierarchyLevel>
-    <MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="service"/>
-  </hierarchyLevel>
   <contact>
     <CI_ResponsibleParty>
       <organisationName>
@@ -43,7 +40,7 @@
       <citation>
         <CI_Citation>
           <title>
-            <gco:CharacterString>Template for service in ISO19139, FTTH-1</gco:CharacterString>
+            <gco:CharacterString>Template for service in ISO19139, FTTH-2</gco:CharacterString>
           </title>
           <date>
             <CI_Date>
@@ -146,23 +143,33 @@
   </identificationInfo>
   <distributionInfo>
     <MD_Distribution>
-             <transferOptions>
-            <MD_DigitalTransferOptions>
-               <onLine>
-                  <CI_OnlineResource>
-                     <linkage>
-                        <URL>http://localhost:8080/...</URL>
-                     </linkage>
-                     <protocol>
-                        <gco:CharacterString></gco:CharacterString>
-                     </protocol>
-                     <name>
-                        <gco:CharacterString>My service</gco:CharacterString>
-                     </name>
-                  </CI_OnlineResource>
-               </onLine>
-            </MD_DigitalTransferOptions>
-         </transferOptions>
+      <distributionFormat>
+        <MD_Format>
+          <name>
+            <gco:CharacterString></gco:CharacterString>
+          </name>
+          <version>
+            <gco:CharacterString></gco:CharacterString>
+          </version>
+        </MD_Format>
+      </distributionFormat>
+      <transferOptions>
+        <MD_DigitalTransferOptions>
+           <onLine>
+              <CI_OnlineResource>
+                 <linkage>
+                    <URL>http://localhost:8080/...</URL>
+                 </linkage>
+                 <protocol>
+                    <gco:CharacterString></gco:CharacterString>
+                 </protocol>
+                 <name>
+                    <gco:CharacterString>My service</gco:CharacterString>
+                 </name>
+              </CI_OnlineResource>
+           </onLine>
+        </MD_DigitalTransferOptions>
+      </transferOptions>
     </MD_Distribution>
   </distributionInfo>
   <dataQualityInfo>
