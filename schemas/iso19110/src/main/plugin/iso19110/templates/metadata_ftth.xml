@@ -52,6 +52,9 @@
           <gfc:memberName>
             <gco:LocalName>Type</gco:LocalName>
           </gfc:memberName>
+          <gfc:definition>
+            <gco:CharacterString></gco:CharacterString>
+          </gfc:definition>
           <gfc:cardinality>
             <gco:Multiplicity>
               <gco:range>
