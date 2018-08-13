@@ -10,9 +10,9 @@ ADD . /
 USER root
 
 RUN mkdir /mnt/geonetwork_datadir && \
-    chown jetty:jetty /etc/georchestra /mnt/geonetwork_datadir && \
-    chown -R jetty:jetty /var/lib/jetty/webapps
-
+    adduser jetty root && \
+    chown -R jetty:root /etc/georchestra /mnt/geonetwork_datadir /var/lib/jetty/webapps && \
+    chmod -R g+rwx /etc/georchestra /mnt/geonetwork_datadir /var/lib/jetty/webapps
 
 # Restore jetty user
 USER jetty
