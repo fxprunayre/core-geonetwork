@@ -4,13 +4,15 @@ ENV XMS=1G XMX=6G
 
 RUN java -jar "$JETTY_HOME/start.jar" --create-startd --add-to-start=jmx,jmx-remote,stats
 
-COPY --chown=jetty:jetty . /
+ADD . /
 
 # Temporary switch to root
 USER root
 
 RUN mkdir /mnt/geonetwork_datadir && \
-    chown jetty:jetty /mnt/geonetwork_datadir
+    adduser jetty root && \
+    chown -R jetty:root /etc/georchestra /mnt/geonetwork_datadir /var/lib/jetty/webapps && \
+    chmod -R g+rwx /etc/georchestra /mnt/geonetwork_datadir /var/lib/jetty/webapps
 
 # Restore jetty user
 USER jetty

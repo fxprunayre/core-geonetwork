@@ -1,3 +1,4 @@
 #!/bin/bash
 
-chown -R jetty:jetty /mnt/geonetwork_datadir
+chown -R jetty:root /mnt/geonetwork_datadir
+chmod -R g+rwx /mnt/geonetwork_datadir
