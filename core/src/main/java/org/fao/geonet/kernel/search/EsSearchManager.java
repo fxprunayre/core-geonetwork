@@ -26,6 +26,7 @@ package org.fao.geonet.kernel.search;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonElement;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Get;
@@ -39,16 +40,12 @@ import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataDataInfo_;
 import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.Metadata_;
-import org.fao.geonet.domain.Pair;
 import org.fao.geonet.es.EsClient;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.SelectionManager;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.repository.MetadataRepository;
-import org.fao.geonet.repository.SortUtils;
 import org.fao.geonet.repository.specification.MetadataSpecs;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
@@ -56,9 +53,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specifications;
 
 import java.io.IOException;
@@ -236,6 +230,26 @@ public class EsSearchManager implements ISearchManager {
             }
         }
     }
+    private static ImmutableSet<String> booleanFields;
+    private static ImmutableSet<String> booleanValues;
+
+    static {
+        booleanFields = ImmutableSet.<String>builder()
+            .add("hasxlinks")
+            .add("hasInspireTheme")
+            .add("hasOverview")
+            .add("isHarvested")
+            .add("isValid")
+            .add("isSchemaValid")
+            .add("isAboveThreshold")
+            .add("isOpenData")
+            .build();
+        booleanValues = ImmutableSet.<String>builder()
+            .add("1")
+            .add("y")
+            .add("true")
+            .build();
+    }
 
     /**
      * Convert document to JSON.
@@ -290,7 +304,10 @@ public class EsSearchManager implements ISearchManager {
                             }
 
                             if (isArray) {
-                                arrayNode.add(node.getTextNormalize());
+                                arrayNode.add(
+                                    booleanFields.contains(propertyName) ?
+                                        parseBoolean(node.getTextNormalize()) :
+                                        node.getTextNormalize());
                             } else if (name.equals("geojson")) {
                                 doc.put("geom", node.getTextNormalize());
                             } else if (
@@ -298,7 +315,9 @@ public class EsSearchManager implements ISearchManager {
                                 !name.startsWith("conformTo_")) {
                                 doc.put(
                                     propertyName,
-                                    node.getTextNormalize());
+                                    booleanFields.contains(propertyName) ?
+                                        parseBoolean(node.getTextNormalize()) :
+                                        node.getTextNormalize());
                             }
                         }
                     }
@@ -308,6 +327,14 @@ public class EsSearchManager implements ISearchManager {
         }
         return listOfXcb;
     }
+
+    /*
+     * Normalize various GN boolean value to only true/false allowed in boolean fields in ES
+     */
+    private String parseBoolean(String value) {
+        return String.valueOf(booleanValues.contains(value));
+    }
+
     @Override
     public void forceIndexChanges() throws IOException {
     }
