@@ -1,19 +1,19 @@
 [submodule "geoserver"]
 	path = geoserver
-	url = git@gitlab-dt-ftth.camptocamp.com:geonetwork/geoserver.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/geoserver.git
 	ignore = dirty
 [submodule "e2e-tests/chromedriver"]
 	path = e2e-tests/chromedriver
-	url = git@gitlab-dt-ftth.camptocamp.com:geonetwork/chromedriver.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/chromedriver.git
 [submodule "web-ui/src/main/resources/catalog/lib/style/bootstrap"]
 	path = web-ui/src/main/resources/catalog/lib/style/bootstrap
-	url = git@gitlab-dt-ftth.camptocamp.com:geonetwork/bootstrap.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/bootstrap.git
 [submodule "web-ui/src/main/resources/catalog/lib/style/font-awesome"]
 	path = web-ui/src/main/resources/catalog/lib/style/font-awesome
-	url = git@gitlab-dt-ftth.camptocamp.com:geonetwork/font-awesome.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/font-awesome.git
 [submodule "web-ui/src/main/resources/catalog/lib/bootstrap-table"]
 	path = web-ui/src/main/resources/catalog/lib/bootstrap-table
-	url = git@gitlab-dt-ftth.camptocamp.com:geonetwork/bootstrap-table.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/bootstrap-table.git
 [submodule "docs/manuals"]
 	path = docs/manuals
-	url =  git@gitlab-dt-ftth.camptocamp.com:geonetwork/manuals.git
+	url = gitlab@gdi-wbench.psst.t-online.corp:geonetwork/manuals.git
