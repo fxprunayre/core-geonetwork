@@ -1,239 +1,232 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<MD_Metadata xmlns:gml="http://www.opengis.net/gml"
-             xmlns:gco="http://www.isotc211.org/2005/gco"
-             xmlns="http://www.isotc211.org/2005/gmd">
-  <fileIdentifier>
-    <gco:CharacterString></gco:CharacterString>
-  </fileIdentifier>
-  <language>
-    <LanguageCode codeList="" codeListValue="eng"></LanguageCode>
-  </language>
-  <characterSet>
-    <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
-  </characterSet>
-  <contact>
-    <CI_ResponsibleParty>
-      <organisationName>
-        <gco:CharacterString/>
-      </organisationName>
-      <role>
-        <CI_RoleCode codeListValue="originator" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"/>
-      </role>
-    </CI_ResponsibleParty>
-  </contact>
-  <dateStamp>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:geonet="http://www.fao.org/geonetwork">
+  <gmd:fileIdentifier>
+    <gco:CharacterString>95529525-4fdd-470a-8881-d1d24a7859f1</gco:CharacterString>
+  </gmd:fileIdentifier>
+  <gmd:language>
+    <gmd:LanguageCode codeList="" codeListValue="ger" />
+  </gmd:language>
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode" />
+  </gmd:characterSet>
+  <gmd:contact>
+    <gmd:CI_ResponsibleParty>
+      <gmd:organisationName>
+        <gco:CharacterString>DT IT GmbH</gco:CharacterString>
+      </gmd:organisationName>
+      <gmd:role>
+        <gmd:CI_RoleCode codeListValue="originator" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" />
+      </gmd:role>
+    </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+  <gmd:dateStamp>
     <gco:DateTime>2005-03-31T19:13:30</gco:DateTime>
-  </dateStamp>
-  <metadataStandardName>
+  </gmd:dateStamp>
+  <gmd:metadataStandardName>
     <gco:CharacterString>ISO 19115:2003/19139</gco:CharacterString>
-  </metadataStandardName>
-  <metadataStandardVersion>
+  </gmd:metadataStandardName>
+  <gmd:metadataStandardVersion>
     <gco:CharacterString>1.0</gco:CharacterString>
-  </metadataStandardVersion>
-  <dataSetURI>
-    <gco:CharacterString></gco:CharacterString>
-  </dataSetURI>
-  <referenceSystemInfo>
-    <MD_ReferenceSystem>
-      <referenceSystemIdentifier>
-        <RS_Identifier>
-          <code>
+  </gmd:metadataStandardVersion>
+  <gmd:dataSetURI>
+    <gco:CharacterString />
+  </gmd:dataSetURI>
+  <gmd:referenceSystemInfo>
+    <gmd:MD_ReferenceSystem>
+      <gmd:referenceSystemIdentifier>
+        <gmd:RS_Identifier>
+          <gmd:code>
             <gco:CharacterString>EPSG:25832</gco:CharacterString>
-          </code>
-        </RS_Identifier>
-      </referenceSystemIdentifier>
-    </MD_ReferenceSystem>
-  </referenceSystemInfo>
-  <identificationInfo>
-    <MD_DataIdentification>
-      <citation>
-        <CI_Citation>
-          <title>
-            <gco:CharacterString>Template for Vector data in ISO19139, FTTH-22
-            </gco:CharacterString>
-          </title>
-          <date>
-            <CI_Date>
-              <date/>
-              <dateType>
-                <CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
-                                     codeListValue="publication"/>
-              </dateType>
-            </CI_Date>
-          </date>
-        </CI_Citation>
-      </citation>
-      <abstract>
-        <gco:CharacterString/>
-      </abstract>
-      <purpose>
-        <gco:CharacterString/>
-      </purpose>
-      <status>
-        <MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode"/>
-      </status>
-      <pointOfContact>
-        <CI_ResponsibleParty>
-          <individualName>
-            <gco:CharacterString/>
-          </individualName>
-          <organisationName>
-            <gco:CharacterString/>
-          </organisationName>
-          <contactInfo>
-            <CI_Contact>
-              <address>
-                <CI_Address>
-                  <electronicMailAddress>
-                    <gco:CharacterString/>
-                  </electronicMailAddress>
-                </CI_Address>
-              </address>
-            </CI_Contact>
-          </contactInfo>
-          <role>
-            <CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode"/>
-          </role>
-        </CI_ResponsibleParty>
-      </pointOfContact>
-      <resourceMaintenance>
-        <MD_MaintenanceInformation>
-          <maintenanceAndUpdateFrequency>
-            <MD_MaintenanceFrequencyCode codeListValue="asNeeded"
-                                         codeList="./resources/codeList.xml#MD_MaintenanceFrequencyCode"/>
-          </maintenanceAndUpdateFrequency>
-        </MD_MaintenanceInformation>
-      </resourceMaintenance>
-      <resourceConstraints>
-        <MD_LegalConstraints>
-          <accessConstraints>
-            <MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
-          </accessConstraints>
-          <useConstraints>
-            <MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode"/>
-          </useConstraints>
-          <otherConstraints>
-            <gco:CharacterString/>
-          </otherConstraints>
-        </MD_LegalConstraints>
-      </resourceConstraints>
-      <spatialRepresentationType>
-        <MD_SpatialRepresentationTypeCode codeListValue="vector" codeList="./resources/codeList.xml#MD_SpatialRepresentationTypeCode"/>
-      </spatialRepresentationType>
-      <spatialResolution>
-        <MD_Resolution>
-          <equivalentScale>
-            <MD_RepresentativeFraction>
-              <denominator/>
-            </MD_RepresentativeFraction>
-          </equivalentScale>
-        </MD_Resolution>
-      </spatialResolution>
-      <!-- language has to be defined for charset to be validated ??? -->
-      <language>
+          </gmd:code>
+        </gmd:RS_Identifier>
+      </gmd:referenceSystemIdentifier>
+    </gmd:MD_ReferenceSystem>
+  </gmd:referenceSystemInfo>
+  <gmd:identificationInfo>
+    <gmd:MD_DataIdentification>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>Template for Vector data in ISO19139</gco:CharacterString>
+          </gmd:title>
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date />
+              <gmd:dateType>
+                <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+              </gmd:dateType>
+            </gmd:CI_Date>
+          </gmd:date>
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString />
+      </gmd:abstract>
+      <gmd:purpose>
+        <gco:CharacterString />
+      </gmd:purpose>
+      <gmd:status>
+        <gmd:MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode" />
+      </gmd:status>
+      <gmd:pointOfContact>
+        <gmd:CI_ResponsibleParty>
+          <gmd:individualName>
+            <gco:CharacterString>TSOEW0103 - Geo Team</gco:CharacterString>
+          </gmd:individualName>
+          <gmd:organisationName>
+            <gco:CharacterString>Deutsche Telekom IT GmbH, Technology Solutions</gco:CharacterString>
+          </gmd:organisationName>
+          <gmd:contactInfo>
+            <gmd:CI_Contact>
+              <gmd:address>
+                <gmd:CI_Address>
+                  <gmd:electronicMailAddress>
+                    <gco:CharacterString>gdi@telekom.de</gco:CharacterString>
+                  </gmd:electronicMailAddress>
+                </gmd:CI_Address>
+              </gmd:address>
+            </gmd:CI_Contact>
+          </gmd:contactInfo>
+          <gmd:role>
+            <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode" />
+          </gmd:role>
+        </gmd:CI_ResponsibleParty>
+      </gmd:pointOfContact>
+      <gmd:resourceMaintenance>
+        <gmd:MD_MaintenanceInformation>
+          <gmd:maintenanceAndUpdateFrequency>
+            <gmd:MD_MaintenanceFrequencyCode codeListValue="asNeeded" codeList="./resources/codeList.xml#MD_MaintenanceFrequencyCode" />
+          </gmd:maintenanceAndUpdateFrequency>
+        </gmd:MD_MaintenanceInformation>
+      </gmd:resourceMaintenance>
+      <gmd:resourceConstraints>
+        <gmd:MD_LegalConstraints>
+          <gmd:accessConstraints>
+            <gmd:MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode" />
+          </gmd:accessConstraints>
+          <gmd:useConstraints>
+            <gmd:MD_RestrictionCode codeListValue="" codeList="./resources/codeList.xml#MD_RestrictionCode" />
+          </gmd:useConstraints>
+          <gmd:otherConstraints>
+            <gco:CharacterString />
+          </gmd:otherConstraints>
+        </gmd:MD_LegalConstraints>
+      </gmd:resourceConstraints>
+      <gmd:spatialRepresentationType>
+        <gmd:MD_SpatialRepresentationTypeCode codeListValue="vector" codeList="./resources/codeList.xml#MD_SpatialRepresentationTypeCode" />
+      </gmd:spatialRepresentationType>
+      <gmd:spatialResolution>
+        <gmd:MD_Resolution>
+          <gmd:equivalentScale>
+            <gmd:MD_RepresentativeFraction>
+              <gmd:denominator />
+            </gmd:MD_RepresentativeFraction>
+          </gmd:equivalentScale>
+        </gmd:MD_Resolution>
+      </gmd:spatialResolution>
+      <gmd:language>
         <gco:CharacterString>eng</gco:CharacterString>
-      </language>
-      <characterSet>
-        <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
-      </characterSet>
-      <topicCategory>
-        <MD_TopicCategoryCode></MD_TopicCategoryCode>
-      </topicCategory>
-      <extent>
-        <EX_Extent>
-          <temporalElement>
-            <EX_TemporalExtent>
-              <extent>
+      </gmd:language>
+      <gmd:characterSet>
+        <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode" />
+      </gmd:characterSet>
+      <gmd:topicCategory>
+        <gmd:MD_TopicCategoryCode />
+      </gmd:topicCategory>
+      <gmd:extent>
+        <gmd:EX_Extent>
+          <gmd:temporalElement>
+            <gmd:EX_TemporalExtent>
+              <gmd:extent>
                 <gml:TimePeriod gml:id="">
-                  <gml:beginPosition/>
-                  <gml:endPosition/>
+                  <gml:beginPosition />
+                  <gml:endPosition />
                 </gml:TimePeriod>
-              </extent>
-            </EX_TemporalExtent>
-          </temporalElement>
-        </EX_Extent>
-      </extent>
-      <extent>
-        <EX_Extent>
-          <geographicElement>
-            <EX_GeographicBoundingBox>
-              <westBoundLongitude>
+              </gmd:extent>
+            </gmd:EX_TemporalExtent>
+          </gmd:temporalElement>
+        </gmd:EX_Extent>
+      </gmd:extent>
+      <gmd:extent>
+        <gmd:EX_Extent>
+          <gmd:geographicElement>
+            <gmd:EX_GeographicBoundingBox>
+              <gmd:westBoundLongitude>
                 <gco:Decimal>-180</gco:Decimal>
-              </westBoundLongitude>
-              <eastBoundLongitude>
+              </gmd:westBoundLongitude>
+              <gmd:eastBoundLongitude>
                 <gco:Decimal>180</gco:Decimal>
-              </eastBoundLongitude>
-              <southBoundLatitude>
+              </gmd:eastBoundLongitude>
+              <gmd:southBoundLatitude>
                 <gco:Decimal>-90</gco:Decimal>
-              </southBoundLatitude>
-              <northBoundLatitude>
+              </gmd:southBoundLatitude>
+              <gmd:northBoundLatitude>
                 <gco:Decimal>90</gco:Decimal>
-              </northBoundLatitude>
-            </EX_GeographicBoundingBox>
-          </geographicElement>
-        </EX_Extent>
-      </extent>
-    </MD_DataIdentification>
-  </identificationInfo>
-  <distributionInfo>
-    <MD_Distribution>
-      <distributionFormat>
-        <MD_Format>
-          <name>
-            <gco:CharacterString></gco:CharacterString>
-          </name>
-          <version>
-            <gco:CharacterString></gco:CharacterString>
-          </version>
-        </MD_Format>
-      </distributionFormat>
-      <transferOptions>
-        <MD_DigitalTransferOptions>
-          <onLine>
-            <CI_OnlineResource>
-              <linkage>
-                <URL/>
-              </linkage>
-              <protocol>
+              </gmd:northBoundLatitude>
+            </gmd:EX_GeographicBoundingBox>
+          </gmd:geographicElement>
+        </gmd:EX_Extent>
+      </gmd:extent>
+    </gmd:MD_DataIdentification>
+  </gmd:identificationInfo>
+  <gmd:distributionInfo>
+    <gmd:MD_Distribution>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString />
+          </gmd:name>
+          <gmd:version>
+            <gco:CharacterString />
+          </gmd:version>
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL />
+              </gmd:linkage>
+              <gmd:protocol>
                 <gco:CharacterString>DB:POSTGIS</gco:CharacterString>
-              </protocol>
-            </CI_OnlineResource>
-          </onLine>
-        </MD_DigitalTransferOptions>
-      </transferOptions>
-    </MD_Distribution>
-  </distributionInfo>
-  <dataQualityInfo>
-    <DQ_DataQuality>
-    <scope>
-      <DQ_Scope>
-        <level>
-          <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue=""/>
-        </level>
-        <levelDescription>
-          <MD_ScopeDescription>
-            <other>
-              <gco:CharacterString>specifies the extent, spatial and/or temporal, and/or common characteristic(s) that identify the data on which data quality was to be evaluated.</gco:CharacterString>
-            </other>
-          </MD_ScopeDescription>
-        </levelDescription>
-      </DQ_Scope>
-    </scope>
-    <lineage>
-        <LI_Lineage>
-          <statement>
-            <gco:CharacterString/>
-          </statement>
-          <processStep>
-          <LI_ProcessStep>
-            <description >
-              <gco:CharacterString></gco:CharacterString>
-            </description>
-          </LI_ProcessStep>
-          </processStep>
-        </LI_Lineage>
-      </lineage>
-    </DQ_DataQuality>
-  </dataQualityInfo>
-</MD_Metadata>
+              </gmd:protocol>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+    </gmd:MD_Distribution>
+  </gmd:distributionInfo>
+  <gmd:dataQualityInfo>
+    <gmd:DQ_DataQuality>
+      <gmd:scope>
+        <gmd:DQ_Scope>
+          <gmd:level>
+            <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue="dataset" />
+          </gmd:level>
+          <gmd:levelDescription>
+            <gmd:MD_ScopeDescription>
+              <gmd:other>
+                <gco:CharacterString>specifies the extent, spatial and/or temporal, and/or common characteristic(s) that identify the data on which data quality was to be evaluated.</gco:CharacterString>
+              </gmd:other>
+            </gmd:MD_ScopeDescription>
+          </gmd:levelDescription>
+        </gmd:DQ_Scope>
+      </gmd:scope>
+      <gmd:lineage>
+        <gmd:LI_Lineage>
+          <gmd:statement>
+            <gco:CharacterString />
+          </gmd:statement>
+          <gmd:processStep>
+            <gmd:LI_ProcessStep>
+              <gmd:description>
+                <gco:CharacterString />
+              </gmd:description>
+            </gmd:LI_ProcessStep>
+          </gmd:processStep>
+        </gmd:LI_Lineage>
+      </gmd:lineage>
+    </gmd:DQ_DataQuality>
+  </gmd:dataQualityInfo>
+</gmd:MD_Metadata>
