@@ -1,126 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<MD_Metadata xmlns:gml="http://www.opengis.net/gml"
-             xmlns:gco="http://www.isotc211.org/2005/gco"
-             xmlns:srv="http://www.isotc211.org/2005/srv"
-             xmlns="http://www.isotc211.org/2005/gmd">
-  <fileIdentifier>
-    <gco:CharacterString></gco:CharacterString>
-  </fileIdentifier>
-  <language>
-    <LanguageCode codeList="" codeListValue="eng"></LanguageCode>
-  </language>
-  <characterSet>
-    <MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode"/>
-  </characterSet>
-  <contact>
-    <CI_ResponsibleParty>
-      <organisationName>
-        <gco:CharacterString/>
-      </organisationName>
-      <role>
-        <CI_RoleCode codeListValue="originator" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"/>
-      </role>
-    </CI_ResponsibleParty>
-  </contact>
-  <dateStamp>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:geonet="http://www.fao.org/geonetwork">
+  <gmd:fileIdentifier>
+    <gco:CharacterString>33d70c57-78ea-43dc-8a22-dff412a4b61b</gco:CharacterString>
+  </gmd:fileIdentifier>
+  <gmd:language>
+    <gmd:LanguageCode codeList="" codeListValue="ger" />
+  </gmd:language>
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode codeListValue="utf8" codeList="./resources/codeList.xml#MD_CharacterSetCode" />
+  </gmd:characterSet>
+  <gmd:contact>
+    <gmd:CI_ResponsibleParty>
+      <gmd:organisationName>
+        <gco:CharacterString>DT IT GmbH</gco:CharacterString>
+      </gmd:organisationName>
+      <gmd:role>
+        <gmd:CI_RoleCode codeListValue="originator" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" />
+      </gmd:role>
+    </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+  <gmd:dateStamp>
     <gco:DateTime>2005-03-31T19:13:30</gco:DateTime>
-  </dateStamp>
-  <metadataStandardName>
+  </gmd:dateStamp>
+  <gmd:metadataStandardName>
     <gco:CharacterString>ISO 19115:2003/19139</gco:CharacterString>
-  </metadataStandardName>
-  <metadataStandardVersion>
+  </gmd:metadataStandardName>
+  <gmd:metadataStandardVersion>
     <gco:CharacterString>1.0</gco:CharacterString>
-  </metadataStandardVersion>
-  <dataSetURI>
-    <gco:CharacterString></gco:CharacterString>
-  </dataSetURI>
-  <identificationInfo>
+  </gmd:metadataStandardVersion>
+  <gmd:dataSetURI>
+    <gco:CharacterString />
+  </gmd:dataSetURI>
+  <gmd:identificationInfo>
     <srv:SV_ServiceIdentification>
-      <citation>
-        <CI_Citation>
-          <title>
-            <gco:CharacterString>Template for service in ISO19139, FTTH-2</gco:CharacterString>
-          </title>
-          <date>
-            <CI_Date>
-              <date/>
-              <dateType>
-                <CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
-                                     codeListValue="publication"/>
-              </dateType>
-            </CI_Date>
-          </date>
-        </CI_Citation>
-      </citation>
-      <abstract>
-        <gco:CharacterString/>
-      </abstract>
-      <purpose>
-        <gco:CharacterString/>
-      </purpose>
-      <status>
-        <MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode"/>
-      </status>
-      <pointOfContact>
-        <CI_ResponsibleParty>
-          <individualName>
-            <gco:CharacterString/>
-          </individualName>
-          <organisationName>
-            <gco:CharacterString/>
-          </organisationName>
-          <contactInfo>
-            <CI_Contact>
-              <address>
-                <CI_Address>
-                  <electronicMailAddress>
-                    <gco:CharacterString/>
-                  </electronicMailAddress>
-                </CI_Address>
-              </address>
-            </CI_Contact>
-          </contactInfo>
-          <role>
-            <CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode"/>
-          </role>
-        </CI_ResponsibleParty>
-      </pointOfContact>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>Template for service in ISO19139</gco:CharacterString>
+          </gmd:title>
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date />
+              <gmd:dateType>
+                <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+              </gmd:dateType>
+            </gmd:CI_Date>
+          </gmd:date>
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString />
+      </gmd:abstract>
+      <gmd:purpose>
+        <gco:CharacterString />
+      </gmd:purpose>
+      <gmd:status>
+        <gmd:MD_ProgressCode codeListValue="" codeList="./resources/codeList.xml#MD_ProgressCode" />
+      </gmd:status>
+      <gmd:pointOfContact>
+        <gmd:CI_ResponsibleParty>
+          <gmd:individualName>
+            <gco:CharacterString>TSOEW0103 - Geo Team</gco:CharacterString>
+          </gmd:individualName>
+          <gmd:organisationName>
+            <gco:CharacterString>Deutsche Telekom IT GmbH, Technology Solutions</gco:CharacterString>
+          </gmd:organisationName>
+          <gmd:contactInfo>
+            <gmd:CI_Contact>
+              <gmd:address>
+                <gmd:CI_Address>
+                  <gmd:electronicMailAddress>
+                    <gco:CharacterString>gdi@telekom.de</gco:CharacterString>
+                  </gmd:electronicMailAddress>
+                </gmd:CI_Address>
+              </gmd:address>
+            </gmd:CI_Contact>
+          </gmd:contactInfo>
+          <gmd:role>
+            <gmd:CI_RoleCode codeListValue="pointOfContact" codeList="./resources/codeList.xml#CI_RoleCode" />
+          </gmd:role>
+        </gmd:CI_ResponsibleParty>
+      </gmd:pointOfContact>
       <srv:serviceType>
-        <gco:LocalName codeSpace="www.w3c.org"></gco:LocalName>
+        <gco:LocalName codeSpace="www.w3c.org" />
       </srv:serviceType>
       <srv:serviceTypeVersion>
         <gco:CharacterString>1.1.1</gco:CharacterString>
       </srv:serviceTypeVersion>
       <srv:accessProperties>
-        <MD_StandardOrderProcess>
-           <fees>
-              <gco:CharacterString/>
-           </fees>
-        </MD_StandardOrderProcess>
+        <gmd:MD_StandardOrderProcess>
+          <gmd:fees>
+            <gco:CharacterString />
+          </gmd:fees>
+        </gmd:MD_StandardOrderProcess>
       </srv:accessProperties>
       <srv:extent>
-        <EX_Extent>
-          <geographicElement>
-            <EX_GeographicBoundingBox>
-              <westBoundLongitude>
+        <gmd:EX_Extent>
+          <gmd:geographicElement>
+            <gmd:EX_GeographicBoundingBox>
+              <gmd:westBoundLongitude>
                 <gco:Decimal>-180</gco:Decimal>
-              </westBoundLongitude>
-              <eastBoundLongitude>
+              </gmd:westBoundLongitude>
+              <gmd:eastBoundLongitude>
                 <gco:Decimal>180</gco:Decimal>
-              </eastBoundLongitude>
-              <southBoundLatitude>
+              </gmd:eastBoundLongitude>
+              <gmd:southBoundLatitude>
                 <gco:Decimal>-90</gco:Decimal>
-              </southBoundLatitude>
-              <northBoundLatitude>
+              </gmd:southBoundLatitude>
+              <gmd:northBoundLatitude>
                 <gco:Decimal>90</gco:Decimal>
-              </northBoundLatitude>
-            </EX_GeographicBoundingBox>
-          </geographicElement>
-        </EX_Extent>
+              </gmd:northBoundLatitude>
+            </gmd:EX_GeographicBoundingBox>
+          </gmd:geographicElement>
+        </gmd:EX_Extent>
       </srv:extent>
       <srv:couplingType>
-        <srv:SV_CouplingType codeListValue="tight" codeList="http://www.isotc211.org/2005/iso19119/resources/Codelist/gmxCodelists.xml#SV_CouplingType"/>
+        <srv:SV_CouplingType codeListValue="tight" codeList="http://www.isotc211.org/2005/iso19119/resources/Codelist/gmxCodelists.xml#SV_CouplingType" />
       </srv:couplingType>
       <srv:containsOperations>
         <srv:SV_OperationMetadata>
@@ -128,80 +123,80 @@
             <gco:CharacterString>GetCapabilities</gco:CharacterString>
           </srv:operationName>
           <srv:DCP>
-            <srv:DCPList codeList="http://someurl#DCPList" codeListValue="HTTPGet"/>
+            <srv:DCPList codeList="http://someurl#DCPList" codeListValue="HTTPGet" />
           </srv:DCP>
           <srv:connectPoint>
-            <CI_OnlineResource>
-              <linkage>
-                <URL>http://...?</URL>
-              </linkage>
-            </CI_OnlineResource>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>http://...?</gmd:URL>
+              </gmd:linkage>
+            </gmd:CI_OnlineResource>
           </srv:connectPoint>
         </srv:SV_OperationMetadata>
       </srv:containsOperations>
     </srv:SV_ServiceIdentification>
-  </identificationInfo>
-  <distributionInfo>
-    <MD_Distribution>
-      <distributionFormat>
-        <MD_Format>
-          <name>
-            <gco:CharacterString></gco:CharacterString>
-          </name>
-          <version>
-            <gco:CharacterString></gco:CharacterString>
-          </version>
-        </MD_Format>
-      </distributionFormat>
-      <transferOptions>
-        <MD_DigitalTransferOptions>
-           <onLine>
-              <CI_OnlineResource>
-                 <linkage>
-                    <URL>http://localhost:8080/...</URL>
-                 </linkage>
-                 <protocol>
-                    <gco:CharacterString></gco:CharacterString>
-                 </protocol>
-                 <name>
-                    <gco:CharacterString>My service</gco:CharacterString>
-                 </name>
-              </CI_OnlineResource>
-           </onLine>
-        </MD_DigitalTransferOptions>
-      </transferOptions>
-    </MD_Distribution>
-  </distributionInfo>
-  <dataQualityInfo>
-    <DQ_DataQuality>
-    <scope>
-      <DQ_Scope>
-        <level>
-          <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue="service"/>
-        </level>
-        <levelDescription>
-          <MD_ScopeDescription>
-            <other>
-              <gco:CharacterString>specifies the extent, spatial and/or temporal, and/or common characteristic(s) that identify the data on which data quality was to be evaluated.</gco:CharacterString>
-            </other>
-          </MD_ScopeDescription>
-        </levelDescription>
-      </DQ_Scope>
-    </scope>
-    <lineage>
-        <LI_Lineage>
-          <statement>
-            <gco:CharacterString/>
-          </statement>
-          <processStep>
-          <LI_ProcessStep>
-            <description >
-              <gco:CharacterString></gco:CharacterString>
-            </description>
-          </LI_ProcessStep>
-          </processStep>
-        </LI_Lineage>
-      </lineage>
-    </DQ_DataQuality>
-  </dataQualityInfo>
-</MD_Metadata>
+  </gmd:identificationInfo>
+  <gmd:distributionInfo>
+    <gmd:MD_Distribution>
+      <gmd:distributionFormat>
+        <gmd:MD_Format>
+          <gmd:name>
+            <gco:CharacterString />
+          </gmd:name>
+          <gmd:version>
+            <gco:CharacterString />
+          </gmd:version>
+        </gmd:MD_Format>
+      </gmd:distributionFormat>
+      <gmd:transferOptions>
+        <gmd:MD_DigitalTransferOptions>
+          <gmd:onLine>
+            <gmd:CI_OnlineResource>
+              <gmd:linkage>
+                <gmd:URL>http://localhost:8080/...</gmd:URL>
+              </gmd:linkage>
+              <gmd:protocol>
+                <gco:CharacterString />
+              </gmd:protocol>
+              <gmd:name>
+                <gco:CharacterString>My service</gco:CharacterString>
+              </gmd:name>
+            </gmd:CI_OnlineResource>
+          </gmd:onLine>
+        </gmd:MD_DigitalTransferOptions>
+      </gmd:transferOptions>
+    </gmd:MD_Distribution>
+  </gmd:distributionInfo>
+  <gmd:dataQualityInfo>
+    <gmd:DQ_DataQuality>
+      <gmd:scope>
+        <gmd:DQ_Scope>
+          <gmd:level>
+            <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue="service" />
+          </gmd:level>
+          <gmd:levelDescription>
+            <gmd:MD_ScopeDescription>
+              <gmd:other>
+                <gco:CharacterString>specifies the extent, spatial and/or temporal, and/or common characteristic(s) that identify the data on which data quality was to be evaluated.</gco:CharacterString>
+              </gmd:other>
+            </gmd:MD_ScopeDescription>
+          </gmd:levelDescription>
+        </gmd:DQ_Scope>
+      </gmd:scope>
+      <gmd:lineage>
+        <gmd:LI_Lineage>
+          <gmd:statement>
+            <gco:CharacterString />
+          </gmd:statement>
+          <gmd:processStep>
+            <gmd:LI_ProcessStep>
+              <gmd:description>
+                <gco:CharacterString />
+              </gmd:description>
+            </gmd:LI_ProcessStep>
+          </gmd:processStep>
+        </gmd:LI_Lineage>
+      </gmd:lineage>
+    </gmd:DQ_DataQuality>
+  </gmd:dataQualityInfo>
+</gmd:MD_Metadata>
