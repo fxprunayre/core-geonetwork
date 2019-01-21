@@ -1,0 +1,110 @@
+diff --git a/core/src/main/java/org/fao/geonet/web/LocaleRedirects.java b/core/src/main/java/org/fao/geonet/web/LocaleRedirects.java
+index 51ecdc0074..c47cf10dd8 100644
+--- a/core/src/main/java/org/fao/geonet/web/LocaleRedirects.java
++++ b/core/src/main/java/org/fao/geonet/web/LocaleRedirects.java
+@@ -99,20 +99,22 @@ public class LocaleRedirects {
+                               @CookieValue(value = Jeeves.LANG_COOKIE, required = false) String langCookie,
+                               @RequestHeader(value = ACCEPT_LANGUAGE_HEADER, required = false) final String langHeader) {
+         String lang = lang(langParam, langCookie, langHeader);
+-        StringBuilder redirectURL;
+-
+-        try {
+-            DefaultSavedRequest originalRequest = (DefaultSavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+-            redirectURL = new StringBuilder();
+-            redirectURL.append(originalRequest.getContextPath() + originalRequest.getServletPath() + originalRequest.getPathInfo());
+-            redirectURL.append("?login");
+-            if (originalRequest.getQueryString() != null && originalRequest.getQueryString().length() > 0) {
+-                redirectURL.append("&" + originalRequest.getQueryString());
+-            }
+-        } catch(ClassCastException ex){
+-            redirectURL = new StringBuilder(request.getContextPath() + "/?login");
+-        }
+-        return redirectURL(redirectURL.toString());
++        return redirectURL(createServiceUrl(request, "catalog.signin", lang, node));
++
++//        StringBuilder redirectURL;
++//
++//        try {
++//            DefaultSavedRequest originalRequest = (DefaultSavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
++//            redirectURL = new StringBuilder();
++//            redirectURL.append(originalRequest.getContextPath() + originalRequest.getServletPath() + originalRequest.getPathInfo());
++//            redirectURL.append("?login");
++//            if (originalRequest.getQueryString() != null && originalRequest.getQueryString().length() > 0) {
++//                redirectURL.append("&" + originalRequest.getQueryString());
++//            }
++//        } catch(ClassCastException ex){
++//            redirectURL = new StringBuilder(request.getContextPath() + "/?login");
++//        }
++//        return redirectURL(redirectURL.toString());
+ 
+     }
+ 
+diff --git a/web-ui/src/main/resources/catalog/templates/top-toolbar.html b/web-ui/src/main/resources/catalog/templates/top-toolbar.html
+index 1973db0b1c..7205b67d2d 100644
+--- a/web-ui/src/main/resources/catalog/templates/top-toolbar.html
++++ b/web-ui/src/main/resources/catalog/templates/top-toolbar.html
+@@ -95,14 +95,14 @@
+     </ul>
+ 
+ 
+-    <!-- <form class="navbar-form navbar-right" role="language">
++    <form class="navbar-form navbar-right" role="language">
+       <div class="form-group"
+            data-gn-language-switcher="lang"
+            data-langs="langs"
+            data-lang-labels="langLabels"/>
+-    </form> -->
++    </form>
+ 
+-    <!-- <ul data-ng-if="gnCfg.mods.signin.enabled"
++    <ul data-ng-if="gnCfg.mods.signin.enabled"
+         class="nav navbar-nav navbar-right">
+       <li class="dropdown dropdown-hover open" data-ng-show="authenticated">
+         <a data-gn-active-tb-item="{{gnCfg.mods.admin.appUrl}}#/organization/users?userOrGroup={{user.username}}"
+@@ -181,6 +181,6 @@
+           </li>
+         </ul>
+       </li>
+-    </ul> -->
++    </ul>
+   </div>
+ </div>
+diff --git a/web/src/main/webResources/WEB-INF/config-spring-geonetwork.xml b/web/src/main/webResources/WEB-INF/config-spring-geonetwork.xml
+index d49a79430d..44c2eba3af 100644
+--- a/web/src/main/webResources/WEB-INF/config-spring-geonetwork.xml
++++ b/web/src/main/webResources/WEB-INF/config-spring-geonetwork.xml
+@@ -39,7 +39,7 @@
+                                 ignore-unresolvable="true" />
+ 
+   <import resource="config-spring-env.xml"/>
+-  <import resource="config-georchestra.xml" />
++  <!--<import resource="config-georchestra.xml" />-->
+   <import resource="config-security/config-security.xml"/>
+   <import resource="config-summary.xml"/>
+   <import resource="classpath:JZkitApplicationContext.xml"/>
+diff --git a/web/src/main/webapp/WEB-INF/config-security/config-security-core.xml b/web/src/main/webapp/WEB-INF/config-security/config-security-core.xml
+index 579f6eaa6e..198ee1522e 100644
+--- a/web/src/main/webapp/WEB-INF/config-security/config-security-core.xml
++++ b/web/src/main/webapp/WEB-INF/config-security/config-security-core.xml
+@@ -122,18 +122,18 @@
+   <bean id="preAuthenticationFilter" class="jeeves.config.springutil.PassthroughFilter"/>
+   <bean id="securityContextPersistenceFilter"
+         class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+-    <property name="securityContextRepository" ref="securityContextRepository"/>
++    <constructor-arg ref="securityContextRepository"/>
+   </bean>
+ 
+   <bean id="authenticationManager"
+         class="org.springframework.security.authentication.ProviderManager">
+-    <property name="providers">
++    <constructor-arg>
+       <list>
+         <!-- Check if the preAuthenticationFilter has already authenticated user -->
+         <ref bean="preFilterAuthenticationProvider"/>
+         <ref bean="geonetworkAuthenticationProvider"/>
+       </list>
+-    </property>
++    </constructor-arg>
+   </bean>
+ 
+   <bean id="securityContextRepository"
