@@ -1519,7 +1519,7 @@
     <help>z.B. TXT, PDF, TIFF, SHAPE etc., aber auch ZIP</help>
     <condition>Obligatorisch</condition>
     <description>Bezeichnung des Datenformats</description>
-    <helper rel="gmd:version">
+    <!--<helper rel="gmd:version">
       <option value="Text">Text</option>
       <option value="ESRI Shapefile" title="1.0">ESRI Shapefile</option>
       <option value="Mapinfo MIF/MID" title="4.5">Mapinfo MIF/MID</option>
@@ -1536,7 +1536,7 @@
       <option value="JPEG">JPEG</option>
       <option value="OGC:WMC">OGC:WMC</option>
       <option value="OGC:OWS Context">OGC:OWS Context</option>
-    </helper>
+    </helper>-->
   </element>
   <element name="gmd:version" context="gmd:MD_Format" id="286">
     <label>Version</label>
@@ -2296,6 +2296,16 @@
       werden
     </description>
   </element>
+  <element name="gmd:spatialRepresentationType"
+           id="37">
+    <label>Räumliche Auflösung</label>
+    <help/>
+    <condition/>
+    <description>Methode, mit der geografische Informationen räumlich
+      dargestellt
+      werden
+    </description>
+  </element>
   <element name="gmd:otherCitationDetails" context="gmd:CI_Citation"
            id="370">
     <label>Weitere Informationen</label>
@@ -2356,6 +2366,20 @@
       Trennzeichen getrennt
     </description>
   </element>
+
+  <element name="gmd:individualName"
+           id="375">
+    <label>Kontakt zu Resource</label>
+    <help>Als Trennzeichen wird Komma empfohlen</help>
+    <condition>Es muss entweder ein Nachname, eine Organisation oder eine
+      Position angegeben werden
+    </condition>
+    <description>Name der zuständigen Kontaktperson in der Reihenfolge
+      Name, Vorname, Titel durch
+      Trennzeichen getrennt
+    </description>
+  </element>
+
   <element name="gmd:organisationName" id="376">
     <label>Organisation</label>
     <help/>
@@ -2571,6 +2595,9 @@
     <condition/>
     <description>Zu verwendendes Verbindungsprotokoll</description>
     <helper>
+      <option show="-" value="DB:POSTGIS">DB:POSTGIS</option>
+      <option show="-" value="FILE:GEO">GIS file</option>
+      <option show="-" value="FILE:RASTER">GIS RASTER file</option>
       <option value="WWW:LINK-1.0-http--link">Webaddresse (URL)</option>
       <option value="WWW:LINK-1.0-http--samples">Beispielprodukt (URL)</option>
       <option value="WWW:LINK-1.0-http--related">Verwandter Link (URL)</option>
@@ -2638,8 +2665,6 @@
       <option show="-" value="OGC:SOS-1.0.0-http-post-observation">OGC-SOS Get Observation (POST)
         (ver 1.0.0)
       </option>
-      <option show="-" value="FILE:GEO">GIS file</option>
-      <option show="-" value="FILE:RASTER">GIS RASTER file</option>
     </helper>
   </element>
   <element name="gmd:applicationProfile" context="gmd:CI_OnlineResource"
@@ -3205,8 +3230,11 @@
     <description>Beschreibung des Bearbeitungsschritts einschliesslich wichtiger Parameter oder
       Toleranzen</description>
     <helper>
-      <option value="fme_6.7">FME gene 1/25000</option>
-      <option value="actinia_989">Actinia Core 3.2.0G</option>
+      <option value="FME">FME</option>
+      <option value="Actinia">Actinia</option>
+      <option value="OSM Importer">OSM Importer</option>
+      <option value="GDI Viewer">GDI Viewer</option>
+      <option value="Manually">Manually</option>
     </helper>
   </element>
   <element name="gmd:rationale" context="gmd:LI_ProcessStep" id="88">
