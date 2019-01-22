@@ -50,7 +50,7 @@
 <codelists xmlns:gmd="http://www.isotc211.org/2005/gmd">
   <!-- ==================================================== -->
   <codelist name="gmd:CI_DateTypeCode">
-    <entry>
+    <entry hideInEditMode="true">
       <code>creation</code>
       <label>Creation</label>
       <description>Date identifies when the resource was brought into existence</description>
@@ -62,7 +62,7 @@
       <description>Date identifies when the resource was issued</description>
     </entry>
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <entry>
+    <entry hideInEditMode="true">
       <code>revision</code>
       <label>Revision</label>
       <description>Date identifies when the resource was examined or re-examined and improved or
