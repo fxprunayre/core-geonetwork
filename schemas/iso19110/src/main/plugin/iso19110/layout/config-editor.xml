@@ -50,6 +50,7 @@
     <name>gfc:constrainedBy</name>
     <name>gfc:inheritsFrom</name>
     <name>gfc:inheritsTo</name>
+    <name>gco:range</name>
   </fieldsWithFieldset>
 
   <!-- View configuration -->
