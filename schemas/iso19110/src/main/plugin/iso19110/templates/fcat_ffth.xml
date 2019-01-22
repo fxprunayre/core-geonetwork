@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gfc:FC_FeatureCatalogue xmlns:gfc="http://www.isotc211.org/2005/gfc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:geonet="http://www.fao.org/geonetwork" uuid="e1456ae4-59a6-4d87-9285-28e6af9f5d58">
+  <gmx:name>
+    <gco:CharacterString>Template for Feature catalogue in ISO19110</gco:CharacterString>
+  </gmx:name>
+  <gmx:scope />
+  <gmx:versionNumber>
+    <gco:CharacterString>1.0</gco:CharacterString>
+  </gmx:versionNumber>
+  <gmx:versionDate>
+    <gco:DateTime>2009-10-12T13:11:25</gco:DateTime>
+  </gmx:versionDate>
+  <gmx:language />
+  <gmx:locale />
+  <gfc:producer />
+  <gfc:featureType>
+    <gfc:FC_FeatureType uuid="e1456ae4-59a6-4d87-9285-28e6af9f5d58">
+      <gfc:typeName />
+      <gfc:code />
+      <gfc:isAbstract />
+      <gfc:featureCatalogue />
+      <gfc:carrierOfCharacteristics>
+        <gfc:FC_FeatureAttribute>
+          <gfc:featureType />
+          <gfc:memberName>
+            <gco:LocalName>Type</gco:LocalName>
+          </gfc:memberName>
+          <gfc:definition gco:nilReason="template">
+            <gco:CharacterString />
+          </gfc:definition>
+          <gfc:cardinality>
+            <gco:Multiplicity>
+              <gco:range>
+                <gco:MultiplicityRange>
+                  <gco:lower>
+                    <gco:Integer>0</gco:Integer>
+                  </gco:lower>
+                  <gco:upper>
+                    <gco:UnlimitedInteger isInfinite="true" xsi:nil="true" />
+                  </gco:upper>
+                </gco:MultiplicityRange>
+              </gco:range>
+            </gco:Multiplicity>
+          </gfc:cardinality>
+          <gfc:valueType>
+            <gco:TypeName>
+              <gco:aName>
+                <gco:CharacterString />
+              </gco:aName>
+            </gco:TypeName>
+          </gfc:valueType>
+          <gfc:listedValue>
+            <gfc:FC_ListedValue>
+              <gfc:label>
+                <gco:CharacterString />
+              </gfc:label>
+              <gfc:code>
+                <gco:CharacterString />
+              </gfc:code>
+              <gfc:definition>
+                <gco:CharacterString />
+              </gfc:definition>
+            </gfc:FC_ListedValue>
+          </gfc:listedValue>
+        </gfc:FC_FeatureAttribute>
+      </gfc:carrierOfCharacteristics>
+    </gfc:FC_FeatureType>
+  </gfc:featureType>
+</gfc:FC_FeatureCatalogue>
