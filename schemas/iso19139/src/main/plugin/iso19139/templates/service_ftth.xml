@@ -128,7 +128,7 @@
           <srv:connectPoint>
             <gmd:CI_OnlineResource>
               <gmd:linkage>
-                <gmd:URL>http://...?</gmd:URL>
+                <gmd:URL>https://cb02bc.gpc-one.ts-icts.de?</gmd:URL>
               </gmd:linkage>
             </gmd:CI_OnlineResource>
           </srv:connectPoint>
@@ -167,36 +167,4 @@
       </gmd:transferOptions>
     </gmd:MD_Distribution>
   </gmd:distributionInfo>
-  <gmd:dataQualityInfo>
-    <gmd:DQ_DataQuality>
-      <gmd:scope>
-        <gmd:DQ_Scope>
-          <gmd:level>
-            <gmd:MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_ScopeCode" codeListValue="service" />
-          </gmd:level>
-          <gmd:levelDescription>
-            <gmd:MD_ScopeDescription>
-              <gmd:other>
-                <gco:CharacterString>specifies the extent, spatial and/or temporal, and/or common characteristic(s) that identify the data on which data quality was to be evaluated.</gco:CharacterString>
-              </gmd:other>
-            </gmd:MD_ScopeDescription>
-          </gmd:levelDescription>
-        </gmd:DQ_Scope>
-      </gmd:scope>
-      <gmd:lineage>
-        <gmd:LI_Lineage>
-          <gmd:statement>
-            <gco:CharacterString />
-          </gmd:statement>
-          <gmd:processStep>
-            <gmd:LI_ProcessStep>
-              <gmd:description>
-                <gco:CharacterString />
-              </gmd:description>
-            </gmd:LI_ProcessStep>
-          </gmd:processStep>
-        </gmd:LI_Lineage>
-      </gmd:lineage>
-    </gmd:DQ_DataQuality>
-  </gmd:dataQualityInfo>
 </gmd:MD_Metadata>

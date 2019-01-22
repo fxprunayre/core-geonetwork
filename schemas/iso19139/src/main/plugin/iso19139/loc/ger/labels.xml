@@ -2589,7 +2589,7 @@
       Locator)
     </description>
   </element>
-  <element name="gmd:protocol" context="gmd:CI_OnlineResource"
+  <element name="gmd:protocol"
            id="398" alias="protocol">
     <label>Protokoll</label>
     <help/>
@@ -3819,5 +3819,13 @@
   </element>
   <element name="gmd:MD_ScopeCode">
     <label>Anwendungsbereich</label>
+  </element>
+  <element name="gco:lower">
+    <label>Lower cardinality</label>
+    <description>Lower cardinality</description>
+  </element>
+  <element name="gco:upper">
+    <label>Upper cardinality</label>
+    <description>Upper cardinality</description>
   </element>
 </labels>
