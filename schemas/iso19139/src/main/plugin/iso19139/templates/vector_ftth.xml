@@ -119,7 +119,9 @@
         <gmd:MD_Resolution>
           <gmd:equivalentScale>
             <gmd:MD_RepresentativeFraction>
-              <gmd:denominator />
+              <gmd:denominator>
+                <gco:Integer></gco:Integer>
+              </gmd:denominator>
             </gmd:MD_RepresentativeFraction>
           </gmd:equivalentScale>
         </gmd:MD_Resolution>

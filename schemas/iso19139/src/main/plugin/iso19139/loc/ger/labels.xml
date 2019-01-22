@@ -3750,7 +3750,7 @@
     </description>
   </element>
   <element name="xlink:href">
-    <label>URL</label>
+    <label>Link href</label>
     <description>Supplies the data that allows an XLink application to find a remote resource (or
       resource fragment) [W3C XLINK]
     </description>
