@@ -7,8 +7,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.domain.AbstractMetadata;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.kernel.DataManager;
+import org.fao.geonet.kernel.datamanager.IMetadataValidator;
 import org.fao.geonet.repository.MetadataRepository;
 import org.jdom.Document;
 import org.quartz.JobExecutionContext;
@@ -26,8 +28,13 @@ public class SchematronJob extends QuartzJobBean {
 
     @Autowired
     private ConfigurableApplicationContext applicationContext;
+
     @Autowired
     private DataManager _dataManager;
+
+    @Autowired
+    private IMetadataValidator validator;
+
 
     private String defaultLanguage = "eng";
 
@@ -48,10 +55,9 @@ public class SchematronJob extends QuartzJobBean {
             MetadataRepository mdrepo = applicationContext.getBean(MetadataRepository.class);
             List<Integer> mdToValidate = mdrepo.findAllIdsBy(isHarvested(false));
             for (Integer mdId : mdToValidate) {
-                Metadata record = mdrepo.findOne(mdId);
+                AbstractMetadata record = mdrepo.findOne(mdId);
                 try {
-                    _dataManager.doValidate(record.getDataInfo().getSchemaId(), mdId.toString(),
-                            new Document(record.getXmlData(false)), defaultLanguage);
+                    validator.doValidate(record, defaultLanguage);
                 } catch (Exception e) {
                     Log.error("Error validating metadata id " + record.getUuid());
                 }
