@@ -30,6 +30,7 @@ import org.fao.geonet.domain.Pair;
 import org.fao.geonet.services.AbstractServiceIntegrationTest;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -43,7 +44,9 @@ import static org.junit.Assert.assertTrue;
  * Test add sample data service User: Jesse Date: 10/16/13 Time: 12:47 PM
  */
 public class SampleDataAddIntegrationTest extends AbstractServiceIntegrationTest {
+
     @Test
+    @Ignore
     public void testExec() throws Exception {
         final Add add = new Add();
         ServiceContext context = createServiceContext();
