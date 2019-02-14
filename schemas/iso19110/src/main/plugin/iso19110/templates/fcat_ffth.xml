@@ -36,7 +36,7 @@
                     <gco:Integer>0</gco:Integer>
                   </gco:lower>
                   <gco:upper>
-                    <gco:UnlimitedInteger isInfinite="true" xsi:nil="true" />
+                    <gco:UnlimitedInteger isInfinite="false" xsi:nil="false">1</gco:UnlimitedInteger>
                   </gco:upper>
                 </gco:MultiplicityRange>
               </gco:range>

@@ -3823,9 +3823,17 @@
   <element name="gco:lower">
     <label>Lower cardinality</label>
     <description>Lower cardinality</description>
+    <helper>
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </helper>
   </element>
   <element name="gco:upper">
     <label>Upper cardinality</label>
     <description>Upper cardinality</description>
+    <helper>
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </helper>
   </element>
 </labels>
