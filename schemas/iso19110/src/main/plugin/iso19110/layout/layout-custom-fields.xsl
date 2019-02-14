@@ -55,6 +55,10 @@
   </xsl:template>
 
 
+  <!-- FTTH / Do not display cardinality in simple view  -->
+  <xsl:template mode="mode-iso19110" match="gfc:cardinality[$isFlatMode]" priority="200"/>
+
+
   <!-- Do not display those elements:
      * hide nested featureType elements
      * hide definition reference elements
