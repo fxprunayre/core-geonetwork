@@ -23,12 +23,14 @@
 
 package org.fao.geonet.api.standards;
 
+import com.itextpdf.text.Meta;
 import io.swagger.annotations.*;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.api.API;
 import org.fao.geonet.api.ApiParams;
 import org.fao.geonet.api.ApiUtils;
 import org.fao.geonet.api.exception.ResourceNotFoundException;
+import org.fao.geonet.api.exception.WebApplicationException;
 import org.fao.geonet.api.tools.i18n.LanguageUtils;
 import org.fao.geonet.kernel.Schema;
 import org.fao.geonet.kernel.SchemaManager;
@@ -38,6 +40,7 @@ import org.fao.geonet.kernel.schema.editorconfig.Editor;
 import org.fao.geonet.kernel.schema.labels.Codelists;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -332,42 +335,49 @@ public class StandardsApi implements ApplicationContextAware {
         @PathVariable String name
     ) throws Exception {
 
-        String schemaToCheck = schema;
+        MetadataSchema metadataSchema = schemaManager.getSchema(schema);
+        String config = retrieveSchemaConfig(metadataSchema, name);
 
-        // Store processed schemas to avoid loops
-        Set<String> schemasProcessed = new HashSet<>();
-
-        while (StringUtils.isNotEmpty(schemaToCheck) &&
-            !schemasProcessed.contains(schemaToCheck)) {
-
-            schemasProcessed.add(schemaToCheck);
-
-            MetadataSchema metadataSchema = schemaManager.getSchema(schemaToCheck);
-
-            Path schemaDir = metadataSchema.getSchemaDir();
-
-            Path configFile = schemaDir.resolve("config").
-                resolve("associated-panel").
-                resolve(name + ".json");
-
-            if (Files.exists(configFile)) {
-                String jsonConfig = new String(Files.readAllBytes(configFile));
-
-                // Parse JSON file to check is valid
-                new JSONObject(jsonConfig);
-
-                return jsonConfig;
+        if (StringUtils.isNotEmpty(config)) {
+            return config;
+        } else if (metadataSchema.getDependsOn() != null) {
+            config = retrieveSchemaConfig(
+                schemaManager.getSchema(metadataSchema.getDependsOn()),
+                name);
+            if (StringUtils.isNotEmpty(config)) {
+                return config;
             } else {
-                // Use the file from dependent schema if available
-                schemaToCheck = metadataSchema.getDependsOn();
+                throw new ResourceNotFoundException(String.format(
+                    "Associated panel configuration '%s' not found for schema '%s' and its dependency.",
+                    name, schema));
             }
         }
-
 
         throw new ResourceNotFoundException(String.format(
             "Associated panel configuration '%s' for schema '%s' not found.",
             name, schema));
+    }
 
+    private String retrieveSchemaConfig(MetadataSchema metadataSchema, String name) {
+        Path schemaDir = metadataSchema.getSchemaDir();
 
+        Path configFile = schemaDir.resolve("config").
+            resolve("associated-panel").
+            resolve(name + ".json");
+
+        if (Files.exists(configFile)) {
+            try {
+                String jsonConfig = new String(Files.readAllBytes(configFile));
+
+                // Parse JSON file to check is valid
+                new JSONObject(jsonConfig);
+                return jsonConfig;
+            } catch (Exception e) {
+                throw new WebApplicationException(String.format(
+                    "Associated panel configuration '%s' for schema '%s' is invalid. Error is: %s",
+                    name, metadataSchema.getName(), e.getMessage()));
+            }
+        }
+        return null;
     }
 }
