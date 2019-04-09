@@ -314,7 +314,7 @@ public class StandardsApi implements ApplicationContextAware {
 
     @ApiOperation(value = "Get editor associated resources panel configuration",
         nickname = "getEditorAssociatedPanelConfiguration")
-    @RequestMapping(value = "/{schema}/editor/associatedpanel/config/default.json",
+    @RequestMapping(value = "/{schema}/editor/associatedpanel/config/{name:[a-zA-Z]+}.json",
         method = RequestMethod.GET,
         produces = {
             MediaType.APPLICATION_JSON_VALUE
@@ -324,7 +324,12 @@ public class StandardsApi implements ApplicationContextAware {
         @ApiParam(value = "Schema identifier",
             required = true,
             example = "iso19139")
-        @PathVariable String schema
+        @PathVariable String schema,
+        @ApiParam(value = "Configuration identifier",
+            required = true,
+            defaultValue = "default",
+            example = "default")
+        @PathVariable String name
     ) throws Exception {
 
         String schemaToCheck = schema;
@@ -343,7 +348,7 @@ public class StandardsApi implements ApplicationContextAware {
 
             Path configFile = schemaDir.resolve("config").
                 resolve("associated-panel").
-                resolve("default.json");
+                resolve(name + ".json");
 
             if (Files.exists(configFile)) {
                 String jsonConfig = new String(Files.readAllBytes(configFile));
@@ -360,8 +365,8 @@ public class StandardsApi implements ApplicationContextAware {
 
 
         throw new ResourceNotFoundException(String.format(
-            "Associated panel configuration for schema '%s' not found.",
-            schema));
+            "Associated panel configuration '%s' for schema '%s' not found.",
+            name, schema));
 
 
     }
