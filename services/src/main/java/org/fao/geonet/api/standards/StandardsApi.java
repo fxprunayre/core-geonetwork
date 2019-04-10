@@ -334,50 +334,43 @@ public class StandardsApi implements ApplicationContextAware {
             example = "default")
         @PathVariable String name
     ) throws Exception {
+        // Store processed schemas to avoid loops
+        Set<String> schemasProcessed = new HashSet<>();
 
-        MetadataSchema metadataSchema = schemaManager.getSchema(schema);
-        String config = retrieveSchemaConfig(metadataSchema, name);
+        while (StringUtils.isNotEmpty(schema) &&
+            !schemasProcessed.contains(schema)) {
 
-        if (StringUtils.isNotEmpty(config)) {
-            return config;
-        } else if (metadataSchema.getDependsOn() != null) {
-            config = retrieveSchemaConfig(
-                schemaManager.getSchema(metadataSchema.getDependsOn()),
-                name);
-            if (StringUtils.isNotEmpty(config)) {
-                return config;
+            schemasProcessed.add(schema);
+
+            MetadataSchema metadataSchema = schemaManager.getSchema(schema);
+
+            Path schemaDir = metadataSchema.getSchemaDir();
+
+            Path configFile = schemaDir.resolve("config").
+                resolve("associated-panel").
+                resolve(name + ".json");
+
+            if (Files.exists(configFile)) {
+                try {
+                    String jsonConfig = new String(Files.readAllBytes(configFile));
+
+                    // Parse JSON file to check is valid
+                    new JSONObject(jsonConfig);
+                    return jsonConfig;
+                } catch (Exception e) {
+                    throw new WebApplicationException(String.format(
+                        "Associated panel configuration '%s' for schema '%s' is invalid. Error is: %s",
+                        name, metadataSchema.getName(), e.getMessage()));
+                }
             } else {
-                throw new ResourceNotFoundException(String.format(
-                    "Associated panel configuration '%s' not found for schema '%s' and its dependency.",
-                    name, schema));
+                // Use the file from dependent schema if available
+                schema = metadataSchema.getDependsOn();
             }
         }
 
         throw new ResourceNotFoundException(String.format(
-            "Associated panel configuration '%s' for schema '%s' not found.",
-            name, schema));
-    }
+        "Associated panel '%s' configuration not found for schema and its dependency '%s'.",
+            name, schemasProcessed.toString()));
 
-    private String retrieveSchemaConfig(MetadataSchema metadataSchema, String name) {
-        Path schemaDir = metadataSchema.getSchemaDir();
-
-        Path configFile = schemaDir.resolve("config").
-            resolve("associated-panel").
-            resolve(name + ".json");
-
-        if (Files.exists(configFile)) {
-            try {
-                String jsonConfig = new String(Files.readAllBytes(configFile));
-
-                // Parse JSON file to check is valid
-                new JSONObject(jsonConfig);
-                return jsonConfig;
-            } catch (Exception e) {
-                throw new WebApplicationException(String.format(
-                    "Associated panel configuration '%s' for schema '%s' is invalid. Error is: %s",
-                    name, metadataSchema.getName(), e.getMessage()));
-            }
-        }
-        return null;
     }
 }
