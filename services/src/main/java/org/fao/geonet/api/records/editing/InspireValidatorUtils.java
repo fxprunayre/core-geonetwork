@@ -58,6 +58,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,24 +96,24 @@ public class InspireValidatorUtils {
      */
     private final static String TestRuns_URL = "/v2/TestRuns";
 
-    public String defaultTestSuite;
+    public static String defaultTestSuite;
 
-    private Map<String, String[]> testsuites;
+    private static Map<String, String[]> testsuites;
 
 
-    public String getDefaultTestSuite() {
+    public static String getDefaultTestSuite() {
         return defaultTestSuite;
     }
 
     public void setDefaultTestSuite(String defaultTestSuite) {
-        this.defaultTestSuite = defaultTestSuite;
+        InspireValidatorUtils.defaultTestSuite = defaultTestSuite;
     }
 
     public void setTestsuites(Map<String, String[]> testsuites) {
-        this.testsuites = testsuites;
+        InspireValidatorUtils.testsuites = testsuites;
     }
 
-    public Map getTestsuites() {
+    public static Map getTestsuites() {
         return testsuites;
     }
 
@@ -129,11 +130,11 @@ public class InspireValidatorUtils {
      * @param client   the client (optional) (optional)
      * @return true, if successful
      */
-    public boolean checkServiceStatus(String endPoint, CloseableHttpClient client) {
+    public static boolean checkServiceStatus(String endPoint, CloseableHttpClient client, SettingManager settingManager) {
 
         boolean close = false;
         if (client == null) {
-            client = getHttpClient();
+            client = getHttpClient(settingManager);
             close = true;
         }
         HttpGet request = new HttpGet(endPoint + CheckStatus_URL);
@@ -170,7 +171,7 @@ public class InspireValidatorUtils {
      * @param client   the client (optional)
      * @return the string
      */
-    private String uploadMetadataFile(String endPoint, InputStream xml, CloseableHttpClient client) {
+    private static String uploadMetadataFile(String endPoint, InputStream xml, CloseableHttpClient client) {
         try {
             HttpPost request = new HttpPost(endPoint + TestObjects_URL + "?action=upload");
 
@@ -209,13 +210,48 @@ public class InspireValidatorUtils {
      * @param client    the client (optional)
      * @return the tests
      */
-    private List<String> getTests(String endPoint, String testsuite, CloseableHttpClient client) {
+    private static Map<String, Map<String, String>> endPointTests = new HashMap<>();
+
+    private static void addEndPointTest(String url, Map<String, String> list) {
+        endPointTests.put(url, list);
+    }
+
+    private static List<String> getTests(String endPoint, String testsuite, CloseableHttpClient client) {
         if (testsuite == null) {
             testsuite = getDefaultTestSuite();
         }
+        String[] tests = testsuites.get(testsuite);
 
+        List<String> testList = new ArrayList<>();
+
+        Map<String, String> listOfTests = endPointTests.get(endPoint);
+        if (listOfTests == null) {
+            loadTestForEndPoint(endPoint, client);
+        }
+
+        listOfTests = endPointTests.get(endPoint);
+
+        if (listOfTests == null) {
+            Log.warning(Log.SERVICE, "WARNING: INSPIRE endpoint: " + endPoint + " does not return tests for testsuite " + testsuite);
+            return testList;
+        }
+
+        listOfTests.entrySet().forEach(t -> {
+            boolean ok = false;
+
+            for (String testToRun : tests) {
+                ok = ok || t.getKey().equals(testToRun);
+            }
+
+            if (ok) {
+                testList.add(t.getValue());
+            }
+        });
+        return testList;
+    }
+
+    private static void loadTestForEndPoint(String endPoint, CloseableHttpClient client) {
         try {
-            String[] tests = testsuites.get(testsuite);
             HttpGet request = new HttpGet(endPoint + ExecutableTestSuites_URL);
 
             request.addHeader("User-Agent", USER_AGENT);
@@ -226,7 +262,7 @@ public class InspireValidatorUtils {
 
             if (response.getStatusLine().getStatusCode() == 200) {
 
-                List<String> testList = new ArrayList<>();
+                Map<String, String> endPointTest = new HashMap<>();
 
                 ResponseHandler<String> handler = new BasicResponseHandler();
                 String body = handler.handleResponse(response);
@@ -239,28 +275,17 @@ public class InspireValidatorUtils {
 
                 for (int i = 0; i < executableTestSuiteArray.length(); i++) {
                     JSONObject test = executableTestSuiteArray.getJSONObject(i);
-
-                    boolean ok = false;
-
-                    for (String testToRun : tests) {
-                        ok = ok || testToRun.equals(test.getString("label"));
-                    }
-
-                    if (ok) {
-                        testList.add(test.getString("id"));
-                    }
+                    endPointTest.put(test.getString("label"), test.getString("id"));
                 }
-
-                return testList;
+                addEndPointTest(endPoint, endPointTest);
             } else {
                 Log.warning(Log.SERVICE, "WARNING: INSPIRE service HTTP response: " + response.getStatusLine().getStatusCode() + " for " + ExecutableTestSuites_URL);
-                return null;
             }
         } catch (Exception e) {
             Log.error(Log.SERVICE, "Exception in INSPIRE service: " + endPoint, e);
-            return null;
         }
     }
+
 
     /**
      * Test run.
@@ -273,7 +298,7 @@ public class InspireValidatorUtils {
      * @throws IOException   Signals that an I/O exception has occurred.
      * @throws JSONException the JSON exception
      */
-    private String testRun(String endPoint, String fileId, List<String> testList, String testTitle, CloseableHttpClient client) {
+    private static String testRun(String endPoint, String fileId, List<String> testList, String testTitle, CloseableHttpClient client) {
         try {
             HttpPost request = new HttpPost(endPoint + TestRuns_URL);
 
@@ -335,14 +360,14 @@ public class InspireValidatorUtils {
      * @return true, if is ready
      * @throws Exception
      */
-    public boolean isReady(String endPoint, String testId, CloseableHttpClient client) throws Exception {
+    public static boolean isReady(String endPoint, String testId, CloseableHttpClient client, SettingManager settingManager) throws Exception {
         if (testId == null) {
             return false;
         }
 
         boolean close = false;
         if (client == null) {
-            client = getHttpClient();
+            client = getHttpClient(settingManager);
             close = true;
         }
 
@@ -366,7 +391,7 @@ public class InspireValidatorUtils {
                 // Completed when estimated number of Test Steps is equal to completed Test Steps
                 // Somehow this condition is necessary but not sufficient
                 // so another check on real value of test is evaluated
-                return jsonRoot.getInt("val") == jsonRoot.getInt("max") & isPassed(endPoint, testId, client) != null;
+                return jsonRoot.getInt("val") == jsonRoot.getInt("max") & isPassed(endPoint, testId, client, settingManager) != null;
 
             } else if (response.getStatusLine().getStatusCode() == 404) {
 
@@ -398,7 +423,7 @@ public class InspireValidatorUtils {
      * @return the string
      * @throws Exception
      */
-    public String isPassed(String endPoint, String testId, CloseableHttpClient client) throws Exception {
+    public static String isPassed(String endPoint, String testId, CloseableHttpClient client, SettingManager settingManager) throws Exception {
 
         if (testId == null) {
             throw new Exception("");
@@ -406,7 +431,7 @@ public class InspireValidatorUtils {
 
         boolean close = false;
         if (client == null) {
-            client = getHttpClient();
+            client = getHttpClient(settingManager);
             close = true;
         }
 
@@ -460,7 +485,7 @@ public class InspireValidatorUtils {
      * @param testId   the test id
      * @return the report url
      */
-    public String getReportUrl(String endPoint, String testId) {
+    public static String getReportUrl(String endPoint, String testId) {
 
         return endPoint + TestRuns_URL + "/" + testId + ".html";
     }
@@ -486,12 +511,12 @@ public class InspireValidatorUtils {
      * @throws IOException   Signals that an I/O exception has occurred.
      * @throws JSONException the JSON exception
      */
-    public String submitFile(String serviceEndpoint, InputStream record, String testsuite, String testTitle) throws IOException, JSONException {
+    public static String submitFile(String serviceEndpoint, InputStream record, String testsuite, String testTitle, SettingManager settingManager) throws IOException, JSONException {
 
-        CloseableHttpClient client = getHttpClient();
+        CloseableHttpClient client = getHttpClient(settingManager);
 
         try {
-            if (checkServiceStatus(serviceEndpoint, client)) {
+            if (checkServiceStatus(serviceEndpoint, client, settingManager)) {
                 // Get the tests to execute
                 List<String> tests = getTests(serviceEndpoint, testsuite, client);
                 // Upload file to test
@@ -519,7 +544,7 @@ public class InspireValidatorUtils {
         }
     }
 
-    private CloseableHttpClient getHttpClient() {
+    private static CloseableHttpClient getHttpClient(SettingManager settingManager) {
 
         HttpClientBuilder clientBuilder = ApplicationContextHolder.get().getBean(GeonetHttpRequestFactory.class).getDefaultHttpClientBuilder();
         CloseableHttpClient client = null;
