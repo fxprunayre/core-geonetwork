@@ -273,10 +273,8 @@
           //loadUserGroup();
           $timeout(loadUserGroup, 200);
 
-          scope.$watchCollection('userSearchGroups',
+          scope.$watchCollection('userSearchGroups.groups',
             function(n, o) {
-              console.log("userSearchGroups watchCollection");
-
               if (n !== o) {
                 scope.userSearchGroupsTextList = "";
 
