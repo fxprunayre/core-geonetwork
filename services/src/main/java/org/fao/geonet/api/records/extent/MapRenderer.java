@@ -86,7 +86,7 @@ public class MapRenderer {
      * Check if a geometry is in the domain of validity of a projection and if not return the
      * intersection of the geometry with the coordinate system domain of validity.
      */
-    private static Geometry computeGeomInDomainOfValidity(Geometry geom, CoordinateReferenceSystem mapCRS) {
+    public static Geometry computeGeomInDomainOfValidity(Geometry geom, CoordinateReferenceSystem mapCRS) {
         final GeometryFactory geometryFactory = JTSFactoryFinder.getGeometryFactory(null);
         final Extent domainOfValidity = mapCRS.getDomainOfValidity();
         Geometry adjustedGeom = geom;
