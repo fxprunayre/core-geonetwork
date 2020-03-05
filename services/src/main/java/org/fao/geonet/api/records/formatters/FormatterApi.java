@@ -141,7 +141,58 @@ import springfox.documentation.annotations.ApiIgnore;
 @Lazy
 public class FormatterApi extends AbstractFormatService implements ApplicationListener {
     @Autowired
-    LanguageUtils languageUtils;
+    private LanguageUtils languageUtils;
+
+    @Autowired
+    private FormatterCache formatterCache;
+
+    @Autowired
+    private IMetadataUtils metadataUtils;
+
+    @Autowired
+    private CacheConfig cacheConfig;
+
+    @Autowired
+    private SchemaManager schemaManager;
+
+    @Autowired
+    private MetadataRepository metadataRepository;
+
+    @Autowired
+    private AccessManager accessManager;
+
+    @Autowired
+    private SearchManager searchManager;
+
+    @Autowired
+    private GeonetHttpRequestFactory geonetHttpRequestFactory;
+
+    @Autowired
+    private SettingManager settingManager;
+
+    @Autowired
+    private GeonetworkDataDirectory geonetworkDataDirectory;
+
+    @Autowired
+    private ServiceManager serviceManager;
+
+    @Autowired
+    private XsltFormatter xsltFormatter;
+
+    @Autowired
+    private GroovyFormatter groovyFormatter;
+
+    @Autowired
+    private XmlSerializer xmlSerializer;
+
+    @Autowired
+    private OperationAllowedRepository operationAllowedRepository;
+
+    @Autowired
+    private SystemInfo systemInfo;
+
+    @Autowired
+    private IsoLanguagesMapper isoLanguagesMapper;
 
     /**
      * Map (canonical path to formatter dir -> Element containing all xml files in Formatter
@@ -166,7 +217,6 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             final Path toDir = geonetworkDataDirectory.getFormatterDir();
             try {
                 copyNewerFilesToDataDir(fromDir, toDir);
-                SchemaManager schemaManager = dataDirEvent.getApplicationContext().getBean(SchemaManager.class);
                 final Set<String> schemas = schemaManager.getSchemas();
                 for (String schema : schemas) {
                     final String webappSchemaPath = "WEB-INF/data/config/schema_plugins/" + schema + "/" + SCHEMA_PLUGIN_FORMATTER_DIR;
@@ -297,7 +347,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         AbstractMetadata metadata = ApiUtils.canViewRecord(metadataUuid, servletRequest);
 
         if(approved) {
-        	metadata = context.getBean(MetadataRepository.class).findOneByUuid(metadataUuid);
+            metadata = metadataRepository.findOneByUuid(metadataUuid);
         }
 
 
@@ -313,9 +363,9 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             final long changeDateAsTime = changeDate.toDate().getTime();
             long roundedChangeDate = changeDateAsTime / 1000 * 1000;
             if (request.checkNotModified(language, roundedChangeDate) &&
-                context.getBean(CacheConfig.class).allowCaching(key)) {
+                cacheConfig.allowCaching(key)) {
                 if (!skipPopularity) {
-                    context.getBean(DataManager.class).increasePopularity(context, String.valueOf(metadata.getId()));
+                    metadataUtils.increasePopularity(context, String.valueOf(metadata.getId()));
                 }
                 return;
             }
@@ -336,15 +386,14 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             // and completely swamp the cache.  So we go with #2.  The formatters are pretty fast so it is a fine solution
             bytes = formatMetadata.call().data;
         } else {
-            final FormatterCache cache = context.getBean(FormatterCache.class);
             if (refreshCache) {
-                cache.remove(key);
+                formatterCache.remove(key);
             }
-            bytes = cache.get(key, validator, formatMetadata, refreshCache ? true : false);
+            bytes = formatterCache.get(key, validator, formatMetadata, refreshCache ? true : false);
         }
         if (bytes != null) {
             if (!skipPopularity) {
-                context.getBean(DataManager.class).increasePopularity(context, String.valueOf(metadata.getId()));
+                metadataUtils.increasePopularity(context, String.valueOf(metadata.getId()));
             }
             writeOutResponse(context, metadataUuid,
                 LanguageUtils.locale2gnCode(locale.getISO3Language()),
@@ -396,7 +445,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         Element metadataEl = Xml.loadString(metadata, false);
 
         if (mdPath != null) {
-            final List<Namespace> namespaces = context.getBean(SchemaManager.class).getSchema(schema).getNamespaces();
+            final List<Namespace> namespaces = schemaManager.getSchema(schema).getNamespaces();
             metadataEl = Xml.selectElement(metadataEl, mdPath, namespaces);
             metadataEl.detach();
         }
@@ -427,8 +476,6 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         @RequestParam(value = "uuid", required = false) final String uuid,
         @RequestParam(value = "xsl", required = false) final String xslid) throws Exception {
         final FormatType formatType = FormatType.valueOf(type.toLowerCase());
-
-        FormatterCache formatterCache = ApplicationContextHolder.get().getBean(FormatterCache.class);
 
         String resolvedId = resolveId(id, uuid);
         Key key = new Key(Integer.parseInt(resolvedId), "", lang, formatType, xslid, true, FormatterWidth._100);
@@ -474,19 +521,19 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         Lib.resource.checkPrivilege(context, resolvedId, ReservedOperation.view);
 
         final boolean hideWithheld = Boolean.TRUE.equals(hide_withheld) ||
-            !context.getBean(AccessManager.class).canEdit(context, resolvedId);
+            !accessManager.canEdit(context, resolvedId);
         Key key = new Key(Integer.parseInt(resolvedId), "", lang, formatType, xslid, hideWithheld, width);
         final boolean skipPopularityBool = new ParamValue(skipPopularity).toBool();
 
-        ISODate changeDate = context.getBean(SearchManager.class).getDocChangeDate(resolvedId);
+        ISODate changeDate = searchManager.getDocChangeDate(resolvedId);
 
         Validator validator;
         if (changeDate != null) {
             final long changeDateAsTime = changeDate.toDate().getTime();
             long roundedChangeDate = changeDateAsTime / 1000 * 1000;
-            if (request.checkNotModified(roundedChangeDate) && context.getBean(CacheConfig.class).allowCaching(key)) {
+            if (request.checkNotModified(roundedChangeDate) && cacheConfig.allowCaching(key)) {
                 if (!skipPopularityBool) {
-                    context.getBean(DataManager.class).increasePopularity(context, resolvedId);
+                    metadataUtils.increasePopularity(context, resolvedId);
                 }
                 return;
             }
@@ -508,11 +555,11 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             // and completely swamp the cache.  So we go with #2.  The formatters are pretty fast so it is a fine solution
             bytes = formatMetadata.call().data;
         } else {
-            bytes = context.getBean(FormatterCache.class).get(key, validator, formatMetadata, false);
+            bytes = formatterCache.get(key, validator, formatMetadata, false);
         }
         if (bytes != null) {
             if (!skipPopularityBool) {
-                context.getBean(DataManager.class).increasePopularity(context, resolvedId);
+                metadataUtils.increasePopularity(context, resolvedId);
             }
 
             writeOutResponse(context, resolvedId, lang, request.getNativeResponse(HttpServletResponse.class), formatType, bytes);
@@ -551,7 +598,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
     private String getXmlFromUrl(ServiceContext context, String lang, String url, WebRequest request) throws IOException, URISyntaxException {
         String adjustedUrl = url;
         if (!url.startsWith("http")) {
-            adjustedUrl = context.getBean(SettingManager.class).getSiteURL(lang) + url;
+            adjustedUrl = settingManager.getSiteURL(lang) + url;
         } else {
             final URI uri = new URI(url);
             Set allowedRemoteHosts = ApplicationContextHolder.get().getBean("formatterRemoteFormatAllowedHosts", Set.class);
@@ -568,7 +615,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             }
         }
 
-        GeonetHttpRequestFactory requestFactory = context.getBean(GeonetHttpRequestFactory.class);
+        GeonetHttpRequestFactory requestFactory = geonetHttpRequestFactory;
         final ClientHttpResponse execute = requestFactory.execute(getXmlRequest);
         if (execute.getRawStatusCode() != 200) {
             throw new IllegalArgumentException("Request " + adjustedUrl + " did not succeed.  Response Status: " + execute.getStatusCode() + ", status text: " + execute.getStatusText());
@@ -581,7 +628,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         try {
             XslUtil.setNoScript();
             ITextRenderer renderer = new ITextRenderer();
-            String siteUrl = context.getBean(SettingManager.class).getSiteURL(lang);
+            String siteUrl = settingManager.getSiteURL(lang);
             MapRenderer mapRenderer = new MapRenderer(context);
             renderer.getSharedContext().setReplacedElementFactory(new ImageReplacedElementFactory(siteUrl.replace("/" + lang + "/", "/eng/"), renderer.getSharedContext()
                 .getReplacedElementFactory(), mapRenderer));
@@ -605,7 +652,6 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
     }
 
     private ServiceContext createServiceContext(String lang, FormatType type, HttpServletRequest request) {
-        final ServiceManager serviceManager = ApplicationContextHolder.get().getBean(ServiceManager.class);
         return serviceManager.createServiceContext("metadata.formatter" + type, lang, request);
     }
 
@@ -619,9 +665,8 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         final String schema = metadataInfo.getDataInfo().getSchemaId();
         Path schemaDir = null;
         if (schema != null) {
-            schemaDir = context.getBean(SchemaManager.class).getSchemaDir(schema);
+            schemaDir = schemaManager.getSchemaDir(schema);
         }
-        GeonetworkDataDirectory geonetworkDataDirectory = context.getBean(GeonetworkDataDirectory.class);
         Path formatDir = getAndVerifyFormatDir(geonetworkDataDirectory, "xsl", xslid, schemaDir);
 
         ConfigFile config = new ConfigFile(formatDir, true, schemaDir);
@@ -640,7 +685,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         fparams.schema = schema;
         fparams.schemaDir = schemaDir;
         fparams.formatType = type;
-        fparams.url = context.getBean(SettingManager.class).getSiteURL(lang);
+        fparams.url = settingManager.getSiteURL(lang);
         fparams.metadataInfo = metadataInfo;
         fparams.width = width;
         fparams.formatterInSchemaPlugin = isFormatterInSchemaPlugin(formatDir, schemaDir);
@@ -650,10 +695,10 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
         FormatterImpl formatter;
         if (Files.exists(viewXslFile)) {
             fparams.viewFile = viewXslFile.toRealPath();
-            formatter = context.getBean(XsltFormatter.class);
+            formatter = xsltFormatter;
         } else if (Files.exists(viewGroovyFile)) {
             fparams.viewFile = viewGroovyFile.toRealPath();
-            formatter = context.getBean(GroovyFormatter.class);
+            formatter = groovyFormatter;
         } else {
             throw new IllegalArgumentException("The 'xsl' parameter must be a valid id of a formatter");
         }
@@ -683,12 +728,10 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
     public Pair<Element, AbstractMetadata> getMetadata(ServiceContext context, int id,
                                                Boolean hide_withheld) throws Exception {
 
-        AbstractMetadata md = loadMetadata(context.getBean(IMetadataUtils.class), id);
-        XmlSerializer serializer = context.getBean(XmlSerializer.class);
-        boolean doXLinks = serializer.resolveXLinks();
+        AbstractMetadata md = loadMetadata(metadataUtils, id);
+        boolean doXLinks = xmlSerializer.resolveXLinks();
 
-
-        Element metadata = serializer.removeHiddenElements(false, md, true);
+        Element metadata = xmlSerializer.removeHiddenElements(false, md, true);
         if (doXLinks) Processor.processXLink(metadata, context);
 
         boolean withholdWithheldElements = hide_withheld != null && hide_withheld;
@@ -768,7 +811,6 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
                             try {
                                 final String fileName = getNameWithoutExtension(file.getFileName().toString());
                                 final String[] nameParts = fileName.split("-", 2);
-                                IsoLanguagesMapper isoLanguagesMapper = context.getBean(IsoLanguagesMapper.class);
                                 String lang = isoLanguagesMapper.iso639_1_to_iso639_2(nameParts[0].toLowerCase(), nameParts[0]);
                                 final JSONObject json = new JSONObject(new String(Files.readAllBytes(file), Constants.CHARSET));
                                 Element fileElements = new Element(nameParts[1]);
@@ -809,7 +851,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
     }
 
     protected boolean isDevMode(ServiceContext context) {
-        return context.getBean(SystemInfo.class).isDevMode();
+        return systemInfo.isDevMode();
     }
 
     public class FormatMetadata implements Callable<StoreInfoAndDataLoadResult> {
@@ -836,7 +878,7 @@ public class FormatterApi extends AbstractFormatService implements ApplicationLi
             long changeDate = fparams.metadataInfo.getDataInfo().getChangeDate().toDate().getTime();
             final Specification<OperationAllowed> isPublished = OperationAllowedSpecs.isPublic(ReservedOperation.view);
             final Specification<OperationAllowed> hasMdId = OperationAllowedSpecs.hasMetadataId(key.mdId);
-            final OperationAllowed one = serviceContext.getBean(OperationAllowedRepository.class).findOne(where(hasMdId).and(isPublished));
+            final OperationAllowed one = operationAllowedRepository.findOne(where(hasMdId).and(isPublished));
             final boolean isPublishedMd = one != null;
 
             Key withheldKey = null;
