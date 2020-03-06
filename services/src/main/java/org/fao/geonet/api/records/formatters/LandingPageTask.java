@@ -91,7 +91,7 @@ public class LandingPageTask extends QuartzJobBean {
         this.landingPageLanguage = landingPageLanguage;
     }
 
-    private void buildLandingPages(ServiceContext serviceContext) {
+    private void buildLandingPages() {
         ApplicationContextHolder.set(applicationContext);
         IndexingList list = applicationContext.getBean("landingPageList", IndexingList.class);
         Set<Integer> metadataIdentifiers = list.getIdentifiers();
@@ -117,6 +117,6 @@ public class LandingPageTask extends QuartzJobBean {
             Log.debug(Geonet.INDEX_ENGINE, "Landing page task / Start at: "
                 + new Date() + ". Checking if any records need to be updated ...");
         }
-        buildLandingPages(serviceContext);
+        buildLandingPages();
     }
 }
