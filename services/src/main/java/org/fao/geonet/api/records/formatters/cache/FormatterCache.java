@@ -487,44 +487,47 @@ public class FormatterCache {
      * @param metadataId
      */
     public void buildLandingPage(int metadataId) {
-        if (_context == null) {
+        if (_context == null || StringUtils.isEmpty(landingPageFormatter)) {
             return;
         }
-        if (StringUtils.isNotEmpty(landingPageFormatter)) {
-            final ServletContext servletContext = _context.getServlet().getServletContext();
-            _context.setAsThreadLocal();
-            final MockHttpSession servletSession = new MockHttpSession(servletContext);
-            servletSession.setAttribute(Jeeves.Elem.SESSION, _context.getUserSession());
-            final MockHttpServletRequest servletRequest = new MockHttpServletRequest(servletContext);
-            servletRequest.setSession(servletSession);
-            servletRequest.setParameters(landingPageFormatterParameters);
-            final MockHttpServletResponse response = new MockHttpServletResponse();
 
-            final OperationAllowed publicRecord = operationAllowedRepo.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId());
-            if (publicRecord != null) {
-                final Metadata metadata = metadataRepository.findOne(metadataId);
-                if(metadata.getDataInfo().getType() == MetadataType.METADATA) {
-                    try {
-                        formatService.getRecordFormattedBy(
-                            MediaType.TEXT_HTML_VALUE,
-                            landingPageFormatter,
-                            metadataUtils.getMetadataUuid(metadataId + ""),
-                            FormatterWidth._100,
-                            null,
-                            landingPageLanguage,
-                            FormatType.html,
-                            true,
-                            true,
-                            true,
-                            new ServletWebRequest(servletRequest, response),
-                            servletRequest);
-                    } catch (Throwable t) {
-                        Log.info(Geonet.GEONETWORK, String.format(
-                            "Error building the landing page with formatter '%s' for record '%s'.",
-                            landingPageFormatter, metadataId), t);
-                    }
-                }
-            }
+        final OperationAllowed publicRecord = operationAllowedRepo.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId());
+        if (publicRecord == null) {
+            return;
+        }
+
+        final Metadata metadata = metadataRepository.findOne(metadataId);
+        if(metadata.getDataInfo().getType() != MetadataType.METADATA) {
+            return;
+        }
+
+        final ServletContext servletContext = _context.getServlet().getServletContext();
+        _context.setAsThreadLocal();
+        final MockHttpSession servletSession = new MockHttpSession(servletContext);
+        servletSession.setAttribute(Jeeves.Elem.SESSION, _context.getUserSession());
+        final MockHttpServletRequest servletRequest = new MockHttpServletRequest(servletContext);
+        servletRequest.setSession(servletSession);
+        servletRequest.setParameters(landingPageFormatterParameters);
+        final MockHttpServletResponse response = new MockHttpServletResponse();
+        
+        try {
+            formatService.getRecordFormattedBy(
+                MediaType.TEXT_HTML_VALUE,
+                landingPageFormatter,
+                metadataUtils.getMetadataUuid(metadataId + ""),
+                FormatterWidth._100,
+                null,
+                landingPageLanguage,
+                FormatType.html,
+                true,
+                true,
+                true,
+                new ServletWebRequest(servletRequest, response),
+                servletRequest);
+        } catch (Throwable t) {
+            Log.info(Geonet.GEONETWORK, String.format(
+                "Error building the landing page with formatter '%s' for record '%s'.",
+                landingPageFormatter, metadataId), t);
         }
     }
 }
