@@ -23,13 +23,11 @@
 
 package org.fao.geonet.api.users;
 
-import static org.springframework.http.HttpStatus.NO_CONTENT;
-
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jeeves.server.UserSession;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.api.API;
 import org.fao.geonet.api.ApiUtils;
@@ -48,45 +46,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import jeeves.server.UserSession;
-import springfox.documentation.annotations.ApiIgnore;
+import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RequestMapping(value = {
     "/{portal}/api/me",
     "/{portal}/api/" + API.VERSION_0_1 +
         "/me"
 })
-@Api(value = "me",
-    tags = "me",
+@Tag(name = "me",
     description = "Me operations")
 @Controller("me")
 public class MeApi {
 
-    @ApiOperation(
-        value = "Get information about me",
-        notes = "If not authenticated, return status 204 (NO_CONTENT), " +
+    @io.swagger.v3.oas.annotations.Operation(
+        summary = "Get information about me",
+        description = "If not authenticated, return status 204 (NO_CONTENT), " +
             "else return basic user information. This operation is usually used to " +
             "know if current user is authenticated or not." +
-            "It returns also info about groups and profiles.",
-        nickname = "getMe")
+            "It returns also info about groups and profiles.")
     @RequestMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         method = RequestMethod.GET)
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Authenticated. Return user details."),
-        @ApiResponse(code = 204, message = "Not authenticated.")
+        @ApiResponse(responseCode = "200", description = "Authenticated. Return user details."),
+        @ApiResponse(responseCode = "204", description = "Not authenticated.")
     })
     @ResponseBody
     public ResponseEntity<MeResponse> getMe(
-        @ApiIgnore
-        @ApiParam(
-            hidden = true
-        )
+        @Parameter(hidden = true)
             HttpSession session
     ) throws Exception {
 
@@ -110,7 +101,8 @@ public class MeApi {
     }
 
     /**
-     *  Retrieves the user's groups ids
+     * Retrieves the user's groups ids
+     *
      * @param session
      * @param profile
      * @return

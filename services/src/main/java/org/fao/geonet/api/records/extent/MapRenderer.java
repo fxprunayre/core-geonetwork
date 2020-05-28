@@ -23,10 +23,6 @@
 
 package org.fao.geonet.api.records.extent;
 
-import org.locationtech.jts.awt.ShapeWriter;
-import org.locationtech.jts.geom.Envelope;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
 import jeeves.server.context.ServiceContext;
 import org.apache.commons.io.IOUtils;
 import org.fao.geonet.api.regions.GeomFormat;
@@ -40,6 +36,10 @@ import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.JTSFactoryFinder;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.referencing.CRS;
+import org.locationtech.jts.awt.ShapeWriter;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.opengis.metadata.extent.Extent;
 import org.opengis.metadata.extent.GeographicBoundingBox;
 import org.opengis.metadata.extent.GeographicExtent;
@@ -64,9 +64,8 @@ import static java.lang.Math.sqrt;
 
 public class MapRenderer {
 
-    private final ServiceContext context;
-
     private static final double WGS_DIAG = sqrt(pow(360, 2) + pow(180, 2));
+    private final ServiceContext context;
 
     public MapRenderer(ServiceContext context) {
         this.context = context;

@@ -23,19 +23,17 @@
 
 package org.fao.geonet.api;
 
+import jeeves.constants.Jeeves;
+import jeeves.server.UserSession;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.utils.Log;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import jeeves.constants.Jeeves;
-import jeeves.server.UserSession;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * In charge of creating a new {@link UserSession} if not existing. Avoid to create any sessions for
@@ -49,6 +47,14 @@ public class AllRequestsInterceptor extends HandlerInterceptorAdapter {
         + "voyager|yahoo! slurp|mediapartners-google).*";
 
     private static final Pattern regex = Pattern.compile(BOT_REGEXP, Pattern.CASE_INSENSITIVE);
+
+    public static boolean isCrawler(String userAgent) {
+        if (StringUtils.isNotBlank(userAgent)) {
+            Matcher m = regex.matcher(userAgent);
+            return m.find();
+        }
+        return false;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -65,7 +71,7 @@ public class AllRequestsInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Create the {@link UserSession} and add it to the HttpSession.
-     *
+     * <p>
      * If a crawler, check that session is null and if not, invalidate it.
      */
     private void createSessionForAllButNotCrawlers(HttpServletRequest request) {
@@ -97,13 +103,5 @@ public class AllRequestsInterceptor extends HandlerInterceptorAdapter {
                 httpSession.invalidate();
             }
         }
-    }
-
-    public static boolean isCrawler(String userAgent) {
-        if (StringUtils.isNotBlank(userAgent)) {
-            Matcher m = regex.matcher(userAgent);
-            return m.find();
-        }
-        return false;
     }
 }

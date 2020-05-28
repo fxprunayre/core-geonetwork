@@ -24,11 +24,9 @@
 package org.fao.geonet.api.links;
 
 import com.google.common.collect.Sets;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jeeves.server.UserSession;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.api.API;
@@ -48,7 +46,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -56,15 +53,8 @@ import org.springframework.jmx.export.MBeanExporter;
 import org.springframework.jmx.export.naming.SelfNaming;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.PostConstruct;
 import javax.management.MalformedObjectNameException;
@@ -85,31 +75,23 @@ import static org.fao.geonet.api.ApiParams.API_PARAM_RECORD_UUIDS_OR_SELECTION;
     "/{portal}/api/" + API.VERSION_0_1 +
         "/records/links"
 })
-@Api(value = "links",
-    tags = "links",
+@Tag(name = "links",
     description = "Record link operations")
 public class LinksApi {
     private static final int NUMBER_OF_SUBSEQUENT_PROCESS_MBEAN_TO_KEEP = 5;
-
-    @Autowired
-    LinkRepository linkRepository;
-
-    @Autowired
-    MetadataRepository metadataRepository;
-
-    @Autowired
-    DataManager dataManager;
-
-    @Autowired
-    UrlAnalyzer urlAnalyser;
-
-    @Autowired
-    MBeanExporter mBeanExporter;
-
     @Autowired
     protected ApplicationContext appContext;
-
-    private ArrayDeque<SelfNaming> mAnalyseProcesses = new ArrayDeque<>(NUMBER_OF_SUBSEQUENT_PROCESS_MBEAN_TO_KEEP);
+    @Autowired
+    LinkRepository linkRepository;
+    @Autowired
+    MetadataRepository metadataRepository;
+    @Autowired
+    DataManager dataManager;
+    @Autowired
+    UrlAnalyzer urlAnalyser;
+    @Autowired
+    MBeanExporter mBeanExporter;
+    private final ArrayDeque<SelfNaming> mAnalyseProcesses = new ArrayDeque<>(NUMBER_OF_SUBSEQUENT_PROCESS_MBEAN_TO_KEEP);
 
     @PostConstruct
     public void iniMBeansSlidingWindowWithEmptySlot() {
@@ -124,25 +106,27 @@ public class LinksApi {
         }
     }
 
-    @ApiOperation(
-            value = "Get record links",
-            notes = "",
-            nickname = "getRecordLinks")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
-                    value = "Results page you want to retrieve (0..N)"),
-            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
-                    value = "Number of records per page."),
-            @ApiImplicitParam(name = "sort", allowMultiple = false, dataType = "string", paramType = "query",
-                    value = "Sorting criteria in the format: property(,asc|desc). " +
-                            "Default sort order is ascending. " )
+    @io.swagger.v3.oas.annotations.Operation(
+        summary = "Get record links",
+        description = "")
+    @Parameters({
+        @Parameter(name = "page",
+            //dataType = "integer", paramType = "query",
+            description = "Results page you want to retrieve (0..N)"),
+        @Parameter(name = "size",
+            //dataType = "integer", paramType = "query",
+            description = "Number of records per page."),
+        @Parameter(name = "sort",
+            //allowMultiple = false, dataType = "string", paramType = "query",
+            description = "Sorting criteria in the format: property(,asc|desc). " +
+                "Default sort order is ascending. ")
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("isAuthenticated()")
     public Page<Link> getRecordLinks(
-            @ApiParam(value = "Filter, e.g. \"{url: 'png', lastState: 'ko', records: 'e421', groupId: 12}\", lastState being 'ok'/'ko'/'unknown'", required = false) @RequestParam(required = false) JSONObject filter,
-            @ApiParam(value = "Optional, restrain display to links defined in published to all metadata or defined in published to given group, e.g. 5. Setting the param to 1 will restrain display to published to all.", required = false) @RequestParam(required = false) Integer groupIdFilter,
-            @ApiIgnore Pageable pageRequest) throws JSONException {
+        @Parameter(description = "Filter, e.g. \"{url: 'png', lastState: 'ko', records: 'e421', groupId: 12}\", lastState being 'ok'/'ko'/'unknown'", required = false) @RequestParam(required = false) JSONObject filter,
+        @Parameter(description = "Optional, restrain display to links defined in published to all metadata or defined in published to given group, e.g. 5. Setting the param to 1 will restrain display to published to all.", required = false) @RequestParam(required = false) Integer groupIdFilter,
+        @Parameter(hidden = true) Pageable pageRequest) throws JSONException {
 
         if (filter == null && groupIdFilter != null) {
             return linkRepository.findAll(LinkSpecs.filter(null, null, null, groupIdFilter), pageRequest);
@@ -156,7 +140,7 @@ public class LinksApi {
                 stateToMatch = 0;
                 if (filter.getString("lastState").equalsIgnoreCase("ok")) {
                     stateToMatch = 1;
-                } else  if (filter.getString("lastState").equalsIgnoreCase("ko")) {
+                } else if (filter.getString("lastState").equalsIgnoreCase("ko")) {
                     stateToMatch = -1;
                 }
             }
@@ -176,10 +160,9 @@ public class LinksApi {
 
     }
 
-    @ApiOperation(
-        value = "Analyze records links",
-        notes = "",
-        nickname = "analyzeRecordLinks")
+    @io.swagger.v3.oas.annotations.Operation(
+        summary = "Analyze records links",
+        description = "")
     @RequestMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         method = RequestMethod.POST)
@@ -187,13 +170,13 @@ public class LinksApi {
     @PreAuthorize("hasRole('Administrator')")
     @ResponseBody
     public ResponseEntity analyzeRecordLinks(
-        @ApiParam(value = API_PARAM_RECORD_UUIDS_OR_SELECTION,
+        @Parameter(description = API_PARAM_RECORD_UUIDS_OR_SELECTION,
             required = false,
             example = "")
         @RequestParam(required = false)
             String[] uuids,
-        @ApiParam(
-            value = ApiParams.API_PARAM_BUCKET_NAME,
+        @Parameter(
+            description = ApiParams.API_PARAM_BUCKET_NAME,
             required = false)
         @RequestParam(
             required = false
@@ -207,9 +190,9 @@ public class LinksApi {
             required = false,
             defaultValue = "false")
             boolean analyze,
-        @ApiIgnore
+        @Parameter(hidden = true)
             HttpSession httpSession,
-        @ApiIgnore
+        @Parameter(hidden = true)
             HttpServletRequest request
     ) throws IOException, JDOMException {
         MAnalyseProcess registredMAnalyseProcess = getRegistredMAnalyseProcess();
@@ -252,10 +235,9 @@ public class LinksApi {
     }
 
 
-    @ApiOperation(
-        value = "Remove all links and status history",
-        notes = "",
-        nickname = "purgeAll")
+    @io.swagger.v3.oas.annotations.Operation(
+        summary = "Remove all links and status history",
+        description = "")
     @RequestMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         method = RequestMethod.DELETE)
