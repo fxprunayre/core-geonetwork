@@ -33,6 +33,7 @@ import org.fao.geonet.api.API;
 import org.fao.geonet.api.ApiParams;
 import org.fao.geonet.api.ApiUtils;
 import org.fao.geonet.api.records.formatters.cache.FormatterCache;
+import org.fao.geonet.api.records.formatters.cache.LandingPageCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -60,7 +61,11 @@ import java.util.Map;
 @ReadWriteController
 public class CacheApi {
     @Autowired
+    LandingPageCache landingPageCache;
+
+    @Autowired
     FormatterCache formatterCache;
+
 
     @ApiOperation(
         value = "Get formatter cache info",
@@ -131,7 +136,7 @@ public class CacheApi {
         @ApiIgnore
             HttpServletRequest request
     ) throws Exception {
-        formatterCache.fillLandingPageCache(ApiUtils.createServiceContext(request));
+        landingPageCache.fillLandingPageCache(ApiUtils.createServiceContext(request));
         return new ResponseEntity(HttpStatus.CREATED);
     }
 

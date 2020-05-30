@@ -33,7 +33,7 @@ import jeeves.server.context.ServiceContext;
 import jeeves.server.sources.http.ServletPathFinder;
 import jeeves.xlink.Processor;
 import org.apache.commons.lang.StringUtils;
-import org.fao.geonet.api.records.formatters.cache.FormatterCache;
+import org.fao.geonet.api.records.formatters.cache.LandingPageCache;
 import org.fao.geonet.api.site.LogUtils;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Pair;
@@ -407,7 +407,7 @@ public class Geonetwork implements ApplicationHandler {
             createDBHeartBeat(gnContext, dbHeartBeatInitialDelay, dbHeartBeatFixedDelay);
         }
 
-        _applicationContext.getBean(FormatterCache.class).setContext(context);
+        _applicationContext.getBean(LandingPageCache.class).setContext(context);
         fillJsCache(context);
 
         AbstractEntityListenerManager.setSystemRunning(true);

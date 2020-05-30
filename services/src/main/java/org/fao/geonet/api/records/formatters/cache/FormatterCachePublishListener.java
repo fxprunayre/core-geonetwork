@@ -53,6 +53,10 @@ public class FormatterCachePublishListener implements AsynchAfterCommitListener 
     private FormatterCache formatterCache;
 
     @Autowired
+    private LandingPageCache landingPageCache;
+
+
+    @Autowired
     OperationAllowedRepository operationAllowedRepository;
 
     private static Logger LOGGER =  LoggerFactory.getLogger("geonetwork.formatter");
@@ -79,13 +83,8 @@ public class FormatterCachePublishListener implements AsynchAfterCommitListener 
             && operationAllowedRepository.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(
                 ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId()
                 ) != null) {
-
-            IndexingList list = ApplicationContextHolder.get()
-                                    .getBean("landingPageList", IndexingList.class);
-
-            LOGGER.debug("Register landing page refresh of public record '{}' [{}].", metadataId, Thread.currentThread());
-            list.add(metadataId);
-//            formatterCache.buildLandingPage(metadataId);
+            LOGGER.debug("Refreshing landing page of public record '{}' [{}].", metadataId, Thread.currentThread());
+            landingPageCache.buildLandingPage(metadataId);
         }
     }
 

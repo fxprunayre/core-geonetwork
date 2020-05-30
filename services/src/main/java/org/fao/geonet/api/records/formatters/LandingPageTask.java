@@ -26,13 +26,9 @@ package org.fao.geonet.api.records.formatters;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.ServiceManager;
 import org.fao.geonet.ApplicationContextHolder;
-import org.fao.geonet.api.records.formatters.cache.FormatterCache;
+import org.fao.geonet.api.records.formatters.cache.LandingPageCache;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.kernel.DataManager;
-import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.search.index.IndexingList;
-import org.fao.geonet.repository.MetadataRepository;
-import org.fao.geonet.repository.OperationAllowedRepository;
 import org.fao.geonet.utils.Log;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -57,8 +53,9 @@ public class LandingPageTask extends QuartzJobBean {
     protected ConfigurableApplicationContext applicationContext;
     @Autowired
     protected ServiceManager serviceManager;
+
     @Autowired
-    FormatterCache formatterCache;
+    LandingPageCache landingPageCache;
 
     private String landingPageFormatter;
     private Map<String, String> landingPageFormatterParameters = new HashMap<>();
@@ -102,7 +99,7 @@ public class LandingPageTask extends QuartzJobBean {
             }
 
             for (Integer metadataIdentifier : metadataIdentifiers) {
-                formatterCache.buildLandingPage(metadataIdentifier);
+                landingPageCache.buildLandingPage(metadataIdentifier);
             }
         }
     }
