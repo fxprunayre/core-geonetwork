@@ -23,8 +23,12 @@
 
 package org.fao.geonet.api.records.formatters;
 
-import io.swagger.annotations.*;
-import org.fao.geonet.ApplicationContextHolder;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+import jeeves.services.ReadWriteController;
 import org.fao.geonet.api.API;
 import org.fao.geonet.api.ApiParams;
 import org.fao.geonet.api.ApiUtils;
@@ -37,17 +41,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import jeeves.services.ReadWriteController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.Map;
-
-import static org.fao.geonet.api.records.formatters.cache.FormatterCache.initializeFormatters;
 
 @RequestMapping(value = {
     "/{portal}/api/formatters",

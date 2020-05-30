@@ -375,50 +375,6 @@ public class FormatterCache {
         return cacheProperties;
     }
 
-    /**
-     * If one record available in the catalogue, init all formatters defined
-     * in formattersToInitialize so they get loaded eg. XSLCache init
-     * @param context
-     */
-    public static void initializeFormatters(final ServiceContext context) {
-        final FormatterApi formatService = context.getBean(FormatterApi.class);
-
-        Thread fillCaches = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                final ServletContext servletContext = context.getServlet().getServletContext();
-                context.setAsThreadLocal();
-                final Page<Metadata> metadatas = ApplicationContextHolder.get().getBean(MetadataRepository.class).findAll(new PageRequest(0, 1));
-                if (metadatas.getNumberOfElements() > 0) {
-                    Integer mdId = metadatas.getContent().get(0).getId();
-                    context.getUserSession().loginAs(new User().setName("admin").setProfile(Profile.Administrator).setUsername("admin"));
-                    @SuppressWarnings("unchecked")
-                    List<String> formattersToInitialize = ApplicationContextHolder.get().getBean("formattersToInitialize", List.class);
-
-                    for (String formatterName : formattersToInitialize) {
-                        Log.info(Geonet.GEONETWORK, "Initializing the Formatter with id: " + formatterName);
-                        final MockHttpSession servletSession = new MockHttpSession(servletContext);
-                        servletSession.setAttribute(Jeeves.Elem.SESSION,  context.getUserSession());
-                        final MockHttpServletRequest servletRequest = new MockHttpServletRequest(servletContext);
-                        servletRequest.setSession(servletSession);
-                        final MockHttpServletResponse response = new MockHttpServletResponse();
-                        try {
-                            formatService.exec("eng", FormatType.html.toString(), mdId.toString(), null, formatterName,
-                                Boolean.TRUE.toString(), false, FormatterWidth._100, new ServletWebRequest(servletRequest, response));
-                        } catch (Throwable t) {
-                            Log.info(Geonet.GEONETWORK, "Error while initializing the Formatter with id: " + formatterName, t);
-                        }
-                    }
-                }
-            }
-        });
-        fillCaches.setDaemon(true);
-        fillCaches.setName("Fill formatter cache thread");
-        fillCaches.setPriority(Thread.MIN_PRIORITY);
-        fillCaches.start();
-    }
-
-
     @Autowired
     OperationAllowedRepository operationAllowedRepo;
     @Autowired
