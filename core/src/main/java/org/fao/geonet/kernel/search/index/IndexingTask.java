@@ -61,7 +61,7 @@ public class IndexingTask extends QuartzJobBean {
 
     private void indexRecords() {
         ApplicationContextHolder.set(applicationContext);
-        IndexingList list = applicationContext.getBean("indexingList", IndexingList.class);
+        IndexingList list = applicationContext.getBean(IndexingList.class);
         Set<Integer> metadataIdentifiers = list.getIdentifiers();
         if (metadataIdentifiers.size() > 0) {
             if (Log.isDebugEnabled(Geonet.INDEX_ENGINE)) {

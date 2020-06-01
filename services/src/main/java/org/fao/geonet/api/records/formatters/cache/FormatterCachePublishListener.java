@@ -23,13 +23,11 @@
 
 package org.fao.geonet.api.records.formatters.cache;
 
-import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.domain.MetadataType;
 import org.fao.geonet.domain.OperationAllowed;
 import org.fao.geonet.domain.ReservedGroup;
 import org.fao.geonet.domain.ReservedOperation;
 import org.fao.geonet.events.md.MetadataIndexCompleted;
-import org.fao.geonet.kernel.search.index.IndexingList;
 import org.fao.geonet.repository.OperationAllowedRepository;
 import org.fao.geonet.repository.specification.OperationAllowedSpecs;
 import org.slf4j.Logger;

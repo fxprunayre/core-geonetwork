@@ -109,7 +109,6 @@ public class BaseMetadataUtils implements IMetadataUtils {
     protected SettingManager settingManager;
 
     @Autowired
-    @Qualifier("indexingList")
     private  IndexingList indexingList;
 
     @Autowired
