@@ -47,27 +47,24 @@ import java.io.IOException;
 
 @EnableAsync
 public class FormatterCachePublishListener implements AsynchAfterCommitListener {
+    private static Logger LOGGER =  LoggerFactory.getLogger("geonetwork.formatter");
+
     @Autowired
     private FormatterCache formatterCache;
 
     @Autowired
     private LandingPageCache landingPageCache;
 
-
     @Autowired
     OperationAllowedRepository operationAllowedRepository;
 
-    private static Logger LOGGER =  LoggerFactory.getLogger("geonetwork.formatter");
-
-    private static final Specification<OperationAllowed> isPublished = OperationAllowedSpecs.isPublic(ReservedOperation.view);
 
     @Override
     public synchronized void onApplicationEvent(MetadataIndexCompleted event) {
         final int metadataId = event.getMd().getId();
         LOGGER.debug("Refreshing formatter cache for record '{}' [{}].", metadataId, Thread.currentThread());
-        final OperationAllowed one = operationAllowedRepository.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId());
+        boolean isPublic = isPublic(metadataId);
         try {
-            boolean isPublic = one != null;
             formatterCache.setPublished(metadataId, event.getMd().getUuid(), isPublic);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -77,13 +74,16 @@ public class FormatterCachePublishListener implements AsynchAfterCommitListener 
     @Override
     public void handleAsync(MetadataIndexCompleted event) {
         final int metadataId = event.getMd().getId();
-        if (event.getMd().getDataInfo().getType() == MetadataType.METADATA
-            && operationAllowedRepository.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(
-                ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId()
-                ) != null) {
+        boolean isPublic = isPublic(metadataId);
+        boolean isMetadata = event.getMd().getDataInfo().getType() == MetadataType.METADATA;
+
+        if (isMetadata && isPublic) {
             LOGGER.debug("Refreshing landing page of public record '{}' [{}].", metadataId, Thread.currentThread());
             landingPageCache.buildLandingPage(metadataId);
         }
     }
 
+    private boolean isPublic(int metadataId) {
+        return operationAllowedRepository.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId()) != null;
+    }
 }
