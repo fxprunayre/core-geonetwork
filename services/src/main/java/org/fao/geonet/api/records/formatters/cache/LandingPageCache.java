@@ -155,16 +155,6 @@ public class LandingPageCache {
             return;
         }
 
-        final OperationAllowed publicRecord = operationAllowedRepo.findOneById_GroupIdAndId_MetadataIdAndId_OperationId(ReservedGroup.all.getId(), metadataId, ReservedOperation.view.getId());
-        if (publicRecord == null) {
-            return;
-        }
-
-        final Metadata metadata = metadataRepository.findOne(metadataId);
-        if(metadata.getDataInfo().getType() != MetadataType.METADATA) {
-            return;
-        }
-
         final ServletContext servletContext = _context.getServlet().getServletContext();
         _context.setAsThreadLocal();
         final MockHttpSession servletSession = new MockHttpSession(servletContext);
