@@ -37,11 +37,10 @@ import org.fao.geonet.domain.UserGroup;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -110,7 +109,7 @@ public class MeApi {
         ApplicationContext applicationContext = ApplicationContextHolder.get();
         final UserGroupRepository userGroupRepository = applicationContext.getBean(UserGroupRepository.class);
 
-        Specifications<UserGroup> spec = Specifications.where(UserGroupSpecs.hasUserId(session.getUserIdAsInt()));
+        Specification<UserGroup> spec = Specification.where(UserGroupSpecs.hasUserId(session.getUserIdAsInt()));
         spec = spec.and(UserGroupSpecs.hasProfile(profile));
 
         return userGroupRepository.findGroupIds(spec);

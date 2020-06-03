@@ -26,11 +26,7 @@ package org.fao.geonet.kernel.datamanager.base;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import jeeves.transaction.TransactionManager;
@@ -42,39 +38,9 @@ import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Edit;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Constants;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataDataInfo;
-import org.fao.geonet.domain.MetadataDataInfo_;
-import org.fao.geonet.domain.MetadataFileUpload;
-import org.fao.geonet.domain.MetadataFileUpload_;
-import org.fao.geonet.domain.MetadataSourceInfo;
-import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.MetadataValidation;
-import org.fao.geonet.domain.Metadata_;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.OperationAllowedId;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.ReservedGroup;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.kernel.AccessManager;
-import org.fao.geonet.kernel.EditLib;
-import org.fao.geonet.kernel.HarvestInfoProvider;
-import org.fao.geonet.kernel.SchemaManager;
-import org.fao.geonet.kernel.ThesaurusManager;
-import org.fao.geonet.kernel.UpdateDatestamp;
-import org.fao.geonet.kernel.XmlSerializer;
-import org.fao.geonet.kernel.datamanager.IMetadataIndexer;
-import org.fao.geonet.kernel.datamanager.IMetadataManager;
-import org.fao.geonet.kernel.datamanager.IMetadataOperations;
-import org.fao.geonet.kernel.datamanager.IMetadataSchemaUtils;
-import org.fao.geonet.kernel.datamanager.IMetadataUtils;
-import org.fao.geonet.kernel.datamanager.IMetadataValidator;
+import org.fao.geonet.domain.*;
+import org.fao.geonet.kernel.*;
+import org.fao.geonet.kernel.datamanager.*;
 import org.fao.geonet.kernel.schema.MetadataSchema;
 import org.fao.geonet.kernel.schema.SchemaPlugin;
 import org.fao.geonet.kernel.search.EsSearchManager;
@@ -82,19 +48,7 @@ import org.fao.geonet.kernel.search.MetaSearcher;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.kernel.setting.Settings;
 import org.fao.geonet.lib.Lib;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.MetadataCategoryRepository;
-import org.fao.geonet.repository.MetadataFileUploadRepository;
-import org.fao.geonet.repository.MetadataRatingByIpRepository;
-import org.fao.geonet.repository.MetadataRepository;
-import org.fao.geonet.repository.MetadataStatusRepository;
-import org.fao.geonet.repository.MetadataValidationRepository;
-import org.fao.geonet.repository.OperationAllowedRepository;
-import org.fao.geonet.repository.PathSpec;
-import org.fao.geonet.repository.SortUtils;
-import org.fao.geonet.repository.Updater;
-import org.fao.geonet.repository.UserRepository;
-import org.fao.geonet.repository.UserSavedSelectionRepository;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.repository.specification.MetadataFileUploadSpecs;
 import org.fao.geonet.repository.specification.MetadataSpecs;
 import org.fao.geonet.repository.specification.OperationAllowedSpecs;
@@ -125,20 +79,9 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
-import static org.springframework.data.jpa.domain.Specifications.where;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 public class BaseMetadataManager implements IMetadataManager {
 
@@ -244,7 +187,7 @@ public class BaseMetadataManager implements IMetadataManager {
         Sort sortByMetadataChangeDate = SortUtils.createSort(Metadata_.dataInfo, MetadataDataInfo_.changeDate);
         int currentPage = 0;
         Page<Pair<Integer, ISODate>> results = metadataUtils.findAllIdsAndChangeDates(
-            new PageRequest(currentPage, METADATA_BATCH_PAGE_SIZE, sortByMetadataChangeDate));
+            PageRequest.of(currentPage, METADATA_BATCH_PAGE_SIZE, sortByMetadataChangeDate));
 
         // index all metadata in DBMS if needed
         while (results.getNumberOfElements() > 0) {
@@ -281,7 +224,7 @@ public class BaseMetadataManager implements IMetadataManager {
 
             currentPage++;
             results = metadataRepository.findAllIdsAndChangeDates(
-                new PageRequest(currentPage, METADATA_BATCH_PAGE_SIZE, sortByMetadataChangeDate));
+                PageRequest.of(currentPage, METADATA_BATCH_PAGE_SIZE, sortByMetadataChangeDate));
         }
 
         // if anything to index then schedule it to be done after servlet is
@@ -478,7 +421,7 @@ public class BaseMetadataManager implements IMetadataManager {
         newMetadata.getSourceInfo().setGroupOwner(Integer.valueOf(groupOwner)).setOwner(owner).setSourceId(source);
 
         // If there is a default category for the group, use it:
-        Group group = groupRepository.findOne(Integer.valueOf(groupOwner));
+        Group group = groupRepository.findById(Integer.valueOf(groupOwner)).get();
         if (group.getDefaultCategory() != null) {
             newMetadata.getMetadataCategories().add(group.getDefaultCategory());
         }
@@ -590,7 +533,7 @@ public class BaseMetadataManager implements IMetadataManager {
             newMetadata.getMetadataCategories().add(metadataCategory);
         } else if (StringUtils.isNotEmpty(groupOwner)) {
             // If the group has a default category, use it
-            Group group = groupRepository.findOne(Integer.valueOf(groupOwner));
+            Group group = groupRepository.findById(Integer.valueOf(groupOwner)).get();
             if (group.getDefaultCategory() != null) {
                 newMetadata.getMetadataCategories().add(group.getDefaultCategory());
             }
@@ -887,7 +830,7 @@ public class BaseMetadataManager implements IMetadataManager {
         buildPrivilegesMetadataInfo(context, map);
 
         // add owner name
-        User user = userRepository.findOne(owner);
+        User user = userRepository.findById(Integer.parseInt(owner)).get();
         if (user != null) {
             String ownerName = user.getName();
             addElement(info, Edit.Info.Elem.OWNERNAME, ownerName);
@@ -993,7 +936,7 @@ public class BaseMetadataManager implements IMetadataManager {
             UserSession usrSess = context.getUserSession();
             if (usrSess.isAuthenticated()) {
                 String myUserId = usrSess.getUserId();
-                User user = getApplicationContext().getBean(UserRepository.class).findOne(myUserId);
+                User user = getApplicationContext().getBean(UserRepository.class).findById(Integer.parseInt(myUserId)).get();
                 if (user != null) {
                     Element elUserDetails = new Element("details");
                     elUserDetails.addContent(new Element("surname").setText(user.getSurname()));
@@ -1279,8 +1222,8 @@ public class BaseMetadataManager implements IMetadataManager {
     @Transactional
     public void delete(Integer id) {
         Log.trace(Geonet.DATA_MANAGER, "Deleting record with id " + id);
-        if (metadataRepository.exists(id)) {
-            metadataRepository.delete(id);
+        if (metadataRepository.existsById(id)) {
+            metadataRepository.deleteById(id);
         }
     }
 

@@ -22,21 +22,8 @@
 //==============================================================================
 package org.fao.geonet.kernel.security.ldap;
 
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.SearchResult;
-
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Group;
@@ -56,12 +43,23 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.naming.NamingEnumeration;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.SearchResult;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LDAPSynchronizerJob extends QuartzJobBean {
 
@@ -172,10 +170,10 @@ public class LDAPSynchronizerJob extends QuartzJobBean {
         final UserRepository userRepository = applicationContext.getBean(UserRepository.class);
         final UserGroupRepository userGroupRepository = applicationContext.getBean(UserGroupRepository.class);
         final IMetadataUtils metadataRepository = applicationContext.getBean(IMetadataUtils.class);
-        final Specifications<User> spec = Specifications.where(
+        final Specification<User> spec = Specification.where(
             UserSpecs.hasAuthType(LDAPConstants.LDAP_FLAG)
         ).and(
-            Specifications.not(UserSpecs.userIsNameNotOneOf(usernames))
+            Specification.not(UserSpecs.userIsNameNotOneOf(usernames))
         );
 
         final List<User> usersFound = userRepository.findAll(spec);
@@ -197,7 +195,7 @@ public class LDAPSynchronizerJob extends QuartzJobBean {
                     String.format("Cannot delete user '%s' who is owner of %d metadata record(s).",
                         u.getUsername(), nbOfUserRecord));
             } else {
-                userRepository.delete(u.getId());
+                userRepository.deleteById(u.getId());
             }
         }
     }

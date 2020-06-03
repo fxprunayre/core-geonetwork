@@ -25,9 +25,7 @@ package org.fao.geonet.api.uisetting;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import junit.framework.Assert;
-import org.fao.geonet.api.FieldNameExclusionStrategy;
 import org.fao.geonet.api.JsonFieldNamingStrategy;
-import org.fao.geonet.domain.UiSetting;
 import org.fao.geonet.domain.UiSetting;
 import org.fao.geonet.repository.UiSettingsRepository;
 import org.fao.geonet.services.AbstractServiceIntegrationTest;
@@ -66,7 +64,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
 
     @Test
     public void putUiConfiguration() throws Exception {
-        UiSetting uiConfig = uiSettingsRepository.findOne("default");
+        UiSetting uiConfig = uiSettingsRepository.findById("default").get();
         Assert.assertNull(uiConfig);
 
         UiSetting newUiConfig = new UiSetting();
@@ -89,12 +87,12 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
             .accept(MediaType.parseMediaType("text/plain")))
             .andExpect(status().is(201));
 
-        UiSetting one = uiSettingsRepository.findOne(newUiConfig.getId());
+        UiSetting one = uiSettingsRepository.findById(newUiConfig.getId()).get();
         Assert.assertNotNull(one);
 
 
         // Get
-        UiSetting uiConfiguration = uiSettingsRepository.findOne("default");
+        UiSetting uiConfiguration = uiSettingsRepository.findById("default").get();
         Assert.assertNotNull(uiConfiguration);
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -106,7 +104,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
 
 
         // update
-        uiConfiguration = uiSettingsRepository.findOne("default");
+        uiConfiguration = uiSettingsRepository.findById("default").get();
         Assert.assertNotNull(uiConfiguration);
 
         uiConfiguration.setConfiguration("{}");
@@ -123,7 +121,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
             .andExpect(status().is(204));
 
         // Delete
-        uiConfiguration = uiSettingsRepository.findOne("default");
+        uiConfiguration = uiSettingsRepository.findById("default").get();
         Assert.assertNotNull(uiConfiguration);
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -148,7 +146,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
 
     @Test
     public void getNonExistingUiConfiguration() throws Exception {
-        UiSetting one = uiSettingsRepository.findOne("222");
+        UiSetting one = uiSettingsRepository.findById("222").get();
         Assert.assertNull(one);
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -162,7 +160,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
 
     @Test
     public void updateNonExistingUiConfiguration() throws Exception {
-        UiSetting uiConfiguration = uiSettingsRepository.findOne("222");
+        UiSetting uiConfiguration = uiSettingsRepository.findById("222").get();
         Assert.assertNull(uiConfiguration);
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -175,7 +173,7 @@ public class UiApiTest extends AbstractServiceIntegrationTest {
 
     @Test
     public void deleteNonExistingUiConfiguration() throws Exception {
-        UiSetting uiConfiguration = uiSettingsRepository.findOne("222");
+        UiSetting uiConfiguration = uiSettingsRepository.findById("222").get();
         Assert.assertNull(uiConfiguration);
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();

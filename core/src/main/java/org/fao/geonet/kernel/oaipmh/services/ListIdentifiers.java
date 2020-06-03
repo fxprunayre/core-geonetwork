@@ -23,6 +23,7 @@
 
 package org.fao.geonet.kernel.oaipmh.services;
 
+import jeeves.server.context.ServiceContext;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.AbstractMetadata;
@@ -39,8 +40,6 @@ import org.fao.oaipmh.responses.Header;
 import org.fao.oaipmh.responses.ListIdentifiersResponse;
 import org.fao.oaipmh.responses.ListResponse;
 import org.fao.oaipmh.util.SearchResult;
-
-import jeeves.server.context.ServiceContext;
 
 //=============================================================================
 
@@ -84,12 +83,6 @@ public class ListIdentifiers extends AbstractTokenLister {
     }
 
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- Private methods
-    //---
-    //---------------------------------------------------------------------------
-
     private Header buildHeader(ServiceContext context, int id, String prefix) throws Exception {
         GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
         SchemaManager sm = gc.getBean(SchemaManager.class);
@@ -130,6 +123,3 @@ public class ListIdentifiers extends AbstractTokenLister {
         return h;
     }
 }
-
-//=============================================================================
-

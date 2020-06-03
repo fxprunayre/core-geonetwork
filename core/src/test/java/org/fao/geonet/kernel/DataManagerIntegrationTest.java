@@ -25,25 +25,12 @@ package org.fao.geonet.kernel;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
-import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataStatus;
-import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.ReservedGroup;
-import org.fao.geonet.domain.Source;
-import org.fao.geonet.domain.SourceType;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.kernel.datamanager.IMetadataManager;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.search.EsSearchManager;
 import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.MetadataCategoryRepository;
 import org.fao.geonet.repository.SourceRepository;
 import org.fao.geonet.repository.specification.MetadataSpecs;
 import org.fao.geonet.utils.Xml;
@@ -58,7 +45,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.data.jpa.domain.Specifications.where;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 public class DataManagerIntegrationTest extends AbstractDataManagerIntegrationTest {
 

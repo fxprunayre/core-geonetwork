@@ -24,11 +24,7 @@ package org.fao.geonet.kernel.security.ldap;
 
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.LDAPUser;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.domain.UserGroup;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.UserGroupRepository;
 import org.fao.geonet.repository.UserRepository;
@@ -36,20 +32,12 @@ import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.fao.geonet.utils.Log;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.*;
 
 public class LDAPUtils {
 
@@ -258,12 +246,12 @@ public class LDAPUtils {
         }
 
         // Remove deprecated usergroups (if any)
-        userGroupRepo.delete(toRemove);
+        userGroupRepo.deleteAll(toRemove);
         entityManager.flush();
         entityManager.clear();
 
         // Add only new usergroups (if any)
-        userGroupRepo.save(toAdd);
+        userGroupRepo.saveAll(toAdd);
         entityManager.flush();
 
     }

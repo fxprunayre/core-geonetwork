@@ -23,28 +23,18 @@
 
 package org.fao.geonet.repository;
 
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.domain.UserGroup;
-import org.fao.geonet.domain.UserGroupId;
-import org.fao.geonet.domain.UserGroupId_;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.springframework.data.jpa.domain.Specifications.where;
+import static org.junit.Assert.*;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 public class UserGroupRepositoryTest extends AbstractSpringDataTest {
 
@@ -82,7 +72,7 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
         int ug1Id = ug1.getId().getUserId();
         int ug2Id = ug2.getId().getUserId();
 
-        Specifications<UserGroup> ug1Or2Spec = where(UserGroupSpecs.hasUserId(ug1Id)).or(UserGroupSpecs.hasUserId(ug2Id));
+        Specification<UserGroup> ug1Or2Spec = where(UserGroupSpecs.hasUserId(ug1Id)).or(UserGroupSpecs.hasUserId(ug2Id));
         List<Integer> ug1Or2Ids = _repo.findUserIds(ug1Or2Spec);
 
         assertTrue(ug1Or2Ids.contains(ug1Id));
@@ -106,8 +96,8 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
 
         assertEquals(2, _repo.count());
 
-        assertNotNull(_repo.findOne(userGroup.getId()));
-        assertNotNull(_repo.findOne(userGroup2.getId()));
+        assertNotNull(_repo.findById(userGroup.getId()));
+        assertNotNull(_repo.findById(userGroup2.getId()));
 
     }
 
@@ -124,7 +114,7 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
 
         int ug1Id = ug1.getId().getGroupId();
         int ug2Id = ug2.getId().getGroupId();
-        Specifications<UserGroup> ug1Or2Spec = where(UserGroupSpecs.hasGroupId(ug1Id)).or(UserGroupSpecs.hasGroupId(ug2Id));
+        Specification<UserGroup> ug1Or2Spec = where(UserGroupSpecs.hasGroupId(ug1Id)).or(UserGroupSpecs.hasGroupId(ug2Id));
 
         List<Integer> ug1Or2Ids = _repo.findGroupIds(ug1Or2Spec);
 
@@ -144,7 +134,7 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
 
         Profile p1 = ug1.getProfile();
         Profile p2 = ug2.getProfile();
-        Specifications<UserGroup> specifications = where(UserGroupSpecs.hasProfile(p1)).or(UserGroupSpecs.hasProfile(p2));
+        Specification<UserGroup> specifications = where(UserGroupSpecs.hasProfile(p1)).or(UserGroupSpecs.hasProfile(p2));
 
         List<UserGroup> found = _repo.findAll(specifications);
 
@@ -165,7 +155,7 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
 
         assertEquals(3, _repo.count());
 
-        Specification<UserGroup> spec = Specifications
+        Specification<UserGroup> spec = Specification
             .where(UserGroupSpecs.hasUserId(ug1.getUser().getId()))
             .and(UserGroupSpecs.hasProfile(Profile.Reviewer));
 
@@ -193,12 +183,12 @@ public class UserGroupRepositoryTest extends AbstractSpringDataTest {
         assertEquals(2, deleted);
         assertEquals(2, _repo.count());
 
-        assertFalse(_repo.exists(ug1.getId()));
-        assertFalse(_repo.exists(ug2.getId()));
-        assertTrue(_repo.exists(ug3.getId()));
-        assertTrue(_repo.exists(ug4.getId()));
+        assertFalse(_repo.existsById(ug1.getId()));
+        assertFalse(_repo.existsById(ug2.getId()));
+        assertTrue(_repo.existsById(ug3.getId()));
+        assertTrue(_repo.existsById(ug4.getId()));
 
-        assertNull(_repo.findOne(ug1.getId()));
+        assertNull(_repo.findById(ug1.getId()));
     }
 
     private UserGroup newUserGroup() {

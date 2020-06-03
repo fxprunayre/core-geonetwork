@@ -104,7 +104,7 @@ public class BaseMetadataCategoryTest extends AbstractCoreIntegrationTest {
 
     @After
     public void cleanup() {
-        metadataRepository.delete(md);
+        metadataRepository.deleteById(md.getId());
     }
 
     private void populate(AbstractMetadata md) {

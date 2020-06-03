@@ -197,7 +197,7 @@ public class AddLimitations implements Service {
         //--- now get the users name, organisation and email address to
         //--- prepopulate the feedback form (if they are logged in)
         if (session.getUserId() != null) {
-            User user = context.getBean(UserRepository.class).findOne(session.getUserIdAsInt());
+            User user = context.getBean(UserRepository.class).findById(session.getUserIdAsInt()).get();
             if (user != null) {
                 Element elRec = user.asXml();
                 elBrief.setName("record");

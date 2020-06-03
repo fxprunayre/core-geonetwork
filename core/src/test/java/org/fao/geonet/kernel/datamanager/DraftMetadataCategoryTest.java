@@ -22,9 +22,7 @@
  */
 package org.fao.geonet.kernel.datamanager;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
+import jeeves.server.context.ServiceContext;
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.domain.AbstractMetadata;
 import org.fao.geonet.domain.Metadata;
@@ -40,7 +38,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import jeeves.server.context.ServiceContext;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for {@link DraftMetadataCategory}.
@@ -71,7 +70,7 @@ public class DraftMetadataCategoryTest extends AbstractCoreIntegrationTest {
     	record = new Metadata();
     	populate(record);
     	metadataRepository.save(record);
-    	
+
         md = new MetadataDraft();
         populate(md);
         md.setApprovedVersion(record);
@@ -86,7 +85,7 @@ public class DraftMetadataCategoryTest extends AbstractCoreIntegrationTest {
     @Test
     public void test() throws Exception {
 
-        assertTrue(metadataDraftRepository.exists(md.getId()));
+        assertTrue(metadataDraftRepository.existsById(md.getId()));
 
         assertTrue(metadataCategory.getCategories(String.valueOf(md.getId())).isEmpty());
 
@@ -104,8 +103,8 @@ public class DraftMetadataCategoryTest extends AbstractCoreIntegrationTest {
 
     @After
     public void cleanup() {
-        metadataDraftRepository.delete(md);
-        metadataRepository.delete(record);
+        metadataDraftRepository.deleteById(md.getId());
+        metadataRepository.deleteById(record.getId());
     }
 
     private void populate(AbstractMetadata md) {

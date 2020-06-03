@@ -23,21 +23,11 @@
 
 package org.fao.geonet.kernel.datamanager.base;
 
-import static org.springframework.data.jpa.domain.Specifications.where;
-
-import java.util.Collection;
-import java.util.List;
-
+import com.google.common.base.Optional;
+import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.OperationAllowedId;
-import org.fao.geonet.domain.OperationAllowedId_;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.ReservedGroup;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.UserGroup;
-import org.fao.geonet.domain.UserGroupId;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.events.md.MetadataPublished;
 import org.fao.geonet.events.md.MetadataUnpublished;
 import org.fao.geonet.exceptions.ServiceNotAllowedEx;
@@ -59,9 +49,10 @@ import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.domain.Specification;
 
-import com.google.common.base.Optional;
+import java.util.Collection;
+import java.util.List;
 
-import jeeves.server.context.ServiceContext;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 public class BaseMetadataOperations implements IMetadataOperations, ApplicationEventPublisherAware {
 
@@ -245,7 +236,7 @@ public class BaseMetadataOperations implements IMetadataOperations, ApplicationE
                     if (userGroupsOnly.equals("true")) {
                         // If user is member of the group, user can set operation
 
-                        if (userGroupRepo.exists(new UserGroupId().setGroupId(grpId).setUserId(userId))) {
+                        if (userGroupRepo.existsById(new UserGroupId().setGroupId(grpId).setUserId(userId))) {
                             throw new ServiceNotAllowedEx(
                                 "User can't set operation for group " + grpId + " because the user in not" + " member of this group.");
                         }
@@ -303,8 +294,8 @@ public class BaseMetadataOperations implements IMetadataOperations, ApplicationE
     @Override
     public void forceUnsetOperation(ServiceContext context, int mdId, int groupId, int operId) throws Exception {
         OperationAllowedId id = new OperationAllowedId().setGroupId(groupId).setMetadataId(mdId).setOperationId(operId);
-        if (opAllowedRepo.exists(id)) {
-            opAllowedRepo.delete(id);
+        if (opAllowedRepo.existsById(id)) {
+            opAllowedRepo.deleteById(id);
             if (svnManager != null) {
                 svnManager.setHistory(mdId + "", context);
             }

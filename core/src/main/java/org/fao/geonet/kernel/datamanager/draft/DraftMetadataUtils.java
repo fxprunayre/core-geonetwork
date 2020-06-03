@@ -28,25 +28,7 @@ import jeeves.server.context.ServiceContext;
 import org.eclipse.jetty.io.RuntimeIOException;
 import org.fao.geonet.api.records.attachments.StoreUtils;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataDataInfo;
-import org.fao.geonet.domain.MetadataDraft;
-import org.fao.geonet.domain.MetadataFileUpload;
-import org.fao.geonet.domain.MetadataHarvestInfo;
-import org.fao.geonet.domain.MetadataRatingByIp;
-import org.fao.geonet.domain.MetadataRatingByIpId;
-import org.fao.geonet.domain.MetadataSourceInfo;
-import org.fao.geonet.domain.MetadataStatus;
-import org.fao.geonet.domain.MetadataStatusId;
-import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.StatusValue;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.UpdateDatestamp;
 import org.fao.geonet.kernel.datamanager.IMetadataManager;
@@ -56,12 +38,7 @@ import org.fao.geonet.kernel.datamanager.base.BaseMetadataUtils;
 import org.fao.geonet.kernel.metadata.StatusActions;
 import org.fao.geonet.kernel.metadata.StatusActionsFactory;
 import org.fao.geonet.kernel.setting.Settings;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.MetadataDraftRepository;
-import org.fao.geonet.repository.MetadataFileUploadRepository;
-import org.fao.geonet.repository.SimpleMetadata;
-import org.fao.geonet.repository.StatusValueRepository;
-import org.fao.geonet.repository.Updater;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.repository.specification.MetadataFileUploadSpecs;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
@@ -76,13 +53,7 @@ import org.springframework.data.jpa.domain.Specification;
 import javax.annotation.Nonnull;
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static org.fao.geonet.repository.specification.MetadataSpecs.hasMetadataUuid;
 
@@ -110,7 +81,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
 
     @Override
     public void setTemplateExt(final int id, final MetadataType metadataType) throws Exception {
-        if (metadataDraftRepository.exists(id)) {
+        if (metadataDraftRepository.existsById(id)) {
             metadataDraftRepository.update(id, new Updater<MetadataDraft>() {
                 @Override
                 public void apply(@Nonnull MetadataDraft metadata) {
@@ -133,7 +104,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
      */
     @Override
     public void setSubtemplateTypeAndTitleExt(final int id, String title) throws Exception {
-        if (metadataDraftRepository.exists(id)) {
+        if (metadataDraftRepository.existsById(id)) {
             metadataDraftRepository.update(id, new Updater<MetadataDraft>() {
                 @Override
                 public void apply(@Nonnull MetadataDraft metadata) {
@@ -153,7 +124,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
     @Override
     public void setHarvestedExt(final int id, final String harvestUuid, final Optional<String> harvestUri)
         throws Exception {
-        if (metadataDraftRepository.exists(id)) {
+        if (metadataDraftRepository.existsById(id)) {
             metadataDraftRepository.update(id, new Updater<MetadataDraft>() {
                 @Override
                 public void apply(MetadataDraft metadata) {
@@ -176,7 +147,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
     @Override
     public void updateDisplayOrder(final String idString, final String displayOrder) throws Exception {
         Integer id = Integer.valueOf(idString);
-        if (metadataDraftRepository.exists(id)) {
+        if (metadataDraftRepository.existsById(id)) {
             metadataDraftRepository.update(id, new Updater<MetadataDraft>() {
                 @Override
                 public void apply(MetadataDraft entity) {
@@ -206,7 +177,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
 
         final int newRating = ratingByIpRepository.averageRating(metadataId);
 
-        if (metadataDraftRepository.exists(metadataId)) {
+        if (metadataDraftRepository.existsById(metadataId)) {
             metadataDraftRepository.update(metadataId, new Updater<MetadataDraft>() {
                 @Override
                 public void apply(MetadataDraft entity) {
@@ -246,7 +217,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
         if (super.exists(id)) {
             return super.findOne(id);
         }
-        return metadataDraftRepository.findOne(id);
+        return metadataDraftRepository.findById(id).get();
     }
 
     @Override
@@ -299,7 +270,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
 
         if (md == null) {
             try {
-                md = metadataDraftRepository.findOne((Specification<MetadataDraft>) spec);
+                md = metadataDraftRepository.findOne((Specification<MetadataDraft>) spec).get();
             } catch (ClassCastException t) {
                 throw new ClassCastException("Unknown AbstractMetadata subtype: " + spec.getClass().getName());
             }
@@ -331,7 +302,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
         for (AbstractMetadata md : super.findAll(keySet)) {
             list.add(md);
         }
-        list.addAll(metadataDraftRepository.findAll(keySet));
+        list.addAll(metadataDraftRepository.findAllById(keySet));
         return list;
     }
 
@@ -360,7 +331,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
 
     @Override
     public boolean exists(Integer iId) {
-        return super.exists(iId) || metadataDraftRepository.exists(iId);
+        return super.exists(iId) || metadataDraftRepository.existsById(iId);
     }
 
     @Override
@@ -509,7 +480,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
         }
         // If there is a default category for the group, use it:
         if (groupOwner != null) {
-            Group group = groupRepository.findOne(Integer.valueOf(groupOwner));
+            Group group = groupRepository.findById(Integer.valueOf(groupOwner)).get();
             if (group.getDefaultCategory() != null) {
                 newMetadata.getCategories().add(group.getDefaultCategory());
             }
@@ -556,7 +527,7 @@ public class DraftMetadataUtils extends BaseMetadataUtils {
 
             int author = context.getUserSession().getUserIdAsInt();
             Integer status = Integer.valueOf(StatusValue.Status.DRAFT);
-            StatusValue statusValue = statusValueRepository.findOne(status);
+            StatusValue statusValue = statusValueRepository.findById(status).get();
 
             for (Integer mdId : metadataIds) {
                 MetadataStatus metadataStatus = new MetadataStatus();

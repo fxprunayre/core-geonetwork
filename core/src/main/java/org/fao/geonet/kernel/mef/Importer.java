@@ -23,22 +23,10 @@
 
 package org.fao.geonet.kernel.mef;
 
-import static org.fao.geonet.domain.Localized.translationXmlToLangMap;
-
-import java.io.InputStream;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-
+import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
+import jeeves.server.ServiceConfig;
+import jeeves.server.context.ServiceContext;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.MetadataResourceDatabaseMigration;
@@ -46,20 +34,7 @@ import org.fao.geonet.Util;
 import org.fao.geonet.api.records.attachments.Store;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataDataInfo;
-import org.fao.geonet.domain.MetadataRelation;
-import org.fao.geonet.domain.MetadataRelationId;
-import org.fao.geonet.domain.MetadataResourceVisibility;
-import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.Source;
-import org.fao.geonet.domain.SourceType;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.exceptions.BadFormatEx;
 import org.fao.geonet.exceptions.NoSchemaMatchesException;
 import org.fao.geonet.exceptions.UnAuthorizedException;
@@ -68,12 +43,7 @@ import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.datamanager.IMetadataManager;
 import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.setting.SettingManager;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.MetadataCategoryRepository;
-import org.fao.geonet.repository.MetadataRelationRepository;
-import org.fao.geonet.repository.OperationAllowedRepository;
-import org.fao.geonet.repository.SourceRepository;
-import org.fao.geonet.repository.Updater;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.utils.FilePathChecker;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
@@ -81,11 +51,14 @@ import org.fao.oaipmh.exceptions.BadArgumentException;
 import org.jdom.Element;
 import org.springframework.context.ApplicationContext;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.Maps;
+import javax.annotation.Nonnull;
+import java.io.InputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
-import jeeves.server.ServiceConfig;
-import jeeves.server.context.ServiceContext;
+import static org.fao.geonet.domain.Localized.translationXmlToLangMap;
 
 public class Importer {
     @Deprecated
@@ -467,7 +440,7 @@ public class Importer {
                             final OperationAllowedRepository allowedRepository = context.getBean(OperationAllowedRepository.class);
                             final Set<OperationAllowed> allowedSet = addOperations(context, dm, privileges, iMetadataId,
                                 Integer.valueOf(finalGroupId));
-                            allowedRepository.save(allowedSet);
+                            allowedRepository.saveAll(allowedSet);
                         }
 
 
@@ -655,7 +628,7 @@ public class Importer {
                 }
             }
         }
-        allowedRepository.save(opAllowedToAdd);
+        allowedRepository.saveAll(opAllowedToAdd);
         return owner;
     }
 

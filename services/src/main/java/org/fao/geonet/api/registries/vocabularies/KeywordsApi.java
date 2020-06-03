@@ -77,7 +77,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -540,8 +539,8 @@ public class KeywordsApi {
 
             // Delete thesaurus record in the database
             String thesaurusId = thesaurusObject.getFname();
-            if (thesaurusActivationRepository.exists(thesaurusId)) {
-                thesaurusActivationRepository.delete(thesaurusId);
+            if (thesaurusActivationRepository.existsById(thesaurusId)) {
+                thesaurusActivationRepository.deleteById(thesaurusId);
             }
         } else {
             throw new IllegalArgumentException(String.format(

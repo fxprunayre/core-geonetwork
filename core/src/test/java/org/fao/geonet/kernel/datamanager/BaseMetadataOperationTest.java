@@ -147,9 +147,9 @@ public class BaseMetadataOperationTest extends AbstractCoreIntegrationTest {
 
     @After
     public void cleanup() {
-        metadataRepository.delete(md);
-        groupRepository.delete(group);
-        groupRepository.delete(groupOwner);
-        userRepository.delete(user);
+        metadataRepository.deleteById(md.getId());
+        groupRepository.deleteById(group.getId());
+        groupRepository.deleteById(groupOwner.getId());
+        userRepository.deleteById(user.getId());
     }
 }

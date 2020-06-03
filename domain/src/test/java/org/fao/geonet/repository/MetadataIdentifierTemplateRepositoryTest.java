@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.assertEquals;
@@ -65,8 +64,8 @@ public class MetadataIdentifierTemplateRepositoryTest extends AbstractSpringData
         MetadataIdentifierTemplate mdUrnTemplate2 = newMetadataUrnTemplate();
         mdUrnTemplate2 = _repo.save(mdUrnTemplate2);
 
-        assertEquals(mdUrnTemplate2, _repo.findOne(mdUrnTemplate2.getId()));
-        assertEquals(mdUrnTemplate1, _repo.findOne(mdUrnTemplate1.getId()));
+        assertEquals(mdUrnTemplate2, _repo.findById(mdUrnTemplate2.getId()));
+        assertEquals(mdUrnTemplate1, _repo.findById(mdUrnTemplate1.getId()));
     }
 
     @Test

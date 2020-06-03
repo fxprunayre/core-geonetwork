@@ -24,7 +24,6 @@
 package org.fao.geonet.kernel.mef;
 
 import jeeves.server.context.ServiceContext;
-
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.ZipUtil;
 import org.fao.geonet.constants.Params;
@@ -65,7 +64,7 @@ public class MEFLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         assertEquals(1, metadataIds.size());
 
-        final AbstractMetadata metadata = _metadataRepo.findOne(metadataIds.get(0));
+        final AbstractMetadata metadata = _metadataRepo.findById(Integer.parseInt(metadataIds.get(0))).get();
 
         assertNotNull(metadata);
         assertEquals(admin.getId(), metadata.getSourceInfo().getOwner().intValue());
@@ -85,7 +84,7 @@ public class MEFLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         for (String metadataId : metadataIds) {
 
-            final AbstractMetadata metadata = _metadataRepo.findOne(metadataId);
+            final AbstractMetadata metadata = _metadataRepo.findById(Integer.parseInt(metadataId)).get();
 
             assertNotNull(metadata);
             assertEquals(admin.getId(), metadata.getSourceInfo().getOwner().intValue());

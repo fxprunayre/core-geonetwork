@@ -567,7 +567,7 @@ class Harvester extends BaseAligner<ThreddsParams> implements IHarvester<Harvest
 
 				if (!isService) {
         	if (params.datasetCategory != null && !params.datasetCategory.equals("")) {
-           	MetadataCategory metadataCategory = context.getBean(MetadataCategoryRepository.class).findOne(Integer.parseInt(params.datasetCategory));
+           	MetadataCategory metadataCategory = context.getBean(MetadataCategoryRepository.class).findById(Integer.parseInt(params.datasetCategory)).get();
 
            	if (metadataCategory == null) {
              	throw new IllegalArgumentException("No category found with name: " + params.datasetCategory);

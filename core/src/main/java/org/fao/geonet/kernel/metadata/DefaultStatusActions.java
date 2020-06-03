@@ -28,18 +28,7 @@ import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataStatus;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.StatusValue;
-import org.fao.geonet.domain.StatusValueNotificationLevel;
-import org.fao.geonet.domain.StatusValueType;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.domain.User_;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.events.md.MetadataStatusChanged;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.DataManager;
@@ -60,13 +49,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -277,7 +260,7 @@ public class DefaultStatusActions implements StatusActions {
         }
 
         UserRepository userRepository = context.getBean(UserRepository.class);
-        User owner = userRepository.findOne(status.getOwner());
+        User owner = userRepository.findById(status.getOwner()).get();
 
         String message = MessageFormat.format(textTemplate, replyToDescr, // Author of the change
                 status.getChangeMessage(), translatedStatusName, status.getId().getChangeDate(), status.getDueDate(),
@@ -314,7 +297,7 @@ public class DefaultStatusActions implements StatusActions {
 
         if (notificationLevel != null) {
             if (notificationLevel == StatusValueNotificationLevel.statusUserOwner) {
-                User owner = userRepository.findOne(status.getOwner());
+                User owner = userRepository.findById(status.getOwner()).get();
                 users.add(owner);
             } else if (notificationLevel == StatusValueNotificationLevel.recordProfileReviewer) {
                 List<Pair<Integer, User>> results = userRepository.findAllByGroupOwnerNameAndProfile(listOfId,
@@ -324,9 +307,9 @@ public class DefaultStatusActions implements StatusActions {
                 }
                 ;
             } else if (notificationLevel == StatusValueNotificationLevel.recordUserAuthor) {
-                Iterable<Metadata> records = this.context.getBean(MetadataRepository.class).findAll(listOfId);
+                Iterable<Metadata> records = this.context.getBean(MetadataRepository.class).findAllById(listOfId);
                 for (Metadata r : records) {
-                    users.add(userRepository.findOne(r.getSourceInfo().getOwner()));
+                    users.add(userRepository.findById(r.getSourceInfo().getOwner()).get());
                 }
                 ;
             } else if (notificationLevel.name().startsWith("catalogueProfile")) {

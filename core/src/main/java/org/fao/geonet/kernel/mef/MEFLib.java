@@ -23,54 +23,20 @@
 
 package org.fao.geonet.kernel.mef;
 
-import static org.fao.geonet.kernel.mef.MEFConstants.DIR_PRIVATE;
-import static org.fao.geonet.kernel.mef.MEFConstants.DIR_PUBLIC;
-import static org.fao.geonet.kernel.mef.MEFConstants.FS;
-import static org.fao.geonet.kernel.mef.MEFConstants.VERSION;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileSystem;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
-import javax.annotation.Nonnull;
-
+import jeeves.server.context.ServiceContext;
 import org.apache.commons.io.IOUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.ZipUtil;
 import org.fao.geonet.constants.Edit;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataResource;
-import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.Operation;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.Pair;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.exceptions.BadInputEx;
 import org.fao.geonet.exceptions.BadParameterEx;
 import org.fao.geonet.exceptions.MetadataNotFoundEx;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.DataManager;
-import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.SchemaManager;
+import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.OperationAllowedRepository;
@@ -81,7 +47,19 @@ import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 
-import jeeves.server.context.ServiceContext;
+import javax.annotation.Nonnull;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+import static org.fao.geonet.kernel.mef.MEFConstants.*;
 
 
 /**
@@ -440,14 +418,14 @@ public class MEFLib {
 
         for (OperationAllowed operationAllowed : opsAllowed) {
             int grpId = operationAllowed.getId().getGroupId();
-            Group group = groupRepository.findOne(grpId);
+            Group group = groupRepository.findById(grpId).get();
             String grpName = group.getName();
 
             if (!userGroups.contains(grpId)) {
                 continue;
             }
 
-            Operation operation = operationRepository.findOne(operationAllowed.getId().getOperationId());
+            Operation operation = operationRepository.findById(operationAllowed.getId().getOperationId()).get();
             String operName = operation.getName();
 
             if (grpOwnerId != null && grpOwnerId == grpId) {

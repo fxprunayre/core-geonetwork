@@ -105,7 +105,7 @@ public class MetadataRepositoryImpl implements MetadataRepositoryCustom<Metadata
 
         TypedQuery<Tuple> query = _entityManager.createQuery(cbQuery);
         if (pageable != null) {
-            query.setFirstResult(pageable.getOffset());
+            query.setFirstResult((int) pageable.getOffset());
             query.setMaxResults(pageable.getPageSize());
         }
 
@@ -193,7 +193,8 @@ public class MetadataRepositoryImpl implements MetadataRepositoryCustom<Metadata
 
         TypedQuery<Tuple> query = _entityManager.createQuery(cbQuery);
         if (pageable != null) {
-            query.setFirstResult(pageable.getOffset());
+            long offset = pageable.getOffset();
+            query.setFirstResult((int)offset);
             query.setMaxResults(pageable.getPageSize());
         }
 
@@ -205,7 +206,7 @@ public class MetadataRepositoryImpl implements MetadataRepositoryCustom<Metadata
             Element schemaid = new Element("schemaid");
             Element changedate = new Element("changedate");
 
-            uuid.addContent((String) tuple.get(0));                    
+            uuid.addContent((String) tuple.get(0));
             changedate.addContent(((ISODate) tuple.get(1)).toString());
             schemaid.addContent((String) tuple.get(2));
 
@@ -218,13 +219,13 @@ public class MetadataRepositoryImpl implements MetadataRepositoryCustom<Metadata
         }
         return result;
     }
-    
+
     @Override
     public Element findAllUuidsAndChangeDatesAndSchemaId(List<Integer> ids) {
         CriteriaBuilder cb = _entityManager.getCriteriaBuilder();
         CriteriaQuery<Tuple> cbQuery = cb.createQuery(Tuple.class);
         Root<Metadata> root = cbQuery.from(Metadata.class);
-        
+
         cbQuery.multiselect(root.get(Metadata_.uuid), root.get(Metadata_.dataInfo).get(MetadataDataInfo_.changeDate), root.get(Metadata_.dataInfo).get(MetadataDataInfo_.schemaId));
 
         cbQuery.where(root.get(Metadata_.id).in(ids), cb.equal(root.get(Metadata_.dataInfo).get(MetadataDataInfo_.type_JPAWorkaround), 'n'));
@@ -239,7 +240,7 @@ public class MetadataRepositoryImpl implements MetadataRepositoryCustom<Metadata
             Element schemaid = new Element("schemaid");
             Element changedate = new Element("changedate");
 
-            uuid.addContent((String) tuple.get(0));                    
+            uuid.addContent((String) tuple.get(0));
             changedate.addContent(((ISODate) tuple.get(1)).toString());
             schemaid.addContent((String) tuple.get(2));
 

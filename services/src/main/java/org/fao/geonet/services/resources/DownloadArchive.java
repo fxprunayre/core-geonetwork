@@ -52,8 +52,6 @@ import org.fao.geonet.utils.*;
 import org.jdom.Element;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -158,7 +156,7 @@ public class DownloadArchive implements Service {
         //--- get logged in user details & record in 'userdetails'
         Element userDetails = new Element("userdetails");
         if (!username.equals("internet")) {
-            final User user = context.getBean(UserRepository.class).findOne(userId);
+            final User user = context.getBean(UserRepository.class).findById(Integer.parseInt(userId)).get();
             if (user != null) {
                 userDetails.addContent(user.asXml());
             }
@@ -371,7 +369,7 @@ public class DownloadArchive implements Service {
                 final GroupRepository groupRepository = context.getBean(GroupRepository.class);
 
                 for (OperationAllowed opAllowed : opsAllowed) {
-                    Group group = groupRepository.findOne(opAllowed.getId().getGroupId());
+                    Group group = groupRepository.findById(opAllowed.getId().getGroupId()).get();
                     String name = group.getName();
                     String email = group.getEmail();
 
@@ -404,6 +402,3 @@ public class DownloadArchive implements Service {
     }
 
 }
-
-//=============================================================================
-

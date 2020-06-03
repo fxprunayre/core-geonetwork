@@ -177,7 +177,7 @@ public class MetadataStatusRepositoryImpl implements MetadataStatusRepositoryCus
 
         TypedQuery<MetadataStatus> query = _entityManager.createQuery(cbQuery);
         if (pageable != null) {
-            query.setFirstResult(pageable.getOffset());
+            query.setFirstResult((int) pageable.getOffset());
             query.setMaxResults(pageable.getPageSize());
         }
 

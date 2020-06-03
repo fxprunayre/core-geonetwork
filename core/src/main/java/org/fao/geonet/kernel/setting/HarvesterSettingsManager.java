@@ -31,13 +31,12 @@ import org.fao.geonet.repository.HarvesterSettingRepository;
 import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * Allows hierarchical management of harvester settings. The harvester settings API has been
@@ -207,7 +206,7 @@ public class HarvesterSettingsManager {
             }
         }
 
-        settingsRepo.save(toSave);
+        settingsRepo.saveAll(toSave);
 
         return success;
     }
@@ -248,7 +247,7 @@ public class HarvesterSettingsManager {
         HarvesterSetting s = settingsRepo.findOneByPath(path);
         if (s == null)
             return false;
-        
+
         //First we have to remove all children
         removeChildren(s.getId());
 

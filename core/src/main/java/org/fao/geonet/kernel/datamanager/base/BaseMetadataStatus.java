@@ -23,27 +23,12 @@
 
 package org.fao.geonet.kernel.datamanager.base;
 
-import java.sql.Date;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang.ArrayUtils;
+import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.MetadataStatus;
-import org.fao.geonet.domain.MetadataStatusId;
-import org.fao.geonet.domain.MetadataStatusId_;
-import org.fao.geonet.domain.MetadataStatus_;
-import org.fao.geonet.domain.StatusValue;
-import org.fao.geonet.domain.StatusValueType;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.datamanager.IMetadataIndexer;
 import org.fao.geonet.kernel.datamanager.IMetadataStatus;
 import org.fao.geonet.kernel.setting.SettingManager;
-import org.fao.geonet.kernel.setting.Settings;
 import org.fao.geonet.repository.GroupRepository;
 import org.fao.geonet.repository.MetadataStatusRepository;
 import org.fao.geonet.repository.SortUtils;
@@ -54,7 +39,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
 
-import jeeves.server.context.ServiceContext;
+import java.util.HashSet;
+import java.util.List;
 
 public class BaseMetadataStatus implements IMetadataStatus {
 
@@ -82,7 +68,7 @@ public class BaseMetadataStatus implements IMetadataStatus {
     public MetadataStatus getStatus(int metadataId) throws Exception {
         String sortField = SortUtils.createPath(MetadataStatus_.id, MetadataStatusId_.changeDate);
         List<MetadataStatus> status = metadataStatusRepository.findAllByIdAndByType(metadataId,
-                StatusValueType.workflow, new Sort(Sort.Direction.DESC, sortField));
+                StatusValueType.workflow, Sort.by(Sort.Direction.DESC, sortField));
         if (status.isEmpty()) {
             return null;
         } else {
@@ -97,7 +83,7 @@ public class BaseMetadataStatus implements IMetadataStatus {
     public List<MetadataStatus> getAllStatus(int metadataId) throws Exception {
         String sortField = SortUtils.createPath(MetadataStatus_.id, MetadataStatusId_.changeDate);
         List<MetadataStatus> status = metadataStatusRepository.findAllById_MetadataId(metadataId,
-                new Sort(Sort.Direction.DESC, sortField));
+                Sort.by(Sort.Direction.DESC, sortField));
         if (status.isEmpty()) {
             return null;
         } else {
@@ -156,7 +142,7 @@ public class BaseMetadataStatus implements IMetadataStatus {
 
         MetadataStatus metatatStatus = new MetadataStatus();
         metatatStatus.setChangeMessage(changeMessage);
-        metatatStatus.setStatusValue(statusValueRepository.findOne(status));
+        metatatStatus.setStatusValue(statusValueRepository.findById(status).get());
         int userId = context.getUserSession().getUserIdAsInt();
         MetadataStatusId mdStatusId = new MetadataStatusId().setStatusId(status).setMetadataId(id)
                 .setChangeDate(changeDate).setUserId(userId);
@@ -178,7 +164,7 @@ public class BaseMetadataStatus implements IMetadataStatus {
             return;
         }
 
-        final Group group = groupRepository.findOne(Integer.valueOf(groupOwner));
+        final Group group = groupRepository.findById(Integer.valueOf(groupOwner)).get();
         String groupName = "";
         if (group != null) {
             groupName = group.getName();
@@ -207,7 +193,7 @@ public class BaseMetadataStatus implements IMetadataStatus {
 
         MetadataStatus metatatStatus = new MetadataStatus();
         metatatStatus.setChangeMessage("");
-        metatatStatus.setStatusValue(statusValueRepository.findOne(newStatus));
+        metatatStatus.setStatusValue(statusValueRepository.findById(newStatus).get());
 
         MetadataStatusId mdStatusId = new MetadataStatusId().setStatusId(newStatus).setMetadataId(metadataId)
                 .setChangeDate(new ISODate(System.currentTimeMillis())).setUserId(userId);

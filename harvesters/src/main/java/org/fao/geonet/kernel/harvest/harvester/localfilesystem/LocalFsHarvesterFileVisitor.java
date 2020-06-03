@@ -23,8 +23,6 @@
 
 package org.fao.geonet.kernel.harvest.harvester.localfilesystem;
 
-import static org.fao.geonet.kernel.HarvestValidationEnum.NOVALIDATION;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import jeeves.server.context.ServiceContext;
@@ -57,11 +55,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 

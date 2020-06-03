@@ -61,7 +61,7 @@ public interface MetadataRepositoryCustom<T extends AbstractMetadata> {
      * <p/>
      * The id needs to be convertable to an integer
      * <p/>
-     * This is just short for repository.findOne(Integer.parseInt(id))
+     * This is just short for repository.findById(Integer.parseInt(id)).get()
      *
      * @param id the id in string form instead of integer.
      */
@@ -70,8 +70,8 @@ public interface MetadataRepositoryCustom<T extends AbstractMetadata> {
 
     /**
      * Find the list of Metadata Ids and changes dates for the metadata. <p> When constructing sort
-     * objects use the MetaModel objects: <ul> <li><code>new Sort(Metadata_.id.getName())</code></li>
-     * <li><code>new Sort(Sort.Direction.ASC, Metadata_.id.getName())</code></li> </ul> </p>
+     * objects use the MetaModel objects: <ul> <li><code>Sort.by(Metadata_.id.getName())</code></li>
+     * <li><code>Sort.by(Sort.Direction.ASC, Metadata_.id.getName())</code></li> </ul> </p>
      *
      * @param pageable if non-null then control which subset of the results to return (and how to
      *                 sort the results).
@@ -127,5 +127,5 @@ public interface MetadataRepositoryCustom<T extends AbstractMetadata> {
      */
     @Nullable
     Element findAllUuidsAndChangeDatesAndSchemaId(List<Integer> ids);
-    
+
 }

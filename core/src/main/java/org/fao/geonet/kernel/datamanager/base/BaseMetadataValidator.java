@@ -29,12 +29,7 @@ import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.constants.Edit;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Geonet.Namespaces;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.MetadataValidation;
-import org.fao.geonet.domain.MetadataValidationId;
-import org.fao.geonet.domain.MetadataValidationStatus;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.SchematronRequirement;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.exceptions.JeevesException;
 import org.fao.geonet.exceptions.SchematronValidationErrorEx;
 import org.fao.geonet.exceptions.XSDValidationErrorEx;
@@ -43,14 +38,12 @@ import org.fao.geonet.kernel.SchematronValidatorExternalMd;
 import org.fao.geonet.kernel.ThesaurusManager;
 import org.fao.geonet.kernel.datamanager.IMetadataManager;
 import org.fao.geonet.kernel.datamanager.IMetadataSchemaUtils;
-import org.fao.geonet.kernel.schema.MetadataSchema;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.repository.MetadataValidationRepository;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.fao.geonet.utils.XmlErrorHandler;
 import org.jdom.Attribute;
-import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
@@ -63,9 +56,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -517,7 +508,7 @@ public class BaseMetadataValidator implements org.fao.geonet.kernel.datamanager.
     private void saveValidationStatus(int id, List<MetadataValidation> validations) {
         try {
             validationRepository.deleteAllById_MetadataId(id);
-            validationRepository.save(validations);
+            validationRepository.saveAll(validations);
         } catch (Exception e) {
             LOGGER.error("Could not save validation status on metadata {}.", id);
             LOGGER.error("Could not save validation status on metadata, exception: ", e);

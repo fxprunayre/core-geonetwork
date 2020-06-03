@@ -23,52 +23,26 @@
 
 package org.fao.geonet.kernel;
 
-import static org.fao.geonet.repository.specification.OperationAllowedSpecs.hasMetadataId;
-import static org.fao.geonet.repository.specification.OperationAllowedSpecs.hasOperation;
-import static org.springframework.data.jpa.domain.Specifications.where;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
-
+import jeeves.server.UserSession;
+import jeeves.server.context.ServiceContext;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.MetadataSourceInfo;
-import org.fao.geonet.domain.Operation;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.ReservedGroup;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.Setting;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.domain.UserGroup;
-import org.fao.geonet.domain.User_;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.setting.Settings;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.GroupRepositoryCustom;
-import org.fao.geonet.repository.OperationAllowedRepository;
-import org.fao.geonet.repository.OperationRepository;
-import org.fao.geonet.repository.SettingRepository;
-import org.fao.geonet.repository.SortUtils;
-import org.fao.geonet.repository.UserGroupRepository;
-import org.fao.geonet.repository.UserRepository;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 
-import jeeves.server.UserSession;
-import jeeves.server.context.ServiceContext;
+import java.util.*;
+
+import static org.fao.geonet.repository.specification.OperationAllowedSpecs.hasMetadataId;
+import static org.fao.geonet.repository.specification.OperationAllowedSpecs.hasOperation;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 /**
  * Handles the access to a metadata depending on the metadata/group.
@@ -138,7 +112,7 @@ public class AccessManager {
             ip, false);
         for (OperationAllowed opAllow : _opAllowedRepository.findByMetadataId(mdId)) {
             if (groups.contains(opAllow.getId().getGroupId())) {
-                operations.add(_opRepository.findOne(opAllow.getId().getOperationId()));
+                operations.add(_opRepository.findById(opAllow.getId().getOperationId()).get());
             }
         }
         return operations;
@@ -174,7 +148,7 @@ public class AccessManager {
             } else {
                 Specification<UserGroup> spec = UserGroupSpecs.hasUserId(usrSess.getUserIdAsInt());
                 if (editingGroupsOnly) {
-                    spec = Specifications.where(spec).and(UserGroupSpecs.hasProfile(Profile.Editor));
+                    spec = Specification.where(spec).and(UserGroupSpecs.hasProfile(Profile.Editor));
                 }
 
                 hs.addAll(_userGroupRepository.findGroupIds(spec));
@@ -191,7 +165,7 @@ public class AccessManager {
         if (usrSess.isAuthenticated()) {
             Specification<UserGroup> spec =
                 UserGroupSpecs.hasUserId(usrSess.getUserIdAsInt());
-            spec = Specifications
+            spec = Specification
                 .where(spec)
                 .and(UserGroupSpecs.hasProfile(Profile.Reviewer));
 
@@ -213,7 +187,7 @@ public class AccessManager {
 
         Set<Integer> hs = new HashSet<Integer>();
 
-        User user = userRepository.findOne(userId);
+        User user = userRepository.findById(userId).get();
 
         if (user == null) {
             return hs;
@@ -470,7 +444,7 @@ public class AccessManager {
             return false;
         }
 
-        Specifications spec = where(UserGroupSpecs.hasProfile(profile)).and(UserGroupSpecs.hasUserId(us.getUserIdAsInt()));
+        Specification spec = where(UserGroupSpecs.hasProfile(profile)).and(UserGroupSpecs.hasUserId(us.getUserIdAsInt()));
 
         List<Integer> opAlloweds = new ArrayList<Integer>();
         for (OperationAllowed opAllowed : allOpAlloweds) {
@@ -497,7 +471,7 @@ public class AccessManager {
         UserGroupRepository userGroupRepository = context.getBean(UserGroupRepository.class);
         IMetadataUtils metadataUtils = context.getBean(IMetadataUtils.class);
 
-        Specifications spec = where(UserGroupSpecs.hasProfile(Profile.Reviewer)).and(UserGroupSpecs.hasUserId(us.getUserIdAsInt()));
+        Specification spec = where(UserGroupSpecs.hasProfile(Profile.Reviewer)).and(UserGroupSpecs.hasUserId(us.getUserIdAsInt()));
 
         List<Integer> opAlloweds = new ArrayList<Integer>();
         opAlloweds.add(metadataUtils.findOne(id).getSourceInfo().getGroupOwner());
@@ -524,7 +498,7 @@ public class AccessManager {
      */
     public String getPrivilegeName(int id) {
         OperationRepository opRepository = ApplicationContextHolder.get().getBean(OperationRepository.class);
-        return opRepository.findOne(id).getName();
+        return opRepository.findById(id).get().getName();
     }
 
     //--------------------------------------------------------------------------
@@ -555,8 +529,8 @@ public class AccessManager {
         // IPv4
 
         SettingRepository settingRepository= ApplicationContextHolder.get().getBean(SettingRepository.class);
-        Setting network = settingRepository.findOne(Settings.SYSTEM_INTRANET_NETWORK);
-        Setting netmask = settingRepository.findOne(Settings.SYSTEM_INTRANET_NETMASK);
+        Setting network = settingRepository.findById(Settings.SYSTEM_INTRANET_NETWORK).get();
+        Setting netmask = settingRepository.findById(Settings.SYSTEM_INTRANET_NETMASK).get();
 
         try {
             if (network != null && netmask != null &&

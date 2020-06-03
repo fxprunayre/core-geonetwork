@@ -31,20 +31,8 @@ import org.apache.log4j.PatternLayout;
 import org.fao.geonet.Logger;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.csw.common.exceptions.InvalidParameterValueEx;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.HarvestHistory;
-import org.fao.geonet.domain.HarvestHistory_;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Profile;
-import org.fao.geonet.domain.Source;
-import org.fao.geonet.domain.SourceType;
-import org.fao.geonet.domain.User;
-import org.fao.geonet.exceptions.BadInputEx;
-import org.fao.geonet.exceptions.BadParameterEx;
-import org.fao.geonet.exceptions.JeevesException;
-import org.fao.geonet.exceptions.OperationAbortedEx;
-import org.fao.geonet.exceptions.UnknownHostEx;
+import org.fao.geonet.domain.*;
+import org.fao.geonet.exceptions.*;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.MetadataIndexerProcessor;
@@ -55,11 +43,7 @@ import org.fao.geonet.kernel.harvest.Common.Status;
 import org.fao.geonet.kernel.setting.HarvesterSettingsManager;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.kernel.setting.Settings;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.HarvestHistoryRepository;
-import org.fao.geonet.repository.SortUtils;
-import org.fao.geonet.repository.SourceRepository;
-import org.fao.geonet.repository.UserRepository;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.repository.specification.HarvestHistorySpecs;
 import org.fao.geonet.repository.specification.MetadataSpecs;
 import org.fao.geonet.resources.Resources;
@@ -70,34 +54,19 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.quartz.CronTrigger;
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
+import org.quartz.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
@@ -249,7 +218,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
     private void initInfo(ServiceContext context) {
         final HarvestHistoryRepository historyRepository = context.getBean(HarvestHistoryRepository.class);
         Specification<HarvestHistory> spec = HarvestHistorySpecs.hasHarvesterUuid(getParams().getUuid());
-        Pageable pageRequest = new PageRequest(0, 1, new Sort(Sort.Direction.DESC, SortUtils.createPath(HarvestHistory_.harvestDate)));
+        Pageable pageRequest = PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, SortUtils.createPath(HarvestHistory_.harvestDate)));
         final Page<HarvestHistory> page = historyRepository.findAll(spec, pageRequest);
         if (page.hasContent()) {
             final HarvestHistory history = page.getContent().get(0);
@@ -324,7 +293,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
                 final SourceRepository sourceRepository = context.getBean(SourceRepository.class);
                 final Resources resources = context.getBean(Resources.class);
 
-                final Specifications<? extends AbstractMetadata> ownedByHarvester = Specifications.where(MetadataSpecs.hasHarvesterUuid(getParams().getUuid()));
+                final Specification<? extends AbstractMetadata> ownedByHarvester = Specification.where(MetadataSpecs.hasHarvesterUuid(getParams().getUuid()));
                 Set<String> sources = new HashSet<>();
                 for (Integer id : metadataRepository.findAllIdsBy(ownedByHarvester)) {
                     sources.add(metadataUtils.findOne(id).getSourceInfo().getSourceId());
@@ -334,10 +303,10 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
                 // Remove all sources related to the harvestUuid if they are not linked to any record anymore
                 for (String sourceUuid : sources) {
                     Long ownedBySource =
-                        metadataRepository.count(Specifications.where(MetadataSpecs.hasSource(sourceUuid)));
-                    if (ownedBySource == 0 && !sourceUuid.equals(params.getUuid()) && sourceRepository.exists(sourceUuid)) {
+                        metadataRepository.count(Specification.where(MetadataSpecs.hasSource(sourceUuid)));
+                    if (ownedBySource == 0 && !sourceUuid.equals(params.getUuid()) && sourceRepository.existsById(sourceUuid)) {
                         removeIcon(resources, sourceUuid);
-                        sourceRepository.delete(sourceUuid);
+                        sourceRepository.deleteById(sourceUuid);
                     }
                 }
 
@@ -611,7 +580,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
         UserRepository repository = this.context.getBean(UserRepository.class);
         User user = null;
         if (StringUtils.isNotEmpty(ownerId)) {
-            user = repository.findOne(ownerId);
+            user = repository.findById(Integer.parseInt(ownerId)).get();
         }
 
         // for harvesters created before owner was added to the harvester code,
@@ -831,7 +800,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
     private void doDestroy(final Resources resources) {
         removeIcon(resources, getParams().getUuid());
 
-        context.getBean(SourceRepository.class).delete(getParams().getUuid());
+        context.getBean(SourceRepository.class).deleteById(getParams().getUuid());
         // FIXME: Should also delete the categories we have created for servers
     }
 
@@ -1103,7 +1072,7 @@ public abstract class AbstractHarvester<T extends HarvestResult, P extends Abstr
     public String getOwnerEmail() {
         String ownerId = getParams().getOwnerIdGroup();
 
-        final Group group = context.getBean(GroupRepository.class).findOne(Integer.parseInt(ownerId));
+        final Group group = context.getBean(GroupRepository.class).findById(Integer.parseInt(ownerId)).get();
         return group.getEmail();
     }
 

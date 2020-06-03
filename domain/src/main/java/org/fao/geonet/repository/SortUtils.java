@@ -115,16 +115,16 @@ public class SortUtils {
      * Create a sort object from the path objects.  This only creates a sort with a single path.
      * For multiple paths do:
      * <p/>
-     * <p> new Sort(createPath(attributes1...), createPath(attributes2...),...) </p>
+     * <p> Sort.by(createPath(attributes1...), createPath(attributes2...),...) </p>
      *
      * @param attributes the attributes to use for building a sort.
      * @return a sort object from the path objects
      */
     public static Sort createSort(SingularAttribute<?, ?>... attributes) {
-        return new Sort(createPath(attributes));
+        return Sort.by(createPath(attributes));
     }
 
     public static Sort createSort(Sort.Direction direction, SingularAttribute<?, ?>... attributes) {
-        return new Sort(direction, createPath(attributes));
+        return Sort.by(direction, createPath(attributes));
     }
 }

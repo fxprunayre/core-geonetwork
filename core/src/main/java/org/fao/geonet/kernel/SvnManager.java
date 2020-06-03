@@ -23,45 +23,20 @@
 
 package org.fao.geonet.kernel;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.sql.Connection;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.annotation.Nonnull;
-import javax.sql.DataSource;
-
+import jeeves.server.UserSession;
+import jeeves.server.context.ServiceContext;
+import jeeves.transaction.AfterCommitTransactionListener;
+import jeeves.transaction.BeforeRollbackTransactionListener;
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.Constants;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.Group;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataStatus;
-import org.fao.geonet.domain.Operation;
-import org.fao.geonet.domain.OperationAllowed;
-import org.fao.geonet.domain.OperationAllowedId;
-import org.fao.geonet.domain.OperationAllowedId_;
-import org.fao.geonet.domain.OperationAllowed_;
-import org.fao.geonet.domain.User;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.kernel.setting.Settings;
-import org.fao.geonet.repository.GroupRepository;
-import org.fao.geonet.repository.OperationAllowedRepository;
-import org.fao.geonet.repository.OperationRepository;
-import org.fao.geonet.repository.SortUtils;
-import org.fao.geonet.repository.UserRepository;
+import org.fao.geonet.repository.*;
 import org.fao.geonet.repository.specification.OperationAllowedSpecs;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
@@ -71,22 +46,20 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.tmatesoft.svn.core.SVNCommitInfo;
-import org.tmatesoft.svn.core.SVNDirEntry;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.SVNProperties;
-import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.*;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.io.ISVNEditor;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
-import jeeves.server.UserSession;
-import jeeves.server.context.ServiceContext;
-import jeeves.transaction.AfterCommitTransactionListener;
-import jeeves.transaction.BeforeRollbackTransactionListener;
+import javax.annotation.Nonnull;
+import javax.sql.DataSource;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.sql.Connection;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.fao.geonet.kernel.setting.Settings.METADATA_VCS;
 
@@ -695,7 +668,7 @@ public class SvnManager implements AfterCommitTransactionListener, BeforeRollbac
         Set<Integer> ids = new HashSet<Integer>();
         ids.add(Integer.valueOf(id));
         AbstractMetadata metadata = this.context.getBean(IMetadataUtils.class).findOne(id);
-        User user = this.context.getBean(UserRepository.class).findOne(metadata.getSourceInfo().getOwner());
+        User user = this.context.getBean(UserRepository.class).findById(metadata.getSourceInfo().getOwner()).get();
         // Backwards compatibility.  Format the metadata as XML in same format as previous versions.
         Element xml = new Element("results").addContent(
             new Element("record")
@@ -750,9 +723,9 @@ public class SvnManager implements AfterCommitTransactionListener, BeforeRollbac
             Element record = new Element("record");
             final OperationAllowedId operationAllowedId = operationAllowed.getId();
             record.addContent(new Element("group_id").setText(Integer.toString(operationAllowedId.getGroupId())));
-            final Group group = groupRepository.findOne(operationAllowedId.getGroupId());
+            final Group group = groupRepository.findById(operationAllowedId.getGroupId()).get();
             record.addContent(new Element("group_name").setText(group.getName()));
-            final Operation operation = operationRepository.findOne(operationAllowedId.getOperationId());
+            final Operation operation = operationRepository.findById(operationAllowedId.getOperationId()).get();
             record.addContent(new Element("operation_id").setText(Integer.toString(operationAllowedId.getOperationId())));
             record.addContent(new Element("operation_name").setText(operation.getName()));
             privs.addContent(record);

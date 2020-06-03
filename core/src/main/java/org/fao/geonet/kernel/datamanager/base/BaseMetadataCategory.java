@@ -23,11 +23,7 @@
 
 package org.fao.geonet.kernel.datamanager.base;
 
-import java.util.Collection;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-
+import jeeves.server.context.ServiceContext;
 import org.fao.geonet.domain.AbstractMetadata;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.domain.MetadataCategory;
@@ -40,7 +36,9 @@ import org.fao.geonet.repository.MetadataRepository;
 import org.fao.geonet.repository.Updater;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jeeves.server.context.ServiceContext;
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.Set;
 
 public class BaseMetadataCategory implements IMetadataCategory {
 
@@ -62,11 +60,11 @@ public class BaseMetadataCategory implements IMetadataCategory {
     @Override
     public boolean setCategory(ServiceContext context, String mdId, String categId) throws Exception {
 
-        if (!getMetadataRepository().exists(Integer.valueOf(mdId))) {
+        if (!getMetadataRepository().existsById(Integer.valueOf(mdId))) {
             return false;
         }
 
-        final MetadataCategory newCategory = metadataCategoryRepository.findOne(Integer.valueOf(categId));
+        final MetadataCategory newCategory = metadataCategoryRepository.findById(Integer.valueOf(categId)).get();
         final boolean[] changed = new boolean[1];
         getMetadataRepository().update(Integer.valueOf(mdId), new Updater<Metadata>() {
             @Override

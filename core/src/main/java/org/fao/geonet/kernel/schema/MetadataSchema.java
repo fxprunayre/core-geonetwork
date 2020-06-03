@@ -27,22 +27,14 @@
 
 package org.fao.geonet.kernel.schema;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.fao.geonet.api.exception.ResourceNotFoundException;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.Pair;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.domain.Schematron;
-import org.fao.geonet.domain.SchematronCriteria;
-import org.fao.geonet.domain.SchematronCriteriaGroup;
-import org.fao.geonet.domain.SchematronCriteriaGroupId;
-import org.fao.geonet.domain.SchematronCriteriaType;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.schema.editorconfig.Editor;
 import org.fao.geonet.repository.SchematronCriteriaGroupRepository;
@@ -53,21 +45,16 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import java.util.*;
 
 
 //==============================================================================
@@ -513,7 +500,7 @@ public class MetadataSchema {
                 updated.add(schematron);
             }
         }
-        this.schemaRepo.save(updated);
+        this.schemaRepo.saveAll(updated);
     }
 
     public void setOperationFilters(Map<String, Pair<String, Element>> operationFilters) {

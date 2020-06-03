@@ -25,19 +25,17 @@ package org.fao.geonet.repository;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import org.fao.geonet.domain.*;
 import org.fao.geonet.repository.specification.UserGroupSpecs;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specifications;
+import org.springframework.data.jpa.domain.Specification;
 
 import javax.annotation.Nullable;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -76,7 +74,7 @@ public class UserRepositoryTest extends AbstractSpringDataTest {
         assertNodeId(user);
         // loading should also set nodeid
         assertNodeId(_userRepo.findAll().get(0));
-        assertNodeId(_userRepo.findOne(user.getId()));
+        assertNodeId(_userRepo.findById(user.getId()).get());
         assertNodeId(_userRepo.findOneByUsername(user.getUsername()));
         assertNodeId(_userRepo.findOneByEmail(user.getEmail()));
         assertNodeId(_userRepo.findAllByProfile(user.getProfile()).get(0));
@@ -202,7 +200,7 @@ public class UserRepositoryTest extends AbstractSpringDataTest {
         assertEquals(reviewerUser, found.get(1).two());
 
         found = _userRepo.findAllByGroupOwnerNameAndProfile(Arrays.asList(md1.getId()), null,
-            new Sort(new Sort.Order(Sort.Direction.DESC, User_.name.getName())));
+            Sort.by(new Sort.Order(Sort.Direction.DESC, User_.name.getName())));
 
         assertEquals(2, found.size());
         assertEquals(md1.getId(), found.get(0).one().intValue());
@@ -256,7 +254,7 @@ public class UserRepositoryTest extends AbstractSpringDataTest {
         assertTrue(found.contains(editUser.getId()));
         assertTrue(found.contains(reviewerUser.getId()));
 
-        found = Lists.transform(_userRepo.findAllUsersInUserGroups(Specifications.not(UserGroupSpecs.hasProfile(Profile.RegisteredUser)
+        found = Lists.transform(_userRepo.findAllUsersInUserGroups(Specification.not(UserGroupSpecs.hasProfile(Profile.RegisteredUser)
         )), new Function<User, Integer>() {
 
             @Nullable

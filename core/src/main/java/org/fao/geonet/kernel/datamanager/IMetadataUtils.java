@@ -482,8 +482,8 @@ public interface IMetadataUtils {
      * <p>
      * When constructing sort objects use the MetaModel objects:
      * <ul>
-     * <li><code>new Sort(Metadata_.id.getName())</code></li>
-     * <li><code>new Sort(Sort.Direction.ASC, Metadata_.id.getName())</code></li>
+     * <li><code>Sort.by(Metadata_.id.getName())</code></li>
+     * <li><code>Sort.by(Sort.Direction.ASC, Metadata_.id.getName())</code></li>
      * </ul>
      * </p>
      *

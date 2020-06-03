@@ -23,15 +23,6 @@
 
 package org.fao.geonet.kernel.security.shibboleth;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.domain.Group;
 import org.fao.geonet.domain.Profile;
@@ -46,6 +37,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class ShibbolethUserUtilsTest extends AbstractCoreIntegrationTest {
 
@@ -95,7 +90,7 @@ public class ShibbolethUserUtilsTest extends AbstractCoreIntegrationTest {
     @After
     public void cleanUp() {
         User user = userRepo.findOneByUsername(username);
-        userRepo.delete(user.getId());
+        userRepo.deleteById(user.getId());
 
         for (int i = 1; i < 5; i++) {
             Group group = groupRepo.findByName(groupname + i);

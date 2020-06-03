@@ -47,10 +47,8 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
-import org.elasticsearch.client.security.RefreshPolicy;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.script.Script;
 import org.elasticsearch.script.ScriptType;
@@ -62,7 +60,6 @@ import org.fao.geonet.domain.AbstractMetadata;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.domain.MetadataType;
-import org.fao.geonet.domain.Source;
 import org.fao.geonet.index.es.EsRestClient;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
@@ -79,7 +76,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -87,17 +83,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 
@@ -629,11 +615,11 @@ public class EsSearchManager implements ISearchManager {
                 dataMan.indexMetadata(id + "", false);
             }
         } else {
-            final Specifications<Metadata> metadataSpec =
-                Specifications.where((Specification<Metadata>) MetadataSpecs.isType(MetadataType.METADATA))
+            final Specification<Metadata> metadataSpec =
+                Specification.where((Specification<Metadata>) MetadataSpecs.isType(MetadataType.METADATA))
                     .or((Specification<Metadata>) MetadataSpecs.isType(MetadataType.TEMPLATE));
             final List<Integer> metadataIds = metadataRepository.findAllIdsBy(
-                Specifications.where(metadataSpec)
+                Specification.where(metadataSpec)
             );
             for (Integer id : metadataIds) {
                 dataMan.indexMetadata(id + "", false);

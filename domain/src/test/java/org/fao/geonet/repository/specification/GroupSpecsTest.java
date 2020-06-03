@@ -34,12 +34,11 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.fao.geonet.repository.specification.GroupSpecs.isReserved;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.springframework.data.jpa.domain.Specifications.not;
+import static org.springframework.data.jpa.domain.Specification.not;
 
 /**
  * Test the Group specs.
