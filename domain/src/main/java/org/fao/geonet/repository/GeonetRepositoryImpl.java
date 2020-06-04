@@ -29,6 +29,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,11 +63,9 @@ public class GeonetRepositoryImpl<T extends GeonetEntity, ID extends Serializabl
     private final Class<T> _entityClass;
     protected EntityManager _entityManager;
 
-
-    protected GeonetRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
-        super(domainClass, entityManager);
-        this._entityManager = entityManager;
-        this._entityClass = domainClass;
+    public GeonetRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this._entityClass = entityInformation.getJavaType();
     }
 
     protected static <T extends GeonetEntity> Element findAllAsXml(EntityManager entityManager, Class<T> entityClass,
