@@ -23,6 +23,8 @@
 
 package org.fao.geonet.repository;
 
+import org.springframework.data.repository.NoRepositoryBean;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -32,6 +34,7 @@ import javax.persistence.PersistenceContext;
  * <p/>
  * User: Jesse Date: 9/10/13 Time: 7:13 AM
  */
+@NoRepositoryBean
 public class StatusValueRepositoryImpl {
 
     @PersistenceContext

@@ -24,6 +24,8 @@
 package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.IsoLanguage;
+import org.fao.geonet.domain.MetadataDraft;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
@@ -32,7 +34,9 @@ import java.util.List;
  *
  * @author Jesse
  */
-public interface IsoLanguageRepository extends GeonetRepository<IsoLanguage, Integer> {
+public interface IsoLanguageRepository extends
+    GeonetRepository<IsoLanguage, Integer>,
+    JpaSpecificationExecutor<IsoLanguage> {
     /**
      * Find all the IsoLanguages based on the code (the longer code).
      *

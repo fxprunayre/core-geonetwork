@@ -44,6 +44,7 @@ import org.fao.geonet.domain.HarvesterSetting;
 import org.fao.geonet.domain.HarvesterSetting_;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
@@ -68,9 +69,11 @@ import com.google.common.collect.Lists;
  * <p/>
  * User: Jesse Date: 10/25/13 Time: 7:53 AM
  */
-public class HarvesterSettingRepositoryOverridesImpl extends GeonetRepositoryImpl<HarvesterSetting,
-    Integer> implements HarvesterSettingRepositoryCustom {
-    protected HarvesterSettingRepositoryOverridesImpl(JpaEntityInformation<HarvesterSetting, ?> domainClass, EntityManager entityManager) {
+@NoRepositoryBean
+public class HarvesterSettingRepositoryCustomImpl extends
+    GeonetRepositoryImpl<HarvesterSetting, Integer>
+    implements HarvesterSettingRepositoryCustom {
+    protected HarvesterSettingRepositoryCustomImpl(JpaEntityInformation<HarvesterSetting, ?> domainClass, EntityManager entityManager) {
         super(domainClass, entityManager);
     }
 

@@ -25,6 +25,7 @@ package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.StatusValue;
 import org.fao.geonet.domain.StatusValueType;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
@@ -33,7 +34,10 @@ import java.util.List;
  *
  * @author Jesse
  */
-public interface StatusValueRepository extends GeonetRepository<StatusValue, Integer> {
+public interface StatusValueRepository extends
+    GeonetRepository<StatusValue, Integer>,
+    JpaSpecificationExecutor<StatusValue> {
+
     StatusValue findOneByName(String statusValueName);
 
     StatusValue findOneById(int statusValueId);

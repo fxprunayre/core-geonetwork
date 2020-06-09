@@ -27,6 +27,7 @@ import org.fao.geonet.domain.SchematronCriteria;
 import org.fao.geonet.domain.SchematronCriteriaGroup;
 import org.fao.geonet.domain.SchematronCriteriaGroup_;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -44,6 +45,7 @@ import java.util.List;
  *
  * Created by Jesse on 3/7/14.
  */
+@NoRepositoryBean
 public class SchematronCriteriaRepositoryImpl {
     @PersistenceContext
     EntityManager _entityManager;

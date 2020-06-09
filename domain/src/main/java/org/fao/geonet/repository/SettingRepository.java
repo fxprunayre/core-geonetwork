@@ -31,6 +31,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  *
  * @author Jesse
  */
-public interface SettingRepository extends GeonetRepository<Setting, String>,
-    SettingRepositoryCustom, JpaSpecificationExecutor<Setting> {
+public interface SettingRepository extends
+    GeonetRepository<Setting, String>,
+    SettingRepositoryCustom,
+    JpaSpecificationExecutor<Setting> {
 }

@@ -24,6 +24,7 @@
 package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.MapServer;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,7 +35,8 @@ import javax.persistence.PersistenceContext;
  * @author Francois
  */
 
-public class MapServerRepositoryImpl implements MapServerRepositoryCustom {
+@NoRepositoryBean
+public class MapServerRepositoryCustomImpl implements MapServerRepositoryCustom {
 
     @PersistenceContext
     private EntityManager _entityManager;

@@ -25,6 +25,7 @@ package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.Operation;
 import org.fao.geonet.domain.ReservedOperation;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,7 +37,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author Jesse
  */
-public class OperationRepositoryImpl implements OperationRepositoryCustom {
+@NoRepositoryBean
+public class OperationRepositoryCustomImpl implements OperationRepositoryCustom {
 
     @PersistenceContext
     private EntityManager _entityManager;

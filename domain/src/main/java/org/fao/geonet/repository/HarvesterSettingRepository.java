@@ -36,8 +36,10 @@ import javax.annotation.Nullable;
  *
  * @author Jesse
  */
-public interface HarvesterSettingRepository extends GeonetRepository<HarvesterSetting, Integer>,
-    JpaSpecificationExecutor<HarvesterSetting>, HarvesterSettingRepositoryCustom {
+public interface HarvesterSettingRepository extends
+    GeonetRepository<HarvesterSetting, Integer>,
+    JpaSpecificationExecutor<HarvesterSetting>,
+    HarvesterSettingRepositoryCustom {
 
     /**
      * The prefix in a path for finding a setting by its id.

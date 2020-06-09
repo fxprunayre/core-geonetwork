@@ -31,6 +31,7 @@ import org.fao.geonet.domain.UserGroupId;
 import org.fao.geonet.domain.UserGroupId_;
 import org.fao.geonet.domain.UserGroup_;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -49,7 +50,8 @@ import java.util.List;
  *
  * @author Jesse
  */
-public class UserGroupRepositoryImpl implements UserGroupRepositoryCustom {
+@NoRepositoryBean
+public class UserGroupRepositoryCustomImpl implements UserGroupRepositoryCustom {
 
     @PersistenceContext
     private EntityManager _entityManager;

@@ -46,6 +46,7 @@ import org.fao.geonet.domain.StatusValueType;
 import org.fao.geonet.domain.StatusValue_;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * Data Access object for accessing
@@ -53,7 +54,8 @@ import org.springframework.data.domain.Sort;
  *
  * @author Jesse
  */
-public class MetadataStatusRepositoryImpl implements MetadataStatusRepositoryCustom {
+@NoRepositoryBean
+public class MetadataStatusRepositoryCustomImpl implements MetadataStatusRepositoryCustom {
 
     @PersistenceContext
     EntityManager _entityManager;

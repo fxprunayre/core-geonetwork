@@ -23,10 +23,7 @@
 
 package org.fao.geonet.repository;
 
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.MetadataSourceInfo;
-import org.fao.geonet.domain.Pair;
+import org.fao.geonet.domain.*;
 import org.fao.geonet.repository.reports.MetadataReportsQueries;
 import org.jdom.Element;
 import org.springframework.data.domain.Page;
@@ -40,12 +37,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Custom (Non spring-data) Query methods for {@link Metadata} entities.
+ * Custom (Non spring-data) Query methods for {@link AbstractMetadata} entities.
  *
  * @author Jesse
  */
 @NoRepositoryBean
-public interface MetadataRepositoryCustom<T extends AbstractMetadata> {
+public interface MetadataDraftRepositoryCustom<T extends AbstractMetadata> {
 
     /**
      * Return an object that contains functions for calculating several different statistical

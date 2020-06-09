@@ -27,6 +27,7 @@ import org.fao.geonet.domain.*;
 import org.fao.geonet.utils.Log;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,7 +46,8 @@ import java.util.List;
  *
  * @author Jesse
  */
-public class UserRepositoryImpl implements UserRepositoryCustom {
+@NoRepositoryBean
+public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @PersistenceContext
     private EntityManager _entityManager;

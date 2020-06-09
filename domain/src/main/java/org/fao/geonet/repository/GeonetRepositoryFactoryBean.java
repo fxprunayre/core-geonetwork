@@ -89,7 +89,7 @@ public class GeonetRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I  ex
             if (isQueryDslExecutor(metadata.getRepositoryInterface())) {
                 return super.getRepositoryBaseClass(metadata);
             } else if (metadata.getDomainType().equals(HarvesterSetting.class)) {
-                return HarvesterSettingRepositoryOverridesImpl.class;
+                return HarvesterSettingRepositoryCustomImpl.class;
             } else {
                 return GeonetRepositoryImpl.class;
             }

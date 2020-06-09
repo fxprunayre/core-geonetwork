@@ -24,6 +24,7 @@
 package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.Schematron;
+import org.fao.geonet.domain.Setting;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;

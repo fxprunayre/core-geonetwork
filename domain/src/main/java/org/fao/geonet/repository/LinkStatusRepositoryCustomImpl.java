@@ -23,10 +23,13 @@
 
 package org.fao.geonet.repository;
 
+import org.springframework.data.repository.NoRepositoryBean;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class MetadataLinkRepositoryImpl {
+@NoRepositoryBean
+public class LinkStatusRepositoryCustomImpl {
 
     @PersistenceContext
     private EntityManager _entityManager;

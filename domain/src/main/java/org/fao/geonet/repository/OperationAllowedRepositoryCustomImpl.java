@@ -44,6 +44,7 @@ import org.fao.geonet.domain.OperationAllowedId_;
 import org.fao.geonet.domain.OperationAllowed_;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Optional;
@@ -54,7 +55,8 @@ import com.google.common.base.Optional;
  *
  * @author Jesse
  */
-public class OperationAllowedRepositoryImpl implements OperationAllowedRepositoryCustom {
+@NoRepositoryBean
+public class OperationAllowedRepositoryCustomImpl implements OperationAllowedRepositoryCustom {
 
     @PersistenceContext
     EntityManager _entityManager;

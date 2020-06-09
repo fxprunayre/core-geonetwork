@@ -26,6 +26,7 @@ package org.fao.geonet.repository;
 import org.fao.geonet.domain.InspireAtomFeed;
 import org.fao.geonet.domain.InspireAtomFeed_;
 import org.fao.geonet.domain.Metadata;
+import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -34,7 +35,8 @@ import javax.persistence.Query;
 import javax.persistence.criteria.*;
 
 
-public class InspireAtomFeedRepositoryImpl implements InspireAtomFeedRepositoryCustom {
+@NoRepositoryBean
+public class InspireAtomFeedRepositoryCustomImpl implements InspireAtomFeedRepositoryCustom {
     @PersistenceContext
     private EntityManager _entityManager;
 

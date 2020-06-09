@@ -25,6 +25,8 @@ package org.fao.geonet.repository;
 
 import org.fao.geonet.domain.CswCapabilitiesInfoField;
 import org.fao.geonet.domain.CswCapabilitiesInfoField_;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Nonnull;
 import javax.persistence.EntityManager;
@@ -41,7 +43,8 @@ import java.util.List;
  * <p/>
  * User: Jesse Date: 9/20/13 Time: 10:36 AM
  */
-public class CswCapabilitiesInfoFieldRepositoryImpl implements CswCapabilitiesInfoFieldRepositoryCustom {
+@NoRepositoryBean
+public class CswCapabilitiesInfoFieldRepositoryCustomImpl implements CswCapabilitiesInfoFieldRepositoryCustom {
     @PersistenceContext
     private EntityManager _EntityManager;
 

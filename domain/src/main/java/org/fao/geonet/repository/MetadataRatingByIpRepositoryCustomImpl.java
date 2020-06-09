@@ -26,6 +26,7 @@ package org.fao.geonet.repository;
 import org.fao.geonet.domain.MetadataRatingByIp;
 import org.fao.geonet.domain.MetadataRatingByIpId_;
 import org.fao.geonet.domain.MetadataRatingByIp_;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -41,7 +42,8 @@ import javax.persistence.criteria.Root;
  * <p/>
  * User: jeichar Date: 9/5/13 Time: 4:15 PM
  */
-public class MetadataRatingByIpRepositoryImpl implements MetadataRatingByIpRepositoryCustom {
+@NoRepositoryBean
+public class MetadataRatingByIpRepositoryCustomImpl implements MetadataRatingByIpRepositoryCustom {
 
     @PersistenceContext
     private EntityManager _entityManager;

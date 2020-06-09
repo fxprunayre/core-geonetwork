@@ -26,6 +26,7 @@
  */
 package org.fao.geonet.repository;
 
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.fao.geonet.domain.UserSavedSelection;
@@ -46,7 +47,8 @@ import java.util.List;
 /**
  * Implementation object for methods in {@link UserSavedSelectionRepositoryCustom}.
  */
-public class UserSavedSelectionRepositoryImpl
+@NoRepositoryBean
+public class UserSavedSelectionRepositoryCustomImpl
     implements UserSavedSelectionRepositoryCustom {
 
     @PersistenceContext
