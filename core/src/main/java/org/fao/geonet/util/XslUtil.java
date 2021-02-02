@@ -130,13 +130,13 @@ import static org.fao.geonet.utils.Xml.getXmlFromJSON;
 public final class XslUtil {
 
 
-    public static MultiPolygon parseGml(Parser parser, String gml) throws IOException, SAXException,
+    public static GeometryCollection parseGml(Parser parser, String gml) throws IOException, SAXException,
         ParserConfigurationException {
         Object value = parser.parse(new StringReader(gml));
         if (value instanceof HashMap) {
             @SuppressWarnings("rawtypes")
             HashMap map = (HashMap) value;
-            List<Polygon> geoms = new ArrayList<Polygon>();
+            List<Geometry> geoms = new ArrayList<Geometry>();
             for (Object entry : map.values()) {
                 addToList(geoms, entry);
             }
@@ -144,7 +144,7 @@ public final class XslUtil {
                 return null;
             } else if (geoms.size() > 1) {
                 GeometryFactory factory = geoms.get(0).getFactory();
-                return factory.createMultiPolygon(geoms.toArray(new Polygon[0]));
+                return factory.createGeometryCollection(geoms.toArray(new Geometry[0]));
             } else {
                 return toMultiPolygon(geoms.get(0));
             }
@@ -223,9 +223,13 @@ public final class XslUtil {
 
 
 
-    public static void addToList(List<Polygon> geoms, Object entry) {
+    public static void addToList(List<Geometry> geoms, Object entry) {
         if (entry instanceof Polygon) {
             geoms.add((Polygon) entry);
+        } else if (entry instanceof LineString) {
+            geoms.add((LineString) entry);
+        } else if (entry instanceof Point) {
+            geoms.add((Point) entry);
         } else if (entry instanceof Collection) {
             @SuppressWarnings("rawtypes")
             Collection collection = (Collection) entry;
@@ -235,12 +239,19 @@ public final class XslUtil {
         }
     }
 
-    public static MultiPolygon toMultiPolygon(Geometry geometry) {
+    public static GeometryCollection toMultiPolygon(Geometry geometry) {
         if (geometry instanceof Polygon) {
             Polygon polygon = (Polygon) geometry;
-
             return geometry.getFactory().createMultiPolygon(
                 new Polygon[]{polygon});
+        } else if (geometry instanceof LineString) {
+            LineString polygon = (LineString) geometry;
+            return geometry.getFactory().createGeometryCollection(
+                new LineString[]{polygon});
+        } else if (geometry instanceof Point) {
+            Point polygon = (Point) geometry;
+            return geometry.getFactory().createGeometryCollection(
+                new Point[]{polygon});
         } else if (geometry instanceof MultiPolygon) {
             return (MultiPolygon) geometry;
         }
@@ -900,7 +911,7 @@ public final class XslUtil {
             CoordinateReferenceSystem geomSrs = DefaultGeographicCRS.WGS84;
             if (srs != null && !(srs.equals(""))) geomSrs = CRS.decode(srs);
             Parser parser = GMLParsers.create(geomElement);
-            MultiPolygon jts = parseGml(parser, gml);
+            GeometryCollection jts = parseGml(parser, gml);
 
 
             // if we have an srs and its not WGS84 then transform to WGS84

@@ -10,10 +10,7 @@ import org.geotools.referencing.CRS;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
 import org.geotools.xsd.Parser;
 import org.jdom.Element;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryFactory;
-import org.locationtech.jts.geom.MultiPolygon;
-import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.*;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 import org.xml.sax.SAXException;
@@ -29,7 +26,7 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class GeomUtils {
-    public static MultiPolygon getSpatialExtent(Path schemaDir, Element metadata, ErrorHandler errorHandler) throws Exception {
+    public static GeometryCollection getSpatialExtent(Path schemaDir, Element metadata, ErrorHandler errorHandler) throws Exception {
         org.geotools.util.logging.Logging.getLogger("org.geotools.xml")
             .setLevel(Level.SEVERE);
         Path sSheet = schemaDir.resolve("extract-gml.xsl").toAbsolutePath();
@@ -37,7 +34,7 @@ public class GeomUtils {
         if (transform.getChildren().size() == 0) {
             return null;
         }
-        List<Polygon> allPolygons = new ArrayList<Polygon>();
+        List<Geometry> allPolygons = new ArrayList<Geometry>();
         for (Element geom : (List<Element>) transform.getChildren()) {
             Parser parser = GMLParsers.create(geom);
             String srs = geom.getAttributeValue("srsName");
@@ -46,16 +43,16 @@ public class GeomUtils {
 
             try {
                 if (srs != null && !(srs.equals(""))) sourceCRS = CRS.decode(srs);
-                MultiPolygon jts = parseGml(parser, gml);
+                GeometryCollection jts = parseGml(parser, gml);
 
                 // if we have an srs and its not WGS84 then transform to WGS84
                 if (!CRS.equalsIgnoreMetadata(sourceCRS, DefaultGeographicCRS.WGS84)) {
                     MathTransform tform = CRS.findMathTransform(sourceCRS, DefaultGeographicCRS.WGS84);
-                    jts = (MultiPolygon) JTS.transform(jts, tform);
+                    jts = (GeometryCollection) JTS.transform(jts, tform);
                 }
 
                 for (int i = 0; i < jts.getNumGeometries(); i++) {
-                    allPolygons.add((Polygon) jts.getGeometryN(i));
+                    allPolygons.add((Geometry) jts.getGeometryN(i));
                 }
             } catch (Exception e) {
                 errorHandler.handleParseException(e, gml);
@@ -67,9 +64,9 @@ public class GeomUtils {
             return null;
         } else {
             try {
-                Polygon[] array = new Polygon[allPolygons.size()];
+                Geometry[] array = new Geometry[allPolygons.size()];
                 GeometryFactory geometryFactory = allPolygons.get(0).getFactory();
-                return geometryFactory.createMultiPolygon(allPolygons.toArray(array));
+                return geometryFactory.createGeometryCollection(allPolygons.toArray(array));
 
 
             } catch (Exception e) {
@@ -80,13 +77,13 @@ public class GeomUtils {
         }
     }
 
-    public static MultiPolygon parseGml(Parser parser, String gml) throws IOException, SAXException,
+    public static GeometryCollection parseGml(Parser parser, String gml) throws IOException, SAXException,
         ParserConfigurationException {
         Object value = parser.parse(new StringReader(gml));
         if (value instanceof HashMap) {
             @SuppressWarnings("rawtypes")
             HashMap map = (HashMap) value;
-            List<MultiPolygon> geoms = new ArrayList<MultiPolygon>();
+            List<GeometryCollection> geoms = new ArrayList<GeometryCollection>();
             for (Object entry : map.values()) {
                 addToList(geoms, entry);
             }
@@ -94,7 +91,7 @@ public class GeomUtils {
                 return null;
             } else if (geoms.size() > 1) {
                 GeometryFactory factory = geoms.get(0).getFactory();
-                return factory.createMultiPolygon(geoms.toArray(new Polygon[0]));
+                return factory.createGeometryCollection(geoms.toArray(new Geometry[0]));
             } else {
                 return toMultiPolygon(geoms.get(0));
             }
@@ -106,12 +103,19 @@ public class GeomUtils {
         }
     }
 
-    public static MultiPolygon toMultiPolygon(Geometry geometry) {
+    public static GeometryCollection toMultiPolygon(Geometry geometry) {
         if (geometry instanceof Polygon) {
             Polygon polygon = (Polygon) geometry;
-
             return geometry.getFactory().createMultiPolygon(
                 new Polygon[]{polygon});
+        } else if (geometry instanceof LineString) {
+            LineString polygon = (LineString) geometry;
+            return geometry.getFactory().createGeometryCollection(
+                new LineString[]{polygon});
+        } else if (geometry instanceof Point) {
+            Point polygon = (Point) geometry;
+            return geometry.getFactory().createGeometryCollection(
+                new Point[]{polygon});
         } else if (geometry instanceof MultiPolygon) {
             return (MultiPolygon) geometry;
         }
@@ -120,9 +124,13 @@ public class GeomUtils {
         throw new IllegalArgumentException(message);
     }
 
-    public static void addToList(List<MultiPolygon> geoms, Object entry) {
+    public static void addToList(List<GeometryCollection> geoms, Object entry) {
         if (entry instanceof Polygon) {
             geoms.add(toMultiPolygon((Polygon) entry));
+        } else if (entry instanceof LineString) {
+            geoms.add(toMultiPolygon((LineString) entry));
+        } else if (entry instanceof Point) {
+            geoms.add(toMultiPolygon((Point) entry));
         } else if (entry instanceof MultiPolygon) {
             geoms.add((MultiPolygon) entry);
         } else if (entry instanceof Collection) {
