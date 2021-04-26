@@ -172,6 +172,7 @@ public class MetadataInsertDeleteApi {
     @ApiResponses(value = {@ApiResponse(responseCode = "204", description = "Record deleted."),
         @ApiResponse(responseCode = "403", description = ApiParams.API_RESPONSE_NOT_ALLOWED_CAN_EDIT)})
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
     public void deleteRecord(
         @Parameter(description = API_PARAM_RECORD_UUID, required = true) @PathVariable String metadataUuid,
         @Parameter(description = API_PARAM_BACKUP_FIRST, required = false) @RequestParam(required = false, defaultValue = "true") boolean withBackup,
@@ -260,8 +261,8 @@ public class MetadataInsertDeleteApi {
         @ApiResponse(responseCode = "403", description = ApiParams.API_RESPONSE_NOT_ALLOWED_ONLY_EDITOR)})
     @PreAuthorize("hasAuthority('Editor')")
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody
-    SimpleMetadataProcessingReport insert(
+    @ResponseBody
+    public SimpleMetadataProcessingReport insert(
         @Parameter(description = API_PARAM_RECORD_TYPE, required = false) @RequestParam(required = false, defaultValue = "METADATA") final MetadataType metadataType,
         @Parameter(description = "XML fragment.", required = false) @RequestBody(required = false) String xml,
         @Parameter(description = "URL of a file to download and insert.", required = false) @RequestParam(required = false) String[] url,
@@ -402,8 +403,8 @@ public class MetadataInsertDeleteApi {
         @ApiResponse(responseCode = "403", description = ApiParams.API_RESPONSE_NOT_ALLOWED_ONLY_EDITOR)})
     @PreAuthorize("hasAuthority('Editor')")
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody
-    String create(
+    @ResponseBody
+    public String create(
         @Parameter(description = API_PARAM_RECORD_TYPE, required = false) @RequestParam(required = false, defaultValue = "METADATA") final MetadataType metadataType,
         @Parameter(description = "UUID of the source record to copy.", required = true) @RequestParam(required = true) String sourceUuid,
         @Parameter(description = "Assign a custom UUID. If this UUID already exist an error is returned. "
