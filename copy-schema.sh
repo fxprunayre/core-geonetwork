@@ -9,3 +9,7 @@ for d in *; do
  fi
 done
 
+# Clean XSL caching
+touch web/src/main/webapp/xslt/ui-metadata/edit/edit.xsl
+touch web/src/main/webapp/xslt/services/thesaurus/convert.xsl
+touch web/src/main/webapp/xslt/services/subtemplate/convert.xsl
