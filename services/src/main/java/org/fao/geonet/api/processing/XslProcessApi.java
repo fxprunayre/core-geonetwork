@@ -202,8 +202,10 @@ public class XslProcessApi {
                     if (schema != null && !currentSchema.equals(schema)) {
                         // We can't append and use a mix of schema.
                         throw new IllegalArgumentException(String.format(
-                            "When using append mode, process preview cannot process records with different schemas. " +
-                                "Record with uuid '%s' as schema '%s'. Select only records in the same schema (ie. '%s')",
+                            """
+                            When using append mode, process preview cannot process records with different schemas. \
+                            Record with uuid '%s' as schema '%s'. Select only records in the same schema (ie. '%s')\
+                            """,
                             uuid, currentSchema, schema));
                     } else {
                         schema = currentSchema;

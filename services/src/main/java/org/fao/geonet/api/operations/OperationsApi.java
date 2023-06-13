@@ -51,10 +51,12 @@ public class OperationsApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get operations",
-        description = "Return the list of operations. Operations are used to define authorization per group. " +
-            "Extending the list of default operations (ie. view, dynamic, download, editing, notify, featured) " +
-            "might be feasible but is experimental.<br/> " +
-            "Featured is not really used anymore (was used in past version for home page highlights).")
+        description = """
+            Return the list of operations. Operations are used to define authorization per group. \
+            Extending the list of default operations (ie. view, dynamic, download, editing, notify, featured) \
+            might be feasible but is experimental.<br/> \
+            Featured is not really used anymore (was used in past version for home page highlights).\
+            """)
     @RequestMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         method = RequestMethod.GET)

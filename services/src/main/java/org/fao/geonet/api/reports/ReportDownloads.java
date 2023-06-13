@@ -97,10 +97,12 @@ public class ReportDownloads implements IReport {
             csvFilePrinter.printRecord("Metadata file downloads");
             csvFilePrinter.println();
 
-            String[] entries = ("Metadata ID#Metadata Title#File download#"
-                + "File download date#Requester name#Requester mail#"
-                + "Requester organisation#Requester comments#"
-                + "Username#Surname#Name#Email#Profile#Delete date")
+            String[] entries = ("""
+                Metadata ID#Metadata Title#File download#\
+                File download date#Requester name#Requester mail#\
+                Requester organisation#Requester comments#\
+                Username#Surname#Name#Email#Profile#Delete date\
+                """)
                 .split("#");
             csvFilePrinter.printRecord(Arrays.asList(entries));
 

@@ -127,8 +127,10 @@ public class BatchEditsApi implements ApplicationContextAware {
     /**
      * The service edits to the current selection or a set of uuids.
      */
-    @io.swagger.v3.oas.annotations.Operation(summary = "Edit a set of records by XPath expressions. This operations applies the update-fixed-info.xsl "
-        + "transformation for the metadata schema and updates the change date if the parameter updateDateStamp is set to true.")
+    @io.swagger.v3.oas.annotations.Operation(summary = """
+        Edit a set of records by XPath expressions. This operations applies the update-fixed-info.xsl \
+        transformation for the metadata schema and updates the change date if the parameter updateDateStamp is set to true.\
+        """)
     @RequestMapping(value = "/batchediting",
         method = RequestMethod.PUT,
         produces = {

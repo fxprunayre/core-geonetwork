@@ -89,9 +89,11 @@ public class ReportInternalMetadata implements IReport {
             csvFilePrinter.println();
 
             String[] entries = (
-                "Metadata ID#Metadata Title#Metadata Create date#Metadata Update date#"
-                    + "Owner Username#Owner Surname#Owner Name#Owner Email#"
-                    + "Group Owner#Group Owner Email").split("#");
+                """
+                Metadata ID#Metadata Title#Metadata Create date#Metadata Update date#\
+                Owner Username#Owner Surname#Owner Name#Owner Email#\
+                Group Owner#Group Owner Email\
+                """).split("#");
             csvFilePrinter.printRecord(Arrays.asList(entries));
 
             List<User> users =

@@ -131,8 +131,10 @@ public class GetCapabilities extends AbstractOperation implements CatalogService
                         isFromRecord = true;
                     } else {
                         message = String.format(
-                            "Record with UUID %s is not public and can't be used to build CSW GetCapabilities document. " +
-                                "Choose another record or publish this one.", record.getUuid());
+                            """
+                            Record with UUID %s is not public and can't be used to build CSW GetCapabilities document. \
+                            Choose another record or publish this one.\
+                            """, record.getUuid());
                         Log.warning(Geonet.CSW, message);
                     }
                 } catch (Exception e) {

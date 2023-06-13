@@ -76,9 +76,11 @@ public class DirectoryEntriesApi {
     GeonetworkDataDirectory dataDirectory;
 
     @io.swagger.v3.oas.annotations.Operation(summary = "Get a directory entry",
-        description = "Directory entry (AKA subtemplates) are XML fragments that can be " +
-            "inserted in metadata records using XLinks. XLinks can be remote or " +
-            "local.")
+        description = """
+            Directory entry (AKA subtemplates) are XML fragments that can be \
+            inserted in metadata records using XLinks. XLinks can be remote or \
+            local.\
+            """)
     @RequestMapping(
         value = "/{uuid:.+}",
         method = RequestMethod.GET,

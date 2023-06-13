@@ -90,8 +90,10 @@ public class TagsApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Create a tag",
-        description = "If labels are not defined, a default label is created " +
-            "with the category name for all languages.")
+        description = """
+            If labels are not defined, a default label is created \
+            with the category name for all languages.\
+            """)
     @RequestMapping(
         method = RequestMethod.PUT,
         consumes = {

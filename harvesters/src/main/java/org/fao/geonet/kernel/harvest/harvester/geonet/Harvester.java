@@ -158,8 +158,10 @@ class Harvester implements IHarvester<HarvestResult> {
                     pageSize = clientPageSize;
                     log.info("Page size returned by the server is smaller than the default one for the harvester. Using the remote server one.");
                 } else {
-                    log.info("Page size returned by the server is greater than the default one for the harvester. " +
-                        "Using the client harvester default page size (" + pageSize + ")");
+                    log.info("""
+                        Page size returned by the server is greater than the default one for the harvester. \
+                        Using the client harvester default page size (\
+                        """ + pageSize + ")");
 
                 }
             } else {

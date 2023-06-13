@@ -122,8 +122,10 @@ public class MetadataInsertDeleteApi {
     private static final String API_PARAM_RECORD_TAGS = "Tags to assign to the record.";
     private static final String API_PARAM_RECORD_VALIDATE = "Validate the record first and reject it if not valid.";
     private static final String API_PARAM_RECORD_XSL = "XSL transformation to apply to the record.";
-    private static final String API_PARAM_FORCE_SCHEMA = "Force the schema of the record. If not set, schema autodetection "
-        + "is used (and is the preferred method).";
+    private static final String API_PARAM_FORCE_SCHEMA = """
+        Force the schema of the record. If not set, schema autodetection \
+        is used (and is the preferred method).\
+        """;
     private static final String API_PARAM_BACKUP_FIRST = "Backup first the record as MEF in the metadata removed folder.";
     private static final String API_PARAM_RECORD_TYPE = "The type of record.";
     @Autowired
@@ -169,10 +171,12 @@ public class MetadataInsertDeleteApi {
     @Autowired
     IMetadataValidator metadataValidator;
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Delete a record", description = "User MUST be able to edit the record to delete it. "
-        + "By default, a backup is made in ZIP format. After that, "
-        + "the record attachments are removed, the document removed "
-        + "from the index and then from the database.")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Delete a record", description = """
+        User MUST be able to edit the record to delete it. \
+        By default, a backup is made in ZIP format. After that, \
+        the record attachments are removed, the document removed \
+        from the index and then from the database.\
+        """)
     @RequestMapping(value = "/{metadataUuid}", method = RequestMethod.DELETE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Record deleted."),
@@ -214,8 +218,9 @@ public class MetadataInsertDeleteApi {
         dataManager.forceIndexChanges();
     }
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Delete one or more records", description ="User MUST be able to edit the record to delete it. "
-        + "")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Delete one or more records", description ="""
+        User MUST be able to edit the record to delete it. \
+        """)
     @RequestMapping(
         method = RequestMethod.DELETE,
         produces = {
@@ -280,10 +285,12 @@ public class MetadataInsertDeleteApi {
         return report;
     }
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Add a record", description = "Add one or more record from an XML fragment, "
-        + "URL or file in a folder on the catalog server. When loading"
-        + "from the catalog server folder, it might be faster to use a "
-        + "local filesystem harvester.")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Add a record", description = """
+        Add one or more record from an XML fragment, \
+        URL or file in a folder on the catalog server. When loading\
+        from the catalog server folder, it might be faster to use a \
+        local filesystem harvester.\
+        """)
     @RequestMapping(method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {
         MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE,
         MediaType.APPLICATION_FORM_URLENCODED_VALUE})
@@ -306,8 +313,10 @@ public class MetadataInsertDeleteApi {
         @Parameter(description = API_PARAM_RECORD_VALIDATE, required = false) @RequestParam(required = false, defaultValue = "false") final boolean rejectIfInvalid,
         @Parameter(description = API_PARAM_RECORD_XSL, required = false) @RequestParam(required = false, defaultValue = "_none_") final String transformWith,
         @Parameter(description = API_PARAM_FORCE_SCHEMA, required = false) @RequestParam(required = false) String schema,
-        @Parameter(description = "Is editable by group members with editor profile? "
-            + "If not, only the author and administrator can edit the record.", required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
+        @Parameter(description = """
+            Is editable by group members with editor profile? \
+            If not, only the author and administrator can edit the record.\
+            """, required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
         @Parameter(description = "(experimental) Add extra information to the record.", required = false) @RequestParam(required = false) final String extra,
          HttpServletRequest request) throws Exception {
 
@@ -441,11 +450,13 @@ public class MetadataInsertDeleteApi {
         return report;
     }
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Create a new record", description ="Create a record from a template or by copying an existing record."
-        + "Return the UUID of the newly created record. Existing links in the "
-        + "source record are preserved, this means that the new record may "
-        + "contains link to the source attachments. They need to be manually "
-        + "updated after creation.")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Create a new record", description ="""
+        Create a record from a template or by copying an existing record.\
+        Return the UUID of the newly created record. Existing links in the \
+        source record are preserved, this means that the new record may \
+        contains link to the source attachments. They need to be manually \
+        updated after creation.\
+        """)
     @RequestMapping(value = "/duplicate", method = {RequestMethod.PUT}, produces = {
         MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Return the internal id of the newly created record."),
@@ -456,11 +467,15 @@ public class MetadataInsertDeleteApi {
     String create(
         @Parameter(description = API_PARAM_RECORD_TYPE, required = false) @RequestParam(required = false, defaultValue = "METADATA") final MetadataType metadataType,
         @Parameter(description = "UUID of the source record to copy.", required = true) @RequestParam(required = true) String sourceUuid,
-        @Parameter(description = "Assign a custom UUID. If this UUID already exist an error is returned. "
-            + "This is enabled only if metadata create / generate UUID settings is activated.", required = false) @RequestParam(required = false) String targetUuid,
+        @Parameter(description = """
+            Assign a custom UUID. If this UUID already exist an error is returned. \
+            This is enabled only if metadata create / generate UUID settings is activated.\
+            """, required = false) @RequestParam(required = false) String targetUuid,
         @Parameter(description = API_PARAM_RECORD_GROUP, required = true) @RequestParam(required = true) final String group,
-        @Parameter(description = "Is editable by group members with editor profile? "
-            + "If not, only the author and administrator can edit the record.", required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
+        @Parameter(description = """
+            Is editable by group members with editor profile? \
+            If not, only the author and administrator can edit the record.\
+            """, required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
         @Parameter(description = API_PARAM_RECORD_TAGS, required = false) @RequestParam(required = false) final String[] category,
         @Parameter(description = "Copy categories from source?", required = false) @RequestParam(required = false, defaultValue = "false") final boolean hasCategoryOfSource,
         @Parameter(description = "Is child of the record to copy?", required = false) @RequestParam(required = false, defaultValue = "false") final boolean isChildOfSource,
@@ -522,8 +537,10 @@ public class MetadataInsertDeleteApi {
             } catch (Exception e) {
                 Log.warning(Geonet.DATA_MANAGER,
                     String.format(
-                        "Error while copying metadata resources. Error is %s. "
-                            + "Metadata is created but without resources from the source record with id '%s':",
+                        """
+                        Error while copying metadata resources. Error is %s. \
+                        Metadata is created but without resources from the source record with id '%s':\
+                        """,
                         e.getMessage(), newId));
             }
         }
@@ -536,8 +553,10 @@ public class MetadataInsertDeleteApi {
                 }
             } catch (Exception e) {
                 Log.warning(Geonet.DATA_MANAGER,
-                    String.format("Error while copying source record category to new record. Error is %s. "
-                            + "Metadata is created but without the categories from the source record with id '%d':",
+                    String.format("""
+                            Error while copying source record category to new record. Error is %s. \
+                            Metadata is created but without the categories from the source record with id '%d':\
+                            """,
                         e.getMessage(), newId));
             }
         }
@@ -550,8 +569,10 @@ public class MetadataInsertDeleteApi {
             } catch (Exception e) {
                 Log.warning(Geonet.DATA_MANAGER,
                     String.format(
-                        "Error while setting record category to new record. Error is %s. "
-                            + "Metadata is created but without the requested categories.",
+                        """
+                        Error while setting record category to new record. Error is %s. \
+                        Metadata is created but without the requested categories.\
+                        """,
                         e.getMessage(), newId));
             }
         }
@@ -578,8 +599,10 @@ public class MetadataInsertDeleteApi {
         @Parameter(description = API_PARAM_RECORD_XSL, required = false) @RequestParam(required = false, defaultValue = "_none_") final String transformWith,
         @Parameter(description = API_PARAM_FORCE_SCHEMA, required = false) @RequestParam(required = false) String schema,
         @Parameter(description = "(experimental) Add extra information to the record.", required = false) @RequestParam(required = false) final String extra,
-        @Parameter(description = "Is editable by group members with editor profile? "
-            + "If not, only the author and administrator can edit the record.", required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
+        @Parameter(description = """
+            Is editable by group members with editor profile? \
+            If not, only the author and administrator can edit the record.\
+            """, required = false) @RequestParam(required = false, defaultValue = "false") final boolean allowEditGroupMembers,
         HttpServletRequest request) throws Exception {
 
         ResourceBundle messages = ApiUtils.getMessagesResourceBundle(request.getLocales());
@@ -680,8 +703,10 @@ public class MetadataInsertDeleteApi {
             throw new IllegalArgumentException("A context as XML or a remote URL MUST be provided.");
         }
         if (StringUtils.isEmpty(xml) && StringUtils.isEmpty(filename)) {
-            throw new IllegalArgumentException(String.format("A context as XML will be saved as a record attachment. "
-                + "You MUST provide a filename in this case."));
+            throw new IllegalArgumentException(String.format("""
+                A context as XML will be saved as a record attachment. \
+                You MUST provide a filename in this case.\
+                """));
         }
 
         ServiceContext context = ApiUtils.createServiceContext(request);
@@ -832,9 +857,11 @@ public class MetadataInsertDeleteApi {
         } catch (Exception e) {
             Log.warning(Geonet.DATA_MANAGER,
                 String.format(
-                    "Error while extracting title for the metadata %d " +
-                        "while creating delete event. Error is %s. " +
-                        "It may happen on subtemplates.",
+                    """
+                    Error while extracting title for the metadata %d \
+                    while creating delete event. Error is %s. \
+                    It may happen on subtemplates.\
+                    """,
                     metadata.getId(), e.getMessage()));
         }
         return new RecordDeletedEvent(metadata.getId(), metadata.getUuid(), titles, userSession.getUserIdAsInt(), xmlBefore);

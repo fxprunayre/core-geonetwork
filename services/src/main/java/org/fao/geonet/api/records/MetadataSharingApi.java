@@ -241,15 +241,17 @@ public class MetadataSharingApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Set record sharing",
-        description = "Privileges are assigned by group. User needs to be able " +
-            "to edit a record to set sharing settings. For reserved group " +
-            "(ie. Internet, Intranet & Guest), user MUST be reviewer of one group. " +
-            "For other group, if Only set privileges to user's groups is set " +
-            "in catalog configuration user MUST be a member of the group.<br/>" +
-            "Clear first allows to unset all operations first before setting the new ones." +
-            "Clear option does not remove reserved groups operation if user is not an " +
-            "administrator, a reviewer or the owner of the record.<br/>" +
-            "<a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/publishing/managing-privileges.html'>More info</a>")
+        description = """
+            Privileges are assigned by group. User needs to be able \
+            to edit a record to set sharing settings. For reserved group \
+            (ie. Internet, Intranet & Guest), user MUST be reviewer of one group. \
+            For other group, if Only set privileges to user's groups is set \
+            in catalog configuration user MUST be a member of the group.<br/>\
+            Clear first allows to unset all operations first before setting the new ones.\
+            Clear option does not remove reserved groups operation if user is not an \
+            administrator, a reviewer or the owner of the record.<br/>\
+            <a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/publishing/managing-privileges.html'>More info</a>\
+            """)
     @RequestMapping(
         value = "/{metadataUuid}/sharing",
         method = RequestMethod.PUT
@@ -732,8 +734,10 @@ public class MetadataSharingApi {
     @ResponseStatus(HttpStatus.OK)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description =
-            "Return a default array of group and operations " +
-                "that can be used to set record sharing properties."),
+            """
+            Return a default array of group and operations \
+            that can be used to set record sharing properties.\
+            """),
         @ApiResponse(responseCode = "403", description = ApiParams.API_RESPONSE_NOT_ALLOWED_CAN_EDIT)
     })
     @PreAuthorize("hasAuthority('Editor')")

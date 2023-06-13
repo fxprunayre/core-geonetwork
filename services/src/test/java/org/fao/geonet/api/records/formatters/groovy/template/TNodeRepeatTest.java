@@ -59,10 +59,12 @@ public class TNodeRepeatTest extends AbstractTemplateParserTest {
         model.put("maps", Lists.<Object>newArrayList(row1, row2));
         model.put("type", "x");
 
-        String expected = "<html>" +
-            " <div> true - false - 0<div>0 - x - key1 - value1</div><div>1 - x - key2 - value2</div> </div>" +
-            " <div> false - true - 1<div>0 - x - key1 - value3</div><div>1 - x - key2 - value4</div> </div>" +
-            "</html>";
+        String expected = """
+            <html>\
+             <div> true - false - 0<div>0 - x - key1 - value1</div><div>1 - x - key2 - value2</div> </div>\
+             <div> false - true - 1<div>0 - x - key1 - value3</div><div>1 - x - key2 - value4</div> </div>\
+            </html>\
+            """;
         assertCorrectRender(parseTree, model, expected);
     }
 
@@ -95,13 +97,15 @@ public class TNodeRepeatTest extends AbstractTemplateParserTest {
         model.put("map", map);
         model.put("list", Lists.newArrayList("item1", "item2", "item3"));
 
-        String expected = "<html>" +
-            "  <li class=\"map\">key1 - value1</li>" +
-            "  <li class=\"map\">key2 - value2</li>" +
-            "  <li class=\"list\">item1</li>" +
-            "  <li class=\"list\">item2</li>" +
-            "  <li class=\"list\">item3</li>" +
-            "</html>";
+        String expected = """
+            <html>\
+              <li class="map">key1 - value1</li>\
+              <li class="map">key2 - value2</li>\
+              <li class="list">item1</li>\
+              <li class="list">item2</li>\
+              <li class="list">item3</li>\
+            </html>\
+            """;
         assertCorrectRender(parseTree, model, expected);
     }
 
@@ -125,10 +129,12 @@ public class TNodeRepeatTest extends AbstractTemplateParserTest {
         item2.setName("name2");
         model.put("items", Lists.newArrayList(item1, item2));
 
-        String expected = "<ul>\n"
-            + "    <li><a rel=\".rel1\">Name 1</a></li>\n"
-            + "    <li><a rel=\".rel2\">Name 2</a></li>\n"
-            + "</ul>";
+        String expected = """
+            <ul>
+                <li><a rel=".rel1">Name 1</a></li>
+                <li><a rel=".rel2">Name 2</a></li>
+            </ul>\
+            """;
 
         assertCorrectRender(parseTree, model, expected);
     }

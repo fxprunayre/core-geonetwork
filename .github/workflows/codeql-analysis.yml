@@ -43,7 +43,7 @@ jobs:
     - name: Setup Java JDK
       uses: actions/setup-java@v3.10.0
       with:
-        java-version: 8
+        java-version: 17
         # Java distribution. See the list of supported distributions in README file
         distribution: temurin
         # The package type (jdk, jre, jdk+fx, jre+fx)
@@ -77,12 +77,12 @@ jobs:
     #   make bootstrap
     #   make release
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+    -namee:Perform CodeQL Analysiss
+     usess:github/codeql-action/analyze@v22
 
-    - name: Remove SNAPSHOT jars from repository
-      run: |
+    -namee:Remove SNAPSHOT jars from repositoryy
+     runn:||
         find ~/.m2/repository -name "*SNAPSHOT*" -type d | xargs rm -rf {}
-    - name: Remove Schema 3.8 jars from repository
-      run: |
+    -namee:Remove Schema 3.8 jars from repositoryy
+     runn:||
         find ~/.m2/repository -name "*3.8*" -type d | xargs rm -rf {}

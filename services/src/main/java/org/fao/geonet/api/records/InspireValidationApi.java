@@ -96,13 +96,15 @@ import static org.fao.geonet.api.ApiParams.API_PARAM_RECORD_UUID;
 @ReadWriteController
 public class InspireValidationApi {
 
-    public static final String API_PARAM_INSPIRE_VALIDATION_MODE = "Define the encoding of the record to use. "
-        + "By default, ISO19139 are used as is and "
-        + "ISO19115-3 are converted to ISO19139."
-        + "If mode = csw, a GetRecordById request is used."
-        + "If mode = any portal id, then a GetRecordById request is used on this portal "
-        + "CSW entry point which may define custom CSW post processing. "
-        + "See https://github.com/geonetwork/core-geonetwork/pull/4493.";
+    public static final String API_PARAM_INSPIRE_VALIDATION_MODE = """
+        Define the encoding of the record to use. \
+        By default, ISO19139 are used as is and \
+        ISO19115-3 are converted to ISO19139.\
+        If mode = csw, a GetRecordById request is used.\
+        If mode = any portal id, then a GetRecordById request is used on this portal \
+        CSW entry point which may define custom CSW post processing. \
+        See https://github.com/geonetwork/core-geonetwork/pull/4493.\
+        """;
     @Autowired
     SettingManager settingManager;
 
@@ -150,10 +152,12 @@ public class InspireValidationApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Submit a record to the INSPIRE service for validation.",
-        description = "User MUST be able to edit the record to validate it. "
-            + "An INSPIRE endpoint must be configured in Settings. "
-            + "This activates an asyncronous process, this method does not return any report. "
-            + "This method returns an id to be used to get the report.")
+        description = """
+            User MUST be able to edit the record to validate it. \
+            An INSPIRE endpoint must be configured in Settings. \
+            This activates an asyncronous process, this method does not return any report. \
+            This method returns an id to be used to get the report.\
+            """)
     @RequestMapping(value = "/{metadataUuid}/validate/inspire",
         method = RequestMethod.PUT,
         produces = {
@@ -276,14 +280,18 @@ public class InspireValidationApi {
                 if (source == null) {
                     response.setStatus(HttpStatus.SC_NOT_FOUND);
                     return String.format(
-                        "Portal %s not found. There is no CSW endpoint at this URL " +
-                            "that we can send to the validator.", mode);
+                        """
+                        Portal %s not found. There is no CSW endpoint at this URL \
+                        that we can send to the validator.\
+                        """, mode);
                 }
                 portal = mode;
             }
             getRecordByIdUrl = String.format(
-                "%s%s/eng/csw?SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&" +
-                    "OUTPUTSCHEMA=%s&ELEMENTSETNAME=full&ID=%s",
+                """
+                %s%s/eng/csw?SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&\
+                OUTPUTSCHEMA=%s&ELEMENTSETNAME=full&ID=%s\
+                """,
                 settingManager.getBaseURL(),
                 portal,
                 ISO19139Namespaces.GMD.getURI(),
@@ -310,9 +318,11 @@ public class InspireValidationApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Check the status of validation with the INSPIRE service.",
-        description = "User MUST be able to edit the record to validate it. "
-            + "An INSPIRE endpoint must be configured in Settings. "
-            + "If the process is complete an object with status is returned. ")
+        description = """
+            User MUST be able to edit the record to validate it. \
+            An INSPIRE endpoint must be configured in Settings. \
+            If the process is complete an object with status is returned. \
+            """)
     @RequestMapping(value = "/{testId}/validate/inspire",
         method = RequestMethod.GET,
         produces = {

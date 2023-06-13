@@ -86,8 +86,10 @@ public class Key {
 
     @Override
     public String toString() {
-        return "Key{" +
-            "mdId=" + mdId +
+        return """
+            Key{\
+            mdId=\
+            """ + mdId +
             ", lang='" + lang + '\'' +
             ", width=" + width +
             ", formatType=" + formatType +

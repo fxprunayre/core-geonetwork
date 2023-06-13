@@ -108,8 +108,10 @@ public class SchematronCriteriaGroupId implements Serializable {
 
     @Override
     public String toString() {
-        return "SchematronCriteriaGroupId{" +
-            "name='" + name + '\'' +
+        return """
+            SchematronCriteriaGroupId{\
+            name='\
+            """ + name + '\'' +
             ", schematronId=" + schematronId +
             '}';
     }

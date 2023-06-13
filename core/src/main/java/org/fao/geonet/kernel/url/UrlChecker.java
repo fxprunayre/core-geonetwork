@@ -36,7 +36,8 @@ import org.fao.geonet.utils.GeonetHttpRequestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.client.ClientHttpResponse;
-import sun.net.ftp.FtpLoginException;
+// TODO: Java17
+//import sun.net.ftp.FtpLoginException;
 import org.fao.geonet.utils.Log;
 
 import javax.annotation.Nullable;
@@ -108,7 +109,7 @@ public class UrlChecker {
             con.getInputStream().close();
             linkStatus.setStatusValue("OK");
             linkStatus.setStatusInfo("new URL(url).openStream() success.");
-        } catch (FtpLoginException e) {
+        } catch (Exception e) {
             linkStatus.setStatusValue("Need username/password");
             linkStatus.setStatusInfo("new URL(url).openStream() need username/password.");
         }

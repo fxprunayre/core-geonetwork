@@ -165,8 +165,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
             new AddElemValue(newRefSystem), true);
 
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
         assertEqualsText(code1, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
         assertEqualsText(code3, metadataElement, refSysElemName + "[3]" + xpath, GMD, GCO);
         assertEqualsText(newValue, metadataElement, refSysElemName + "[2]" + xpath, GMD, GCO);
@@ -203,8 +205,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         assertTrue(updateOccurred);
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
 
         final String refSysElemName = "gmd:referenceSystemInfo";
         assertTrue(Xml.selectNodes(metadataElement, refSysElemName + "[1]" + xpath, theNSs).isEmpty());
@@ -253,8 +257,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         assertTrue(updateOccurred);
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
 
         final String refSysElemName = "gmd:referenceSystemInfo";
         assertEqualsText(newValue, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
@@ -299,8 +305,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
             new AddElemValue(newRefSystem), true);
 
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
         assertEqualsText(code1, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
         assertEqualsText(code3, metadataElement, refSysElemName + "[3]" + xpath, GMD, GCO);
         assertEqualsText(newValue, metadataElement, refSysElemName + "[2]" + xpath, GMD, GCO);
@@ -333,8 +341,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
             new AddElemValue(newRefSystems), true);
 
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
         assertEqualsText(newValue1, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
         assertEqualsText(newValue2, metadataElement, refSysElemName + "[2]" + xpath, GMD, GCO);
         assertEquals(2, Xml.selectNodes(metadataElement, "gmd:referenceSystemInfo", Arrays.asList(GMD, GCO)).size());
@@ -416,8 +426,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
         new EditLib(_schemaManager).addElementOrFragmentFromXpath(metadataElement, schema,
             refSysElemName + "[1]", new AddElemValue(newRefSystems), true);
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/" +
-            "gmd:RS_Identifier/gmd:code/gco:CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/\
+            gmd:RS_Identifier/gmd:code/gco:CharacterString\
+            """;
 
         assertEquals(2, Xml.selectNodes(metadataElement, "gmd:referenceSystemInfo", Arrays.asList(GMD, GCO)).size());
         assertEqualsText(code2, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
@@ -506,8 +518,10 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
             new AddElemValue(newRefSystems), true);
 
 
-        final String xpath = "/gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco" +
-            ":CharacterString";
+        final String xpath = """
+            /gmd:ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco\
+            :CharacterString\
+            """;
         assertEqualsText(code1, metadataElement, refSysElemName + "[1]" + xpath, GMD, GCO);
         assertEqualsText(code2, metadataElement, refSysElemName + "[2]" + xpath, GMD, GCO);
         assertEqualsText(code3, metadataElement, refSysElemName + "[3]" + xpath, GMD, GCO);
@@ -540,10 +554,12 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         String name = "Individual Name";
         String newValue =
-            "<gmd:CI_ResponsibleParty gco:nilReason='withheld' xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" " +
-                "xmlns:gco=\"http://www.isotc211.org/2005/gco\">" +
-                "<gmd:individualName>" +
-                "<gco:CharacterString>" + name + "</gco:CharacterString>" +
+            """
+                <gmd:CI_ResponsibleParty gco:nilReason='withheld' xmlns:gmd="http://www.isotc211.org/2005/gmd" \
+                xmlns:gco="http://www.isotc211.org/2005/gco">\
+                <gmd:individualName>\
+                <gco:CharacterString>\
+                """ + name + "</gco:CharacterString>" +
                 "</gmd:individualName>" +
                 "</gmd:CI_ResponsibleParty>";
         new EditLib(manager).addElementOrFragmentFromXpath(metadataElement, schema,
@@ -568,31 +584,39 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
         final Element metadataElement = new Element("MD_Metadata", GMD);
 
         String newValue =
-            "<gmd:date xmlns:gco=\"http://www.isotc211.org/2005/gco\" xmlns:gmd=\"http://www.isotc211.org/2005/gmd\">" +
-                "    <gmd:CI_Date>" +
-                "      <gmd:date>" +
-                "        <gco:Date>2014-01-21</gco:Date>" +
-                "      </gmd:date>" +
-                "      <gmd:dateType>" +
-                "        <gmd:CI_DateTypeCode codeListValue=\"revision\"></gmd:CI_DateTypeCode>" +
-                "      </gmd:dateType>" +
-                "    </gmd:CI_Date>" +
-                "  </gmd:date>";
+            """
+            <gmd:date xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gmd="http://www.isotc211.org/2005/gmd">\
+                <gmd:CI_Date>\
+                  <gmd:date>\
+                    <gco:Date>2014-01-21</gco:Date>\
+                  </gmd:date>\
+                  <gmd:dateType>\
+                    <gmd:CI_DateTypeCode codeListValue="revision"></gmd:CI_DateTypeCode>\
+                  </gmd:dateType>\
+                </gmd:CI_Date>\
+              </gmd:date>\
+            """;
         // Test with no condition
         new EditLib(manager).addElementOrFragmentFromXpath(metadataElement, schema,
             "/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date", new AddElemValue(newValue), true);
         assertEqualsText("2014-01-21", metadataElement,
-            "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation" +
-                "/gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']/gmd:CI_Date/gmd:date/gco:Date", GMD, GCO);
+            """
+            gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation\
+            /gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']/gmd:CI_Date/gmd:date/gco:Date\
+            """, GMD, GCO);
 
         //Test with condition
         final Element metadataElement2 = new Element("MD_Metadata", GMD);
         new EditLib(manager).addElementOrFragmentFromXpath(metadataElement2, schema,
-            "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation" +
-                "/gmd:CI_Citation/gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']", new AddElemValue(newValue), true);
+            """
+            gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation\
+            /gmd:CI_Citation/gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']\
+            """, new AddElemValue(newValue), true);
         assertEqualsText("2014-01-21", metadataElement2,
-            "gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation" +
-                "/gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']/gmd:CI_Date/gmd:date/gco:Date", GMD, GCO);
+            """
+            gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation\
+            /gmd:date[gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue = 'revision']/gmd:CI_Date/gmd:date/gco:Date\
+            """, GMD, GCO);
 
     }
 
@@ -607,10 +631,12 @@ public class EditLibIntegrationTest extends AbstractCoreIntegrationTest {
 
         String name = "Individual Name";
         String newValue =
-            "<gmd:CI_ResponsibleParty  xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" " +
-                "xmlns:gco=\"http://www.isotc211.org/2005/gco\">" +
-                "<gmd:individualName>" +
-                "<gco:CharacterString>" + name + "</gco:CharacterString>" +
+            """
+                <gmd:CI_ResponsibleParty  xmlns:gmd="http://www.isotc211.org/2005/gmd" \
+                xmlns:gco="http://www.isotc211.org/2005/gco">\
+                <gmd:individualName>\
+                <gco:CharacterString>\
+                """ + name + "</gco:CharacterString>" +
                 "</gmd:individualName>" +
                 "</gmd:CI_ResponsibleParty>";
         new EditLib(manager).addElementOrFragmentFromXpath(metadataElement, schema,

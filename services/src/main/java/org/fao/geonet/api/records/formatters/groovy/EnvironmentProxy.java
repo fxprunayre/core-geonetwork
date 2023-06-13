@@ -57,10 +57,12 @@ public class EnvironmentProxy implements Environment {
         final Environment env = currentEnvironment.get();
         if (env == null) {
             throw new AssertionError(
-                "The Environment object cannot be used at the moment, it can only be used during XML processing," +
-                    " not during the configuration stage.  It is accessible here only so that it is in scope in all" +
-                    " handlers without having to pass it in as a parameter to all handlers and sorters and similar" +
-                    " object used for XML processing");
+                """
+                The Environment object cannot be used at the moment, it can only be used during XML processing,\
+                 not during the configuration stage.  It is accessible here only so that it is in scope in all\
+                 handlers without having to pass it in as a parameter to all handlers and sorters and similar\
+                 object used for XML processing\
+                """);
         }
 
         return env;

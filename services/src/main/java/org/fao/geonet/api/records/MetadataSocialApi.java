@@ -77,13 +77,15 @@ public class MetadataSocialApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Rate a record",
-        description = "User rating of metadata. If the metadata was harvested using the 'GeoNetwork' protocol and the " +
-            "system setting localrating/enable is false (the default), the user's rating is shared between " +
-            "GN nodes in this harvesting network. If the metadata was not harvested or if " +
-            "localrating/enable is true then 'local rating' is applied, counting only rating from users of " +
-            "this node.<br/>" +
-            "When a remote rating is applied, the local rating is not updated. It will be updated on the next " +
-            "harvest run (FIXME ?).")
+        description = """
+            User rating of metadata. If the metadata was harvested using the 'GeoNetwork' protocol and the \
+            system setting localrating/enable is false (the default), the user's rating is shared between \
+            GN nodes in this harvesting network. If the metadata was not harvested or if \
+            localrating/enable is true then 'local rating' is applied, counting only rating from users of \
+            this node.<br/>\
+            When a remote rating is applied, the local rating is not updated. It will be updated on the next \
+            harvest run (FIXME ?).\
+            """)
     @RequestMapping(
         value = "/{metadataUuid}/rate",
         method = RequestMethod.PUT

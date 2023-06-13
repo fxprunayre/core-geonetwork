@@ -54,8 +54,10 @@ public class SearchApi {
 
     @Operation(
         summary = "Get statistics about a field",
-        description = "(experimental) This return facet info for the requested field and " +
-            "provide a list of values.")
+        description = """
+            (experimental) This return facet info for the requested field and \
+            provide a list of values.\
+            """)
     @RequestMapping(
         produces = {
             MediaType.TEXT_HTML_VALUE,

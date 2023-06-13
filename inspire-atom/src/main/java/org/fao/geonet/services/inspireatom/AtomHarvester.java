@@ -53,8 +53,10 @@ import static org.springframework.http.HttpStatus.CREATED;
 public class AtomHarvester {
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Scan records for ATOM feeds",
-        description = "Check in the settings which protocol identify ATOM feeds in your catalogue." +
-            "Only applies to ISO19139 records.")
+        description = """
+            Check in the settings which protocol identify ATOM feeds in your catalogue.\
+            Only applies to ISO19139 records.\
+            """)
     @GetMapping(
         value = "/scan",
         produces = MediaType.APPLICATION_JSON_VALUE)

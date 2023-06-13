@@ -41,8 +41,10 @@ import static org.junit.Assert.assertNotNull;
 public class GeomFormatTest {
     @Test
     public void testParseWkt() throws Exception {
-        final String geomString = "Polygon((482200.0%2063000.0,835700.0%2063000.0,835700.0%20301000.0,482200.0%20301000.0," +
-            "482200.0%2063000.0))";
+        final String geomString = """
+            Polygon((482200.0%2063000.0,835700.0%2063000.0,835700.0%20301000.0,482200.0%20301000.0,\
+            482200.0%2063000.0))\
+            """;
         assertNotNull(GeomFormat.WKT.parse(geomString));
     }
 
@@ -54,8 +56,10 @@ public class GeomFormatTest {
 
     @Test
     public void testGML2() throws Exception {
-        final Geometry geometry = GeomFormat.WKT.parse("Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0," +
-            "482200.0 63000.0))");
+        final Geometry geometry = GeomFormat.WKT.parse("""
+            Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0,\
+            482200.0 63000.0))\
+            """);
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final Encoder encoder = new Encoder(GeomFormat.gml2Config);
         encoder.setIndenting(false);
@@ -71,8 +75,10 @@ public class GeomFormatTest {
 
     @Test
     public void testGML3() throws Exception {
-        final Geometry geometry = GeomFormat.WKT.parse("Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0," +
-            "482200.0 63000.0))");
+        final Geometry geometry = GeomFormat.WKT.parse("""
+            Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0,\
+            482200.0 63000.0))\
+            """);
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final Encoder encoder = new Encoder(GeomFormat.gml3Config);
         encoder.setIndenting(false);
@@ -88,8 +94,10 @@ public class GeomFormatTest {
 
     @Test
     public void testGML32() throws Exception {
-        final Geometry geometry = GeomFormat.WKT.parse("Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0," +
-            "482200.0 63000.0))");
+        final Geometry geometry = GeomFormat.WKT.parse("""
+            Polygon((482200.0 63000.0,835700.0 63000.0,835700.0 301000.0,482200.0 301000.0,\
+            482200.0 63000.0))\
+            """);
         final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         final Encoder encoder = new Encoder(GeomFormat.gml32Config);
         encoder.setIndenting(false);

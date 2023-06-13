@@ -80,8 +80,10 @@ public class SetSequenceValueToMaxOfMetadataAndStats extends DatabaseMigrationTa
             try {
                 int newSequenceValue = Math.max(numberOfMetadata, Math.max(numberOfParams, numberOfRequests)) + 1;
                 Log.debug(Geonet.DB, "  Set sequence to value: " + newSequenceValue);
-                final String updateSequenceSQL = "ALTER SEQUENCE HIBERNATE_SEQUENCE " +
-                    "RESTART WITH " + newSequenceValue;
+                final String updateSequenceSQL = """
+                    ALTER SEQUENCE HIBERNATE_SEQUENCE \
+                    RESTART WITH \
+                    """ + newSequenceValue;
                 statement.execute(updateSequenceSQL);
 
                 // TODO: Probably a scenario for Oracle db
@@ -95,8 +97,10 @@ public class SetSequenceValueToMaxOfMetadataAndStats extends DatabaseMigrationTa
                 // On Oracle : To restart the sequence at a different number, you must drop and re-create it.
             }
         } catch (Exception e) {
-            Log.debug(Geonet.DB, "  Exception while updating sequence. " +
-                "Error is: " + e.getMessage());
+            Log.debug(Geonet.DB, """
+                  Exception while updating sequence. \
+                Error is: \
+                """ + e.getMessage());
             Log.error(Geonet.DB, e);
         }
     }

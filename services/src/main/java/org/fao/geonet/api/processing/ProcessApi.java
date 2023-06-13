@@ -70,9 +70,11 @@ public class ProcessApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get current process reports",
-        description = "When processing, the report is stored in memory and allows to retrieve " +
-            "progress repport during processing. Usually, process reports are returned by " +
-            "the synchronous processing operation.")
+        description = """
+            When processing, the report is stored in memory and allows to retrieve \
+            progress repport during processing. Usually, process reports are returned by \
+            the synchronous processing operation.\
+            """)
     @RequestMapping(
         path = "/reports",
         method = RequestMethod.GET,
@@ -112,15 +114,17 @@ public class ProcessApi {
 
     @Deprecated
     @io.swagger.v3.oas.annotations.Operation(summary = "Search and replace values in one or more ISO19139 records",
-        description = "Service to apply replacements to one or more records." +
-            "\n" +
-            " To define a replacement, send the following parameters:\n" +
-            " * mdsection-139815551372=metadata\n" +
-            " * mdfield-1398155513728=id.contact.individualName\n" +
-            " * replaceValue-1398155513728=Juan\n" +
-            " * searchValue-1398155513728=Jose\n\n" +
-            "<br/>" +
-            "Batch editing can also be used for similar works.")
+        description = """
+            Service to apply replacements to one or more records.
+             To define a replacement, send the following parameters:
+             * mdsection-139815551372=metadata
+             * mdfield-1398155513728=id.contact.individualName
+             * replaceValue-1398155513728=Juan
+             * searchValue-1398155513728=Jose
+
+            <br/>\
+            Batch editing can also be used for similar works.\
+            """)
     @RequestMapping(
         value = "/search-and-replace",
         method = RequestMethod.POST,
@@ -161,9 +165,11 @@ public class ProcessApi {
         @RequestParam(defaultValue = "false")
             boolean isCaseInsensitive,
         @RequestParam(defaultValue = "")
-        @Parameter(description = "'record' to apply vacuum.xsl, " +
-            "'element' to remove empty elements. " +
-            "Empty to not affect empty elements.",
+        @Parameter(description = """
+            'record' to apply vacuum.xsl, \
+            'element' to remove empty elements. \
+            Empty to not affect empty elements.\
+            """,
             required = false)
             String vacuumMode,
         @Parameter(hidden = true)

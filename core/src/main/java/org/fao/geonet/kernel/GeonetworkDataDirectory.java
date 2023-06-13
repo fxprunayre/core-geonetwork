@@ -250,8 +250,10 @@ public class GeonetworkDataDirectory {
             if (!this.systemDataDir.isAbsolute()) {
                 Log.warning(
                     Geonet.DATA_DIRECTORY,
-                    "    - Data directory is not an absolute path. Relative path is not recommended.\n"
-                        + "Update "
+                    """
+                            - Data directory is not an absolute path. Relative path is not recommended.
+                        Update \
+                        """
                         + webappName
                         + KEY_SUFFIX + " or geonetwork.dir environment variable.");
             }

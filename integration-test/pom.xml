@@ -72,12 +72,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.11.0</version>
         <configuration>
+          <compilerVersion>17</compilerVersion>
+          <debug>true</debug>
           <encoding>UTF-8</encoding>
-          <source>1.8</source>
-          <target>1.8</target>
-          <compilerArgument>-Werror</compilerArgument>
+          <release>17</release>
         </configuration>
       </plugin>
     </plugins>

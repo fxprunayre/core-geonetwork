@@ -58,13 +58,15 @@ public class IsoMatchersTest extends AbstractFormatterTest {
         final String formatterId = "full_view";
         final Handlers handlers = getHandlers(request, formatterId);
         GPathResult elem = parseXml(
-            "<root><gmd:title  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" xmlns:gco=\"http://www.isotc211.org/2005/gco\" xsi:type=\"gmd:PT_FreeText_PropertyType\" gco:nilReason=\"missing\">\n"
-                + "  <gmd:PT_FreeText xmlns:gco=\"http://www.isotc211.org/2005/gmd\">\n"
-                + "    <gmd:textGroup>\n"
-                + "      <gmd:LocalisedCharacterString locale=\"#DE\">GER Citation Title</gmd:LocalisedCharacterString>\n"
-                + "    </gmd:textGroup>\n"
-                + "  </gmd:PT_FreeText>\n"
-                + "</gmd:title></root>", ISO19139Namespaces.GMD, ISO19139Namespaces.GCO);
+            """
+            <root><gmd:title  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xsi:type="gmd:PT_FreeText_PropertyType" gco:nilReason="missing">
+              <gmd:PT_FreeText xmlns:gco="http://www.isotc211.org/2005/gmd">
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#DE">GER Citation Title</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title></root>\
+            """, ISO19139Namespaces.GMD, ISO19139Namespaces.GCO);
         final GPathResult titleEl = (GPathResult) elem.getProperty("gmd:title");
         Handler handler = handlers.findHandlerFor(titleEl);
 
@@ -74,11 +76,13 @@ public class IsoMatchersTest extends AbstractFormatterTest {
         assertTrue(handlerResult, handlerResult.contains("GER Citation Title"));
 
         elem = parseXml(
-            "<root  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:gmd=\"http://www.isotc211.org/2005/gmd\" "
-                + "xmlns:gco=\"http://www.isotc211.org/2005/gco\" xsi:type=\"gmd:PT_FreeText_PropertyType\" gco:nilReason=\"missing\">"
-                + "<gmd:language>\n"
-                + "    <gco:CharacterString>eng</gco:CharacterString>\n"
-                + "</gmd:language></root>", ISO19139Namespaces.GMD, ISO19139Namespaces.GCO);
+            """
+            <root  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmd="http://www.isotc211.org/2005/gmd" \
+            xmlns:gco="http://www.isotc211.org/2005/gco" xsi:type="gmd:PT_FreeText_PropertyType" gco:nilReason="missing">\
+            <gmd:language>
+                <gco:CharacterString>eng</gco:CharacterString>
+            </gmd:language></root>\
+            """, ISO19139Namespaces.GMD, ISO19139Namespaces.GCO);
         final GPathResult langEl = (GPathResult) elem.getProperty("gmd:language");
         handler = handlers.findHandlerFor(langEl);
 

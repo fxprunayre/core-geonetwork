@@ -78,9 +78,11 @@ public class TNodeTranscludeTest extends AbstractTemplateParserTest {
         Map<String, Object> model = Maps.newHashMap();
         model.put("other2", "Other&Two");
         model.put("other3", "Other Three");
-        String expected = "<div><div>"
-            + "    within"
-            + "    </div>Other OneOther&TwoOther Three</div>";
+        String expected = """
+            <div><div>\
+                within\
+                </div>Other OneOther&TwoOther Three</div>\
+            """;
 
         assertCorrectRender(parseTree, model, expected);
     }

@@ -141,8 +141,10 @@ public class IsoLanguage extends Localized {
 
     @Override
     public String toString() {
-        return "IsoLanguage{" +
-            "id=" + id +
+        return """
+            IsoLanguage{\
+            id=\
+            """ + id +
             ", code='" + code + '\'' +
             ", shortCode='" + shortCode + '\'' +
             '}';

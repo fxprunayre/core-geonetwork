@@ -73,12 +73,17 @@ public class HarvestError extends AbstractHarvestError {
     	super(context);
 
         this.origin = ex;
-        this.description = "The server didn't accept one of the parameters"
-            + " sent on the request.\n The parameter rejected was: "
+        this.description = """
+            The server didn't accept one of the parameters\
+             sent on the request.
+             The parameter rejected was: \
+            """
             + ex.getLocator() + " (" + ex.getMessage() + ")";
 
-        this.hint = "Check that geonetwork supports the exact version of"
-            + " the server you are trying to connect";
+        this.hint = """
+            Check that geonetwork supports the exact version of\
+             the server you are trying to connect\
+            """;
         printLog();
     }
 
@@ -168,8 +173,10 @@ public class HarvestError extends AbstractHarvestError {
 
         this.origin = e;
         this.description = "Unable to parse the metadata.";
-        this.hint = "Check with your administrator about possible "
-            + "network errors or corrupt data on harvested server.";
+        this.hint = """
+            Check with your administrator about possible \
+            network errors or corrupt data on harvested server.\
+            """;
         printLog();
     }
 

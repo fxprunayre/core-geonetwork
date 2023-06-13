@@ -64,8 +64,10 @@ public class AjaxEditUtils extends EditUtils {
         Element md = (Element) session.getProperty(Geonet.Session.METADATA_EDITING + id);
         if (md == null) {
             throw new ResourceNotFoundException(String.format(
-                "Requested metadata with id '%s' is not available in current session. " +
-                    "Open an editing session on this record first.", id));
+                """
+                Requested metadata with id '%s' is not available in current session. \
+                Open an editing session on this record first.\
+                """, id));
         }
         md.detach();
         return md;

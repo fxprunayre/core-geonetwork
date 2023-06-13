@@ -151,8 +151,10 @@ public class MetadataValidateApi {
         }
     }
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Validate a record", description = "User MUST be able to edit the record to validate it. "
-        + "FIXME : id MUST be the id of the current metadata record in session ?")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Validate a record", description = """
+        User MUST be able to edit the record to validate it. \
+        FIXME : id MUST be the id of the current metadata record in session ?\
+        """)
     @RequestMapping(value = "/{metadataUuid}/validate/internal", method = RequestMethod.PUT, produces = {
         MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.CREATED)

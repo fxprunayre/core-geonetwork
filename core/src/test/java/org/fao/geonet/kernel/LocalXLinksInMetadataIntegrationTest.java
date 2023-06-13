@@ -72,8 +72,10 @@ public class LocalXLinksInMetadataIntegrationTest extends AbstractIntegrationTes
             + "        <gco:CharacterString>%s</gco:CharacterString>\n"
             + "    </gmd:keyword>\n"
             + "</gmd:MD_Keywords>\n";
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-            + "<gmd:MD_Metadata " + namespaces
+        String xml = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <gmd:MD_Metadata \
+            """ + namespaces
             + "    gco:isoType=\"gmd:MD_Metadata\">\n"
             + "    <gmd:fileIdentifier xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n"
             + "        <gco:CharacterString>23b53e29-c0a2-4897-b107-141bb15f929a</gco:CharacterString>\n"

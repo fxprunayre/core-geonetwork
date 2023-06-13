@@ -76,8 +76,10 @@ public class AtomGetData {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get a data file related to dataset",
-        description = "This service if a dataset has only 1 download format for a CRS returns the file, otherwise " +
-            "returns a feed with downloads for the dataset.")
+        description = """
+            This service if a dataset has only 1 download format for a CRS returns the file, otherwise \
+            returns a feed with downloads for the dataset.\
+            """)
     @GetMapping(
         value = "/download/resource",
         produces = MediaType.APPLICATION_XML_VALUE

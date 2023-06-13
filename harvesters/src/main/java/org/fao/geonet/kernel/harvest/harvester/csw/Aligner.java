@@ -658,11 +658,13 @@ public class Aligner extends BaseAligner<CswParams> {
 
          Set<String> metadataUuids = new HashSet<>();
 
-        String jsonQuery = " {" +
-            "       \"query_string\": {" +
-            "       \"query\": \"+resourceIdentifier.code:\\\"%s\\\" -uuid:\\\"%s\\\"\"" +
-            "       }" +
-            "}";
+        String jsonQuery = """
+             {\
+                   "query_string": {\
+                   "query": "+resourceIdentifier.code:\\"%s\\" -uuid:\\"%s\\""\
+                   }\
+            }\
+            """;
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode esJsonQuery = objectMapper.readTree(String.format(jsonQuery, datasetIdCode, metadataUuid));

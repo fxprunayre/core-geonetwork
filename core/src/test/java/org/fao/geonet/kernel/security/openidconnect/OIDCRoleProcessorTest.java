@@ -447,11 +447,13 @@ public class OIDCRoleProcessorTest {
     // from standard GN configuration
     private RoleHierarchyImpl getRoleHierarchy() {
         RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        roleHierarchy.setHierarchy("  Administrator > UserAdmin\n" +
-            "        UserAdmin > Reviewer\n" +
-            "        Reviewer > Editor\n" +
-            "        Editor > RegisteredUser\n" +
-            "        RegisteredUser > Guest");
+        roleHierarchy.setHierarchy("""
+              Administrator > UserAdmin
+                    UserAdmin > Reviewer
+                    Reviewer > Editor
+                    Editor > RegisteredUser
+                    RegisteredUser > Guest\
+            """);
         return roleHierarchy;
     }
 

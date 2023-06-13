@@ -171,10 +171,12 @@ public class PasswordApi {
     }
 
     @io.swagger.v3.oas.annotations.Operation(summary = "Send user password reminder by email",
-        description = "An email is sent to the requested user with a link to " +
-            "reset his password. User MUST have an email to get the link. " +
-            "LDAP users will not be able to retrieve their password " +
-            "using this service.")
+        description = """
+            An email is sent to the requested user with a link to \
+            reset his password. User MUST have an email to get the link. \
+            LDAP users will not be able to retrieve their password \
+            using this service.\
+            """)
     @RequestMapping(
         value = "/actions/forgot-password",
         method = RequestMethod.PUT,

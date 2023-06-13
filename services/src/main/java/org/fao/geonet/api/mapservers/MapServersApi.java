@@ -90,11 +90,13 @@ public class MapServersApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get mapservers",
-        description = "Mapservers are used by the catalog to publish record attachments " +
-            "(eg. ZIP file with shape) or record associated resources (eg. " +
-            "database table, file on the local network) in a remote mapserver like " +
-            "GeoServer or MapServer. The catalog communicate with the mapserver using " +
-            "GeoServer REST API."
+        description = """
+            Mapservers are used by the catalog to publish record attachments \
+            (eg. ZIP file with shape) or record associated resources (eg. \
+            database table, file on the local network) in a remote mapserver like \
+            GeoServer or MapServer. The catalog communicate with the mapserver using \
+            GeoServer REST API.\
+            """
 //        authorizations = {
 //            @Authorization(value = "basicAuth")
 //        }
@@ -238,8 +240,10 @@ public class MapServersApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Update a mapserver authentication",
-        description = "The remote mapserver REST API may require basic authentication. " +
-            "This operation set the username and password."
+        description = """
+            The remote mapserver REST API may require basic authentication. \
+            This operation set the username and password.\
+            """
         //       authorizations = {
         //           @Authorization(value = "basicAuth")
         //      })

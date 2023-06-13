@@ -67,8 +67,10 @@ public class TNodeIfTest extends AbstractTemplateParserTest {
         model.put("body", "y");
         model.put("div", "Div Data");
 
-        String expected = "<html><head lang=\"en\"><title>Title</title></head>"
-            + "<body><div>Div Data</div></body></html>";
+        String expected = """
+            <html><head lang="en"><title>Title</title></head>\
+            <body><div>Div Data</div></body></html>\
+            """;
         assertCorrectRender(parseTree, model, expected);
 
         model.remove("title");
@@ -216,9 +218,11 @@ public class TNodeIfTest extends AbstractTemplateParserTest {
         Map<String, Object> model = Maps.newHashMap();
         model.put("title", "Title");
 
-        String expected = "<head>\n"
-            + "    <title >Title</title>\n"
-            + "</head>";
+        String expected = """
+            <head>
+                <title >Title</title>
+            </head>\
+            """;
         assertCorrectRender(parseTree, model, expected);
     }
 }

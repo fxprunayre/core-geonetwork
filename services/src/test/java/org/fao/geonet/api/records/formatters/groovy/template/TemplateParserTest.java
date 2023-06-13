@@ -72,11 +72,13 @@ public class TemplateParserTest extends AbstractTemplateParserTest {
         Map<String, Object> model = Maps.newHashMap();
         model.put("title", "Title");
 
-        String expected = "<html>\n"
-            + "<head>\n"
-            + "  <title>Title</title>\n"
-            + "</head>\n"
-            + "</html>";
+        String expected = """
+            <html>
+            <head>
+              <title>Title</title>
+            </head>
+            </html>\
+            """;
         final ByteArrayOutputStream result = new ByteArrayOutputStream();
         TRenderContext context = new TRenderContext(result, model);
 

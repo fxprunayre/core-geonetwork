@@ -75,8 +75,10 @@ public class ReportUsers implements IReport {
             csvFilePrinter.printRecord("Users");
             csvFilePrinter.println();
 
-            String[] entries = ("Username#Surname#Name#"
-                + "Email#User groups#Last login date").split("#");
+            String[] entries = ("""
+                Username#Surname#Name#\
+                Email#User groups#Last login date\
+                """).split("#");
             csvFilePrinter.printRecord(Arrays.asList(entries));
 
             final UserGroupRepository userGroupRepository =

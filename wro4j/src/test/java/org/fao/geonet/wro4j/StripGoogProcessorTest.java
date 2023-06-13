@@ -53,8 +53,13 @@ public class StripGoogProcessorTest extends TestCase {
     }
 
     public void testProcess4() throws Exception {
-        Reader reader = new StringReader("goog.provide('id');goog.require('id2'); goog.require('id2'); goog.require('id2'); \n" +
-            "goog.require('id2'); \ngoog.require('id2'); goog.require('id2'); \n\nconsole.log('hi')");
+        Reader reader = new StringReader("""
+            goog.provide('id');goog.require('id2'); goog.require('id2'); goog.require('id2');\s
+            goog.require('id2');\s
+            goog.require('id2'); goog.require('id2');\s
+
+            console.log('hi')\
+            """);
         StringWriter writer = new StringWriter();
         final StripGoogProcessor processor = new StripGoogProcessor();
         Resource resource = new Resource();

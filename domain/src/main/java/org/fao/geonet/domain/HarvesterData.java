@@ -153,8 +153,10 @@ public class HarvesterData {
 
     @Override
     public String toString() {
-        return "HarvesterData{" +
-            "id=" + id +
+        return """
+            HarvesterData{\
+            id=\
+            """ + id +
             ", value='" + value + '\'' +
             '}';
     }

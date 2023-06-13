@@ -109,9 +109,11 @@ public class LocalFilesystemHarvester extends AbstractHarvester<HarvestResult, L
         Set<Integer> idsResultHs = Sets.newHashSet(idsForHarvestingResult);
 
         if (!params.nodelete) {
-            log.debug("Starting to delete locally existing metadata " +
-                "from the same source if they " +
-                " were not in this harvesting result...");
+            log.debug("""
+                Starting to delete locally existing metadata \
+                from the same source if they \
+                 were not in this harvesting result...\
+                """);
             List<Integer> existingMetadata = context.getBean(MetadataRepository.class).findIdsBy((Specification<Metadata>) MetadataSpecs.hasHarvesterUuid(params.getUuid()));
             for (Integer existingId : existingMetadata) {
 

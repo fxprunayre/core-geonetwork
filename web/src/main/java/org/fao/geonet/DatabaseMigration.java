@@ -175,9 +175,11 @@ public class DatabaseMigration implements BeanPostProcessor {
         _logger.info("      Webapp   version:" + webappVersion + " subversion:" + subVersion);
         _logger.info("      Database version:" + dbVersion + " subversion:" + dbSubVersion);
         if (dbVersion == null) {
-            _logger.warning("      Unable to retrieve the current GeoNetwork version from the database. "
-                + "If this is an initial run of the software, then the database will be auto-populated. "
-                + "Else check that the database is properly configured");
+            _logger.warning("""
+                      Unable to retrieve the current GeoNetwork version from the database. \
+                If this is an initial run of the software, then the database will be auto-populated. \
+                Else check that the database is properly configured\
+                """);
             return true;
         } else if (webappVersion == null) {
             _logger.warning("      Unable to retrieve the GeoNetwork version from the application code.");
@@ -242,17 +244,21 @@ public class DatabaseMigration implements BeanPostProcessor {
                     }
                 }
                 if (anyMigrationAction && !anyMigrationError) {
-                    _logger.info("      Successfull migration.\n"
-                        + "      Catalogue administrator still need to update the catalogue\n"
-                        + "      logo and data directory in order to complete the migration process.\n"
-                        + "      Lucene index rebuild is also recommended after migration."
+                    _logger.info("""
+                              Successfull migration.
+                              Catalogue administrator still need to update the catalogue
+                              logo and data directory in order to complete the migration process.
+                              Lucene index rebuild is also recommended after migration.\
+                        """
                     );
                 }
 
                 if (!anyMigrationAction) {
-                    _logger.warning("      No migration task found between webapp and database version.\n"
-                        + "      The system may be unstable or may failed to start if you try to run \n"
-                        + "      the current GeoNetwork " + webappVersion + " with an older database (ie. " + dbVersion
+                    _logger.warning("""
+                              No migration task found between webapp and database version.
+                              The system may be unstable or may failed to start if you try to run\s
+                              the current GeoNetwork \
+                        """ + webappVersion + " with an older database (ie. " + dbVersion
                         + "\n"
                         + "      ). Try to run the migration task manually on the current database\n"
                         + "      before starting the application or start with a new empty database.\n"

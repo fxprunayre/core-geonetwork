@@ -93,15 +93,17 @@ public class LogosApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get all logos",
-        description = "Logos are used for the catalog, the groups logos, and harvester icons. " +
-            "Logos are stored in the data directory in " +
-            "<dataDirectory>/resources/images/harvesting.<br/> " +
-            "Records are attached to a source. A source can be the local catalog " +
-            "or a harvester node. When a source is created, its logo is located " +
-            "in the images/logos folder with the source UUID as filename. For some " +
-            "sources the logo can be automatically retrieved (eg. when harvesting GeoNetwork " +
-            "catalogs). For others, the logo is usually manually defined when configuring the " +
-            "harvester.")
+        description = """
+            Logos are used for the catalog, the groups logos, and harvester icons. \
+            Logos are stored in the data directory in \
+            <dataDirectory>/resources/images/harvesting.<br/> \
+            Records are attached to a source. A source can be the local catalog \
+            or a harvester node. When a source is created, its logo is located \
+            in the images/logos folder with the source UUID as filename. For some \
+            sources the logo can be automatically retrieved (eg. when harvesting GeoNetwork \
+            catalogs). For others, the logo is usually manually defined when configuring the \
+            harvester.\
+            """)
     @RequestMapping(
         produces = MediaType.APPLICATION_JSON_VALUE,
         method = RequestMethod.GET)

@@ -78,24 +78,30 @@ public interface MetadataRepository extends GeonetRepository<Metadata, Integer>,
 
 
 
-    @Query(value = "SELECT replace(data, :search, :replace) FROM metadata m " +
-        "WHERE uuid = :uuid",
+    @Query(value = """
+        SELECT replace(data, :search, :replace) FROM metadata m \
+        WHERE uuid = :uuid\
+        """,
         nativeQuery = true)
     String selectOneWithSearchAndReplace(
         @Param("uuid") String uuid,
         @Param("search") String search,
         @Param("replace") String replace);
 
-    @Query(value = "SELECT regexp_replace(data, :pattern, :replace) FROM metadata m " +
-        "WHERE uuid = :uuid",
+    @Query(value = """
+        SELECT regexp_replace(data, :pattern, :replace) FROM metadata m \
+        WHERE uuid = :uuid\
+        """,
         nativeQuery = true)
     String selectOneWithRegexSearchAndReplace(
         @Param("uuid") String uuid,
         @Param("pattern") String search,
         @Param("replace") String replace);
 
-    @Query(value = "SELECT regexp_replace(data, :pattern, :replace, :flags) FROM metadata m " +
-        "WHERE uuid = :uuid",
+    @Query(value = """
+        SELECT regexp_replace(data, :pattern, :replace, :flags) FROM metadata m \
+        WHERE uuid = :uuid\
+        """,
         nativeQuery = true)
     String selectOneWithRegexSearchAndReplaceWithFlags(
         @Param("uuid") String uuid,

@@ -801,8 +801,10 @@ public class SchemaLoader {
             String existingSubstitionGroup = hmSubsLink.get(ee.name);
             if (existingSubstitionGroup != null
                 && !ee.substGroup.equals(existingSubstitionGroup)) {
-                throw new IllegalArgumentException("Substitution link collision" +
-                    " for " + ee.name +
+                throw new IllegalArgumentException("""
+                    Substitution link collision\
+                     for \
+                    """ + ee.name +
                     " link to " + existingSubstitionGroup +
                     ". Already bound to " + ee.substGroup);
             } else {
@@ -813,8 +815,10 @@ public class SchemaLoader {
 
             String existingType = hmAbsElems.get(ee.name);
             if (existingType != null && !ee.type.equals(existingType)) {
-                throw new IllegalArgumentException("Namespace collision" +
-                    " for " + ee.name +
+                throw new IllegalArgumentException("""
+                    Namespace collision\
+                     for \
+                    """ + ee.name +
                     " type " + existingType +
                     ". Already bound to " + ee.type);
             } else {
@@ -859,8 +863,10 @@ public class SchemaLoader {
 
         ComplexTypeEntry existingType = hmTypes.get(ct.name);
         if (existingType != null && !ct.name.equals(existingType.name)) {
-            throw new IllegalArgumentException("Namespace collision" +
-                " for complex type " + ct.name +
+            throw new IllegalArgumentException("""
+                Namespace collision\
+                 for complex type \
+                """ + ct.name +
                 " type " + existingType.name + "already defined.");
         }
         hmTypes.put(ct.name, ct);

@@ -159,8 +159,10 @@ public class MapService {
 
     @Override
     public String toString() {
-        return "MapService{" +
-            "url='" + url + '\'' +
+        return """
+            MapService{\
+            url='\
+            """ + url + '\'' +
             ", urlType=" + urlType +
             ", useProxy=" + useProxy +
             ", authType=" + authType +

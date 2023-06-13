@@ -76,18 +76,24 @@ public class OnlineSrcAddProcessTest extends XslProcessTest {
             resultString, hasXPath("count(//gmd:onLine)", equalTo("4")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/*/text() = 'Website name'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/*/text() = 'Website name'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/*/text() = 'Website description'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/*/text() = 'Website description'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
 
@@ -115,23 +121,31 @@ public class OnlineSrcAddProcessTest extends XslProcessTest {
             resultString, hasXPath("count(//gmd:onLine)", equalTo("4")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/*/text() = 'Website name'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/*/text() = 'Website name'])\
+                    """,
                 equalTo("0")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/*/text() = 'Website name updated'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/*/text() = 'Website name updated'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/*/text() = 'Website description updated'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/*/text() = 'Website description updated'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org/contact'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org/contact'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
     }
@@ -162,28 +176,38 @@ public class OnlineSrcAddProcessTest extends XslProcessTest {
             resultString, hasXPath("count(//gmd:onLine)", equalTo("3")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/gco:CharacterString/text() = 'Le monde en français'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/gco:CharacterString/text() = 'Le monde en français'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'English website'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'English website'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/gco:CharacterString/text() = 'Description du site'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/gco:CharacterString/text() = 'Description du site'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'Website description'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'Website description'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
 
@@ -206,28 +230,38 @@ public class OnlineSrcAddProcessTest extends XslProcessTest {
         resultString = Xml.getString(resultElement);
 
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/gco:CharacterString/text() = 'Le monde en français 2'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/gco:CharacterString/text() = 'Le monde en français 2'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:name/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'English website 2'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:name/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'English website 2'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/gco:CharacterString/text() = 'Description du site 2'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/gco:CharacterString/text() = 'Description du site 2'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:description/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'Website description 2'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:description/gmd:PT_FreeText/*/gmd:LocalisedCharacterString[@locale='#EN']/text() = 'Website description 2'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
         assertThat(
-            resultString, hasXPath("count(//gmd:onLine" +
-                    "[*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org2'])",
+            resultString, hasXPath("""
+                    count(//gmd:onLine\
+                    [*/gmd:linkage/*/text() = 'http://www.geonetwork-opensource.org2'])\
+                    """,
                 equalTo("1")).withNamespaceContext(ns)
         );
     }

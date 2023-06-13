@@ -147,8 +147,10 @@ class Search {
                 }
             }
         } catch (Exception e) {
-            throw new OperationAbortedEx("Search request criteria error. " +
-                "Check that the free criteria fields '" +
+            throw new OperationAbortedEx("""
+                Search request criteria error. \
+                Check that the free criteria fields '\
+                """ +
                 anyField + "' and values '" +
                 anyValue + "' are correct. You MUST have the same " +
                 "number of criteria and values.", e);

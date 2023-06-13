@@ -106,8 +106,10 @@ public class DirectoryApiTest extends AbstractServiceIntegrationTest {
         ServiceContext context = createServiceContext();
         loginAsAdmin(context);
 
-        final String xpath = ".//gmd:graphicOverview[" +
-            "ends-with(*/gmd:fileName/gco:CharacterString, '.gif')]";
+        final String xpath = """
+            .//gmd:graphicOverview[\
+            ends-with(*/gmd:fileName/gco:CharacterString, '.gif')]\
+            """;
 
         // Test record contains 3 contacts matching XPath
         // with 1 in 2 locations.

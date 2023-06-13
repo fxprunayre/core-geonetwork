@@ -10,9 +10,11 @@ import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.assertEquals;
 
-@Ignore(value = "As it depends on third party online app. " +
-    "Various number of calls can be required " +
-    "to finalize a complete registration.")
+@Ignore(value = """
+    As it depends on third party online app. \
+    Various number of calls can be required \
+    to finalize a complete registration.\
+    """)
 public class SpatineoUtilTest extends AbstractCoreIntegrationTest {
     @Test
     public void testRegisterService() {

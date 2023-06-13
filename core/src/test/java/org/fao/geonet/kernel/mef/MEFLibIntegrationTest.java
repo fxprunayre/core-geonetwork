@@ -143,8 +143,10 @@ public class MEFLibIntegrationTest extends AbstractCoreIntegrationTest {
                 }
                 Element params = new Element("request");
                 if (iterations > 1 && !uuidAction.equalsIgnoreCase(Params.GENERATE_UUID)) {
-                    throw new AssertionError("If iterations (the number or times each mef file is imported) is greater than 1"
-                        + " then uuidAction must be " + Params.GENERATE_UUID);
+                    throw new AssertionError("""
+                        If iterations (the number or times each mef file is imported) is greater than 1\
+                         then uuidAction must be \
+                        """ + Params.GENERATE_UUID);
                 }
                 params.addContent(new Element(Params.UUID_ACTION).setText(uuidAction));
 

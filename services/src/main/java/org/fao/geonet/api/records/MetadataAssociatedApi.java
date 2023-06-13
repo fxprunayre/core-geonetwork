@@ -92,9 +92,11 @@ public class MetadataAssociatedApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get record associated resources",
-        description = "Retrieve related services, datasets, sources, ... " +
-            "to this records.<br/>" +
-            "<a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/associating-resources/index.html'>More info</a>")
+        description = """
+            Retrieve related services, datasets, sources, ... \
+            to this records.<br/>\
+            <a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/associating-resources/index.html'>More info</a>\
+            """)
     @RequestMapping(value = "/{metadataUuid:.+}/associated",
         method = RequestMethod.GET,
         produces = {

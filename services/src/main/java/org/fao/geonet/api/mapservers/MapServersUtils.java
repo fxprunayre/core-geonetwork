@@ -211,8 +211,9 @@ public class MapServersUtils {
                     g.setErrorCode(report);
                     return false;
                 }
-                g.setReport(String.format("" +
-                        "Layer '%s' remove from mapserver.",
+                g.setReport(String.format("""
+                        Layer '%s' remove from mapserver.\
+                        """,
                     dsName
                 ));
                 return true;

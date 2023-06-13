@@ -34,22 +34,26 @@ import static org.junit.Assert.assertTrue;
 
 public class WMTSBaseMapRendererTest {
 
-    String json = "{\n" +
-        "                     \"wmtsGetCapabilitiesURL\":\"HTTP://example.com\",\n" +
-        "                     \"layerName\":\"standard\",\n" +
-        "                     \"SRID2MatrixSet\": {\n" +
-        "                          \"EPSG:900913\":\"EPSG:3857\"\n" +
-        "                     },\n" +
-        "                     \"flip4326\": true\n" +
-        "                   }";
-    String jsonNoFlip = "{\n" +
-        "                     \"wmtsGetCapabilitiesURL\":\"HTTPS://example.com\",\n" +
-        "                     \"layerName\":\"standard\",\n" +
-        "                     \"SRID2MatrixSet\": {\n" +
-        "                          \"EPSG:900913\":\"EPSG:3857\"\n" +
-        "                     },\n" +
-        "                     \"flip4326\": false\n" +
-        "                   }";
+    String json = """
+        {
+                             "wmtsGetCapabilitiesURL":"HTTP://example.com",
+                             "layerName":"standard",
+                             "SRID2MatrixSet": {
+                                  "EPSG:900913":"EPSG:3857"
+                             },
+                             "flip4326": true
+                           }\
+        """;
+    String jsonNoFlip = """
+        {
+                             "wmtsGetCapabilitiesURL":"HTTPS://example.com",
+                             "layerName":"standard",
+                             "SRID2MatrixSet": {
+                                  "EPSG:900913":"EPSG:3857"
+                             },
+                             "flip4326": false
+                           }\
+        """;
 
     @Test
     public void canHandle() {

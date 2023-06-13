@@ -154,8 +154,10 @@ public class WebDavHarvester_Validation_NonRecursive_IntegrationTest extends Abs
         }
 
         private void registerDirectory(MockRequestFactoryGeonet factory, String parentHref) throws Exception {
-            StringBuilder builder = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-                + "<D:multistatus xmlns:D=\"DAV:\" xmlns:ns0=\"DAV:\">\n");
+            StringBuilder builder = new StringBuilder("""
+                <?xml version="1.0" encoding="utf-8"?>
+                <D:multistatus xmlns:D="DAV:" xmlns:ns0="DAV:">
+                """);
 
             builder.append(getWebDavSnippet(parentHref, WEBDAV_DIR_TEMPLATE_XML, -1));
             for (WebDavDescriptor child : children) {

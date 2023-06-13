@@ -211,8 +211,10 @@ public class RegionsApi {
         },
         method = RequestMethod.GET)
     public HttpEntity<byte[]> getGeomAsImage(
-        @Parameter(description = "(optional) the background map projection. If not passed uses the region/getmap/mapproj"
-            + " setting. If the setting is not set defaults to EPSG:4326")
+        @Parameter(description = """
+            (optional) the background map projection. If not passed uses the region/getmap/mapproj\
+             setting. If the setting is not set defaults to EPSG:4326\
+            """)
         @RequestParam(value = MAP_SRS_PARAM, required = false) String mapSrs,
         @Parameter(description = "(optional) width of the image that is created. Only one of width and height are permitted")
         @RequestParam(value = WIDTH_PARAM, required = false, defaultValue = "300") Integer width,
@@ -256,8 +258,10 @@ public class RegionsApi {
         }
 
         if ((background != null) && (background.startsWith("http")) && (disableFullUrlBackgroundMapServices)) {
-            throw new BadParameterEx(BACKGROUND_PARAM, "Background layers from provided are not supported, " +
-                "use a preconfigured background layers map service.");
+            throw new BadParameterEx(BACKGROUND_PARAM, """
+                Background layers from provided are not supported, \
+                use a preconfigured background layers map service.\
+                """);
         }
 
         String outputFileName = "geom.png";

@@ -65,8 +65,10 @@ public class DashboardAppHealthCheck implements HealthCheckFactory {
                             // but proxy need authentication
                         } else {
                             return Result.unhealthy(
-                                "Dashboard application is not available currently. " +
-                                    "This component is only required if you use dashboards.");
+                                """
+                                Dashboard application is not available currently. \
+                                This component is only required if you use dashboards.\
+                                """);
                         }
                     } catch (Throwable e) {
                         return Result.unhealthy(e);
@@ -77,8 +79,10 @@ public class DashboardAppHealthCheck implements HealthCheckFactory {
                     }
                 } else {
                     return Result.unhealthy(
-                        "Dashboard application is not configured. " +
-                            "Update config.properties to setup Kibana to use this feature.");
+                        """
+                        Dashboard application is not configured. \
+                        Update config.properties to setup Kibana to use this feature.\
+                        """);
                 }
             }
         };

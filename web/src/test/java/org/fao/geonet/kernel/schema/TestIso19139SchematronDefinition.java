@@ -131,12 +131,15 @@ public class TestIso19139SchematronDefinition extends AbstractSchematronTest {
             file.getFileName() + "' \n\n";
 
         String fixExplanation =
-            "Each rule in a pattern must select different nodes in the metadata because,\n" +
-                "due to the nature of the generated XSLT, only one of the rules will be \n" +
-                "executed.  Therefore the context attribute of each rule must be unique.  \n" +
-                "There are two ways to  fix this problem.  \n" +
-                "        1. Put the assertions and reports of the two rules into the same rule\n" +
-                "        2. Put the rules in separate patterns\n\n";
+            """
+            Each rule in a pattern must select different nodes in the metadata because,
+            due to the nature of the generated XSLT, only one of the rules will be\s
+            executed.  Therefore the context attribute of each rule must be unique. \s
+            There are two ways to  fix this problem. \s
+                    1. Put the assertions and reports of the two rules into the same rule
+                    2. Put the rules in separate patterns
+            
+            """;
 
         throw new AssertionError(errorDescription + titleOfRule + "\n\n\t selects one of the same nodes as" +
             " another or the rules in the same " +

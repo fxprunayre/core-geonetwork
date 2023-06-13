@@ -115,8 +115,10 @@ public class HarvesterDataId implements Serializable {
 
     @Override
     public String toString() {
-        return "ID {" +
-            "harvesterUuid='" + harvesterUuid + '\'' +
+        return """
+            ID {
+            harvesterUuid='\
+            """ + harvesterUuid + '\'' +
             ", key='" + key + '\'' +
             '}';
     }

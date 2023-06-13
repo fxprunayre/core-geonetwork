@@ -50,8 +50,10 @@ public class StatusActionsFactory {
             this.statusRules = (Class<StatusActions>) Class.forName(this.className);
         } catch (ClassNotFoundException e) {
             Log.error(Geonet.DATA_MANAGER, String.format(
-                "Class name '%s' is not found. You MUST use a valid class name loaded in the classpath. " +
-                    "The default status action class is used (ie. %s)",
+                """
+                Class name '%s' is not found. You MUST use a valid class name loaded in the classpath. \
+                The default status action class is used (ie. %s)\
+                """,
                 this.className
             ));
             try {

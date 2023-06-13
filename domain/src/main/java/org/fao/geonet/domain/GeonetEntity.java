@@ -49,7 +49,7 @@ public class GeonetEntity {
 
     /**
      * Process the object by reflection to get all the attributes in xml format
-     * 
+     *
      * @param obj
      * @param alreadyEncoded
      * @param exclude
@@ -113,7 +113,7 @@ public class GeonetEntity {
 
     /**
      * Get the property of the getter and add it to the element
-     * 
+     *
      * @param obj
      * @param alreadyEncoded
      * @param exclude
@@ -134,7 +134,7 @@ public class GeonetEntity {
 
     /**
      * Checks if we should add the property or not
-     * 
+     *
      * @param exclude
      * @param objclass
      * @param method
@@ -155,7 +155,7 @@ public class GeonetEntity {
     /**
      * Gets the parent of a class but stops when reaching GeonetEntity or Object (Object shouldn't be accessed if it is a database object
      * domain because GeonetEntity should come first, but just in case.
-     * 
+     *
      * @param objclass
      * @return
      */
@@ -169,7 +169,7 @@ public class GeonetEntity {
 
     /**
      * Checks if this is a label getter
-     * 
+     *
      * @param descName
      * @return
      */
@@ -179,7 +179,7 @@ public class GeonetEntity {
 
     /**
      * Checks if this is a primitive like int or boolean
-     * 
+     *
      * @param descName
      * @return
      */
@@ -189,7 +189,7 @@ public class GeonetEntity {
 
     /**
      * Given a property (from a getter) on the object, convert it to a simple attribute in xml
-     * 
+     *
      * @param alreadyEncoded
      * @param descName
      * @param rawData
@@ -228,7 +228,7 @@ public class GeonetEntity {
 
     /**
      * Harmonize names
-     * 
+     *
      * @param descName
      * @return
      */

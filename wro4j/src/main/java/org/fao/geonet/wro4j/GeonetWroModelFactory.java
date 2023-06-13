@@ -724,8 +724,10 @@ public class GeonetWroModelFactory implements WroModelFactory {
                 @Override
                 public Iterator<File> iterator() {
                     if (!root.exists()) {
-                        throw new IllegalArgumentException(String.format("%s doesn't exist. It could be a missing library. " +
-                            "Check the source if you have all dependency files required.", root));
+                        throw new IllegalArgumentException(String.format("""
+                            %s doesn't exist. It could be a missing library. \
+                            Check the source if you have all dependency files required.\
+                            """, root));
                     }
                     if (root.isFile()) {
                         List<String> suffixes = Arrays.stream(extToCollect).map(sufix -> "." + sufix).collect(Collectors.toList());

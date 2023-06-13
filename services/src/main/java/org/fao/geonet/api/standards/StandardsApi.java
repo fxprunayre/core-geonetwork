@@ -183,9 +183,11 @@ public class StandardsApi implements ApplicationContextAware {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get multiple codelist translations",
-        description = "All translations are combined in the same object. " +
-            "No distinction by codelist. This is useful if you need " +
-            "lots of codelists terms to be loaded.")
+        description = """
+            All translations are combined in the same object. \
+            No distinction by codelist. This is useful if you need \
+            lots of codelists terms to be loaded.\
+            """)
     @RequestMapping(value = "/{schema}/codelists",
         method = RequestMethod.GET,
         produces = {

@@ -103,9 +103,11 @@ public class ISO19139SchemaPlugin
      */
     public Set<AssociatedResource> getAssociatedResourcesUUIDs(Element metadata) {
 
-        String xpathForAggregationInfo = "*//gmd:aggregationInfo/*" +
-            "[gmd:aggregateDataSetIdentifier/*/gmd:code " +
-            "and gmd:associationType/gmd:DS_AssociationTypeCode/@codeListValue!='']";
+        String xpathForAggregationInfo = """
+            *//gmd:aggregationInfo/*\
+            [gmd:aggregateDataSetIdentifier/*/gmd:code \
+            and gmd:associationType/gmd:DS_AssociationTypeCode/@codeListValue!='']\
+            """;
         Set<AssociatedResource> listOfResources = new HashSet<>();
         List<?> sibs = null;
 
@@ -118,8 +120,7 @@ public class ISO19139SchemaPlugin
 
             for (Object o : sibs) {
                 try {
-                    if (o instanceof Element) {
-                        Element sib = (Element) o;
+                    if (o instanceof Element sib) {
                         Element agId = (Element) sib.getChild("aggregateDataSetIdentifier", GMD)
                             .getChildren().get(0);
                         List children = getChild(agId, "code", GMD)
@@ -280,8 +281,10 @@ public class ISO19139SchemaPlugin
 
     @Override
     public List<Element> getTranslationForElement(Element element, String languageIdentifier) {
-        final String path = ".//gmd:LocalisedCharacterString" +
-            "[@locale='#" + languageIdentifier + "']";
+        final String path = """
+            .//gmd:LocalisedCharacterString\
+            [@locale='#\
+            """ + languageIdentifier + "']";
         try {
             XPath xpath = XPath.newInstance(path);
             @SuppressWarnings("unchecked")

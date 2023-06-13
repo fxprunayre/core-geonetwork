@@ -41,12 +41,14 @@ public class NamespaceUtilsTest {
 
     @Test
     public void testNamespaceInScope() throws Exception {
-        String xml = "<?xml version=\"1.0\"?><root " +
-            "xmlns:a=\"http://aaa\" " +
-            "xmlns:b=\"http://bbb\" " +
-            "xmlns:c=\"http://ccc\" " +
-            "xmlns:d=\"http://ddd\">" +
-            "<a:a/></root>";
+        String xml = """
+            <?xml version="1.0"?><root \
+            xmlns:a="http://aaa" \
+            xmlns:b="http://bbb" \
+            xmlns:c="http://ccc" \
+            xmlns:d="http://ddd">\
+            <a:a/></root>\
+            """;
         Element xmle = Xml.loadString(xml, false);
         List<Namespace> inScope = NamespaceUtils.getNamespacesInScope(xmle);
 
@@ -67,12 +69,14 @@ public class NamespaceUtilsTest {
     }
 
     public void testNamespaceInherited() throws Exception {
-        String xml = "<?xml version=\"1.0\"?><root " +
-            "xmlns:a=\"http://aaa\" " +
-            "xmlns:b=\"http://bbb\" " +
-            "xmlns:c=\"http://ccc\" " +
-            "xmlns:d=\"http://ddd\">" +
-            "<a:a/></root>";
+        String xml = """
+            <?xml version="1.0"?><root \
+            xmlns:a="http://aaa" \
+            xmlns:b="http://bbb" \
+            xmlns:c="http://ccc" \
+            xmlns:d="http://ddd">\
+            <a:a/></root>\
+            """;
         Element xmle = Xml.loadString(xml, false);
         List<Namespace> inHerited = NamespaceUtils.getNamespacesInherited(xmle);
 
@@ -87,12 +91,14 @@ public class NamespaceUtilsTest {
     }
 
     public void testNamespaceIntroduced() throws Exception {
-        String xml = "<?xml version=\"1.0\"?><root " +
-            "xmlns:a=\"http://aaa\" " +
-            "xmlns:b=\"http://bbb\" " +
-            "xmlns:c=\"http://ccc\" " +
-            "xmlns:d=\"http://ddd\">" +
-            "<a:a/></root>";
+        String xml = """
+            <?xml version="1.0"?><root \
+            xmlns:a="http://aaa" \
+            xmlns:b="http://bbb" \
+            xmlns:c="http://ccc" \
+            xmlns:d="http://ddd">\
+            <a:a/></root>\
+            """;
         Element xmle = Xml.loadString(xml, false);
         List<Namespace> introduced = NamespaceUtils.getNamespacesIntroduced(xmle);
 

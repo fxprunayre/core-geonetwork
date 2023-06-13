@@ -148,22 +148,24 @@ public class AtomSearch {
         }
 
         String privilegesFilter = buildPermissionsFilter(context);
-        String jsonQuery = "{" +
-            "    \"bool\": {" +
-            "      \"must\": [" +
-            "        {" +
-            "          \"exists\": {" +
-            "            \"field\": \"atomfeed\"" +
-            "          }" +
-            "        }" +
-            "      ]," +
-            "      \"filter\": [{" +
-            "          \"query_string\": {" +
-            "            \"query\": \"%s\"" +
-            "        }" +
-            "      }]" +
-            "    }" +
-            "}";
+        String jsonQuery = """
+            {\
+                "bool": {\
+                  "must": [\
+                    {\
+                      "exists": {\
+                        "field": "atomfeed"\
+                      }\
+                    }\
+                  ],\
+                  "filter": [{\
+                      "query_string": {\
+                        "query": "%s"\
+                    }\
+                  }]\
+                }\
+            }\
+            """;
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode esJsonQuery = objectMapper.readTree(String.format(jsonQuery, privilegesFilter));
 

@@ -124,8 +124,9 @@ public class UpdateFixedInfoTest extends AbstractServiceIntegrationTest {
             "*//gmd:descriptiveKeywords[4]//gmd:keyword", NAMESPACES).size());
 
         // and order is preserved
-        assertEquals(Xml.getString(updatedXml), 1, Xml.selectNodes(updatedXml, "" +
-            "*//gmd:descriptiveKeywords[2]//gmd:keyword", NAMESPACES).size());
+        assertEquals(Xml.getString(updatedXml), 1, Xml.selectNodes(updatedXml, """
+            *//gmd:descriptiveKeywords[2]//gmd:keyword\
+            """, NAMESPACES).size());
 
         assertEqualsText(
             "local://api/registries/vocabularies/keyword?thesaurus=external.theme.httpinspireeceuropaeutheme-theme&id=http://rdfdata.eionet.europa.eu/inspirethemes/themes/5&multiple=false&lang=ger,fre,eng,ita&textgroupOnly",

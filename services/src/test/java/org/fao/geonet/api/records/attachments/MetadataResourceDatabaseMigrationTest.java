@@ -47,10 +47,12 @@ public class MetadataResourceDatabaseMigrationTest extends AbstractServiceIntegr
 
     public static final String XPATH = "*//*[contains(text(), '/resources.get?')]";
     private static final String XPATH_THUMBNAIL =
-        "*//gmd:MD_BrowseGraphic" +
-            "[gmd:fileDescription/gco:CharacterString = 'thumbnail' or " +
-            "gmd:fileDescription/gco:CharacterString = 'large_thumbnail']/gmd:fileName/" +
-            "gco:CharacterString[not(starts-with(normalize-space(text()), 'http'))]";
+        """
+        *//gmd:MD_BrowseGraphic\
+        [gmd:fileDescription/gco:CharacterString = 'thumbnail' or \
+        gmd:fileDescription/gco:CharacterString = 'large_thumbnail']/gmd:fileName/\
+        gco:CharacterString[not(starts-with(normalize-space(text()), 'http'))]\
+        """;
     public static final String XPATH_AFTER_UPDATE = "*//*[contains(text(), 'api/records')]";
 
     private static String resources =
@@ -105,8 +107,8 @@ public class MetadataResourceDatabaseMigrationTest extends AbstractServiceIntegr
         assertEquals("New links with correct URL",
             NUMBER_OF_LINKS_TO_UPDATE + 1, links.size());
     }
-    
-    
+
+
     @Test
     public void testMetadataResourceThumbnailMigration() throws Exception {
         final String fileName = "record-with-external-url-for-thumbnails.xml";
@@ -125,7 +127,7 @@ public class MetadataResourceDatabaseMigrationTest extends AbstractServiceIntegr
         boolean changed = MetadataResourceDatabaseMigration.updateMetadataResourcesLink(
             metadata, null, settingManager
         );
-        
+
         linksThumbnail =
             Lists.newArrayList((Iterable<? extends Element>)
                 Xml.selectNodes(metadata, XPATH_THUMBNAIL_WITH_EXTERNAL_URL));

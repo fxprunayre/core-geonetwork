@@ -224,9 +224,11 @@ public class GeonetWroModelFactoryTest {
 
     @Test
     public void testCreateDeclaredGroups() throws Exception {
-        String sourcesXml = "<sources>\n"
-            + "    <declarative name=\"groupName\" pathOnDisk=\"wro4j/src/test/resources/org/fao/geonet/wro4j\">\n"
-            + "        <jsSource webappPath=\"sampleFile1a.js\" pathOnDisk=\"" + PATH_TO_ROOT_OF_TEST_RESOURCES + "\"/>\n"
+        String sourcesXml = """
+            <sources>
+                <declarative name="groupName" pathOnDisk="wro4j/src/test/resources/org/fao/geonet/wro4j">
+                    <jsSource webappPath="sampleFile1a.js" pathOnDisk="\
+            """ + PATH_TO_ROOT_OF_TEST_RESOURCES + "\"/>\n"
             + "        <jsSource webappPath=\"jslvl2/sampleFile2a.js\" minimize=\"false\"/>\n"
             + "        <cssSource webappPath=\"1a.css\" minimize=\"false\"/>\n"
             + "        <cssSource webappPath=\"anotherCss.less\" pathOnDisk=\"" + PATH_TO_ROOT_OF_TEST_RESOURCES +
@@ -405,9 +407,11 @@ public class GeonetWroModelFactoryTest {
     }
 
     private String createSourcesXmlWithPathOnGroup(String pathOnDisk) {
-        return "<sources xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
-            + "         xsi:noNamespaceSchemaLocation=\"../../../../web/src/main/webResources/WEB-INF/wro-sources.xsd\">\n"
-            + "    <require pathOnDisk=\"" + pathOnDisk + "\">\n"
+        return """
+            <sources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:noNamespaceSchemaLocation="../../../../web/src/main/webResources/WEB-INF/wro-sources.xsd">
+                <require pathOnDisk="\
+            """ + pathOnDisk + "\">\n"
             + "        <jsSource webappPath=\"\">\n"
             + "            <notMinimized>\n"
             + "                <file>sampleFile1b.js</file>\n"

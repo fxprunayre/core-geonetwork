@@ -46,21 +46,23 @@ public class XPathCriteriaEvaluatorTest {
 
     static {
         try {
-            testMetadata = Xml.loadString("<geonet>\n"
-                + "    <general>\n"
-                + "        <profiles>../../../web/geonetwork/WEB-INF/user-profiles.xml</profiles>\n"
-                + "        <uploadDir>../../../data/tmp</uploadDir>\n"
-                + "        <maxUploadSize>100</maxUploadSize> <!-- Size must be in megabyte (integer) -->\n"
-                + "        <debug>true</debug>\n"
-                + "    </general>\n"
-                + "\n"
-                + "    <default>\n"
-                + "        <service>main.home</service>\n"
-                + "        <language></language>\n"
-                + "        <localized>true</localized>\n"
-                + "        <contentType>text/html; charset=UTF-8</contentType>\n"
-                + "    </default>\n"
-                + "</geonet>", false);
+            testMetadata = Xml.loadString("""
+                <geonet>
+                    <general>
+                        <profiles>../../../web/geonetwork/WEB-INF/user-profiles.xml</profiles>
+                        <uploadDir>../../../data/tmp</uploadDir>
+                        <maxUploadSize>100</maxUploadSize> <!-- Size must be in megabyte (integer) -->
+                        <debug>true</debug>
+                    </general>
+
+                    <default>
+                        <service>main.home</service>
+                        <language></language>
+                        <localized>true</localized>
+                        <contentType>text/html; charset=UTF-8</contentType>
+                    </default>
+                </geonet>\
+                """, false);
         } catch (Throwable e) {
             throw new Error(e);
         }
@@ -133,8 +135,10 @@ public class XPathCriteriaEvaluatorTest {
         SchematronCriteria oneGoodAndXPath = XPathCriteriaEvaluator.createAndCriteria("*//debug/text()", "*//service[text() = 'xyz']");
         assertFalse(oneGoodAndXPath.accepts(null, metadataId, testMetadata, NAMESPACES));
 
-        SchematronCriteria twoGoodAndXPath = XPathCriteriaEvaluator.createAndCriteria("*//debug/text()", "*//service[text() = 'main" +
-            ".home']");
+        SchematronCriteria twoGoodAndXPath = XPathCriteriaEvaluator.createAndCriteria("*//debug/text()", """
+            *//service[text() = 'main\
+            .home']\
+            """);
         assertTrue(twoGoodAndXPath.accepts(null, metadataId, testMetadata, NAMESPACES));
     }
 

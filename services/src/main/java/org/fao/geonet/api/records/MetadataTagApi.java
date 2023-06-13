@@ -92,8 +92,10 @@ public class MetadataTagApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get record tags",
-        description = "Tags are used to classify information.<br/>" +
-            "<a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/tag-information/tagging-with-categories.html'>More info</a>")
+        description = """
+            Tags are used to classify information.<br/>\
+            <a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/tag-information/tagging-with-categories.html'>More info</a>\
+            """)
     @GetMapping(
         value = "/{metadataUuid}/tags",
         produces = {

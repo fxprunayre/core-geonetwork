@@ -290,16 +290,18 @@ public class RdfOutputManager {
     private void writeFileHeader(BufferedWriter output) throws Exception {
         output.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         output.write("\n");
-        output.write("<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" " +
-            "xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\" " +
-            "xmlns:foaf=\"http://xmlns.com/foaf/0.1/\" " +
-            "xmlns:void=\"http://www.w3.org/TR/void/\" " +
-            "xmlns:dcat=\"http://www.w3.org/ns/dcat#\" " +
-            "xmlns:dctype=\"http://purl.org/dc/dcmitype/\" " +
-            "xmlns:dc=\"http://purl.org/dc/elements/1.1/\" " +
-            "xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" " +
-            "xmlns:locn=\"http://www.w3.org/ns/locn#\" xmlns:time=\"http://www.w3.org/2006/time#\" " +
-            "xmlns:dct=\"http://purl.org/dc/terms/\">");
+        output.write("""
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" \
+            xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" \
+            xmlns:foaf="http://xmlns.com/foaf/0.1/" \
+            xmlns:void="http://www.w3.org/TR/void/" \
+            xmlns:dcat="http://www.w3.org/ns/dcat#" \
+            xmlns:dctype="http://purl.org/dc/dcmitype/" \
+            xmlns:dc="http://purl.org/dc/elements/1.1/" \
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" \
+            xmlns:locn="http://www.w3.org/ns/locn#" xmlns:time="http://www.w3.org/2006/time#" \
+            xmlns:dct="http://purl.org/dc/terms/">\
+            """);
         output.write("\n");
     }
 

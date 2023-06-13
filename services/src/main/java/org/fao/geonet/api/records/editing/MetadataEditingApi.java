@@ -501,8 +501,10 @@ public class MetadataEditingApi {
             }
 
             if (isUnpublished) {
-                throw new IllegalStateException(String.format("Record saved but as it was invalid at the end of "
-                    + "the editing session. The public record '%s' was unpublished.", metadata.getUuid()));
+                throw new IllegalStateException(String.format("""
+                    Record saved but as it was invalid at the end of \
+                    the editing session. The public record '%s' was unpublished.\
+                    """, metadata.getUuid()));
             } else {
                 return;
             }

@@ -91,26 +91,27 @@ public class ISO19115_3_2018SchemaPlugin
     }
 
     public Set<AssociatedResource> getAssociatedResourcesUUIDs(Element metadata) {
-        String xpathForAggregationInfo = "*//mri:associatedResource/*" +
-            "[mri:metadataReference/@uuidref " +
-            "and %s]";
+        String xpathForAggregationInfo = """
+            *//mri:associatedResource/*\
+            [mri:metadataReference/@uuidref \
+            and %s]\
+            """;
         Set<AssociatedResource> listOfResources = new HashSet<>();
         List<?> sibs = null;
         try {
             sibs = Xml
                 .selectNodes(
                     metadata,
-                    String.format(xpathForAggregationInfo,
-                        StringUtils.isNotEmpty(parentAssociatedResourceType) ?
-                            String.format("mri:associationType/*/@codeListValue != '%s'", parentAssociatedResourceType) :
-                            "mri:associationType/mri:DS_AssociationTypeCode/@codeListValue != ''"
-                    ),
+                xpathForAggregationInfo.formatted(
+                    StringUtils.isNotEmpty(parentAssociatedResourceType) ?
+                        "mri:associationType/*/@codeListValue != '%s'".formatted(parentAssociatedResourceType) :
+                        "mri:associationType/mri:DS_AssociationTypeCode/@codeListValue != ''"
+                ),
                     allNamespaces.asList());
 
 
             for (Object o : sibs) {
-                if (o instanceof Element) {
-                    Element sib = (Element) o;
+                if (o instanceof Element sib) {
                     AssociatedResource resource = metadataRefAsAssociatedResource(sib);
                     listOfResources.add(resource);
                 }
@@ -137,12 +138,14 @@ public class ISO19115_3_2018SchemaPlugin
         if (StringUtils.isNotEmpty(parentAssociatedResourceType)) {
             try {
                 String XPATH_FOR_PARENT_IN_AGGRGATIONINFO =
-                    "*//mri:associatedResource/*" +
-                        "[mri:associationType/*/@codeListValue = '%s']";
+                    """
+                    *//mri:associatedResource/*\
+                    [mri:associationType/*/@codeListValue = '%s']\
+                    """;
                 final List<?> associatedParents = Xml
                     .selectNodes(
                         metadata,
-                        String.format(XPATH_FOR_PARENT_IN_AGGRGATIONINFO, parentAssociatedResourceType),
+                    XPATH_FOR_PARENT_IN_AGGRGATIONINFO.formatted(parentAssociatedResourceType),
                         allNamespaces.asList());
                 for (Object o : associatedParents) {
                     Element sib = (Element) o;
@@ -263,8 +266,10 @@ public class ISO19115_3_2018SchemaPlugin
 
     @Override
     public List<Element> getTranslationForElement(Element element, String languageIdentifier) {
-        final String path = ".//lan:LocalisedCharacterString" +
-            "[@locale='#" + languageIdentifier + "']";
+        final String path = """
+            .//lan:LocalisedCharacterString\
+            [@locale='#\
+            """ + languageIdentifier + "']";
         try {
             XPath xpath = XPath.newInstance(path);
             @SuppressWarnings("unchecked")

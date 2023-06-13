@@ -74,12 +74,12 @@ public class LanguageXslProcessTest extends XslProcessTest {
         );
         assertThat(
             resultString,
-            hasXPath(String.format(XPATH_TITLE_TRANSLATION, 2), equalTo("Template for Vector data (multilingual)"))
+            hasXPath(XPATH_TITLE_TRANSLATION.formatted(2), equalTo("Template for Vector data (multilingual)"))
                 .withNamespaceContext(ns)
         );
         assertThat(
             resultString,
-            hasXPath(String.format(XPATH_TITLE_TRANSLATION, 1), equalTo("Modèle pour les données vecteur (multilingue)"))
+            hasXPath(XPATH_TITLE_TRANSLATION.formatted(1), equalTo("Modèle pour les données vecteur (multilingue)"))
                 .withNamespaceContext(ns)
         );
     }
@@ -152,7 +152,7 @@ public class LanguageXslProcessTest extends XslProcessTest {
         );
         assertThat(
             resultString,
-            hasXPath(String.format(XPATH_TITLE_TRANSLATION, 2), equalTo("Шаблон для векторных данных (многоязычное)"))
+            hasXPath(XPATH_TITLE_TRANSLATION.formatted(2), equalTo("Шаблон для векторных данных (многоязычное)"))
                 .withNamespaceContext(ns)
         );
     }
@@ -175,7 +175,7 @@ public class LanguageXslProcessTest extends XslProcessTest {
         );
         assertThat(
             resultString,
-            hasXPath(String.format(XPATH_TITLE_TRANSLATION, 3), equalTo("Modèle pour les données vecteur (multilingue)"))
+            hasXPath(XPATH_TITLE_TRANSLATION.formatted(3), equalTo("Modèle pour les données vecteur (multilingue)"))
                 .withNamespaceContext(ns)
         );
     }
@@ -193,7 +193,7 @@ public class LanguageXslProcessTest extends XslProcessTest {
         Arrays.stream(otherLanguages).forEach(l -> {
             assertThat(
                 resultString,
-                hasXPath(String.format(XPATH_OTHER_LANGUAGE, i[0]++),
+                hasXPath(XPATH_OTHER_LANGUAGE.formatted(i[0]++),
                     equalTo(l))
                     .withNamespaceContext(ns)
             );

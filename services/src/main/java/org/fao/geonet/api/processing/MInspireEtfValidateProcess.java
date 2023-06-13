@@ -198,8 +198,10 @@ public class MInspireEtfValidateProcess implements SelfNaming {
                                                         if (source == null) {
                                                             metadataAnalysedInError++;
                                                             Log.warning(API.LOG_MODULE_NAME, String.format(
-                                                                "Portal %s not found. There is no CSW endpoint at this URL " +
-                                                                    "that we can send to the validator.", mode));
+                                                                """
+                                                                Portal %s not found. There is no CSW endpoint at this URL \
+                                                                that we can send to the validator.\
+                                                                """, mode));
                                                         }
                                                         portal = mode;
                                                     } else {
@@ -208,8 +210,10 @@ public class MInspireEtfValidateProcess implements SelfNaming {
 
                                                     if (portal  != null) {
                                                         getRecordByIdUrl = String.format(
-                                                            "%s%s/eng/csw?SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&" +
-                                                                "OUTPUTSCHEMA=%s&ELEMENTSETNAME=full&ID=%s",
+                                                            """
+                                                            %s%s/eng/csw?SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&\
+                                                            OUTPUTSCHEMA=%s&ELEMENTSETNAME=full&ID=%s\
+                                                            """,
                                                             appContext.getBean(SettingManager.class).getBaseURL(),
                                                             portal,
                                                             ISO19139Namespaces.GMD.getURI(),

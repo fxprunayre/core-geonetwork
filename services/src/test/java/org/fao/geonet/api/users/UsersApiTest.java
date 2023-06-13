@@ -598,8 +598,10 @@ public class UsersApiTest extends AbstractServiceIntegrationTest {
             .contentType(API_JSON_EXPECTED_ENCODING)
             .session(this.mockHttpSession)
             .accept(MediaType.parseMediaType("application/json")))
-            .andExpect(jsonPath("$.description", is("Another user with username "
-                + "'testuser-editor' ignore case already exists")))
+            .andExpect(jsonPath("$.description", is("""
+                Another user with username \
+                'testuser-editor' ignore case already exists\
+                """)))
             .andExpect(status().is(400));
     }
 

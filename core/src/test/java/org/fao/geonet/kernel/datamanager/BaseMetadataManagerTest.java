@@ -139,15 +139,19 @@ public class BaseMetadataManagerTest extends AbstractCoreIntegrationTest {
 
         AbstractMetadata metadataToDuplicate = metadataManager.save(createMetadata("doi-metadata.iso19139.xml", MetadataType.METADATA));
 
-        Object x = Xml.selectSingle(metadataToDuplicate.getXmlData(false), "gmd:identificationInfo//gmd:identifier[" +
-                "                                contains(*/gmd:code/*/text(), 'datacite.org/doi/')" +
-                "                                or contains(*/gmd:code/*/text(), 'doi.org')" +
-                "                                or contains(*/gmd:code/*/@xlink:href, 'doi.org')]",
+        Object x = Xml.selectSingle(metadataToDuplicate.getXmlData(false), """
+                gmd:identificationInfo//gmd:identifier[\
+                                                contains(*/gmd:code/*/text(), 'datacite.org/doi/')\
+                                                or contains(*/gmd:code/*/text(), 'doi.org')\
+                                                or contains(*/gmd:code/*/@xlink:href, 'doi.org')]\
+                """,
             metadataSchemaUtils.getSchema(metadataToDuplicate.getDataInfo().getSchemaId()).getNamespaces());
         assertNotNull(x);
 
-        x = Xml.selectSingle(metadataToDuplicate.getXmlData(false), "gmd:distributionInfo//gmd:protocol[" +
-                "                              */text() = 'DOI']",
+        x = Xml.selectSingle(metadataToDuplicate.getXmlData(false), """
+                gmd:distributionInfo//gmd:protocol[\
+                                              */text() = 'DOI']\
+                """,
             metadataSchemaUtils.getSchema(metadataToDuplicate.getDataInfo().getSchemaId()).getNamespaces());
         assertNotNull(x);
 
@@ -164,15 +168,19 @@ public class BaseMetadataManagerTest extends AbstractCoreIntegrationTest {
         AbstractMetadata metadataDuplicated = metadataUtils.findOne(id);
         assertNotNull(metadataDuplicated);
 
-        x = Xml.selectSingle(metadataDuplicated.getXmlData(false), "gmd:identificationInfo//gmd:identifier[\n" +
-                "                                contains(*/gmd:code/*/text(), 'datacite.org/doi/')\n" +
-                "                                or contains(*/gmd:code/*/text(), 'doi.org')\n" +
-                "                                or contains(*/gmd:code/*/@xlink:href, 'doi.org')]",
+        x = Xml.selectSingle(metadataDuplicated.getXmlData(false), """
+                gmd:identificationInfo//gmd:identifier[
+                                                contains(*/gmd:code/*/text(), 'datacite.org/doi/')
+                                                or contains(*/gmd:code/*/text(), 'doi.org')
+                                                or contains(*/gmd:code/*/@xlink:href, 'doi.org')]\
+                """,
             metadataSchemaUtils.getSchema(metadataToDuplicate.getDataInfo().getSchemaId()).getNamespaces());
         assertNull(x);
 
-        x = Xml.selectSingle(metadataDuplicated.getXmlData(false), "gmd:distributionInfo//gmd:protocol[" +
-                "                              */text() = 'DOI']",
+        x = Xml.selectSingle(metadataDuplicated.getXmlData(false), """
+                gmd:distributionInfo//gmd:protocol[\
+                                              */text() = 'DOI']\
+                """,
             metadataSchemaUtils.getSchema(metadataToDuplicate.getDataInfo().getSchemaId()).getNamespaces());
         assertNull(x);
     }

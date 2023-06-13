@@ -81,12 +81,14 @@ public class UserSavedSelectionRepositoryCustomImpl
         String lastNotificationDate, String nextLastNotificationDate) {
 
         Query query = _entityManager.createNativeQuery(
-            "SELECT DISTINCT metadataUuid " +
-                "FROM UserSavedSelections u, Metadata m " +
-                "WHERE u.selectionId = :selectionId AND u.userId = :userId AND " +
-                "u.metadataUuid = m.uuid AND " +
-                "m.changeDate >= :lastNotificationDate AND " +
-                "m.changeDate < :nextLastNotificationDate"
+            """
+            SELECT DISTINCT metadataUuid \
+            FROM UserSavedSelections u, Metadata m \
+            WHERE u.selectionId = :selectionId AND u.userId = :userId AND \
+            u.metadataUuid = m.uuid AND \
+            m.changeDate >= :lastNotificationDate AND \
+            m.changeDate < :nextLastNotificationDate\
+            """
         );
 
         query.setParameter("selectionId", selectionId);

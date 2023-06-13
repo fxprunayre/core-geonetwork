@@ -28,7 +28,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public abstract class AbstractHistoryEvent extends ApplicationEvent {
 
@@ -101,7 +100,7 @@ public abstract class AbstractHistoryEvent extends ApplicationEvent {
      * uuid identifier of the metadata
      *
      * @return
-             */
+     */
     public String getUuid() {
         return null;
     }

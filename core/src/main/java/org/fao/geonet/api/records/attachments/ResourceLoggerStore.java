@@ -189,8 +189,10 @@ public class ResourceLoggerStore extends AbstractStore {
 
                 } catch (org.springframework.dao.EmptyResultDataAccessException ex) {
                     Log.debug(Geonet.RESOURCES, String.format(
-                            "No references in FileNameNotDeleted repository for metadata '%s', resource id '%s'. Get request will not be "
-                                    + "saved.",
+                            """
+                            No references in FileNameNotDeleted repository for metadata '%s', resource id '%s'. Get request will not be \
+                            saved.\
+                            """,
                             metadataUuid, resourceId));
 
                     // No related upload is found

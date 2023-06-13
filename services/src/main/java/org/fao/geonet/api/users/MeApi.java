@@ -59,10 +59,12 @@ public class MeApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Get information about me",
-        description = "If not authenticated, return status 204 (NO_CONTENT), " +
-            "else return basic user information. This operation is usually used to " +
-            "know if current user is authenticated or not." +
-            "It returns also info about groups and profiles.")
+        description = """
+            If not authenticated, return status 204 (NO_CONTENT), \
+            else return basic user information. This operation is usually used to \
+            know if current user is authenticated or not.\
+            It returns also info about groups and profiles.\
+            """)
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Authenticated. Return user details."),

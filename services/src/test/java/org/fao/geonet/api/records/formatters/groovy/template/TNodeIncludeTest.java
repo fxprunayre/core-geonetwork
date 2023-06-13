@@ -67,9 +67,11 @@ public class TNodeIncludeTest extends AbstractTemplateParserTest {
         final TNode parseTree = parser.parse(IO.toPath(url.toURI()));
 
         Map<String, Object> model = Maps.newHashMap();
-        String expected = "<html>\n"
-            + "    <div><div>included</div></div>\n"
-            + "</html>";
+        String expected = """
+            <html>
+                <div><div>included</div></div>
+            </html>\
+            """;
         assertCorrectRender(parseTree, model, expected);
     }
 
@@ -80,9 +82,11 @@ public class TNodeIncludeTest extends AbstractTemplateParserTest {
         final TNode parseTree = parser.parse(IO.toPath(url.toURI()));
 
         Map<String, Object> model = Maps.newHashMap();
-        String expected = "<html>\n"
-            + "    <div>included</div>\n"
-            + "</html>";
+        String expected = """
+            <html>
+                <div>included</div>
+            </html>\
+            """;
         assertCorrectRender(parseTree, model, expected);
     }
 }

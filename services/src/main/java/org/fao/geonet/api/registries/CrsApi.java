@@ -79,8 +79,10 @@ public class CrsApi {
      */
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Search coordinate reference system (CRS)",
-        description = "Based on GeoTools EPSG database. If phrase query, each words " +
-            "are searched separately.")
+        description = """
+            Based on GeoTools EPSG database. If phrase query, each words \
+            are searched separately.\
+            """)
     @RequestMapping(
         value = "/crs",
         method = RequestMethod.GET,

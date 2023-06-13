@@ -83,8 +83,10 @@ public class MetadataProcessApi {
     @Autowired
     SettingManager sm;
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Get suggestions", description ="Analyze the record an suggest processes to improve the quality of the record.<br/>"
-        + "<a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/workflow/batchupdate-xsl.html'>More info</a>")
+    @io.swagger.v3.oas.annotations.Operation(summary = "Get suggestions", description ="""
+        Analyze the record an suggest processes to improve the quality of the record.<br/>\
+        <a href='http://geonetwork-opensource.org/manuals/trunk/eng/users/user-guide/workflow/batchupdate-xsl.html'>More info</a>\
+        """)
     @RequestMapping(value = "/{metadataUuid}/processes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAuthority('Editor')")
     @ResponseStatus(HttpStatus.OK)
@@ -119,8 +121,10 @@ public class MetadataProcessApi {
             try {
                 xmlSuggestions = Xml.transform(md, xslProcessing, xslParameter);
             } catch (TransformerConfigurationException e) {
-                throw new WebApplicationException(String.format("Error while retrieving suggestion for record '%s'. "
-                    + "Check your suggest.xsl process (and all its imports).", metadataUuid, xslProcessing), e);
+                throw new WebApplicationException(String.format("""
+                    Error while retrieving suggestion for record '%s'. \
+                    Check your suggest.xsl process (and all its imports).\
+                    """, metadataUuid, xslProcessing), e);
             }
             SuggestionsType suggestions = (SuggestionsType) Xml.unmarshall(xmlSuggestions, SuggestionsType.class);
 

@@ -106,9 +106,11 @@ public class MetadataSavedQueryApi {
     // TODO: Api is query xpath
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Apply a saved query for this metadata",
-        description = "All parameters will be substituted to the XPath query. " +
-            "eg. {{protocol}} in the XPath expression will be replaced by " +
-            "the protocol parameter provided in the request body.")
+        description = """
+            All parameters will be substituted to the XPath query. \
+            eg. {{protocol}} in the XPath expression will be replaced by \
+            the protocol parameter provided in the request body.\
+            """)
     @RequestMapping(
         value = "/query/{savedQuery}",
         method = RequestMethod.POST,
@@ -118,8 +120,10 @@ public class MetadataSavedQueryApi {
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "List of matching elements. " +
-            "If element are nodes, then they are returned as string."),
+        @ApiResponse(responseCode = "200", description = """
+            List of matching elements. \
+            If element are nodes, then they are returned as string.\
+            """),
         @ApiResponse(responseCode = "403", description = ApiParams.API_RESPONSE_NOT_ALLOWED_CAN_VIEW)
     })
     public Map<String, String> applyQuery(

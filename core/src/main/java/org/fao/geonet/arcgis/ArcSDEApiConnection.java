@@ -80,8 +80,10 @@ public class ArcSDEApiConnection implements ArcSDEConnection{
         try {
             seConnection.close();
         } catch (Throwable x) {
-            Log.error(ARCSDE_LOG_MODULE_NAME, "Error closing the ArcSDE connection (via API) "
-                + "in the finalize method", x);
+            Log.error(ARCSDE_LOG_MODULE_NAME, """
+                Error closing the ArcSDE connection (via API) \
+                in the finalize method\
+                """, x);
             throw x;
         } finally {
             super.finalize();
@@ -155,8 +157,10 @@ public class ArcSDEApiConnection implements ArcSDEConnection{
         } catch (SeException x) {
             SeError error = x.getSeError();
             String description = error.getExtError() + " " + error.getExtErrMsg() + " " + error.getErrDesc();
-            Log.error(ARCSDE_LOG_MODULE_NAME, "Error retrieving the metadata from "
-                + "ArcSDE connection (via API):" + description, x);
+            Log.error(ARCSDE_LOG_MODULE_NAME, """
+                Error retrieving the metadata from \
+                ArcSDE connection (via API):\
+                """ + description, x);
             throw new Exception(x);
         }
     }

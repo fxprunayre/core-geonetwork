@@ -67,8 +67,10 @@ public class DoiApi {
     private DoiManager doiManager;
 
     @io.swagger.v3.oas.annotations.Operation(
-        summary = "Check that a record can be submitted to DataCite for DOI creation. " +
-            "DataCite requires some fields to be populated.")
+        summary = """
+            Check that a record can be submitted to DataCite for DOI creation. \
+            DataCite requires some fields to be populated.\
+            """)
     @RequestMapping(value = "/{metadataUuid}/doi/checkPreConditions",
         method = RequestMethod.GET,
         produces = {

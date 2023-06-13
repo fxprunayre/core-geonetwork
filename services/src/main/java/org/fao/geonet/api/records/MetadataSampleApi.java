@@ -94,9 +94,11 @@ public class MetadataSampleApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Add samples",
-        description = "Add sample records for one or more schemas. " +
-            "Samples are defined for each standard in the samples folder " +
-            "as MEF files.")
+        description = """
+            Add sample records for one or more schemas. \
+            Samples are defined for each standard in the samples folder \
+            as MEF files.\
+            """)
     @RequestMapping(value = "/samples",
         method = RequestMethod.PUT
     )
@@ -185,9 +187,11 @@ public class MetadataSampleApi {
 
     @io.swagger.v3.oas.annotations.Operation(
         summary = "Add templates",
-        description = "Add template records for one or more schemas. " +
-            "Templates are defined for each standard in the template folder " +
-            "as XML files. Template may also contains subtemplates.")
+        description = """
+            Add template records for one or more schemas. \
+            Templates are defined for each standard in the template folder \
+            as XML files. Template may also contains subtemplates.\
+            """)
     @RequestMapping(value = "/templates",
         method = RequestMethod.PUT
     )

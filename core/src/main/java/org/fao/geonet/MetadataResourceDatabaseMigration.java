@@ -73,10 +73,12 @@ public class MetadataResourceDatabaseMigration extends DatabaseMigrationTask {
     private static final String XPATH_RESOURCES =
             "*//*[contains(text(), '/resources.get?')]";
     private static final String XPATH_THUMBNAIL_WITH_NO_URL =
-            "*//gmd:MD_BrowseGraphic" +
-                    "[gmd:fileDescription/gco:CharacterString = 'thumbnail' or " +
-                    "gmd:fileDescription/gco:CharacterString = 'large_thumbnail']/gmd:fileName/" +
-                    "gco:CharacterString[not(starts-with(normalize-space(text()), 'http'))]";
+            """
+            *//gmd:MD_BrowseGraphic\
+            [gmd:fileDescription/gco:CharacterString = 'thumbnail' or \
+            gmd:fileDescription/gco:CharacterString = 'large_thumbnail']/gmd:fileName/\
+            gco:CharacterString[not(starts-with(normalize-space(text()), 'http'))]\
+            """;
     private static final String XPATH_THUMBNAIL_WITH_URL =
             "*//gmd:graphicOverview/gmd:MD_BrowseGraphic/gmd:fileName/gco:CharacterString[starts-with(normalize-space(text()), 'http')]";
 
