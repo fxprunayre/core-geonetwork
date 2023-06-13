@@ -24,11 +24,13 @@ package org.fao.geonet.domain;
 
 import org.fao.geonet.domain.converter.UserSearchFeaturedTypeConverter;
 import org.fao.geonet.entitylistener.UserSearchEntityListenerManager;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.sql.Types;
 import java.util.*;
 
 /**
@@ -60,7 +62,7 @@ public class UserSearch extends Localized implements Serializable {
     }
 
     @Lob
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getUrl() {
         return url;
     }

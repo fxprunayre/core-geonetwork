@@ -25,7 +25,6 @@ package org.fao.geonet.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.fao.geonet.entitylistener.SettingEntityListenerManager;
-import org.hibernate.annotations.Type;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Access;
@@ -38,6 +37,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
 
 /**
  * An entity representing a system configuration setting.
@@ -82,8 +84,7 @@ public class Setting extends GeonetEntity {
 
     @Lob
     @Column(name = "value", nullable = true)
-    @Type(type = "org.hibernate.type.TextType")
-    // this is a work around for postgres so postgres can correctly load clobs
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getStoredValue() {
         return storedValue;
     }

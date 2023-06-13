@@ -231,7 +231,7 @@ public class MapServer extends GeonetEntity {
      * @return the password.
      */
     @Column(length = 128)
-    @Type(type="encryptedString")
+    // TODO: Java17   @Type(type="encryptedString")
     public String getPassword() {
         return _password;
     }

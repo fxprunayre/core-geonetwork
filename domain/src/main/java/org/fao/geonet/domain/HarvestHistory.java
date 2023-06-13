@@ -26,6 +26,7 @@ package org.fao.geonet.domain;
 import org.fao.geonet.entitylistener.HarvestHistoryEntityListenerManager;
 import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 import org.jdom.Content;
 import org.jdom.Element;
@@ -37,6 +38,7 @@ import jakarta.persistence.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.Types;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -243,8 +245,7 @@ public class HarvestHistory extends GeonetEntity {
      * @return the harvester info.
      */
     @Lob
-    @Type(type = "org.hibernate.type.TextType")
-    // this is a work around for postgres so postgres can correctly load clobs
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getInfo() {
         return _info;
     }
@@ -346,8 +347,7 @@ public class HarvestHistory extends GeonetEntity {
      * @return the parameters used for performing the harvesting.
      */
     @Lob
-    @Type(type = "org.hibernate.type.TextType")
-    // this is a work around for postgres so postgres can correctly load clobs
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getParams() {
         return _params;
     }

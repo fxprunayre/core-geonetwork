@@ -23,7 +23,7 @@
 package org.fao.geonet.domain;
 
 import org.fao.geonet.utils.Xml;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.output.Format;
@@ -33,6 +33,7 @@ import org.springframework.util.Assert;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import java.io.IOException;
+import java.sql.Types;
 import java.util.*;
 
 
@@ -118,7 +119,7 @@ public abstract class AbstractMetadata extends GeonetEntity {
     @Column(nullable = false)
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Type(type = "org.hibernate.type.TextType") // this is a work around for postgres so postgres can correctly load clobs
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getData() {
         return _data;
     }

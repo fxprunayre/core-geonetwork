@@ -1055,7 +1055,7 @@
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-cas</artifactId>
-        <version>${spring.security.version}</version>
+        <version>6.1.0</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.security</groupId>
@@ -1115,24 +1115,29 @@
       </dependency>-->
 
       <dependency>
-        <groupId>org.hibernate</groupId>
+        <groupId>org.hibernate.validator</groupId>
         <artifactId>hibernate-validator</artifactId>
-        <version>5.4.3.Final</version>
+        <version>6.2.5.Final</version>
       </dependency>
       <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core-jakarta</artifactId>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
         <version>${hibernate.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-ehcache</artifactId>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-jpamodelgen</artifactId>
         <version>${hibernate.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-jcache</artifactId>
         <version>${hibernate.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>${ehcache.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.data</groupId>
@@ -1600,11 +1605,13 @@
     <jts.version>1.18.2</jts.version>
     <pg.version>42.3.3</pg.version>
 
-    <spring.version>5.3.27</spring.version>
-    <spring.security.version>5.7.8</spring.security.version>
+    <spring.version>6.0.9</spring.version>
+    <spring.security.version>6.0.3</spring.security.version>
     <spring.jpa.version>3.0.6</spring.jpa.version>
     <springboot.version>2.7.0</springboot.version>
     <springdoc.version>1.5.9</springdoc.version>
+    <hibernate.version>6.2.4.Final</hibernate.version>
+    <ehcache.version>3.10.8</ehcache.version>
 
     <metrics.version>2.2.0</metrics.version>
     <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format>
@@ -1626,8 +1633,6 @@
     <httpcomponents.version>4.5.14</httpcomponents.version>
     <jasypt.version>1.9.3</jasypt.version>
     <jupiter.version>5.9.1</jupiter.version>
-    <hibernate.version>5.6.12.Final</hibernate.version>
-<!--    <hibernate.version>6.2.4.Final</hibernate.version>-->
 
     <sonar.organization>geonetwork</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>

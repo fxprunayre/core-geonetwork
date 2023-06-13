@@ -23,7 +23,6 @@
 
 package org.fao.geonet.repository;
 
-import net.sf.ehcache.CacheManager;
 import org.fao.geonet.ApplicationContextHolder;
 import org.junit.AfterClass;
 import org.junit.Before;

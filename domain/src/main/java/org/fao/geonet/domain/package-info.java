@@ -28,21 +28,22 @@
  *
  * @author Jesse
  */
-@TypeDefs
-    ({
-        @TypeDef(
-            name="encryptedString",
-            typeClass= EncryptedStringType.class,
-            parameters={
-                @Parameter(name="encryptorRegisteredName",
-                    value="STRING_ENCRYPTOR")
-            }
-        )
-    })
-
+// TODO: Java17
+//@TypeDefs
+//    ({
+//        @TypeDef(
+//            name="encryptedString",
+//            typeClass= EncryptedStringType.class,
+//            parameters={
+//                @Parameter(name="encryptorRegisteredName",
+//                    value="STRING_ENCRYPTOR")
+//            }
+//        )
+//    })
+//
 package org.fao.geonet.domain;
 
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-import org.jasypt.hibernate5.type.EncryptedStringType;
+//import org.hibernate.annotations.Parameter;
+//import org.hibernate.annotations.TypeDef;
+//import org.hibernate.annotations.TypeDefs;
+//import org.jasypt.hibernate5.type.EncryptedStringType;

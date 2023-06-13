@@ -24,8 +24,10 @@
 package org.fao.geonet.domain;
 
 import java.io.Serializable;
+import java.sql.Types;
 
 import org.fao.geonet.entitylistener.TranslationsEntityListenerManager;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 
 import jakarta.persistence.*;
@@ -140,7 +142,7 @@ public class Translations extends GeonetEntity implements Serializable {
      */
     @Lob
     @Column(name = "label")
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(Types.LONGVARCHAR)
     // this is a work around for postgres so postgres can correctly load clobs
     public String getValue() {
         return _value;

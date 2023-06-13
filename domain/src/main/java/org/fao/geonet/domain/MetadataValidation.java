@@ -24,10 +24,13 @@
 package org.fao.geonet.domain;
 
 import org.fao.geonet.entitylistener.MetadataValidationEntityListenerManager;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+
+import java.sql.Types;
 import java.util.Objects;
 
 /**
@@ -200,7 +203,7 @@ public class MetadataValidation extends GeonetEntity {
     @Column
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Type(type = "org.hibernate.type.TextType")
+    @JdbcTypeCode(Types.LONGVARCHAR)
     public String getReportContent() {
         return reportContent;
     }
