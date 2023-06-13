@@ -26,8 +26,8 @@ package org.fao.geonet.api.processing.report;
 import org.fao.geonet.Util;
 import org.opengis.annotation.XmlElement;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Created by francois on 20/05/16.

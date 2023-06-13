@@ -29,7 +29,7 @@ import org.apache.commons.mail.SimpleEmail;
 import org.fao.geonet.Logger;
 import org.fao.geonet.Util;
 
-import javax.mail.internet.InternetAddress;
+import jakarta.mail.internet.InternetAddress;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -23,10 +23,10 @@
 
 package org.fao.geonet.domain;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 /**
  * Information about the source and owner of the metadata document. This is a JPA Embeddable object
@@ -139,15 +139,15 @@ public class MetadataSourceInfo {
 				+ (_groupOwner != null ? "_groupOwner=" + _groupOwner + ", " : "")
 				+ (_owner != null ? "_owner=" + _owner : "") + "]";
 	}
-	
+
 	@Override
 	protected MetadataSourceInfo clone() {
 		MetadataSourceInfo clon = new MetadataSourceInfo();
-		
+
 		clon.setGroupOwner(this.getGroupOwner());
 		clon.setOwner(this.getOwner());
 		clon.setSourceId(this.getSourceId());
-		
+
 		return clon;
 	}
 }

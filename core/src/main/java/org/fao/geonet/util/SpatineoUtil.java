@@ -31,7 +31,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.apache.http.client.methods.HttpGet;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.apache.http.impl.client.HttpClientBuilder;
 import com.google.common.base.Function;
 import org.fao.geonet.lib.Lib;

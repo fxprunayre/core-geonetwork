@@ -43,8 +43,8 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.MetadataResourceExternalManagementProperties;
 import org.fao.geonet.utils.Log;
 
-import javax.annotation.Nonnull;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.PostConstruct;
 
 import java.util.Arrays;
 import java.util.HashMap;

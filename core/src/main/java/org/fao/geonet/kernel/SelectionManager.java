@@ -42,7 +42,7 @@ import org.jdom.Element;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 import static org.fao.geonet.kernel.search.EsSearchManager.FIELDLIST_UUID;
 

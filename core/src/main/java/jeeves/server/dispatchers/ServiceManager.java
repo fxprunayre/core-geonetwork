@@ -44,7 +44,6 @@ import jeeves.server.sources.ServiceRequest.OutputMethod;
 import jeeves.server.sources.http.HttpServiceRequest;
 import jeeves.server.sources.http.JeevesServlet;
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.jetty.io.EofException;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.Constants;
 import org.fao.geonet.NodeInfo;
@@ -65,11 +64,11 @@ import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -863,9 +862,10 @@ public class ServiceManager {
                                 req.getOutputStream().write(baos.toByteArray());
                                 req.endStream();
                             }
-                        } catch (EofException e) {
-                            // ignore this.
-                            // it happens because the stream closes by client.
+                        // TODO: Java17
+                        //                        } catch (EofException e) {
+                        //                            // ignore this.
+                        //                            // it happens because the stream closes by client.
                         } catch (Exception e) {
                             error("   -> exception during transformation for : " + req.getService());
                             error("   ->  (C) stylesheet : " + styleSheet);

@@ -3,19 +3,19 @@ package org.fao.geonet.kernel.schema.labels;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -65,25 +65,25 @@ public class Helper {
 
     /**
      * Suggestion is an HTML option Gets the value of the option property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the option property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getOption().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Option }
-     * 
-     * 
+     *
+     *
      */
     public List<Option> getOption() {
         if (option == null) {
@@ -94,11 +94,11 @@ public class Helper {
 
     /**
      * Gets the value of the rel property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getRel() {
         return rel;
@@ -106,11 +106,11 @@ public class Helper {
 
     /**
      * Sets the value of the rel property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setRel(String value) {
         this.rel = value;
@@ -118,11 +118,11 @@ public class Helper {
 
     /**
      * Gets the value of the relAtt property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getRelAtt() {
         return relAtt;
@@ -130,11 +130,11 @@ public class Helper {
 
     /**
      * Sets the value of the relAtt property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setRelAtt(String value) {
         this.relAtt = value;
@@ -142,11 +142,11 @@ public class Helper {
 
     /**
      * Gets the value of the sort property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Boolean }
-     *     
+     *
      */
     public Boolean isSort() {
         return sort;
@@ -154,11 +154,11 @@ public class Helper {
 
     /**
      * Sets the value of the sort property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Boolean }
-     *     
+     *
      */
     public void setSort(Boolean value) {
         this.sort = value;
@@ -166,11 +166,11 @@ public class Helper {
 
     /**
      * Gets the value of the editorMode property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getEditorMode() {
         return editorMode;
@@ -178,11 +178,11 @@ public class Helper {
 
     /**
      * Sets the value of the editorMode property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setEditorMode(String value) {
         this.editorMode = value;
@@ -190,11 +190,11 @@ public class Helper {
 
     /**
      * Gets the value of the displayIf property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDisplayIf() {
         return displayIf;
@@ -202,11 +202,11 @@ public class Helper {
 
     /**
      * Sets the value of the displayIf property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDisplayIf(String value) {
         this.displayIf = value;

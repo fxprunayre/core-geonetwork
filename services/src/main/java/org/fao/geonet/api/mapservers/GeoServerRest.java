@@ -40,7 +40,7 @@ import org.fao.geonet.utils.nio.PathHttpEntity;
 import org.jdom.Element;
 import org.springframework.http.client.ClientHttpResponse;
 
-import javax.annotation.CheckReturnValue;
+import jakarta.annotation.CheckReturnValue;
 import java.io.IOException;
 import java.nio.file.Path;
 

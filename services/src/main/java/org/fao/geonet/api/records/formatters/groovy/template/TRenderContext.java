@@ -30,7 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.fao.geonet.Constants;
 import org.springframework.beans.BeanUtils;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.beans.PropertyDescriptor;
 import java.io.*;
 import java.lang.reflect.Field;

@@ -24,8 +24,6 @@ package org.fao.geonet.kernel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.eclipse.jetty.util.URIUtil;
-import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Geonet.Namespaces;
 import org.fao.geonet.exceptions.LabelNotFoundException;
 import org.fao.geonet.languages.IsoLanguagesMapper;
@@ -33,6 +31,9 @@ import org.jdom.Content;
 import org.jdom.Element;
 import org.springframework.util.StringUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static org.fao.geonet.kernel.rdf.Selectors.RDF_NAMESPACE;
@@ -105,7 +106,7 @@ public class KeywordBean {
      * @return a complex iso19139 representation of the keyword
      */
     @JsonIgnore
-    public static Element getComplexIso19139Elt(List<KeywordBean> kbList) {
+    public static Element getComplexIso19139Elt(List<KeywordBean> kbList) throws UnsupportedEncodingException {
         Element root = new Element("MD_Keywords", Namespaces.GMD);
 
         Element cs = new Element("CharacterString", Namespaces.GCO);
@@ -120,7 +121,9 @@ public class KeywordBean {
             Element keyword = new Element("keyword", Namespaces.GMD);
             if (kb.getUriCode() != null && kb.getUriCode().length() != 0) {
                 an.setText(kb.getDefaultValue());
-                an.setAttribute("href", URIUtil.encodePath(kb.keywordUrl + kb.getUriCode()), Namespaces.XLINK);
+                an.setAttribute("href",
+                    URLEncoder.encode(kb.keywordUrl + kb.getUriCode(), StandardCharsets.UTF_8),
+                    Namespaces.XLINK);
                 keyword.addContent((Content) an.clone());
             } else {
                 cs.setText(kb.getDefaultValue());

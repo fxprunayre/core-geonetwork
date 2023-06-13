@@ -23,12 +23,8 @@
 
 package org.fao.geonet.repository;
 
-import java.util.List;
-
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.fao.geonet.domain.OperationAllowed;
 import org.fao.geonet.domain.OperationAllowedId;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -36,6 +32,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Data Access object for finding and saving {@link OperationAllowed} entities.
@@ -129,7 +127,7 @@ public interface OperationAllowedRepository extends GeonetRepository<OperationAl
      * @param metadataId the metadata id
      * @param groupIds    the group id
      */
-    @Nonnegative
+    // TODO: Java17    @Nonnegative
     @Transactional
     @Modifying(clearAutomatically=true)
     @Query("DELETE FROM OperationAllowed where metadataId = :metadataId and groupId not in :groupIds")

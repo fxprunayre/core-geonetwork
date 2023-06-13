@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.operation.TransformException;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 

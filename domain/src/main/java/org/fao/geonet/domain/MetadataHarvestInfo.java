@@ -23,7 +23,7 @@
 
 package org.fao.geonet.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Encapsulates the harvest data related to a metadata document. Like whether the metadata was
@@ -166,15 +166,15 @@ public class MetadataHarvestInfo {
 		return "MetadataHarvestInfo [_harvested=" + _harvested + ", " + (_uuid != null ? "_uuid=" + _uuid + ", " : "")
 				+ (_uri != null ? "_uri=" + _uri : "") + "]";
 	}
-	
+
 	@Override
 	protected MetadataHarvestInfo clone() {
 		MetadataHarvestInfo clon = new MetadataHarvestInfo();
-		
+
 		clon.setHarvested(this.isHarvested());
 		clon.setUri(this.getUri());
 		clon.setUuid(this.getUuid());
-		
+
 		return clon;
 	}
 }

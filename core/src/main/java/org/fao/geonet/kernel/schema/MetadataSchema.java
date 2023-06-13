@@ -53,6 +53,9 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -65,13 +68,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
-
-//==============================================================================
 
 @JsonPropertyOrder({
     "name", "titles", "descriptions", "standardUrl", "targetNamespace", "namespaces",
@@ -112,41 +108,23 @@ public class MetadataSchema {
     private String dependsOn;
 
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- Constructor
-    //---
-    //---------------------------------------------------------------------------
-
     MetadataSchema(SchematronRepository schemaRepo, SchematronCriteriaGroupRepository criteriaGroupRepository) {
         schemaName = "UNKNOWN";
         this.schemaRepo = schemaRepo;
         this.criteriaGroupRepository = criteriaGroupRepository;
     }
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- API methods
-    //---
-    //---------------------------------------------------------------------------
-
     public boolean canEdit() {
         return canEdit;
     }
-
-    //---------------------------------------------------------------------------
 
     public void setCanEdit(boolean canEdit) {
         this.canEdit = canEdit;
     }
 
-    //---------------------------------------------------------------------------
-
     public String getName() {
         return schemaName;
     }
-
-    //---------------------------------------------------------------------------
 
     public void setName(String inName) {
         schemaName = inName;
@@ -185,27 +163,20 @@ public class MetadataSchema {
         this.schemaDir = schemaDir;
     }
 
-    //---------------------------------------------------------------------------
     @JsonProperty(value = "targetNamespace")
     public String getPrimeNS() {
         return primeNS;
     }
 
-    //---------------------------------------------------------------------------
-
     public void setPrimeNS(String theNS) {
         primeNS = theNS;
     }
-
-    //---------------------------------------------------------------------------
 
     public MetadataType getTypeInfo(String type) {
         Logger.log();
         if (hmTypes.get(type) == null) return new MetadataType();
         else return hmTypes.get(type);
     }
-
-    //---------------------------------------------------------------------------
 
     public String getElementType(String elem, String parent) throws Exception {
         // two cases here - if we have just one element (or a substitute) with

@@ -37,7 +37,7 @@ import org.jdom.Element;
 
 import java.util.Map;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 /**
  * Integration Test for the Csw Harvester class.

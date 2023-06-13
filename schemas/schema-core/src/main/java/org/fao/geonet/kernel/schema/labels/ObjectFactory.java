@@ -1,25 +1,25 @@
 
 package org.fao.geonet.kernel.schema.labels;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlElementDecl;
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.annotation.XmlElementDecl;
+import jakarta.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the org.fao.geonet.kernel.schema.labels package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the org.fao.geonet.kernel.schema.labels package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
+ *
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -33,14 +33,14 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.fao.geonet.kernel.schema.labels
-     * 
+     *
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link Codelists }
-     * 
+     *
      */
     public Codelists createCodelists() {
         return new Codelists();
@@ -48,7 +48,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Codelists.Codelist }
-     * 
+     *
      */
     public Codelists.Codelist createCodelistsCodelist() {
         return new Codelists.Codelist();
@@ -56,7 +56,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Helper }
-     * 
+     *
      */
     public Helper createHelper() {
         return new Helper();
@@ -64,7 +64,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Option }
-     * 
+     *
      */
     public Option createOption() {
         return new Option();
@@ -72,7 +72,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Labels }
-     * 
+     *
      */
     public Labels createLabels() {
         return new Labels();
@@ -80,7 +80,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Element }
-     * 
+     *
      */
     public Element createElement() {
         return new Element();
@@ -88,7 +88,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Codelists.Codelist.Entry }
-     * 
+     *
      */
     public Codelists.Codelist.Entry createCodelistsCodelistEntry() {
         return new Codelists.Codelist.Entry();
@@ -96,7 +96,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "help")
     public JAXBElement<String> createHelp(String value) {
@@ -105,7 +105,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "condition")
     public JAXBElement<String> createCondition(String value) {
@@ -114,7 +114,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "description")
     public JAXBElement<String> createDescription(String value) {
@@ -123,7 +123,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "label")
     public JAXBElement<String> createLabel(String value) {
@@ -132,7 +132,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "inspireInfo")
     public JAXBElement<String> createInspireInfo(String value) {
@@ -141,7 +141,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     *
      */
     @XmlElementDecl(namespace = "", name = "example")
     public JAXBElement<String> createExample(String value) {

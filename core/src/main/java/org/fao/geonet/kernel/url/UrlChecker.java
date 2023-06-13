@@ -40,7 +40,7 @@ import org.springframework.http.client.ClientHttpResponse;
 //import sun.net.ftp.FtpLoginException;
 import org.fao.geonet.utils.Log;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;

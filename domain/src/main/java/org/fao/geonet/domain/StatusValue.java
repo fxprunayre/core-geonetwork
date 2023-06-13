@@ -25,7 +25,7 @@ package org.fao.geonet.domain;
 
 import org.fao.geonet.entitylistener.StatusValueEntityListenerManager;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.Map;
 

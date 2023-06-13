@@ -53,7 +53,7 @@ import org.fao.oaipmh.exceptions.BadArgumentException;
 import org.jdom.Element;
 import org.springframework.context.ApplicationContext;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.io.InputStream;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;

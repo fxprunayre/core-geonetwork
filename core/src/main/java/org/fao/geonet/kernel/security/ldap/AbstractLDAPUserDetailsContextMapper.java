@@ -39,8 +39,8 @@ import org.springframework.security.ldap.userdetails.InetOrgPerson;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import java.util.*;
 
 /**

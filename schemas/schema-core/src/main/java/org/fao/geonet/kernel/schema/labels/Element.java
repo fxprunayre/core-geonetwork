@@ -2,22 +2,22 @@
 package org.fao.geonet.kernel.schema.labels;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -68,12 +68,12 @@ public class Element {
     /**
      * The descriptor label to display next
      *               to the field
-     *             
-     * 
+     *
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getLabel() {
         return label;
@@ -81,11 +81,11 @@ public class Element {
 
     /**
      * Sets the value of the label property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setLabel(String value) {
         this.label = value;
@@ -93,12 +93,12 @@ public class Element {
 
     /**
      * The definition to be displayed in the help
-     *             
-     * 
+     *
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getDescription() {
         return description;
@@ -106,11 +106,11 @@ public class Element {
 
     /**
      * Sets the value of the description property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setDescription(String value) {
         this.description = value;
@@ -118,12 +118,12 @@ public class Element {
 
     /**
      * More help (CDATA could be used to store HTML)
-     *             
-     * 
+     *
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getHelp() {
         return help;
@@ -131,11 +131,11 @@ public class Element {
 
     /**
      * Sets the value of the help property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setHelp(String value) {
         this.help = value;
@@ -143,11 +143,11 @@ public class Element {
 
     /**
      * CHECKME: Not really used ?
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCondition() {
         return condition;
@@ -155,11 +155,11 @@ public class Element {
 
     /**
      * Sets the value of the condition property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCondition(String value) {
         this.condition = value;
@@ -167,12 +167,12 @@ public class Element {
 
     /**
      * Examples to be added to the help section
-     *             
-     * 
+     *
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getExample() {
         return example;
@@ -180,11 +180,11 @@ public class Element {
 
     /**
      * Sets the value of the example property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setExample(String value) {
         this.example = value;
@@ -199,12 +199,12 @@ public class Element {
      *               service).
      *               In that case, a displayIf attribute is added to define when to
      *               display that helper list.
-     *             
-     * 
+     *
+     *
      * @return
      *     possible object is
      *     {@link Helper }
-     *     
+     *
      */
     public Helper getHelper() {
         return helper;
@@ -212,11 +212,11 @@ public class Element {
 
     /**
      * Sets the value of the helper property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Helper }
-     *     
+     *
      */
     public void setHelper(Helper value) {
         this.helper = value;
@@ -224,11 +224,11 @@ public class Element {
 
     /**
      * Gets the value of the context property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getContext() {
         return context;
@@ -236,11 +236,11 @@ public class Element {
 
     /**
      * Sets the value of the context property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setContext(String value) {
         this.context = value;
@@ -248,11 +248,11 @@ public class Element {
 
     /**
      * Gets the value of the id property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link BigDecimal }
-     *     
+     *
      */
     public BigDecimal getId() {
         return id;
@@ -260,11 +260,11 @@ public class Element {
 
     /**
      * Sets the value of the id property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link BigDecimal }
-     *     
+     *
      */
     public void setId(BigDecimal value) {
         this.id = value;
@@ -272,11 +272,11 @@ public class Element {
 
     /**
      * Gets the value of the name property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getName() {
         return name;
@@ -284,11 +284,11 @@ public class Element {
 
     /**
      * Sets the value of the name property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setName(String value) {
         this.name = value;

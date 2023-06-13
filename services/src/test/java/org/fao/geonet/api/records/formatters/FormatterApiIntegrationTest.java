@@ -70,7 +70,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import jeeves.config.springutil.JeevesDelegatingFilterProxy;
 import jeeves.server.context.ServiceContext;

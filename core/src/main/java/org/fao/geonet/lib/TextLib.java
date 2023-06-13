@@ -26,7 +26,7 @@ package org.fao.geonet.lib;
 import org.fao.geonet.Util;
 import org.fao.geonet.utils.IO;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;

@@ -25,13 +25,13 @@ package org.fao.geonet.readonly;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.HarvesterSetting;
@@ -51,14 +51,14 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 /**
- * 
+ *
  * This instance is a slave, which means: No user login (no filter configured
  * to authenticate) and no user creation {@link InterceptsUserAdd}
  * {@link InterceptsUserUpdate}
- * 
+ *
  * On this class we will load a harvester defined by an url on a source file, if
  * not already added, and remove all users except the admin user, just in case.
- * 
+ *
  * @author delawen
  *
  */
@@ -85,7 +85,7 @@ public class InterceptsStartup implements ApplicationListener<ServerStartup> {
 
 	/**
 	 * Remove all harvesters that don't have the name "MASTER"
-	 * 
+	 *
 	 * @param arg0
 	 */
 	@Transactional(value = TxType.REQUIRES_NEW)
@@ -116,7 +116,7 @@ public class InterceptsStartup implements ApplicationListener<ServerStartup> {
 	/**
 	 * Remove all users with an ID above 1 (the default admin user we need to run
 	 * GeoNetwork).
-	 * 
+	 *
 	 * @param arg0
 	 */
 	@Transactional(value = TxType.REQUIRES_NEW)
@@ -135,12 +135,12 @@ public class InterceptsStartup implements ApplicationListener<ServerStartup> {
 
 	/**
 	 * Create the "MASTER" harvester to replicate all content
-	 * 
+	 *
 	 * @param arg0
 	 */
 	private void addHarvester(ServerStartup arg0) {
 		int id = harvesterAlreadyCreated(arg0);
-		
+
 		if (id < 0) {
 
 			Element harvester = new Element("node");
@@ -166,7 +166,7 @@ public class InterceptsStartup implements ApplicationListener<ServerStartup> {
 
 			id = addMasterHarvester(arg0, harvester);
 		}
-		
+
 		try {
 			HarvestManager hm = arg0.getContext().getBean(HarvestManager.class);
 			hm.run(String.valueOf(id));

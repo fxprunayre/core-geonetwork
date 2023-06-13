@@ -23,8 +23,8 @@
 
 package org.fao.geonet.kernel.security.keycloak;
 
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
+import jakarta.transaction.Transactional;
+import jakarta.transaction.Transactional.TxType;
 
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.*;

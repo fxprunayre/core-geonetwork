@@ -354,7 +354,8 @@
       <artifactId>gn-oaipmh</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency> <!-- dummy API for ARC SDE stuff -->
+    <dependency>
+      <!-- dummy API for ARC SDE stuff -->
       <groupId>${project.groupId}</groupId>
       <artifactId>gn-dummy-api</artifactId>
       <version>${project.version}</version>
@@ -440,6 +441,11 @@
       <groupId>jakarta</groupId>
       <artifactId>jakarta-slide-webdavlib</artifactId>
       <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
     </dependency>
     <dependency>
       <groupId>edu.ucar</groupId>
@@ -536,13 +542,6 @@
           <artifactId>jsp-api-2.1</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>

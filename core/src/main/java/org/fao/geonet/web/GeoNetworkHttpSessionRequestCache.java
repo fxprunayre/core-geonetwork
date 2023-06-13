@@ -25,8 +25,8 @@ package org.fao.geonet.web;
 
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.web.PortResolver;
 import org.springframework.security.web.PortResolverImpl;
@@ -69,7 +69,7 @@ public class GeoNetworkHttpSessionRequestCache extends HttpSessionRequestCache {
             if (createSessionAllowed || request.getSession(false) != null) {
                 // Store the HTTP request itself. Used by AbstractAuthenticationProcessingFilter
                 // for redirection after successful authentication (SEC-29)
-                request.getSession().setAttribute(SAVED_REQUEST, savedRequest);                
+                request.getSession().setAttribute(SAVED_REQUEST, savedRequest);
             }
         }
     }

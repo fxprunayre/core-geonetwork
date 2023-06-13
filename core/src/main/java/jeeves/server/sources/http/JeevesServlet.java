@@ -23,8 +23,9 @@
 
 package jeeves.server.sources.http;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.*;
 import jeeves.config.springutil.JeevesApplicationContext;
-import jeeves.config.springutil.JeevesContextLoaderListener;
 import jeeves.config.springutil.JeevesDelegatingFilterProxy;
 import jeeves.constants.Jeeves;
 import jeeves.server.JeevesEngine;
@@ -43,34 +44,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-
-//=============================================================================
 
 /**
  * This is the main class. It handles http connections and inits the system
  */
-
 public class JeevesServlet extends HttpServlet {
     public static final String USER_SESSION_ATTRIBUTE_KEY = Jeeves.Elem.SESSION;
     private static final long serialVersionUID = 1L;
     private boolean initialized = false;
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- Init
-    //---
-    //---------------------------------------------------------------------------
-
-    public void init() throws ServletException {
+    public void init() {
         try {
             final ServletContext servletContext = getServletContext();
             final ServletPathFinder pathFinder = new ServletPathFinder(servletContext);
@@ -87,17 +70,9 @@ public class JeevesServlet extends HttpServlet {
         }
     }
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- HTTP Request / Response
-    //---
-    //---------------------------------------------------------------------------
-
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         execute(req, res);
     }
-
-    //---------------------------------------------------------------------------
 
     /**
      * This is the core of the servlet. It receives http requests and invokes the proper service
@@ -216,7 +191,3 @@ public class JeevesServlet extends HttpServlet {
         return initialized;
     }
 }
-
-//=============================================================================
-
-

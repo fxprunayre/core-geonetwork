@@ -54,8 +54,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.annotation.Nonnull;
-import javax.persistence.EntityNotFoundException;
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.*;
 

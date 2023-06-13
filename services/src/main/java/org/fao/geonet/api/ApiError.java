@@ -22,7 +22,7 @@
  */
 package org.fao.geonet.api;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import org.fao.geonet.exceptions.ILocalizedException;
 import org.springframework.util.StringUtils;

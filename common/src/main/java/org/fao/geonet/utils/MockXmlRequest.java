@@ -32,7 +32,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.mock.http.client.MockClientHttpResponse;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 import java.io.*;
 import java.net.URI;
