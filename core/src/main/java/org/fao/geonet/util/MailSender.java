@@ -29,7 +29,7 @@ import org.apache.commons.mail.SimpleEmail;
 import org.fao.geonet.Logger;
 import org.fao.geonet.Util;
 
-import jakarta.mail.internet.InternetAddress;
+import javax.mail.internet.InternetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +111,7 @@ public class MailSender extends Thread {
         try {
             setUp(server, port, username, password, useSSL, useTLS, ignoreSslCertificateErrors, from, fromDescr, to,
                 subject, message);
-            List<InternetAddress> addressColl = new ArrayList<InternetAddress>();
+            List<InternetAddress> addressColl = new ArrayList<>();
             addressColl.add(new InternetAddress(replyTo, replyToDesc));
             email.setReplyTo(addressColl);
 

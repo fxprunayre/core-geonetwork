@@ -363,13 +363,14 @@ public class Geonetwork implements ApplicationHandler {
 
                 for (String wro4jUrl : wro4jUrls) {
                     Log.info(Geonet.GEONETWORK, "Initializing the WRO4J group: " + wro4jUrl + " cache");
-                    final MockHttpServletRequest servletRequest = new MockHttpServletRequest(servletContext, "GET", "/static/" + wro4jUrl);
-                    final MockHttpServletResponse response = new MockHttpServletResponse();
-                    try {
-                        filter.doFilter(servletRequest, response, new MockFilterChain());
-                    } catch (Throwable t) {
-                        Log.info(Geonet.GEONETWORK, "Error while initializing the WRO4J group: " + wro4jUrl + " cache", t);
-                    }
+                    // TODO: Java17
+//                    final MockHttpServletRequest servletRequest = new MockHttpServletRequest(servletContext, "GET", "/static/" + wro4jUrl);
+//                    final MockHttpServletResponse response = new MockHttpServletResponse();
+//                    try {
+//                        filter.doFilter(servletRequest, response, new MockFilterChain());
+//                    } catch (Throwable t) {
+//                        Log.info(Geonet.GEONETWORK, "Error while initializing the WRO4J group: " + wro4jUrl + " cache", t);
+//                    }
                 }
 
 

@@ -3,7 +3,7 @@ package org.fao.geonet.wro4j;
 import ro.isdc.wro.config.Context;
 import ro.isdc.wro.model.resource.locator.UriLocator;
 
-import jakarta.servlet.ServletContext;
+import javax.servlet.ServletContext;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -33,6 +33,7 @@ public class TemplatesUriLocator implements UriLocator {
             javascript = new StringBuilder();
             final String realPath;
             final String path = uri.substring(URI_PREFIX.length());
+            // TODO: Java17
             final ServletContext servletContext = Context.get().getServletContext();
             if (servletContext != null) {
                 realPath = servletContext.getRealPath(path);

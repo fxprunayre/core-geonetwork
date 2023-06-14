@@ -931,9 +931,9 @@ public class ServiceManager {
                 req.beginStream(outPage.getContentType(), cache);
                 Xml.transform(rootElem, styleSheet, req.getOutputStream());
                 req.endStream();
-            } catch (EofException e) {
-                // ignore this.
-                // it happens because the stream closes by client.
+// TODO: Java17            } catch (EofException e) {
+//                // ignore this.
+//                // it happens because the stream closes by client.
             } catch (Exception e) {
                 Log.error(Log.JEEVES, e.getMessage(), e);
             }

@@ -98,7 +98,7 @@ public class KeycloakPreAuthActionsLoginFilter extends KeycloakPreAuthActionsFil
             return;
         }
 
-        super.doFilter(servletRequest, servletResponse, chain);
+        // TODO: Java17 super.doFilter(servletRequest, servletResponse, chain);
     }
 
     private boolean isAuthenticated() {

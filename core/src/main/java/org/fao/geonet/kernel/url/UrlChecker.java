@@ -122,7 +122,7 @@ public class UrlChecker {
         }
 
         try (ClientHttpResponse response = getResponseFromServer(url)) {
-            org.springframework.http.HttpStatus statusCode = buildStatusCode(response);
+            org.springframework.http.HttpStatusCode statusCode = buildStatusCode(response);
             if (statusCode.is3xxRedirection() && response.getHeaders().containsKey("Location")) {
                 // follow the redirects
                 return getUrlStatus(response.getHeaders().getFirst("Location"), tryNumber - 1);
@@ -196,7 +196,7 @@ public class UrlChecker {
     }
 
 
-    private org.springframework.http.HttpStatus buildStatusCode(ClientHttpResponse response) throws IOException {
+    private org.springframework.http.HttpStatusCode buildStatusCode(ClientHttpResponse response) throws IOException {
         try {
             return response.getStatusCode();
         } catch (Exception e) {

@@ -538,7 +538,9 @@ public class KeywordBean {
         Element cs = new Element("CharacterString", Namespaces.GCO);
         if (getUriCode() != null && getUriCode().length() != 0) {
             an.setText(getDefaultValue());
-            an.setAttribute("href", URIUtil.encodePath(keywordUrl + getUriCode()), Namespaces.XLINK);
+            an.setAttribute("href",
+                URLEncoder.encode(keywordUrl + getUriCode(), StandardCharsets.UTF_8),
+                Namespaces.XLINK);
             el.addContent(an);
         } else {
             cs.setText(getDefaultValue());

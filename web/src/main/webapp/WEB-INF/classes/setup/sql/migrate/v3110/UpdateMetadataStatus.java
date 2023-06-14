@@ -147,25 +147,26 @@ public class UpdateMetadataStatus extends DatabaseMigrationTask {
         Integer rowcount = null;
         try {
             statement = connection.createStatement();
-            try {
-                rowcount = statement.executeUpdate("update " + MetadataStatus.TABLE_NAME +
-                        " set " + MetadataStatus_.id.getName() + " = " + dialect.getSelectSequenceNextValString(MetadataStatus.ID_SEQ_NAME) +
-                        " where " + MetadataStatus_.id.getName() + " IS NULL");
-            } catch (SQLException e1) {
-                try {
-                    connection.rollback();
-                    if (statement != null) {
-                        statement.close();
-                    }
-                    statement = connection.createStatement();
-                    rowcount = statement.executeUpdate("update " + MetadataStatus.TABLE_NAME +
-                            " set " + MetadataStatus_.id.getName() + " = " + dialect.getSelectSequenceNextValString(HIBERNATE_SEQUENCE) +
-                            " where " + MetadataStatus_.id.getName() + " IS NULL");
-                } catch (SQLException e2) {
-                    throw new SQLException("Error updating table \"" + MetadataStatus.TABLE_NAME + "." + MetadataStatus_.id.getName() +
-                            "\" values to sequence value using sequence \"" + MetadataStatus.ID_SEQ_NAME + "\" and \"" + HIBERNATE_SEQUENCE + "\"\n" + e1.getMessage() + "\n", e2);
-                }
-            }
+            // TODO: Java17
+//            try {
+//                rowcount = statement.executeUpdate("update " + MetadataStatus.TABLE_NAME +
+//                        " set " + MetadataStatus_.id.getName() + " = " + dialect.getSelectSequenceNextValString(MetadataStatus.ID_SEQ_NAME) +
+//                        " where " + MetadataStatus_.id.getName() + " IS NULL");
+//            } catch (SQLException e1) {
+//                try {
+//                    connection.rollback();
+//                    if (statement != null) {
+//                        statement.close();
+//                    }
+//                    statement = connection.createStatement();
+//                    rowcount = statement.executeUpdate("update " + MetadataStatus.TABLE_NAME +
+//                            " set " + MetadataStatus_.id.getName() + " = " + dialect.getSelectSequenceNextValString(HIBERNATE_SEQUENCE) +
+//                            " where " + MetadataStatus_.id.getName() + " IS NULL");
+//                } catch (SQLException e2) {
+//                    throw new SQLException("Error updating table \"" + MetadataStatus.TABLE_NAME + "." + MetadataStatus_.id.getName() +
+//                            "\" values to sequence value using sequence \"" + MetadataStatus.ID_SEQ_NAME + "\" and \"" + HIBERNATE_SEQUENCE + "\"\n" + e1.getMessage() + "\n", e2);
+//                }
+//            }
         } finally {
             if (statement != null) {
                 statement.close();

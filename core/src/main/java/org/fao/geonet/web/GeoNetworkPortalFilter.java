@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  * - Default srv portal.
  * - Valid portal defined in the sources table
  */
-public class GeoNetworkPortalFilter implements javax.servlet.Filter {
+public class GeoNetworkPortalFilter implements Filter {
     private static final String EXCLUDED_URL_PATHS = "excludedPaths";
 
     private static final String URL_PATH_SEPARATOR = "/";

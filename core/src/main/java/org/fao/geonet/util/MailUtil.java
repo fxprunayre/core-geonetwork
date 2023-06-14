@@ -30,8 +30,9 @@ import org.fao.geonet.kernel.setting.Settings;
 import org.fao.geonet.utils.Log;
 
 import jakarta.annotation.Nonnull;
-import jakarta.mail.Session;
-import jakarta.mail.internet.InternetAddress;
+
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;

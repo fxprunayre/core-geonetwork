@@ -64,7 +64,7 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-http4</artifactId>
+      <artifactId>camel-http</artifactId>
       <version>${camel.version}</version>
     </dependency>
     <dependency>
@@ -74,17 +74,12 @@
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-script</artifactId>
-      <version>${camel.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
       <artifactId>camel-groovy</artifactId>
       <version>${camel.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-quartz2</artifactId>
+      <artifactId>camel-quartz</artifactId>
       <version>${camel.version}</version>
     </dependency>
 

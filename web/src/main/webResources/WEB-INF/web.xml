@@ -59,9 +59,9 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <listener>
+<!-- TODO: Java17  <listener>
     <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
-  </listener>
+  </listener>-->
 
   <!-- listeter used to send signout event. Used by keycloak-->
   <listener>

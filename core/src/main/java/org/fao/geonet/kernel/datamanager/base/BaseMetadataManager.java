@@ -309,7 +309,7 @@ public class BaseMetadataManager implements IMetadataManager {
         // Logical delete for metadata file uploads
         PathSpec<MetadataFileUpload, String> deletedDatePathSpec = new PathSpec<MetadataFileUpload, String>() {
             @Override
-            public javax.persistence.criteria.Path<String> getPath(Root<MetadataFileUpload> root) {
+            public jakarta.persistence.criteria.Path<String> getPath(Root<MetadataFileUpload> root) {
                 return root.get(MetadataFileUpload_.deletedDate);
             }
         };

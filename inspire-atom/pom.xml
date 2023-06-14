@@ -53,6 +53,11 @@
       <artifactId>gn-services</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
     <!-- Persistence dependencies -->
     <dependency>

@@ -415,6 +415,11 @@
     </dependency>
 
     <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.apache.chemistry.opencmis</groupId>
       <artifactId>chemistry-opencmis-client-api</artifactId>
       <version>1.1.0</version>

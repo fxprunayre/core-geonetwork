@@ -150,7 +150,7 @@ public class JeevesServlet extends HttpServlet {
             sb.append("File upload too big - exceeds ").append(jeeves.getMaxUploadSize()).append(" Mb\n")
                 .append("Error : ").append(e.getClass().getName()).append("\n");
 
-            res.sendError(SC_BAD_REQUEST, sb.toString());
+            res.sendError(HttpServletResponse.SC_BAD_REQUEST, sb.toString());
 
             // now stick the stack trace on the end and log the whole lot
             sb.append("Stack :\n").append(Util.getStackTrace(e));
@@ -163,7 +163,7 @@ public class JeevesServlet extends HttpServlet {
             sb.append("Cannot build ServiceRequest\n").append("Cause : ").append(e.getMessage()).append("\n")
                 .append("Error : ").append(e.getClass().getName()).append("\n");
 
-            res.sendError(SC_BAD_REQUEST, sb.toString());
+            res.sendError(HttpServletResponse.SC_BAD_REQUEST, sb.toString());
 
             // now stick the stack trace on the end and log the whole lot
             sb.append("Stack :\n").append(Util.getStackTrace(e));

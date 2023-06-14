@@ -26,8 +26,8 @@ import org.fao.geonet.utils.Log;
 import ro.isdc.wro.http.WroFilter;
 
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.SocketException;
@@ -45,7 +45,7 @@ public class GeonetWro4jFilter extends WroFilter {
         config.getServletContext().setAttribute(GEONET_WRO4J_FILTER_KEY, this);
     }
 
-    @Override
+//   TODO: Java 17 @Override
     protected void onException(Exception e, HttpServletResponse response, FilterChain chain) {
         if (e.getCause() instanceof SocketException) {
             // ignore this because it means that a client closed the socket while data was being written to it.

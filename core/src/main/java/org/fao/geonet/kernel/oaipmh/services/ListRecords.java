@@ -41,8 +41,6 @@ import org.springframework.data.jpa.domain.Specification;
 
 import jeeves.server.context.ServiceContext;
 
-//=============================================================================
-
 public class ListRecords extends AbstractTokenLister {
 
 
@@ -53,12 +51,6 @@ public class ListRecords extends AbstractTokenLister {
     public String getVerb() {
         return ListRecordsRequest.VERB;
     }
-
-    //---------------------------------------------------------------------------
-    //---
-    //--- Service
-    //---
-    //---------------------------------------------------------------------------
 
 
     public ListRecordsResponse processRequest(TokenListRequest req, int pos, SearchResult result, ServiceContext context) throws Exception {
@@ -85,12 +77,6 @@ public class ListRecords extends AbstractTokenLister {
 
     }
 
-    //---------------------------------------------------------------------------
-    //---
-    //--- Private methods
-    //---
-    //---------------------------------------------------------------------------
-
     private Record buildRecord(ServiceContext context, int id, String prefix) throws Exception {
 
         // have to catch exceptions and return null because this function can
@@ -107,6 +93,3 @@ public class ListRecords extends AbstractTokenLister {
         }
     }
 }
-
-//=============================================================================
-

@@ -41,7 +41,7 @@
 
   <bean id="wfsfeaturesHarvesterRouteBuilder"
         class="org.fao.geonet.harvester.wfsfeatures.worker.WFSHarvesterRouteBuilder">
-    <property name="startsFromXMLConfigurationFile" value="false"/>
+<!--    <property name="startsFromXMLConfigurationFile" value="false"/>-->
   </bean>
   <bean id="WFSFeatureIndexer"
         class="org.fao.geonet.harvester.wfsfeatures.worker.EsWFSFeatureIndexer"

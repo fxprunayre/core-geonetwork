@@ -40,7 +40,6 @@ import org.fao.geonet.utils.nio.PathHttpEntity;
 import org.jdom.Element;
 import org.springframework.http.client.ClientHttpResponse;
 
-import jakarta.annotation.CheckReturnValue;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -624,7 +623,6 @@ public class GeoServerRest {
      * @param contentType type of content in case of post data or file updload.
      */
     public
-    @CheckReturnValue
     int sendREST(String method, String urlParams, String postData,
                  Path file, String contentType, Boolean saveResponse)
         throws IOException {

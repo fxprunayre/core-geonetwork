@@ -16,9 +16,9 @@ package org.fao.geonet.kernel.security.ecas;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jasig.cas.client.validation.Assertion;
-import org.jasig.cas.client.validation.TicketValidationException;
-import org.jasig.cas.client.validation.TicketValidator;
+import org.apereo.cas.client.validation.Assertion;
+import org.apereo.cas.client.validation.TicketValidationException;
+import org.apereo.cas.client.validation.TicketValidator;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -60,7 +60,8 @@ public class ECasAuthenticationProvider implements AuthenticationProvider,
     InitializingBean, MessageSourceAware {
     // ~ Static fields/initializers
     // =====================================================================================
-
+    public static final String CAS_STATEFUL_IDENTIFIER = "_cas_stateful_";
+    public static final String CAS_STATELESS_IDENTIFIER = "_cas_stateless_";
     private static final Log logger = LogFactory
         .getLog(CasAuthenticationProvider.class);
 
@@ -98,8 +99,8 @@ public class ECasAuthenticationProvider implements AuthenticationProvider,
         }
 
         if (authentication instanceof UsernamePasswordAuthenticationToken
-            && (!CasAuthenticationFilter.CAS_STATEFUL_IDENTIFIER
-            .equals(authentication.getPrincipal().toString()) && !CasAuthenticationFilter.CAS_STATELESS_IDENTIFIER
+            && (!CAS_STATEFUL_IDENTIFIER
+            .equals(authentication.getPrincipal().toString()) && !CAS_STATELESS_IDENTIFIER
             .equals(authentication.getPrincipal().toString()))) {
             // UsernamePasswordAuthenticationToken not CAS related
             return null;
@@ -129,7 +130,7 @@ public class ECasAuthenticationProvider implements AuthenticationProvider,
         boolean stateless = false;
 
         if (authentication instanceof UsernamePasswordAuthenticationToken
-            && CasAuthenticationFilter.CAS_STATELESS_IDENTIFIER
+            && CAS_STATELESS_IDENTIFIER
             .equals(authentication.getPrincipal())) {
             stateless = true;
         }

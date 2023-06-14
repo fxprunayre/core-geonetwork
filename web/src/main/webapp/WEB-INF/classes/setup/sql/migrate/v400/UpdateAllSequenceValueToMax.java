@@ -190,22 +190,24 @@ public class UpdateAllSequenceValueToMax extends DatabaseMigrationTask {
 
                 Log.info(Geonet.DB, "  Sequence " + sequenceName + " updated. Currval: " + desiredVal);
             } else {
-                preparedStatement = connection.prepareStatement(dialect.getSequenceNextValString(sequenceName));
-
-                // There may be a better way to adjust the sequence other than looping though them
-                // but this is the only database agnostic approach that could be found at the moment..
-                while (currval < desiredVal) {
-                    resultSet = preparedStatement.executeQuery();
-                    if (resultSet.next()) {
-                        currval = resultSet.getLong(1);
-                        loopCount++;
-                    } else {
-                        break;
-                    }
-                    resultSet.close();
-                    resultSet = null;
-                }
-                Log.info(Geonet.DB, "  Sequence " + sequenceName + " updated. Increased by: " + loopCount + ".  Currval: " + currval);
+                return;
+                // TODO: Java17
+//                preparedStatement = connection.prepareStatement(dialect.getSequenceNextValString(sequenceName));
+//
+//                // There may be a better way to adjust the sequence other than looping though them
+//                // but this is the only database agnostic approach that could be found at the moment..
+//                while (currval < desiredVal) {
+//                    resultSet = preparedStatement.executeQuery();
+//                    if (resultSet.next()) {
+//                        currval = resultSet.getLong(1);
+//                        loopCount++;
+//                    } else {
+//                        break;
+//                    }
+//                    resultSet.close();
+//                    resultSet = null;
+//                }
+//                Log.info(Geonet.DB, "  Sequence " + sequenceName + " updated. Increased by: " + loopCount + ".  Currval: " + currval);
             }
         } catch (SQLException e) {
             throw e;

@@ -35,6 +35,11 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
     </dependency>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
     <dependency>
       <groupId>ro.isdc.wro4j</groupId>
@@ -43,6 +48,11 @@
       <scope>provided</scope>
     </dependency>
 
+    <dependency>
+      <groupId>ro.isdc.wro4j</groupId>
+      <artifactId>wro4j-core</artifactId>
+      <version>${wro.version}</version>
+    </dependency>
     <dependency>
       <groupId>ro.isdc.wro4j</groupId>
       <artifactId>wro4j-extensions</artifactId>
@@ -82,12 +92,6 @@
       <groupId>com.github.sommeri</groupId>
       <artifactId>less4j</artifactId>
       <version>1.8.4</version>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
