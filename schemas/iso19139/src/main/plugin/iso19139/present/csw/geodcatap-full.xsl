@@ -1738,7 +1738,7 @@
 
     <xsl:param name="Address">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
-        <xsl:variable name="deliveryPoint" select="normalize-space(gmd:deliveryPoint/*)"/>
+        <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
         <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
@@ -1769,7 +1769,7 @@
 
     <xsl:param name="Address-vCard">
       <xsl:for-each select="gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address">
-        <xsl:variable name="deliveryPoint" select="normalize-space(gmd:deliveryPoint/*)"/>
+        <xsl:variable name="deliveryPoint" select="normalize-space(string-join(gmd:deliveryPoint/*, ' '))"/>
         <xsl:variable name="city" select="normalize-space(gmd:city/*)"/>
         <xsl:variable name="administrativeArea" select="normalize-space(gmd:administrativeArea/*)"/>
         <xsl:variable name="postalCode" select="normalize-space(gmd:postalCode/*)"/>
