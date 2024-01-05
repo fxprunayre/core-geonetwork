@@ -56,6 +56,7 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.SystemInfo;
+import org.fao.geonet.analytics.WebAnalyticsConfiguration;
 import org.fao.geonet.api.records.attachments.FilesystemStore;
 import org.fao.geonet.api.records.attachments.FilesystemStoreResourceContainer;
 import org.fao.geonet.api.records.attachments.Store;
@@ -1707,8 +1708,21 @@ public final class XslUtil {
         });
         return listOfLinks;
     }
-
     public static String escapeForJson(String value) {
         return StringEscapeUtils.escapeJson(value);
+    }
+
+    public static String getWebAnalyticsService() {
+        ApplicationContext applicationContext = ApplicationContextHolder.get();
+        WebAnalyticsConfiguration webAnalyticsConfiguration = applicationContext.getBean(WebAnalyticsConfiguration.class);
+
+        return webAnalyticsConfiguration.getService();
+    }
+
+    public static String getWebAnalyticsJavascriptCode() {
+        ApplicationContext applicationContext = ApplicationContextHolder.get();
+        WebAnalyticsConfiguration webAnalyticsConfiguration = applicationContext.getBean(WebAnalyticsConfiguration.class);
+
+        return webAnalyticsConfiguration.getJavascriptCode();
     }
 }
