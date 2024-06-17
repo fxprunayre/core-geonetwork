@@ -325,21 +325,21 @@
                 {
                   filter: { match: { "cl_status.key": "superseded" } },
                   weight: 0.3
-                },
+                }
                 // {
                 //   "filter": { "match": { "cl_resourceScope": "service" } },
                 //   "weight": 0.8
                 // },
                 // Start boosting down records more than 3 months old
-                {
-                  gauss: {
-                    changeDate: {
-                      scale: "365d",
-                      offset: "90d",
-                      decay: 0.5
-                    }
-                  }
-                }
+                // {
+                //   gauss: {
+                //     changeDate: {
+                //       scale: "365d",
+                //       offset: "90d",
+                //       decay: 0.5
+                //     }
+                //   }
+                // }
               ],
               score_mode: "multiply"
             },

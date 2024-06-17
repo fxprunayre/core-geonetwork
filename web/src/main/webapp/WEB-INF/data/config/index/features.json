@@ -59,7 +59,7 @@
           "match": "ft_*_s",
           "mapping": {
             "type": "keyword",
-            "copy_to": "any"
+            "copy_to": "any.default"
           }
         }
       },
@@ -85,7 +85,17 @@
     ],
     "properties": {
       "any": {
-        "type": "text"
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "text",
+             "analyzer": "standard"
+          },
+          "common": {
+            "type": "text",
+            "analyzer": "standard"
+          }
+        }
       },
       "id": {
         "type": "keyword"
@@ -98,11 +108,11 @@
       },
       "resourceType": {
         "type": "keyword",
-        "copy_to": "any"
+        "copy_to": ["any.default"]
       },
       "resourceTitle": {
         "type": "text",
-        "copy_to": "any",
+        "copy_to": ["any.default"],
         "fields": {
           "keyword": {
             "type": "keyword",

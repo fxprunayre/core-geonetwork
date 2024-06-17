@@ -409,7 +409,8 @@ public class EsHTTPProxy {
                      String endPoint, String body,
                      String selectionBucket,
                      RelatedItemType[] relatedTypes) throws Exception {
-        final String url = client.getServerUrl() + "/" + defaultIndex + "/" + endPoint + "?";
+        String index = request.getParameter("index");
+        final String url = client.getServerUrl() + "/" + (StringUtils.isNotEmpty(index) ? index : defaultIndex) + "/" + endPoint + "?";
         // Make query on multiple indices
 //        final String url = client.getServerUrl() + "/" + defaultIndex + ",gn-features/" + endPoint + "?";
         if (SEARCH_ENDPOINT.equals(endPoint) || MULTISEARCH_ENDPOINT.equals(endPoint)) {
@@ -686,7 +687,7 @@ public class EsHTTPProxy {
                     addRelatedTypes(doc, relatedTypes, context);
                 }
 
-                if (doc.has("_source")) {
+                if (doc.has("_source") && doc.get("_source").has("documentStandard")) {
                     ObjectNode sourceNode = (ObjectNode) doc.get("_source");
 
                     String metadataSchema = doc.get("_source").get("documentStandard").asText();

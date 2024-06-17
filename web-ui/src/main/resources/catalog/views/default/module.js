@@ -552,7 +552,7 @@
         advancedMode: false,
         from: 1,
         to: 20,
-        selectionBucket: "s101",
+        selectionBucket: "s101&index=gn-*",
         viewerMap: viewerMap,
         searchMap: searchMap,
         mapfieldOption: {
@@ -562,7 +562,7 @@
         hitsperpageValues: gnSearchSettings.hitsperpageValues,
         filters: gnSearchSettings.filters,
         defaultParams: {
-          isTemplate: "n",
+          // isTemplate: "n",
           resourceTemporalDateRange: {
             range: {
               resourceTemporalDateRange: {
@@ -576,7 +576,7 @@
           sortOrder: sortConfig[1] || ""
         },
         params: {
-          isTemplate: "n",
+          // isTemplate: "n",
           resourceTemporalDateRange: {
             range: {
               resourceTemporalDateRange: {

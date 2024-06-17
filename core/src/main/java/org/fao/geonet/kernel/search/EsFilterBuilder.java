@@ -72,7 +72,7 @@ public class EsFilterBuilder {
         }
 
         if (!isSearchingForDraft) {
-            query.append(" AND (draft:n OR draft:e)");
+//            query.append(" AND (draft:n OR draft:e OR -_exists_:draft)");
         }
 
         final String portalFilter = EsFilterBuilder.buildPortalFilter(node);
