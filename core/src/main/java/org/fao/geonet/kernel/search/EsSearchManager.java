@@ -52,6 +52,7 @@ import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SelectionManager;
 import org.fao.geonet.kernel.datamanager.IMetadataIndexer;
 import org.fao.geonet.kernel.datamanager.IMetadataUtils;
+import org.fao.geonet.kernel.datamanager.base.GeoNetwork5MetadataIndexer;
 import org.fao.geonet.kernel.search.index.OverviewIndexFieldUpdater;
 import org.fao.geonet.kernel.setting.SettingInfo;
 import org.fao.geonet.repository.SourceRepository;
@@ -172,6 +173,9 @@ public class EsSearchManager implements ISearchManager {
     private EsRestClient client;
 
     @Autowired
+    GeoNetwork5MetadataIndexer indexer;
+
+    @Autowired
     private OverviewIndexFieldUpdater overviewFieldUpdater;
 
     private int commitInterval = 200;
@@ -242,18 +246,21 @@ public class EsSearchManager implements ISearchManager {
 
     @Override
     public void init(boolean dropIndexFirst, Optional<List<String>> indices) throws Exception {
-        if (indexList != null) {
-            indexList.keySet().forEach(e -> {
-                try {
-                    if (!indices.isPresent() ||
-                        indices.get().contains(e)) {
-                        createIndex(e, indexList.get(e), dropIndexFirst);
-                    }
-                } catch (IOException ex) {
-                    LOGGER.error("Error during index creation. Error is: {}", ex.getMessage());
-                }
-            });
-        }
+
+        indexer.setupIndex();
+//
+//        if (indexList != null) {
+//            indexList.keySet().forEach(e -> {
+//                try {
+//                    if (!indices.isPresent() ||
+//                        indices.get().contains(e)) {
+//                        createIndex(e, indexList.get(e), dropIndexFirst);
+//                    }
+//                } catch (IOException ex) {
+//                    LOGGER.error("Error during index creation. Error is: {}", ex.getMessage());
+//                }
+//            });
+//        }
     }
 
     @Autowired

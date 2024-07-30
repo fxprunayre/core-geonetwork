@@ -234,7 +234,11 @@
            value="\${map.bbox.background.service}"/>
   </util:map>
 
-    <bean class="org.fao.geonet.kernel.datamanager.draft.DraftMetadataIndexer"/>
+
+  <bean class="org.fao.geonet.kernel.datamanager.base.GeoNetwork5MetadataIndexer">
+    <property name="baseUrl" value="http://localhost:7979/api/indexing"/>
+  </bean>
+<!--    <bean class="org.fao.geonet.kernel.datamanager.draft.DraftMetadataIndexer"/>-->
     <bean class="org.fao.geonet.kernel.datamanager.draft.DraftMetadataManager"/>
     <bean class="org.fao.geonet.kernel.datamanager.draft.DraftMetadataUtils">
       <property name="listOfStatusCreatingDraft">

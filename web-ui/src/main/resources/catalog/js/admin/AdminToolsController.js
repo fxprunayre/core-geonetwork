@@ -254,7 +254,7 @@
         var url =
           "../api/site/index?reset=" +
           dropFirst +
-          "&asynchronous=true" +
+          "&asynchronous=false" +
           (index ? "&indices=" + index : "");
         return $http.put(url).then(
           function (response) {

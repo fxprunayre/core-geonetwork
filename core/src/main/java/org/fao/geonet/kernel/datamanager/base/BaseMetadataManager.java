@@ -172,7 +172,7 @@ public class BaseMetadataManager implements IMetadataManager {
         }
 
         // From DataManager:
-        searchManager.init(false, java.util.Optional.empty());
+//  TODO GN5       searchManager.init(false, java.util.Optional.empty());
     }
 
     /**
