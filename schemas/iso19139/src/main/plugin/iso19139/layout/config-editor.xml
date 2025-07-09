@@ -315,6 +315,8 @@
     <name>gmd:pointOfContact</name>
     <name>gmd:contact</name>
     <name>gmd:processor</name>
+    <name>gmd:report</name>
+    <name>gmd:result</name>
     <name>gmd:userContactInfo</name>
     <name>gmd:resourceSpecificUsage</name>
     <name>gmd:graphicOverview</name>
@@ -324,6 +326,7 @@
     <name>gmd:distributionFormat</name>
     <name>gmd:referenceSystemInfo</name>
     <name>gmd:spatialResolution</name>
+    <name>gmd:transferOptions</name>
     <name>gmd:offLine</name>
     <name>gmd:onLine</name>
     <name>gmd:address</name>
@@ -331,6 +334,7 @@
     <name>gmd:ellipsoid</name>
     <name>gmd:attributes</name>
     <name>gmd:geographicBox</name>
+    <name>gmd:EX_Extent</name>
     <name>gmd:EX_TemporalExtent</name>
     <name>gmd:EX_VerticalExtent</name>
     <name>gmd:MD_Distributor</name>

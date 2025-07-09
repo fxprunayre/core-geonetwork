@@ -464,6 +464,7 @@
     <name>mdq:report</name>
     <name>mdq:result</name>
     <name>mrd:distributionFormat</name>
+    <name>mrd:transferOptions</name>
     <name>mrd:onLine</name>
     <name>mri:associatedResource</name>
     <name>mri:descriptiveKeywords</name>

@@ -507,14 +507,9 @@
   </xsl:template>
 
 
-  <!-- Some elements are only containers so bypass them
-       Excluded gmd:MD_DigitalTransferOptions, otherwise is rendered differently
-       when contains 1 or more gmd:onLine elements. Probably template affects
-       other similar container elements.
-  -->
+  <!-- Some elements are only containers so bypass them  -->
   <xsl:template mode="render-field"
                 match="*[
-                          name() != 'gmd:MD_DigitalTransferOptions' and
                           count(gmd:*[name() != 'gmd:PT_FreeText']) = 1 and
                           count(*/@codeListValue) = 0
                         ]"
@@ -526,13 +521,7 @@
   <!-- Some major sections are boxed -->
   <xsl:template mode="render-field"
                 match="*[name() = $configuration/editor/fieldsWithFieldset/name
-    or @gco:isoType = $configuration/editor/fieldsWithFieldset/name]|
-      gmd:report/*|
-      gmd:result/*|
-      gmd:extent[name(..)!='gmd:EX_TemporalExtent']|
-      gmd:transferOptions/*|
-      *[$isFlatMode = false() and gmd:* and
-        not(gco:CharacterString) and not(gmd:URL)]">
+                                or @gco:isoType = $configuration/editor/fieldsWithFieldset/name]" priority="100">
     <div class="entry name">
       <h2>
         <xsl:call-template name="render-field-label">

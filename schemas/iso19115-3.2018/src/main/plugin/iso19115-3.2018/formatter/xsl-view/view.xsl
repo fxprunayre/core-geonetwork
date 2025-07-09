@@ -499,13 +499,9 @@
 
   <!-- Some elements are only containers so bypass them
        unless they are flat mode exceptions.
-       Excluded mrd:MD_DigitalTransferOptions, otherwise is rendered differently
-       when contains 1 or more mrd:onLine elements. Probably template affects
-       other similar container elements.
   -->
   <xsl:template mode="render-field"
                 match="*[
-                          name() != 'mrd:MD_DigitalTransferOptions' and
                           count(*[name() != 'lan:PT_FreeText']) = 1 and
                           count(*/@codeListValue) = 0
                           ]"
@@ -523,17 +519,10 @@
   <!-- Some major sections are boxed but
   * if part of fieldsWithFieldset exception
   * has content
-  * only if more than one child to be displayed (non flat mode only) bypass container elements
-  * digital transfer options (mrd:transferOptions/*)
   . -->
   <xsl:template mode="render-field"
-                match="*[$isFlatMode = true() and not(gco:CharacterString) and (
-                            name() = $configuration/editor/fieldsWithFieldset/name
-                            or @gco:isoType = $configuration/editor/fieldsWithFieldset/name)]|
-                       *[$isFlatMode = false() and not(gco:CharacterString) and (
-                            name() = $configuration/editor/fieldsWithFieldset/name
-                            or @gco:isoType = $configuration/editor/fieldsWithFieldset/name
-                            or count(*) > 1)]|mrd:transferOptions/*"
+                match="*[name() = $configuration/editor/fieldsWithFieldset/name
+                                or @gco:isoType = $configuration/editor/fieldsWithFieldset/name]"
                 priority="100">
 
     <xsl:variable name="content">
