@@ -30,11 +30,8 @@ import java.nio.file.Path;
 
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.AbstractMetadata;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.MetadataCategory;
-import org.fao.geonet.domain.MetadataDataInfo;
+import org.fao.geonet.domain.*;
+import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.datamanager.IMetadataUtils;
 import org.fao.geonet.kernel.oaipmh.Lib;
@@ -65,8 +62,16 @@ public class GetRecord implements OaiPmhService {
         SchemaManager sm = gc.getBean(SchemaManager.class);
 
         AbstractMetadata metadata = context.getBean(IMetadataUtils.class).findOne(spec);
+
         if (metadata == null)
             throw new IdDoesNotExistException(spec.toString());
+
+        try {
+            org.fao.geonet.lib.Lib.resource.checkPrivilege(context, String.valueOf(metadata.getId()), ReservedOperation.view);
+        } catch (Exception e) {
+            throw new SecurityException(String.format(
+                "You can't view record with UUID %s", metadata.getUuid()));
+        }
 
         String uuid = metadata.getUuid();
         final MetadataDataInfo dataInfo = metadata.getDataInfo();
