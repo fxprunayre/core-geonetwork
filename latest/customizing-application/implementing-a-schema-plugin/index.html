@@ -13,25 +13,32 @@
         <link rel="canonical" href="https://docs.geonetwork-opensource.org/4.4/customizing-application/implementing-a-schema-plugin/">
       
       
-        <link rel="prev" href="../characterset/">
+        <link rel="prev" href="../adding-static-pages/">
       
       
-        <link rel="next" href="../misc/">
+        <link rel="next" href="../integrating-external-resource-properties/">
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../fr/customizing-application/implementing-a-schema-plugin/" hreflang="fr">
+        
       
       
       <link rel="icon" href="../../assets/images/geonetwork-logo.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Implementing schema plugins - GeoNetwork opensource (EN)</title>
+        <title>Implementing schema plugins - GeoNetwork opensource</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -52,11 +59,10 @@
     
       <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -89,6 +95,16 @@
     
       <div data-md-color-scheme="default" data-md-component="outdated" hidden>
         
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  GeoNetwork 4.4 is latest.
+  <a href="../../.."><strong>Click here to go to stable.</strong></a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -96,20 +112,20 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource (EN)" class="md-header__button md-logo" aria-label="GeoNetwork opensource (EN)" data-md-component="logo">
+    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource" class="md-header__button md-logo" aria-label="GeoNetwork opensource" data-md-component="logo">
       
   <img src="../../assets/images/geonetwork-logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            GeoNetwork opensource (EN)
+            GeoNetwork opensource
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -131,7 +147,7 @@
     <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
       </label>
     
   
@@ -141,7 +157,7 @@
     <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
       </label>
     
   
@@ -149,14 +165,14 @@
       
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
       <div class="md-header__option">
   <div class="md-select">
     
     <button class="md-header__button md-icon" aria-label="Select language">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
@@ -179,32 +195,34 @@
 </div>
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -215,13 +233,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/geonetwork/core-geonetwork" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     core-geonetwork
@@ -247,9 +266,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../.." class="md-tabs__link">
         
+  
   
     
   
@@ -264,11 +285,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../overview/" class="md-tabs__link">
           
+  
   
     
   
@@ -284,11 +307,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../help/" class="md-tabs__link">
           
+  
   
     
   
@@ -304,11 +329,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../user-guide/" class="md-tabs__link">
           
+  
   
     
   
@@ -324,11 +351,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../maintainer-guide/" class="md-tabs__link">
           
+  
   
     
   
@@ -344,11 +373,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../api/" class="md-tabs__link">
           
+  
   
     
   
@@ -363,6 +394,7 @@
         
   
   
+  
     
   
   
@@ -371,6 +403,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../../devel/" class="md-tabs__link">
           
+  
   
     
   
@@ -386,11 +419,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../tutorials/" class="md-tabs__link">
           
+  
   
     
   
@@ -406,11 +441,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../annexes/" class="md-tabs__link">
           
+  
   
     
   
@@ -444,19 +481,19 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource (EN)" class="md-nav__button md-logo" aria-label="GeoNetwork opensource (EN)" data-md-component="logo">
+    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource" class="md-nav__button md-logo" aria-label="GeoNetwork opensource" data-md-component="logo">
       
   <img src="../../assets/images/geonetwork-logo.svg" alt="logo">
 
     </a>
-    GeoNetwork opensource (EN)
+    GeoNetwork opensource
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/geonetwork/core-geonetwork" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     core-geonetwork
@@ -476,9 +513,16 @@
       <a href="../.." class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     GeoNetwork
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,6 +553,7 @@
       
     
     
+    
       
       
     
@@ -521,14 +566,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../overview/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       
@@ -565,6 +618,7 @@
       
     
     
+    
       
       
     
@@ -577,14 +631,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../help/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Help
+  
+
+    
   </span>
+  
   
 
       
@@ -612,11 +674,7 @@
         
       
         
-          
-        
       
-        
-          
         
       
         
@@ -634,11 +692,10 @@
         
       
         
-          
-        
       
         
       
+    
     
     
       
@@ -653,14 +710,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../user-guide/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
+    
   </span>
+  
   
 
       
@@ -690,13 +755,10 @@
         
       
         
-          
-        
       
         
-          
-        
       
+    
     
     
       
@@ -711,14 +773,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../maintainer-guide/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Maintainer Guide
+  
+
+    
   </span>
+  
   
 
       
@@ -763,6 +833,7 @@
       
         
       
+    
     
     
       
@@ -779,12 +850,20 @@
         
   
   
+  
     <a href="../../api/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
       
@@ -819,6 +898,7 @@
       
         
       
+    
     
     
       
@@ -837,14 +917,20 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          
           <div class="md-nav__link md-nav__container">
             <a href="../../devel/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Development
+  
+
+    
   </span>
+  
   
 
             </a>
@@ -859,7 +945,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
-            Development
+            
+  
+    Development
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -879,17 +969,12 @@
         
       
         
-          
+      
         
       
         
-          
-        
       
-        
-          
-        
-      
+    
     
     
       
@@ -906,12 +991,20 @@
         
   
   
+  
     <a href="../../devel/docs/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Documentation
+  
+
+    
   </span>
+  
   
 
       
@@ -967,6 +1060,9 @@
       
         
       
+        
+      
+    
     
     
       
@@ -982,14 +1078,20 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" checked>
         
           
-          
           <div class="md-nav__link md-nav__container">
             <a href="../" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Customization
+  
+
+    
   </span>
+  
   
 
             </a>
@@ -1004,7 +1106,11 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_7_3">
             <span class="md-nav__icon md-icon"></span>
-            Customization
+            
+  
+    Customization
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1035,6 +1141,7 @@
       
     
     
+    
       
       
     
@@ -1049,12 +1156,20 @@
         
   
   
+  
     <a href="../search-ui/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Search
+  
+
+    
   </span>
+  
   
 
       
@@ -1079,9 +1194,16 @@
       <a href="../creating-custom-view/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Customizing metadata views
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1100,9 +1222,16 @@
       <a href="../editor-ui/creating-custom-editor/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Customizing editor
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1121,9 +1250,16 @@
       <a href="../editor-ui/custom-editor-examples/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Custom editor examples
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1142,9 +1278,16 @@
       <a href="../editor-ui/tutorial/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Building a custom form step by step
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1163,9 +1306,16 @@
       <a href="../changing-layout/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Theming
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1184,9 +1334,16 @@
       <a href="../configuring-search-fields/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Configuring search fields
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1205,9 +1362,16 @@
       <a href="../configuring-faceted-search/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Configuring faceted search
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1226,9 +1390,16 @@
       <a href="../advanced-configuration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Advanced configuration
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1247,30 +1418,16 @@
       <a href="../adding-static-pages/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Adding static pages
-  </span>
   
 
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../characterset/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Characterset
+    
   </span>
+  
   
 
       </a>
@@ -1298,9 +1455,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Implementing schema plugins
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -1309,9 +1473,16 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Implementing schema plugins
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1334,7 +1505,9 @@
         <li class="md-nav__item">
   <a href="#metadata-schemas-and-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata schemas and profiles
+      
+        Metadata schemas and profiles
+      
     </span>
   </a>
   
@@ -1343,7 +1516,9 @@
         <li class="md-nav__item">
   <a href="#implementing-a-metadata-schema-or-profile" class="md-nav__link">
     <span class="md-ellipsis">
-      Implementing a metadata schema or profile
+      
+        Implementing a metadata schema or profile
+      
     </span>
   </a>
   
@@ -1352,7 +1527,9 @@
         <li class="md-nav__item">
   <a href="#schema-plugins" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Plugins
+      
+        Schema Plugins
+      
     </span>
   </a>
   
@@ -1362,7 +1539,9 @@
           <li class="md-nav__item">
   <a href="#contents-of-a-geonetwork-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Contents of a GeoNetwork schema
+      
+        Contents of a GeoNetwork schema
+      
     </span>
   </a>
   
@@ -1371,7 +1550,9 @@
           <li class="md-nav__item">
   <a href="#preparation" class="md-nav__link">
     <span class="md-ellipsis">
-      Preparation
+      
+        Preparation
+      
     </span>
   </a>
   
@@ -1380,7 +1561,9 @@
           <li class="md-nav__item">
   <a href="#example-iso1911519139-marine-community-profile-mcp" class="md-nav__link">
     <span class="md-ellipsis">
-      Example - ISO19115/19139 Marine Community Profile (MCP)
+      
+        Example - ISO19115/19139 Marine Community Profile (MCP)
+      
     </span>
   </a>
   
@@ -1390,7 +1573,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-schema-identxml-file" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema-ident.xml file
+      
+        Creating the schema-ident.xml file
+      
     </span>
   </a>
   
@@ -1399,7 +1584,9 @@
           <li class="md-nav__item">
   <a href="#more-on-autodetect" class="md-nav__link">
     <span class="md-ellipsis">
-      More on autodetect
+      
+        More on autodetect
+      
     </span>
   </a>
   
@@ -1408,7 +1595,9 @@
           <li class="md-nav__item">
   <a href="#more-on-autodetect-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
-      More on autodetect evaluation
+      
+        More on autodetect evaluation
+      
     </span>
   </a>
   
@@ -1418,7 +1607,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp-14" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp-1.4
+      
+        iso19139.mcp-1.4
+      
     </span>
   </a>
   
@@ -1427,7 +1618,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp-cmar" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp-cmar
+      
+        iso19139.mcp-cmar
+      
     </span>
   </a>
   
@@ -1436,7 +1629,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp
+      
+        iso19139.mcp
+      
     </span>
   </a>
   
@@ -1450,7 +1645,9 @@
           <li class="md-nav__item">
   <a href="#more-on-filters" class="md-nav__link">
     <span class="md-ellipsis">
-      More on filters
+      
+        More on filters
+      
     </span>
   </a>
   
@@ -1459,7 +1656,9 @@
           <li class="md-nav__item">
   <a href="#schema_conversions" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema-conversions.xml file
+      
+        Creating the schema-conversions.xml file
+      
     </span>
   </a>
   
@@ -1468,7 +1667,9 @@
           <li class="md-nav__item">
   <a href="#schema_and_schema_xsd" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema directory and schema.xsd file
+      
+        Creating the schema directory and schema.xsd file
+      
     </span>
   </a>
   
@@ -1477,7 +1678,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-extract-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the extract-... XSLTs
+      
+        Creating the extract-... XSLTs
+      
     </span>
   </a>
   
@@ -1486,7 +1689,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-localized-strings-in-the-loc-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the localized strings in the loc directory
+      
+        Creating the localized strings in the loc directory
+      
     </span>
   </a>
   
@@ -1495,7 +1700,9 @@
           <li class="md-nav__item">
   <a href="#more-on-codelistsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on codelists.xml
+      
+        More on codelists.xml
+      
     </span>
   </a>
   
@@ -1504,7 +1711,9 @@
           <li class="md-nav__item">
   <a href="#more-on-labelsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on labels.xml
+      
+        More on labels.xml
+      
     </span>
   </a>
   
@@ -1513,7 +1722,9 @@
           <li class="md-nav__item">
   <a href="#more-on-stringsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on strings.xml
+      
+        More on strings.xml
+      
     </span>
   </a>
   
@@ -1522,7 +1733,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-presentations-using-formatter" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the presentations using formatter
+      
+        Creating the presentations using formatter
+      
     </span>
   </a>
   
@@ -1531,7 +1744,9 @@
           <li class="md-nav__item">
   <a href="#customizing-the-editor" class="md-nav__link">
     <span class="md-ellipsis">
-      Customizing the editor
+      
+        Customizing the editor
+      
     </span>
   </a>
   
@@ -1540,7 +1755,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-presentations-xslts-in-the-present-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the presentations XSLTs in the present directory
+      
+        Creating the presentations XSLTs in the present directory
+      
     </span>
   </a>
   
@@ -1549,7 +1766,9 @@
           <li class="md-nav__item">
   <a href="#an-alternative-xslt-design-for-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      An alternative XSLT design for profiles
+      
+        An alternative XSLT design for profiles
+      
     </span>
   </a>
   
@@ -1558,7 +1777,9 @@
           <li class="md-nav__item">
   <a href="#csw-presentation-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      CSW Presentation XSLTs
+      
+        CSW Presentation XSLTs
+      
     </span>
   </a>
   
@@ -1567,7 +1788,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-indexxsl-to-index-content-from-the-metadata-record" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the index.xsl to index content from the metadata record
+      
+        Creating the index.xsl to index content from the metadata record
+      
     </span>
   </a>
   
@@ -1576,7 +1799,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-sample-data-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the sample-data directory
+      
+        Creating the sample-data directory
+      
     </span>
   </a>
   
@@ -1585,16 +1810,37 @@
           <li class="md-nav__item">
   <a href="#creating-schematrons-to-describe-mcp-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating schematrons to describe MCP conditions
+      
+        Creating schematrons to describe MCP conditions
+      
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Creating schematrons to describe MCP conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-parameters-in-schematron-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available parameters in schematron rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#adding-the-components-necessary-to-create-and-edit-mcp-metadata" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding the components necessary to create and edit MCP metadata
+      
+        Adding the components necessary to create and edit MCP metadata
+      
     </span>
   </a>
   
@@ -1603,7 +1849,9 @@
           <li class="md-nav__item">
   <a href="#creating-set-uuidxsl" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating set-uuid.xsl
+      
+        Creating set-uuid.xsl
+      
     </span>
   </a>
   
@@ -1612,7 +1860,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-update-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the update-... XSLTs
+      
+        Creating the update-... XSLTs
+      
     </span>
   </a>
   
@@ -1621,7 +1871,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-templates-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the templates directory
+      
+        Creating the templates directory
+      
     </span>
   </a>
   
@@ -1630,7 +1882,9 @@
           <li class="md-nav__item">
   <a href="#editor-behaviour-adding-schema-suggestionsxml-and-schema-substitutesxml" class="md-nav__link">
     <span class="md-ellipsis">
-      Editor behaviour: Adding schema-suggestions.xml and schema-substitutes.xml
+      
+        Editor behaviour: Adding schema-suggestions.xml and schema-substitutes.xml
+      
     </span>
   </a>
   
@@ -1639,7 +1893,9 @@
           <li class="md-nav__item">
   <a href="#adding-components-to-support-conversion-of-metadata-records-to-other-schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding components to support conversion of metadata records to other schemas
+      
+        Adding components to support conversion of metadata records to other schemas
+      
     </span>
   </a>
   
@@ -1648,7 +1904,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-convert-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the convert directory
+      
+        Creating the convert directory
+      
     </span>
   </a>
   
@@ -1657,7 +1915,9 @@
           <li class="md-nav__item">
   <a href="#supporting-oaipmh-conversions" class="md-nav__link">
     <span class="md-ellipsis">
-      Supporting OAIPMH conversions
+      
+        Supporting OAIPMH conversions
+      
     </span>
   </a>
   
@@ -1689,12 +1949,75 @@
   
   
     <li class="md-nav__item">
+      <a href="../integrating-external-resource-properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrating External Resource Properties
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../characterset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characterset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../misc/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Miscellaneous
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1732,6 +2055,7 @@
       
     
     
+    
       
       
     
@@ -1746,12 +2070,20 @@
         
   
   
+  
     <a href="../../contributing/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Contributing
+  
+
+    
   </span>
+  
   
 
       
@@ -1796,6 +2128,7 @@
       
     
     
+    
       
       
     
@@ -1810,12 +2143,20 @@
         
   
   
+  
     <a href="../../tutorials/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
       
@@ -1843,13 +2184,12 @@
         
       
         
-          
-        
       
         
       
         
       
+    
     
     
       
@@ -1866,12 +2206,20 @@
         
   
   
+  
     <a href="../../annexes/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Annexes
+  
+
+    
   </span>
+  
   
 
       
@@ -1914,7 +2262,9 @@
         <li class="md-nav__item">
   <a href="#metadata-schemas-and-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      Metadata schemas and profiles
+      
+        Metadata schemas and profiles
+      
     </span>
   </a>
   
@@ -1923,7 +2273,9 @@
         <li class="md-nav__item">
   <a href="#implementing-a-metadata-schema-or-profile" class="md-nav__link">
     <span class="md-ellipsis">
-      Implementing a metadata schema or profile
+      
+        Implementing a metadata schema or profile
+      
     </span>
   </a>
   
@@ -1932,7 +2284,9 @@
         <li class="md-nav__item">
   <a href="#schema-plugins" class="md-nav__link">
     <span class="md-ellipsis">
-      Schema Plugins
+      
+        Schema Plugins
+      
     </span>
   </a>
   
@@ -1942,7 +2296,9 @@
           <li class="md-nav__item">
   <a href="#contents-of-a-geonetwork-schema" class="md-nav__link">
     <span class="md-ellipsis">
-      Contents of a GeoNetwork schema
+      
+        Contents of a GeoNetwork schema
+      
     </span>
   </a>
   
@@ -1951,7 +2307,9 @@
           <li class="md-nav__item">
   <a href="#preparation" class="md-nav__link">
     <span class="md-ellipsis">
-      Preparation
+      
+        Preparation
+      
     </span>
   </a>
   
@@ -1960,7 +2318,9 @@
           <li class="md-nav__item">
   <a href="#example-iso1911519139-marine-community-profile-mcp" class="md-nav__link">
     <span class="md-ellipsis">
-      Example - ISO19115/19139 Marine Community Profile (MCP)
+      
+        Example - ISO19115/19139 Marine Community Profile (MCP)
+      
     </span>
   </a>
   
@@ -1970,7 +2330,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-schema-identxml-file" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema-ident.xml file
+      
+        Creating the schema-ident.xml file
+      
     </span>
   </a>
   
@@ -1979,7 +2341,9 @@
           <li class="md-nav__item">
   <a href="#more-on-autodetect" class="md-nav__link">
     <span class="md-ellipsis">
-      More on autodetect
+      
+        More on autodetect
+      
     </span>
   </a>
   
@@ -1988,7 +2352,9 @@
           <li class="md-nav__item">
   <a href="#more-on-autodetect-evaluation" class="md-nav__link">
     <span class="md-ellipsis">
-      More on autodetect evaluation
+      
+        More on autodetect evaluation
+      
     </span>
   </a>
   
@@ -1998,7 +2364,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp-14" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp-1.4
+      
+        iso19139.mcp-1.4
+      
     </span>
   </a>
   
@@ -2007,7 +2375,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp-cmar" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp-cmar
+      
+        iso19139.mcp-cmar
+      
     </span>
   </a>
   
@@ -2016,7 +2386,9 @@
           <li class="md-nav__item">
   <a href="#iso19139mcp" class="md-nav__link">
     <span class="md-ellipsis">
-      iso19139.mcp
+      
+        iso19139.mcp
+      
     </span>
   </a>
   
@@ -2030,7 +2402,9 @@
           <li class="md-nav__item">
   <a href="#more-on-filters" class="md-nav__link">
     <span class="md-ellipsis">
-      More on filters
+      
+        More on filters
+      
     </span>
   </a>
   
@@ -2039,7 +2413,9 @@
           <li class="md-nav__item">
   <a href="#schema_conversions" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema-conversions.xml file
+      
+        Creating the schema-conversions.xml file
+      
     </span>
   </a>
   
@@ -2048,7 +2424,9 @@
           <li class="md-nav__item">
   <a href="#schema_and_schema_xsd" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the schema directory and schema.xsd file
+      
+        Creating the schema directory and schema.xsd file
+      
     </span>
   </a>
   
@@ -2057,7 +2435,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-extract-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the extract-... XSLTs
+      
+        Creating the extract-... XSLTs
+      
     </span>
   </a>
   
@@ -2066,7 +2446,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-localized-strings-in-the-loc-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the localized strings in the loc directory
+      
+        Creating the localized strings in the loc directory
+      
     </span>
   </a>
   
@@ -2075,7 +2457,9 @@
           <li class="md-nav__item">
   <a href="#more-on-codelistsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on codelists.xml
+      
+        More on codelists.xml
+      
     </span>
   </a>
   
@@ -2084,7 +2468,9 @@
           <li class="md-nav__item">
   <a href="#more-on-labelsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on labels.xml
+      
+        More on labels.xml
+      
     </span>
   </a>
   
@@ -2093,7 +2479,9 @@
           <li class="md-nav__item">
   <a href="#more-on-stringsxml" class="md-nav__link">
     <span class="md-ellipsis">
-      More on strings.xml
+      
+        More on strings.xml
+      
     </span>
   </a>
   
@@ -2102,7 +2490,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-presentations-using-formatter" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the presentations using formatter
+      
+        Creating the presentations using formatter
+      
     </span>
   </a>
   
@@ -2111,7 +2501,9 @@
           <li class="md-nav__item">
   <a href="#customizing-the-editor" class="md-nav__link">
     <span class="md-ellipsis">
-      Customizing the editor
+      
+        Customizing the editor
+      
     </span>
   </a>
   
@@ -2120,7 +2512,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-presentations-xslts-in-the-present-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the presentations XSLTs in the present directory
+      
+        Creating the presentations XSLTs in the present directory
+      
     </span>
   </a>
   
@@ -2129,7 +2523,9 @@
           <li class="md-nav__item">
   <a href="#an-alternative-xslt-design-for-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      An alternative XSLT design for profiles
+      
+        An alternative XSLT design for profiles
+      
     </span>
   </a>
   
@@ -2138,7 +2534,9 @@
           <li class="md-nav__item">
   <a href="#csw-presentation-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      CSW Presentation XSLTs
+      
+        CSW Presentation XSLTs
+      
     </span>
   </a>
   
@@ -2147,7 +2545,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-indexxsl-to-index-content-from-the-metadata-record" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the index.xsl to index content from the metadata record
+      
+        Creating the index.xsl to index content from the metadata record
+      
     </span>
   </a>
   
@@ -2156,7 +2556,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-sample-data-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the sample-data directory
+      
+        Creating the sample-data directory
+      
     </span>
   </a>
   
@@ -2165,16 +2567,37 @@
           <li class="md-nav__item">
   <a href="#creating-schematrons-to-describe-mcp-conditions" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating schematrons to describe MCP conditions
+      
+        Creating schematrons to describe MCP conditions
+      
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Creating schematrons to describe MCP conditions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-parameters-in-schematron-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Available parameters in schematron rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#adding-the-components-necessary-to-create-and-edit-mcp-metadata" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding the components necessary to create and edit MCP metadata
+      
+        Adding the components necessary to create and edit MCP metadata
+      
     </span>
   </a>
   
@@ -2183,7 +2606,9 @@
           <li class="md-nav__item">
   <a href="#creating-set-uuidxsl" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating set-uuid.xsl
+      
+        Creating set-uuid.xsl
+      
     </span>
   </a>
   
@@ -2192,7 +2617,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-update-xslts" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the update-... XSLTs
+      
+        Creating the update-... XSLTs
+      
     </span>
   </a>
   
@@ -2201,7 +2628,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-templates-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the templates directory
+      
+        Creating the templates directory
+      
     </span>
   </a>
   
@@ -2210,7 +2639,9 @@
           <li class="md-nav__item">
   <a href="#editor-behaviour-adding-schema-suggestionsxml-and-schema-substitutesxml" class="md-nav__link">
     <span class="md-ellipsis">
-      Editor behaviour: Adding schema-suggestions.xml and schema-substitutes.xml
+      
+        Editor behaviour: Adding schema-suggestions.xml and schema-substitutes.xml
+      
     </span>
   </a>
   
@@ -2219,7 +2650,9 @@
           <li class="md-nav__item">
   <a href="#adding-components-to-support-conversion-of-metadata-records-to-other-schemas" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding components to support conversion of metadata records to other schemas
+      
+        Adding components to support conversion of metadata records to other schemas
+      
     </span>
   </a>
   
@@ -2228,7 +2661,9 @@
           <li class="md-nav__item">
   <a href="#creating-the-convert-directory" class="md-nav__link">
     <span class="md-ellipsis">
-      Creating the convert directory
+      
+        Creating the convert directory
+      
     </span>
   </a>
   
@@ -2237,7 +2672,9 @@
           <li class="md-nav__item">
   <a href="#supporting-oaipmh-conversions" class="md-nav__link">
     <span class="md-ellipsis">
-      Supporting OAIPMH conversions
+      
+        Supporting OAIPMH conversions
+      
     </span>
   </a>
   
@@ -2263,14 +2700,16 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
+
   
-    <a href="https://github.com/geonetwork/core-geonetwork/edit/main/docs/manual/docs/customizing-application/implementing-a-schema-plugin.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/geonetwork/core-geonetwork/edit/main/docs/manual/docs/customizing-application/implementing-a-schema-plugin.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
   
   
@@ -2279,7 +2718,7 @@
     
     <a href="https://github.com/geonetwork/core-geonetwork/raw/main/docs/manual/docs/customizing-application/implementing-a-schema-plugin.md" title="View source of this page" class="md-content__button md-icon">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
@@ -2298,7 +2737,7 @@
 <p>A metadata schema is usually an implementation of a metadata standard.</p>
 <p>A metadata profile is an adaptation of a metadata schema to suit the needs of a particular community. A metadata profile contains all the components of a metadata schema but may extend, restrict or redefine these components.</p>
 <h2 id="implementing-a-metadata-schema-or-profile">Implementing a metadata schema or profile</h2>
-<p>There are many ways in which a metadata schema or profile can be implemented. This section will describe the way in which metadata schemas are implemented on <a href="https://github.com/geonetwork/schema-plugins">https://github.com/geonetwork/schema-plugins</a> or <a href="https://github.com/metadata101">https://github.com/metadata101</a>.</p>
+<p>There are many ways in which a metadata schema or profile can be implemented. This section will describe the way in which metadata schemas are implemented on <a href="https://github.com/geonetwork/schema-plugins">geonetwork/schema-plugins</a> or <a href="https://github.com/metadata101">metadata101</a>.</p>
 <p>Each metadata schema is a Maven module implemented as a filesystem tree. The root of the tree is the name of the metadata schema in abbreviated form. The essential components of a metadata schema in the <code>src/main/plugin/&lt;schema_id&gt;</code> folder and are laid out as follows:</p>
 <ol>
 <li><strong>loc</strong> directory with subdirectories for each three letter language code that this information is localized into, with the content in XML files (labels.xml, codelists.xml). For example: <code>loc/eng/codelists.xml</code> describes the english codelists for metadata elements</li>
@@ -2320,13 +2759,13 @@
 <p>Schemas can also added to GeoNetwork dynamically if a zip archive of the schema directory is created and then uploaded to GeoNetwork in one of following ways using functions in the Administration menu:</p>
 <ol>
 <li>Server file path (specified using file chooser)</li>
-<li>HTTP URL (eg. <a href="http://somehost/somedirectory/iso19139.mcp.zip">http://somehost/somedirectory/iso19139.mcp.zip</a>)</li>
+<li>HTTP URL (e.g. <code>http://somehost/somedirectory/iso19139.mcp.zip</code>)</li>
 <li>As an online resource attached to an ISO19115/19139 metadata record</li>
 </ol>
 <p>Uploaded schemas are also stored in the <code>schema_plugins</code> sub directory of the GeoNetwork data directory.</p>
 <div class="admonition info">
 <p class="admonition-title">See Also</p>
-<p>A template module is available here <a href="https://github.com/geonetwork/schema-plugins/tree/develop/iso19139.xyz">https://github.com/geonetwork/schema-plugins/tree/develop/iso19139.xyz</a> and is a good example to start with.</p>
+<p>A template module is available at <a href="https://github.com/geonetwork/schema-plugins/tree/develop/iso19139.xyz">geonetwork/schema-plugins</a> and is a good example to start with.</p>
 </div>
 <h3 id="contents-of-a-geonetwork-schema">Contents of a GeoNetwork schema</h3>
 <p>When installed, a GeoNetwork schema is a directory.</p>
@@ -2362,7 +2801,7 @@
 </ul>
 <p>The following configuration files can be present:</p>
 <ul>
-<li><strong>oasis-catalog.xml</strong>: (<em>Optional</em>) An oasis catalog describing any mappings that should be used for this schema eg. mapping URLs to local copies such as schemaLocations eg. <a href="http://www.isotc211.org/2005/gmd/gmd.xsd">http://www.isotc211.org/2005/gmd/gmd.xsd</a> is mapped to <code>schema/gmd/gmd.xsd</code>. Path names used in the oasis catalog are relative to the location of this file which is the schema directory.</li>
+<li><strong>oasis-catalog.xml</strong>: (<em>Optional</em>) An oasis catalog describing any mappings that should be used for this schema, e.g. mapping URLs to local copies such as schemaLocations, e.g. <code>http://www.isotc211.org/2005/gmd/gmd.xsd</code> is mapped to <code>schema/gmd/gmd.xsd</code>. Path names used in the oasis catalog are relative to the location of this file which is the schema directory.</li>
 <li><strong>schema.xsd</strong>: (<em>Optional</em>) XML schema directory file that includes the XSDs used by this metadata schema. If the schema uses a DTD then this file should not be present. Metadata records from schemas that use DTDs cannot be edited in GeoNetwork.</li>
 <li><strong>schema-conversions.xml</strong>: (<em>Optional</em>) XML file that describes the converters that can be applied to records belonging to this schema. This information is used to show these conversions as options for the user to choose when a metadata record belonging to this schema is shown in the search results.</li>
 <li><strong>schema-ident.xml</strong>: (<em>Mandatory</em>) XML file that contains the schema name, identifier, version number and details on how to recognise metadata records that belong to this schema. This file has an XML schema definition in <code>INSTALL_DIR/web/geonetwork/xml/validation/schemaPlugins/schema-ident.xsd</code> which is used to validate it when the schema is loaded.</li>
@@ -2409,7 +2848,7 @@
 </ul>
 <h3 id="example-iso1911519139-marine-community-profile-mcp">Example - ISO19115/19139 Marine Community Profile (MCP)</h3>
 <p>The Marine Community Profile (MCP) is a profile of ISO19115/19139 developed for and with the Marine Community. The profile extends the ISO19115 metadata standard and is implemented using an extension of the XML implementation of ISO19115 described in ISO19139. Both the ISO19115 metadata standard and its XML implementation, ISO19139, are available through ISO distribution channels.</p>
-<p>The documentation for the Marine Community Profile can be found at <a href="http://www.aodc.gov.au/files/MarineCommunityProfilev1.4.pdf">http://www.aodc.gov.au/files/MarineCommunityProfilev1.4.pdf</a>. The implementation of the Marine Community Profile as XML schema definitions is based on the approach described at <a href="https://www.seegrid.csiro.au/wiki/AppSchemas/MetadataProfiles">https://www.seegrid.csiro.au/wiki/AppSchemas/MetadataProfiles</a>. The XML schema definitions (XSDs) are available at the URL <a href="http://bluenet3.antcrc.utas.edu.au/mcp-1.4">http://bluenet3.antcrc.utas.edu.au/mcp-1.4</a>.</p>
+<p>The documentation for the Marine Community Profile can be found in the <a href="http://www.aodc.gov.au/files/MarineCommunityProfilev1.4.pdf">Marine Community Profile document</a>. The implementation as XML schema definitions is based on the approach described at <a href="https://www.seegrid.csiro.au/wiki/AppSchemas/MetadataProfiles">AppSchemas/MetadataProfiles</a>. The XML schema definitions (XSDs) are available at <code>http://bluenet3.antcrc.utas.edu.au/mcp-1.4</code>.</p>
 <p>Looking at the XML schema definitions, the profile adds a few new elements to the base ISO19139 standard. So the basic idea in defining a plugin Marine Community Profile schema for GeoNetwork is to use as much of the basic ISO19139 schema definition supplied with GeoNetwork as possible.</p>
 <p>We'll now describe in basic steps how to create each of the components of a plugin schema for GeoNetwork that implements the MCP.</p>
 <h4 id="creating-the-schema-identxml-file">Creating the schema-ident.xml file</h4>
@@ -2655,7 +3094,7 @@
 <p>Each converter has the following attributes:</p>
 <ul>
 <li><strong>name</strong> - the name of the converter. This is the service name of the GeoNetwork (Jeeves) service and should be unique (prefixing the service name with <code>xml_&lt;schema_name&gt;</code> is a good way to make this name unique).</li>
-<li><strong>nsUri</strong> - the primary namespace of the schema produced by the converter. eg. xml_iso19139.mcpTorifcs transforms metadata records from iso19139.mcp to the RIFCS schema. Metadata records in the RIFCS metadata schema have primary namespace URI of <a href="http://ands.org.au/standards/rif-cs/registryObjects">http://ands.org.au/standards/rif-cs/registryObjects</a>.</li>
+<li><strong>nsUri</strong> - the primary namespace of the schema produced by the converter. e.g. xml_iso19139.mcpTorifcs transforms metadata records from iso19139.mcp to the RIFCS schema. Metadata records in the RIFCS metadata schema have primary namespace URI of <code>http://ands.org.au/standards/rif-cs/registryObjects</code>.</li>
 <li><strong>schemaLocation</strong> - the location (URL) of the XML schema definition (XSD) corresponding to the nsURI.</li>
 <li><strong>xslt</strong> - the name of the XSLT that actually carries out the transformation. This XSLT should be located in the convert subdirectory of the schema plugin.</li>
 </ul>
@@ -2665,8 +3104,8 @@
 <h4 id="schema_and_schema_xsd">Creating the schema directory and schema.xsd file</h4>
 <p>The schema and schema.xsd components are used by the GeoNetwork editor and validation functions.</p>
 <p>GeoNetwork's editor uses the XSDs to build a form that will not only order the elements in a metadata document correctly but also offer options to create any elements that are not in the metadata document. The idea behind this approach is twofold. Firstly, the editor can use the XML schema definition rules to help the user avoid creating a document that is structurally incorrect eg. missing mandatory elements or elements not ordered correctly. Secondly, the same editor code can be used on any XML metadata document with a defined XSD.</p>
-<p>If you are defining your own metadata schema then you can create an XML schema document using the XSD language. The elements of the language can be found online at <a href="http://www.w3schools.com/schema/">http://www.w3schools.com/schema/</a> or you can refer to a textbook such as Priscilla Walmsley's Definitive XML Schema (Prentice Hall, 2002). GeoNetwork's XML schema parsing code understands almost all of the XSD language with the exception of redefine, any and anyAttribute (although the last two can be handled under special circumstances).</p>
-<p>In the case of the Marine Commuity Profile, we are basically defining a number of extensions to the base standard ISO19115/19139. These extensions are defined using the XSD extension mechanism on the types defined in ISO19139. The following snippet shows how the Marine Community Profile extends the gmd:MD_Metadata element to add a new element called revisionDate:</p>
+<p>If you are defining your own metadata schema then you can create an XML schema document using the XSD language. The elements of the language can be found online at <a href="http://www.w3schools.com/schema/">w3schools.com/schema</a> or you can refer to a textbook such as Priscilla Walmsley's Definitive XML Schema (Prentice Hall, 2002). GeoNetwork's XML schema parsing code understands almost all of the XSD language with the exception of redefine, any and anyAttribute (although the last two can be handled under special circumstances).</p>
+<p>In the case of the Marine Community Profile, we are basically defining a number of extensions to the base standard ISO19115/19139. These extensions are defined using the XSD extension mechanism on the types defined in ISO19139. The following snippet shows how the Marine Community Profile extends the gmd:MD_Metadata element to add a new element called revisionDate:</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">&lt;xs:schema</span><span class="w"> </span><span class="na">targetNamespace=</span><span class="s">&quot;http://bluenet3.antcrc.utas.edu.au/mcp&quot;</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">           </span><span class="na">xmlns:mcp=</span><span class="s">&quot;http://bluenet3.antcrc.utas.edu.au/mcp&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
@@ -2785,7 +3224,7 @@ schema-conversions.xml  schema-ident.xml  schema.xsd  schema
 </ul>
 <p>Note that because the MCP is a profile of ISO19115/19139 and we have followed the GeoNetwork naming convention for profiles, we need only include the labels and codelists that are specific to the MCP or that we want to override. Other labels and codelists will be retrieved from the base schema iso19139.</p>
 <h4 id="more-on-codelistsxml">More on codelists.xml</h4>
-<p>Typically codelists are generated from enumerated lists in the metadata schema XSDs such as the following from <a href="http://www.isotc211.org/2005/gmd/identification.xsd">http://www.isotc211.org/2005/gmd/identification.xsd</a> for gmd:MD_TopicCategoryCode in the iso19139 schema:</p>
+<p>Typically codelists are generated from enumerated lists in the metadata schema XSDs such as the following from <code>http://www.isotc211.org/2005/gmd/identification.xsd</code> for gmd:MD_TopicCategoryCode in the iso19139 schema:</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">&lt;xs:element</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MD_TopicCategoryCode&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;gmd:MD_TopicCategoryCode_Type&quot;</span><span class="nt">/&gt;</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nt">&lt;xs:simpleType</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;MD_TopicCategoryCode_Type&quot;</span><span class="nt">&gt;</span>
@@ -2843,7 +3282,7 @@ schema-conversions.xml  schema-ident.xml  schema.xsd  schema
 <p>The codelists.xml file maps the enumerated values from the XSD to a localized label and a description via the code element.</p>
 <p>A localized copy of codelists.xml is made available on an XPath to the presentation XSLTs eg. /root/gui/schemas/iso19139/codelist for the iso19139 schema.</p>
 <p>The XSLT metadata.xsl which contains templates used by all metadata schema presentation XSLTs, handles the creation of a select list/drop down menu in the editor and display of the code and description in the metadata viewer.</p>
-<p>The iso19139 schema has additional codelists that are managed external to the XSDs in catalog/vocabulary files such as <a href="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml">http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml</a> These have also been added to the codelists.xml file so that they can be localized, overridden in profiles and include an extended description to provide more useful information when viewing the metadata record.</p>
+<p>The iso19139 schema has additional codelists that are managed external to the XSDs in catalog/vocabulary files such as <code>http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml</code>. These have also been added to the codelists.xml file so that they can be localized, overridden in profiles and include an extended description to provide more useful information when viewing the metadata record.</p>
 <p>To use the ISO19139 codelist in a profile you can add a template to point to the codelist to use:</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nt">&lt;xsl:template</span><span class="w"> </span><span class="na">mode=</span><span class="s">&quot;mode-iso19139.xyz&quot;</span><span class="w"> </span><span class="na">match=</span><span class="s">&quot;*[*/@codeList]&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="nt">&lt;xsl:param</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;schema&quot;</span><span class="w"> </span><span class="na">select=</span><span class="s">&quot;$schema&quot;</span><span class="w"> </span><span class="na">required=</span><span class="s">&quot;no&quot;</span><span class="nt">/&gt;</span>
@@ -3240,7 +3679,7 @@ schema
 <p><img alt="" src="../img/kb-index-pattern.png" /></p>
 <p>Select <code>gn-records</code> to retrieve the list of fields:</p>
 <p><img alt="" src="../img/kb-index-fields.png" /></p>
-<p>If Elasticsearch instance is accessible, user can get the details about a record using <a href="http://localhost:9200/gn-records/_doc/7c7923b1-c387-49ac-b6c7-391ca187b7fa">http://localhost:9200/gn-records/_doc/7c7923b1-c387-49ac-b6c7-391ca187b7fa</a> (<code>Kibana --&gt; dev tools</code> can also be used to get the document details):</p>
+<p>If the Elasticsearch instance is accessible, users can get the details about a record using <code>http://localhost:9200/gn-records/_doc/7c7923b1-c387-49ac-b6c7-391ca187b7fa</code> (Kibana <strong>Dev Tools</strong> can also be used to get the document details):</p>
 <p><img alt="" src="../img/es-get-doc.png" /></p>
 <p>For example, here is the mapping created between the metadata element mcp:revisionDate and the index field changeDate:</p>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nt">&lt;xsl:for-each</span><span class="w"> </span><span class="na">select=</span><span class="s">&quot;mcp:revisionDate/*&quot;</span><span class="nt">&gt;</span>
@@ -3302,11 +3741,44 @@ schema
 </span><span id="__span-44-16"><a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a>
 </span><span id="__span-44-17"><a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="nt">&lt;/strings&gt;</span>
 </span></code></pre></div>
+<h5 id="available-parameters-in-schematron-rules">Available parameters in schematron rules</h5>
+<p>When GeoNetwork executes a compiled schematron, the following parameters are automatically passed to the XSL and can be referenced inside <code>&lt;sch:rule&gt;</code> blocks using <code>$paramName</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lang</code></td>
+<td>string</td>
+<td>The two or three letter language code of the current user session (e.g. <code>eng</code>). Use this to return localised messages.</td>
+</tr>
+<tr>
+<td><code>rule</code></td>
+<td>string</td>
+<td>The file name of the compiled schematron XSL (e.g. <code>schematron-rules-iso.xsl</code>).</td>
+</tr>
+<tr>
+<td><code>thesaurusDir</code></td>
+<td>string</td>
+<td>Absolute path to the GeoNetwork thesaurus directory. Useful for rules that need to validate against controlled vocabularies.</td>
+</tr>
+<tr>
+<td><code>metadataId</code></td>
+<td>integer</td>
+<td>The internal database identifier of the metadata record being validated. Useful for rules that need to look up related information. <strong>Note:</strong> When validating external metadata (metadata not saved to the database), this parameter is set to <code>-1</code>. Attempts to query the database using this value will return empty results.</td>
+</tr>
+</tbody>
+</table>
 <p>Procedure for adding schematron rules, working within the schematrons directory:</p>
 <ol>
 <li>Place your schematron rules in 'rules'. Naming convention is 'schematron-rules-<suffix>.sch' eg. <code>schematron-rules-iso-mcp.sch</code>. Place localized strings for the rule assertions into 'rules/loc/<language_prefix>'.</li>
 </ol>
-<p>Schematron rules are compiled when the schema is loaded.</p>
+<p>Schematron rules are compiled when the schema is loaded on startup. Schema can also be reloaded using the API operation http://localhost:8080/geonetwork/srv/api/standards/reload to update schematron.</p>
 <p>At this stage, our new GeoNetwork plugin schema for MCP contains:</p>
 <div class="language-text highlight"><pre><span></span><code>extract-date-modified.xsl  extract-gml.xsd  extract-uuid.xsl
 index-fields.xsl  loc  present  sample-data  schema-conversions.xml
@@ -3441,14 +3913,14 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
             </div>
           
           
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
 
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
   Back to top
 </button>
         
@@ -3461,35 +3933,35 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../characterset/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Characterset">
+          <a href="../adding-static-pages/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Adding static pages">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Previous
               </span>
               <div class="md-ellipsis">
-                Characterset
+                Adding static pages
               </div>
             </div>
           </a>
         
         
           
-          <a href="../misc/" class="md-footer__link md-footer__link--next" aria-label="Next: Miscellaneous">
+          <a href="../integrating-external-resource-properties/" class="md-footer__link md-footer__link--next" aria-label="Next: Integrating External Resource Properties">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Miscellaneous
+                Integrating External Resource Properties
               </div>
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
             </div>
           </a>
         
@@ -3521,7 +3993,7 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
 <div class="md-copyright">
   
   <span class="md-copyright__highlight">
-    Copyright &copy; 2001 - 2024 FAO-UN and others
+    Copyright &copy; 2001 - 2026 FAO-UN and others
   </span>
   
   
@@ -3540,7 +4012,8 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
   
 </div>
       
-        <div class="md-social">
+        
+<div class="md-social">
   
     
     
@@ -3550,7 +4023,7 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
       
     
     <a href="https://github.com/geonetwork" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   
     
@@ -3561,7 +4034,7 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
       
     
     <a href="https://hub.docker.com/_/geonetwork" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
     </a>
   
     
@@ -3598,10 +4071,13 @@ schema-ident.xml  schema.xsd  schema  schematron/schematron-rules-iso-mcp.sch
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["content.action.view", "content.action.edit", "content.code.copy", "content.tabs.link", "navigation.tabs", "navigation.tracking", "navigation.prune", "navigation.indexes", "toc.follow", "navigation.top", "navigation.footer", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["toc.follow", "navigation.tracking", "navigation.top", "navigation.tabs", "navigation.prune", "navigation.indexes", "navigation.footer", "header.autohide", "content.tabs.link", "content.code.copy", "content.action.view", "content.action.edit", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

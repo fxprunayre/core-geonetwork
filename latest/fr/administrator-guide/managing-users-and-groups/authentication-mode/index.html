@@ -19,19 +19,26 @@
         <link rel="next" href="../creating-group/">
       
       
+        
+          <link rel="alternate" href="../../../../administrator-guide/managing-users-and-groups/authentication-mode/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="fr">
+        
+      
+      
       <link rel="icon" href="../../../../assets/images/geonetwork-logo.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>Authentication mode - GeoNetwork opensource (FR)</title>
+        <title>Authentication mode - GeoNetwork opensource</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -52,11 +59,10 @@
     
       <link rel="stylesheet" href="../../../../assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -89,6 +95,16 @@
     
       <div data-md-color-scheme="default" data-md-component="outdated" hidden>
         
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  GeoNetwork 4.4 is latest.
+  <a href="../../../../.."><strong>Click here to go to stable.</strong></a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),base=new URL("../../../.."),outdated=__md_get("__outdated",sessionStorage,base);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
       </div>
     
     
@@ -96,20 +112,20 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource (FR)" class="md-header__button md-logo" aria-label="GeoNetwork opensource (FR)" data-md-component="logo">
+    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource" class="md-header__button md-logo" aria-label="GeoNetwork opensource" data-md-component="logo">
       
   <img src="../../../../assets/images/geonetwork-logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            GeoNetwork opensource (FR)
+            GeoNetwork opensource
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -131,7 +147,7 @@
     <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
       </label>
     
   
@@ -141,7 +157,7 @@
     <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
       </label>
     
   
@@ -149,14 +165,14 @@
       
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
       <div class="md-header__option">
   <div class="md-select">
     
     <button class="md-header__button md-icon" aria-label="Sélectionner la langue">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04M18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12m-2.62 7 1.62-4.33L19.12 17h-3.24Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
@@ -179,32 +195,34 @@
 </div>
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Recherche">
         
         <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initialisation de la recherche
@@ -215,13 +233,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/geonetwork/core-geonetwork" title="Aller au dépôt" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     core-geonetwork
@@ -247,9 +266,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../../../" class="md-tabs__link">
         
+  
   
     
   
@@ -264,11 +285,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../overview/" class="md-tabs__link">
           
+  
   
     
   
@@ -284,11 +307,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../help/" class="md-tabs__link">
           
+  
   
     
   
@@ -303,6 +328,7 @@
         
   
   
+  
     
   
   
@@ -311,6 +337,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="../../../user-guide/" class="md-tabs__link">
           
+  
   
     
   
@@ -326,11 +353,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../maintainer-guide/" class="md-tabs__link">
           
+  
   
     
   
@@ -346,11 +375,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../api/" class="md-tabs__link">
           
+  
   
     
   
@@ -366,11 +397,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../devel/" class="md-tabs__link">
           
+  
   
     
   
@@ -386,11 +419,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../tutorials/" class="md-tabs__link">
           
+  
   
     
   
@@ -406,11 +441,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../../../annexes/" class="md-tabs__link">
           
+  
   
     
   
@@ -444,19 +481,19 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource (FR)" class="md-nav__button md-logo" aria-label="GeoNetwork opensource (FR)" data-md-component="logo">
+    <a href="https://geonetwork-opensource.org/" title="GeoNetwork opensource" class="md-nav__button md-logo" aria-label="GeoNetwork opensource" data-md-component="logo">
       
   <img src="../../../../assets/images/geonetwork-logo.svg" alt="logo">
 
     </a>
-    GeoNetwork opensource (FR)
+    GeoNetwork opensource
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/geonetwork/core-geonetwork" title="Aller au dépôt" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     core-geonetwork
@@ -476,9 +513,16 @@
       <a href="../../../" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     GeoNetwork
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,6 +553,7 @@
       
     
     
+    
       
       
     
@@ -521,14 +566,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../overview/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       
@@ -563,6 +616,7 @@
       
         
       
+    
     
     
       
@@ -579,12 +633,20 @@
         
   
   
+  
     <a href="../../../help/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Help
+  
+
+    
   </span>
+  
   
 
       
@@ -614,11 +676,7 @@
         
       
         
-          
-        
       
-        
-          
         
       
         
@@ -636,11 +694,10 @@
         
       
         
-          
-        
       
         
       
+    
     
     
       
@@ -659,14 +716,20 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          
           <div class="md-nav__link md-nav__container">
             <a href="../../../user-guide/" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     User Guide
+  
+
+    
   </span>
+  
   
 
             </a>
@@ -681,7 +744,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            User Guide
+            
+  
+    User Guide
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -697,9 +764,16 @@
       <a href="../../../user-guide/quick-start/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Quick start
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -718,9 +792,16 @@
       <a href="../../../user-guide/map/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Maps and dataset visualisation
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -758,6 +839,7 @@
       
     
     
+    
       
       
     
@@ -770,14 +852,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/describing-information/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Describing Information
+  
+
+    
   </span>
+  
   
 
       
@@ -813,24 +903,7 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
+    
     
     
       
@@ -845,14 +918,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/associating-resources/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Associating Resources
+  
+
+    
   </span>
+  
   
 
       
@@ -886,6 +967,7 @@
       
     
     
+    
       
       
     
@@ -898,14 +980,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/tag-information/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Tag information
+  
+
+    
   </span>
+  
   
 
       
@@ -941,6 +1031,7 @@
       
     
     
+    
       
       
     
@@ -953,14 +1044,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/publishing/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Publishing
+  
+
+    
   </span>
+  
   
 
       
@@ -994,6 +1093,7 @@
       
     
     
+    
       
       
     
@@ -1006,14 +1106,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/analyzing/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Analyzing
+  
+
+    
   </span>
+  
   
 
       
@@ -1053,12 +1161,7 @@
       
         
       
-        
-      
-        
-      
-        
-      
+    
     
     
       
@@ -1073,14 +1176,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../user-guide/workflow/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Workflow
+  
+
+    
   </span>
+  
   
 
       
@@ -1132,6 +1243,15 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
       
@@ -1148,12 +1268,20 @@
         
   
   
+  
     <a href="../../../user-guide/harvesting/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Harvesting
+  
+
+    
   </span>
+  
   
 
       
@@ -1178,9 +1306,16 @@
       <a href="../../../user-guide/export/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Exporting records
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1212,6 +1347,9 @@
       
         
       
+        
+      
+    
     
     
       
@@ -1227,14 +1365,20 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12" checked>
         
           
-          
           <div class="md-nav__link md-nav__container">
             <a href="../../" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Administration
+  
+
+    
   </span>
+  
   
 
             </a>
@@ -1249,7 +1393,11 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_12_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_12">
             <span class="md-nav__icon md-icon"></span>
-            Administration
+            
+  
+    Administration
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1284,6 +1432,7 @@
       
     
     
+    
       
       
     
@@ -1298,12 +1447,20 @@
         
   
   
+  
     <a href="../../configuring-the-catalog/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Catalog
+  
+
+    
   </span>
+  
   
 
       
@@ -1341,6 +1498,9 @@
       
         
       
+        
+      
+    
     
     
       
@@ -1356,14 +1516,20 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_12_3" checked>
         
           
-          
           <div class="md-nav__link md-nav__container">
             <a href="../" class="md-nav__link ">
               
   
+  
   <span class="md-ellipsis">
+    
+  
     Users and Groups
+  
+
+    
   </span>
+  
   
 
             </a>
@@ -1378,7 +1544,11 @@
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_12_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_12_3">
             <span class="md-nav__icon md-icon"></span>
-            Users and Groups
+            
+  
+    Users and Groups
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1403,9 +1573,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     Authentication mode
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -1414,9 +1591,16 @@
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Authentication mode
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1439,7 +1623,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ldap" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP
+      
+        Configuring LDAP
+      
     </span>
   </a>
   
@@ -1449,7 +1635,9 @@
           <li class="md-nav__item">
   <a href="#authorization-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      Authorization Settings
+      
+        Authorization Settings
+      
     </span>
   </a>
   
@@ -1459,7 +1647,9 @@
           <li class="md-nav__item">
   <a href="#user-information" class="md-nav__link">
     <span class="md-ellipsis">
-      User information
+      
+        User information
+      
     </span>
   </a>
   
@@ -1468,7 +1658,9 @@
           <li class="md-nav__item">
   <a href="#privileges-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Privileges configuration
+      
+        Privileges configuration
+      
     </span>
   </a>
   
@@ -1477,7 +1669,9 @@
           <li class="md-nav__item">
   <a href="#synchronization" class="md-nav__link">
     <span class="md-ellipsis">
-      Synchronization
+      
+        Synchronization
+      
     </span>
   </a>
   
@@ -1486,7 +1680,9 @@
           <li class="md-nav__item">
   <a href="#debugging" class="md-nav__link">
     <span class="md-ellipsis">
-      Debugging
+      
+        Debugging
+      
     </span>
   </a>
   
@@ -1505,7 +1701,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ldap-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP - Hierarchy
+      
+        Configuring LDAP - Hierarchy
+      
     </span>
   </a>
   
@@ -1515,7 +1713,9 @@
           <li class="md-nav__item">
   <a href="#configuring-ldap-beans-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP Beans (Hierarchy)
+      
+        Configuring LDAP Beans (Hierarchy)
+      
     </span>
   </a>
   
@@ -1529,7 +1729,9 @@
         <li class="md-nav__item">
   <a href="#authentication-cas" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring CAS
+      
+        Configuring CAS
+      
     </span>
   </a>
   
@@ -1538,7 +1740,9 @@
         <li class="md-nav__item">
   <a href="#authentication-openid" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring OAUTH2 OpenID Connect
+      
+        Configuring OAUTH2 OpenID Connect
+      
     </span>
   </a>
   
@@ -1548,7 +1752,9 @@
           <li class="md-nav__item">
   <a href="#environment-variable-and-meaning" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment Variable and Meaning
+      
+        Environment Variable and Meaning
+      
     </span>
   </a>
   
@@ -1557,7 +1763,9 @@
           <li class="md-nav__item">
   <a href="#configuration-for-a-keycloak-server" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration for a Keycloak Server
+      
+        Configuration for a Keycloak Server
+      
     </span>
   </a>
   
@@ -1566,7 +1774,9 @@
           <li class="md-nav__item">
   <a href="#azure-ad-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Azure AD Configuration
+      
+        Azure AD Configuration
+      
     </span>
   </a>
   
@@ -1576,7 +1786,9 @@
           <li class="md-nav__item">
   <a href="#with-users-and-groups" class="md-nav__link">
     <span class="md-ellipsis">
-      With Users and Groups
+      
+        With Users and Groups
+      
     </span>
   </a>
   
@@ -1585,7 +1797,9 @@
           <li class="md-nav__item">
   <a href="#with-application-roles" class="md-nav__link">
     <span class="md-ellipsis">
-      With Application Roles
+      
+        With Application Roles
+      
     </span>
   </a>
   
@@ -1599,7 +1813,9 @@
           <li class="md-nav__item">
   <a href="#oidc_bearer_tokens" class="md-nav__link">
     <span class="md-ellipsis">
-      OIDC Bearer Tokens
+      
+        OIDC Bearer Tokens
+      
     </span>
   </a>
   
@@ -1609,7 +1825,9 @@
           <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
-      Validation
+      
+        Validation
+      
     </span>
   </a>
   
@@ -1618,7 +1836,20 @@
           <li class="md-nav__item">
   <a href="#bearer_token_configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service_account_configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service account Configuration
+      
     </span>
   </a>
   
@@ -1627,7 +1858,9 @@
           <li class="md-nav__item">
   <a href="#other-providers" class="md-nav__link">
     <span class="md-ellipsis">
-      Other Providers
+      
+        Other Providers
+      
     </span>
   </a>
   
@@ -1646,7 +1879,9 @@
         <li class="md-nav__item">
   <a href="#authentication-keycloak" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring Keycloak
+      
+        Configuring Keycloak
+      
     </span>
   </a>
   
@@ -1656,7 +1891,9 @@
           <li class="md-nav__item">
   <a href="#geonetwork-client-url-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Geonetwork client URL configuration
+      
+        Geonetwork client URL configuration
+      
     </span>
   </a>
   
@@ -1665,7 +1902,9 @@
           <li class="md-nav__item">
   <a href="#sample-userrolegroup-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample user/role/group setup
+      
+        Sample user/role/group setup
+      
     </span>
   </a>
   
@@ -1675,7 +1914,9 @@
           <li class="md-nav__item">
   <a href="#sample-role-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample Role setup
+      
+        Sample Role setup
+      
     </span>
   </a>
   
@@ -1684,7 +1925,9 @@
           <li class="md-nav__item">
   <a href="#sample-group-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample Group configuration
+      
+        Sample Group configuration
+      
     </span>
   </a>
   
@@ -1693,7 +1936,9 @@
           <li class="md-nav__item">
   <a href="#sample-user-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample User configuration
+      
+        Sample User configuration
+      
     </span>
   </a>
   
@@ -1701,6 +1946,146 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jwt-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring JWT/JSON Headers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring JWT/JSON Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-headers-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Headers configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JWT Headers configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-name-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Name Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-source-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role Source Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role Conversion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Role Conversion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jwt-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JWT Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-headers-or-geonetwork-database-for-profiles-profile-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Headers or GeoNetwork Database for Profiles &amp; Profile Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-jwt-headers-for-both-oidc-and-oauth2-simultaneously" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using JWT Headers for both OIDC and OAUTH2 (Simultaneously)
+      
+    </span>
+  </a>
   
 </li>
         
@@ -1712,7 +2097,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ecas" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring EU Login
+      
+        Configuring EU Login
+      
     </span>
   </a>
   
@@ -1721,7 +2108,9 @@
         <li class="md-nav__item">
   <a href="#authentication-shibboleth" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring Shibboleth
+      
+        Configuring Shibboleth
+      
     </span>
   </a>
   
@@ -1746,9 +2135,16 @@
       <a href="../creating-group/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Creating group
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1767,9 +2163,16 @@
       <a href="../creating-user/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Creating user
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1788,9 +2191,44 @@
       <a href="../user-self-registration/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     User Self-Registration
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-reset-password/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User 'Forgot your password?' function
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1828,6 +2266,7 @@
       
     
     
+    
       
       
     
@@ -1842,12 +2281,20 @@
         
   
   
+  
     <a href="../../managing-classification-systems/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Classification Systems
+  
+
+    
   </span>
+  
   
 
       
@@ -1883,6 +2330,7 @@
       
     
     
+    
       
       
     
@@ -1895,14 +2343,86 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../managing-metadata-standards/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Metadata Standards
+  
+
+    
   </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../managing-anonymous-links/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Managing Anonymous Links
+  
+
+    
+  </span>
+  
   
 
       
@@ -1948,13 +2468,10 @@
         
       
         
-          
-        
       
         
-          
-        
       
+    
     
     
       
@@ -1969,14 +2486,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../maintainer-guide/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Maintainer Guide
+  
+
+    
   </span>
+  
   
 
       
@@ -2023,6 +2548,7 @@
       
     
     
+    
       
       
     
@@ -2035,14 +2561,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../api/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
       
@@ -2077,6 +2611,7 @@
       
     
     
+    
       
       
     
@@ -2089,14 +2624,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../devel/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Development
+  
+
+    
   </span>
+  
   
 
       
@@ -2133,6 +2676,7 @@
       
     
     
+    
       
       
     
@@ -2145,14 +2689,22 @@
     <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
       
         
+  
   
   
     <a href="../../../tutorials/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
       
@@ -2180,13 +2732,12 @@
         
       
         
-          
-        
       
         
       
         
       
+    
     
     
       
@@ -2203,12 +2754,20 @@
         
   
   
+  
     <a href="../../../annexes/" class="md-nav__link">
       
   
+  
   <span class="md-ellipsis">
+    
+  
     Annexes
+  
+
+    
   </span>
+  
   
 
       
@@ -2251,7 +2810,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ldap" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP
+      
+        Configuring LDAP
+      
     </span>
   </a>
   
@@ -2261,7 +2822,9 @@
           <li class="md-nav__item">
   <a href="#authorization-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      Authorization Settings
+      
+        Authorization Settings
+      
     </span>
   </a>
   
@@ -2271,7 +2834,9 @@
           <li class="md-nav__item">
   <a href="#user-information" class="md-nav__link">
     <span class="md-ellipsis">
-      User information
+      
+        User information
+      
     </span>
   </a>
   
@@ -2280,7 +2845,9 @@
           <li class="md-nav__item">
   <a href="#privileges-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Privileges configuration
+      
+        Privileges configuration
+      
     </span>
   </a>
   
@@ -2289,7 +2856,9 @@
           <li class="md-nav__item">
   <a href="#synchronization" class="md-nav__link">
     <span class="md-ellipsis">
-      Synchronization
+      
+        Synchronization
+      
     </span>
   </a>
   
@@ -2298,7 +2867,9 @@
           <li class="md-nav__item">
   <a href="#debugging" class="md-nav__link">
     <span class="md-ellipsis">
-      Debugging
+      
+        Debugging
+      
     </span>
   </a>
   
@@ -2317,7 +2888,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ldap-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP - Hierarchy
+      
+        Configuring LDAP - Hierarchy
+      
     </span>
   </a>
   
@@ -2327,7 +2900,9 @@
           <li class="md-nav__item">
   <a href="#configuring-ldap-beans-hierarchy" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring LDAP Beans (Hierarchy)
+      
+        Configuring LDAP Beans (Hierarchy)
+      
     </span>
   </a>
   
@@ -2341,7 +2916,9 @@
         <li class="md-nav__item">
   <a href="#authentication-cas" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring CAS
+      
+        Configuring CAS
+      
     </span>
   </a>
   
@@ -2350,7 +2927,9 @@
         <li class="md-nav__item">
   <a href="#authentication-openid" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring OAUTH2 OpenID Connect
+      
+        Configuring OAUTH2 OpenID Connect
+      
     </span>
   </a>
   
@@ -2360,7 +2939,9 @@
           <li class="md-nav__item">
   <a href="#environment-variable-and-meaning" class="md-nav__link">
     <span class="md-ellipsis">
-      Environment Variable and Meaning
+      
+        Environment Variable and Meaning
+      
     </span>
   </a>
   
@@ -2369,7 +2950,9 @@
           <li class="md-nav__item">
   <a href="#configuration-for-a-keycloak-server" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration for a Keycloak Server
+      
+        Configuration for a Keycloak Server
+      
     </span>
   </a>
   
@@ -2378,7 +2961,9 @@
           <li class="md-nav__item">
   <a href="#azure-ad-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Azure AD Configuration
+      
+        Azure AD Configuration
+      
     </span>
   </a>
   
@@ -2388,7 +2973,9 @@
           <li class="md-nav__item">
   <a href="#with-users-and-groups" class="md-nav__link">
     <span class="md-ellipsis">
-      With Users and Groups
+      
+        With Users and Groups
+      
     </span>
   </a>
   
@@ -2397,7 +2984,9 @@
           <li class="md-nav__item">
   <a href="#with-application-roles" class="md-nav__link">
     <span class="md-ellipsis">
-      With Application Roles
+      
+        With Application Roles
+      
     </span>
   </a>
   
@@ -2411,7 +3000,9 @@
           <li class="md-nav__item">
   <a href="#oidc_bearer_tokens" class="md-nav__link">
     <span class="md-ellipsis">
-      OIDC Bearer Tokens
+      
+        OIDC Bearer Tokens
+      
     </span>
   </a>
   
@@ -2421,7 +3012,9 @@
           <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
-      Validation
+      
+        Validation
+      
     </span>
   </a>
   
@@ -2430,7 +3023,20 @@
           <li class="md-nav__item">
   <a href="#bearer_token_configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service_account_configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service account Configuration
+      
     </span>
   </a>
   
@@ -2439,7 +3045,9 @@
           <li class="md-nav__item">
   <a href="#other-providers" class="md-nav__link">
     <span class="md-ellipsis">
-      Other Providers
+      
+        Other Providers
+      
     </span>
   </a>
   
@@ -2458,7 +3066,9 @@
         <li class="md-nav__item">
   <a href="#authentication-keycloak" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring Keycloak
+      
+        Configuring Keycloak
+      
     </span>
   </a>
   
@@ -2468,7 +3078,9 @@
           <li class="md-nav__item">
   <a href="#geonetwork-client-url-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Geonetwork client URL configuration
+      
+        Geonetwork client URL configuration
+      
     </span>
   </a>
   
@@ -2477,7 +3089,9 @@
           <li class="md-nav__item">
   <a href="#sample-userrolegroup-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample user/role/group setup
+      
+        Sample user/role/group setup
+      
     </span>
   </a>
   
@@ -2487,7 +3101,9 @@
           <li class="md-nav__item">
   <a href="#sample-role-setup" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample Role setup
+      
+        Sample Role setup
+      
     </span>
   </a>
   
@@ -2496,7 +3112,9 @@
           <li class="md-nav__item">
   <a href="#sample-group-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample Group configuration
+      
+        Sample Group configuration
+      
     </span>
   </a>
   
@@ -2505,7 +3123,9 @@
           <li class="md-nav__item">
   <a href="#sample-user-configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Sample User configuration
+      
+        Sample User configuration
+      
     </span>
   </a>
   
@@ -2513,6 +3133,146 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jwt-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring JWT/JSON Headers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring JWT/JSON Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-headers-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Headers configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JWT Headers configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Options
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#user-name-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User Name Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-source-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role Source Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#role-conversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role Conversion
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Role Conversion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jwt-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JWT Validation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JWT Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-headers-or-geonetwork-database-for-profiles-profile-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Headers or GeoNetwork Database for Profiles &amp; Profile Groups
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-jwt-headers-for-both-oidc-and-oauth2-simultaneously" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using JWT Headers for both OIDC and OAUTH2 (Simultaneously)
+      
+    </span>
+  </a>
   
 </li>
         
@@ -2524,7 +3284,9 @@
         <li class="md-nav__item">
   <a href="#authentication-ecas" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring EU Login
+      
+        Configuring EU Login
+      
     </span>
   </a>
   
@@ -2533,7 +3295,9 @@
         <li class="md-nav__item">
   <a href="#authentication-shibboleth" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuring Shibboleth
+      
+        Configuring Shibboleth
+      
     </span>
   </a>
   
@@ -2549,14 +3313,16 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
 
+
   
-    <a href="https://github.com/geonetwork/core-geonetwork/edit/main/docs/manual/docs/administrator-guide/managing-users-and-groups/authentication-mode.md" title="Editer cette page" class="md-content__button md-icon">
+    <a href="https://github.com/geonetwork/core-geonetwork/edit/main/docs/manual/docs/administrator-guide/managing-users-and-groups/authentication-mode.md" title="Editer cette page" class="md-content__button md-icon" rel="edit">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
   
   
@@ -2565,7 +3331,7 @@
     
     <a href="https://github.com/geonetwork/core-geonetwork/raw/main/docs/manual/docs/administrator-guide/managing-users-and-groups/authentication-mode.md" title="Consulter la source de cette page" class="md-content__button md-icon">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
@@ -2577,7 +3343,9 @@
 <li><a href="./#authentication-ldap-hierarchy">Configuring LDAP - Hierarchy</a></li>
 <li><a href="./#authentication-cas">Configuring CAS</a></li>
 <li><a href="./#authentication-openid">Configuring OAUTH2 OpenID Connect</a></li>
+<li><a href="./#jwt-headers">Configuring JWT/JSON Headers</a></li>
 <li><a href="./#authentication-keycloak">Configuring Keycloak</a></li>
+<li><a href="./#authentication-ecas">Configuring EU Login</a></li>
 <li><a href="./#authentication-shibboleth">Configuring Shibboleth</a></li>
 </ul>
 <p>Which mode to use is configured in <strong><code>WEB-INF/config-security/config-security.xml</code></strong> or via an environment variable <code>geonetwork.security.type</code>.</p>
@@ -2586,7 +3354,7 @@
 </span></code></pre></div>
 <h2 id="authentication-ldap">Configuring LDAP</h2>
 <p><a href="https://en.wikipedia.org/wiki/Ldap">Lightweight Directory Access Protocol (LDAP)</a> enables GeoNetwork to verify usernames and passwords to a remote identity store. LDAP implementation uses the default GeoNetwork Login User Interface elements.</p>
-<p>GeoNetwork currently has 2 approaches to configure LDAP. Verify also the alternative approach in <a href="./#authentication-ldap-hierarchy">Configuring LDAP - Hierarchy</a>.</p>
+<p>GeoNetwork currently has 2 approaches to configure LDAP. See also the alternative approach in <a href="./#authentication-ldap-hierarchy">Configuring LDAP - Hierarchy</a>.</p>
 <p>The LDAP configuration is defined in <code>WEB-INF/config-security/config-security.properties</code>, you can then configure your environment updating the previous file or overriding the properties in the file <code>WEB-INF/config-security/config-security-overrides.properties</code>.</p>
 <ol>
 <li>
@@ -2594,7 +3362,7 @@
 <ul>
 <li><code>ldap.base.provider.url</code>: This tells the portal where the LDAP server is located. Make sure that the computer with the catalog can hit the computer with the LDAP server. Check to make sure that the appropriate ports are opened, etc.</li>
 <li><code>ldap.base.dn</code>: this will usually look something like: "dc=[organizationnamehere],dc=org"</li>
-<li><code>ldap.security.principal</code> / <code>ldap.security.credentials</code>: Define LDAP administrator user to use to bind to LDAP. If not define, an anonymous bind is made. Principal is the username and credentials property the password.</li>
+<li><code>ldap.security.principal</code> / <code>ldap.security.credentials</code>: Define LDAP administrator user to use to bind to LDAP. If not defined, an anonymous bind is made. Principal is the username and credentials property the password.</li>
 </ul>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># LDAP security properties
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ldap.base.provider.url=ldap://localhost:389
@@ -2635,13 +3403,13 @@
 </span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>ldapUserContextMapper.mapping[country]=,
 </span></code></pre></div>
 <h4 id="privileges-configuration">Privileges configuration</h4>
-<p>User groups and user profiles could be set optionally from LDAP information or not. By default user privileges are managed from the local database. If LDAP information should be used to define user privileges, set the <code>ldap.privilege.import</code> property <code>true</code>:</p>
+<p>User groups and user profiles can be set from LDAP information, or left to the local database. By default, user privileges are managed from the local database. If LDAP information should be used to define user privileges, set the <code>ldap.privilege.import</code> property <code>true</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ldap.privilege.import=true
 </span></code></pre></div>
-<p>When importing privileges from LDAP, the catalog administrator could decide to create groups defined in the LDAP and not defined in local database. For this set the following property to true:</p>
+<p>When importing privileges from LDAP, the catalog administrator can decide to create groups defined in the LDAP and not defined in the local database. For this set the following property to true:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ldap.privilege.create.nonexisting.groups=false
 </span></code></pre></div>
-<p>In order to define which groups the user is member of and which profile is the user:</p>
+<p>To specify which groups the user belongs to and what profile the user has:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ldapUserContextMapper.mapping[privilege]=groups,sample
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a># If not set, the default profile is RegisteredUser
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a># Valid profiles are ADMINISTRATOR, USER_ADMIN, REVIEWER, EDITOR, REGISTERED_USER, GUEST
@@ -2649,8 +3417,8 @@
 </span></code></pre></div>
 <p>Attributes configuration:</p>
 <ul>
-<li>privilege attribute contains the group this user is member of. More than one group is allowed.</li>
-<li>profile attribute contains the profile of the user.</li>
+<li>The privilege attribute contains the group this user is a member of. More than one group is allowed.</li>
+<li>The profile attribute contains the profile of the user.</li>
 </ul>
 <p>User valid profiles are:</p>
 <ul>
@@ -2762,7 +3530,7 @@
 <li>T0: User A signs in to the catalog. A local user A is created in the user database.</li>
 <li>T1: User A is deleted from the LDAP (User A cannot sign in to the catalog anymore).</li>
 <li>T2: The synchronization task will check that all local LDAP users exist in LDAP:<ul>
-<li>If the user does not own any records, it will be deleted.</li>
+<li>If the user does not own any records, they will be deleted.</li>
 <li>If the user owns metadata records, a warning message will be written to the catalog logging system. The owner of the record should be changed to another user before the task can remove the current owner.</li>
 </ul>
 </li>
@@ -2791,7 +3559,7 @@
 <h2 id="authentication-ldap-hierarchy">Configuring LDAP - Hierarchy</h2>
 <p>A slightly different method for LDAP configuration was introduced in mid-2020.</p>
 <p>This extends the original configuration infrastructure (original configurations still work without any changes).</p>
-<p>Before you start configuring, you will need to know;</p>
+<p>Before you start configuring, you will need to know:</p>
 <ol>
 <li>URL to your LDAP Server</li>
 <li>Username/password to login to the LDAP Server (to execute queries)</li>
@@ -2811,7 +3579,7 @@
 <p>If you are starting a new configuration, I would recommend the Hierarchy configuration. It's a little simpler and supported by test cases and test infrastructure. It also supports LDAPs where users/groups are in multiple directories.</p>
 </div>
 <h3 id="configuring-ldap-beans-hierarchy">Configuring LDAP Beans (Hierarchy)</h3>
-<p>GeoNetwork comes with a sample LDAP configuration that you can use in Apache Directory Studio to create the same LDAP server used in the test cases. There is also a sample GeoNetwork configuration that connects to this LDAP server. Please see <code class="interpreted-text" role="repo">core-geonetwork/blob/master/core/src/test/resources/org/fao/geonet/kernel/security/ldap/README.md</code> or the <a href="https://www.youtube.com/watch?v=f8rvbEdnE-g">video developer chat</a> for instructions.</p>
+<p>GeoNetwork comes with a sample LDAP configuration that you can use in Apache Directory Studio to create the same LDAP server used in the test cases. There is also a sample GeoNetwork configuration that connects to this LDAP server. Please see the <a href="https://github.com/geonetwork/core-geonetwork/blob/main/core/src/test/resources/org/fao/geonet/kernel/security/ldap/README.md">LDAP README</a> or the <a href="https://www.youtube.com/watch?v=f8rvbEdnE-g">video developer chat</a> for instructions.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>To use this configuration, uncomment the "<import resource="config-security-ldap-recursive.xml"/>" line in <code>web/src/main/webapp/WEB-INF/config-security/config-security.xml</code></p>
@@ -2829,7 +3597,10 @@
 </li>
 <li>
 <p>Configure the <code>ldapUserSearch</code> bean with the query used to find the user (given what was typed in the login page).</p>
-<p>NOTE: Set <code>searchSubtree</code> to <code>true</code> to do a recursive search of the LDAP. Use <code>searchBase</code> to control which directory the search starts in ("" means start from the root).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Set <code>searchSubtree</code> to <code>true</code> to do a recursive search of the LDAP. Use <code>searchBase</code> to control which directory the search starts in (<code>""</code> means start from the root).</p>
+</div>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;ldapUserSearch&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;…&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">   </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;searchBase&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;&quot;</span><span class="nt">/&gt;</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">   </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;searchFilter&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;(sAMAccountName={0})&quot;</span><span class="nt">/&gt;</span>
@@ -2841,7 +3612,10 @@
 </li>
 <li>
 <p>Configure the <code>ldapUserContextMapper</code> bean with how to convert the LDAP user's attributes to GeoNetwork user attributes (see the original configuration documentation, above).</p>
-<p>NOTE: The <code>value</code> portion has two parts. The first part is the name of LDAP attribute (can be blank). The second part is the default value if the LDAP attribute is missing or empty (see the original configuration documentation, above).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>value</code> portion has two parts. The first part is the name of LDAP attribute (can be blank). The second part is the default value if the LDAP attribute is missing or empty (see the original configuration documentation, above).</p>
+</div>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;ldapUserContextMapper&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">“LDAPUserDetailsContextMapperWithProfileSearchEnhanced&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mapping&quot;</span><span class="nt">&gt;</span>
@@ -2866,7 +3640,10 @@
 </li>
 <li>
 <p>Continue configuring the <code>ldapUserContextMapper</code> bean so the LDAP can also provide group/profile roles for the user.</p>
-<p>NOTE: The <code>ldapMembershipQuery</code> is the LDAP directory where the membership query will be start ("" means start at the root of the LDAP).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>membershipSearchStartObject</code> is the LDAP directory where the membership query will start (<code>""</code> means start at the root of the LDAP).</p>
+</div>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;ldapUserContextMapper&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;LDAPUserDetailsContextMapperWithProfileSearchEnhanced&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;importPrivilegesFromLdap&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">“true&quot;/</span><span class="nt">&gt;</span>
@@ -2884,7 +3661,10 @@
 </li>
 <li>
 <p>Continue configuring the <code>ldapUserContextMapper</code> bean so the LDAP roles can be converted to GeoNetwork Groups/Profiles.</p>
-<p>NOTE: You can use multiple <code>ldapRoleConverters</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use multiple <code>ldapRoleConverters</code>.</p>
+</div>
 <div class="language-xml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;ldapUserContextMapper&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;LDAPUserDetailsContextMapperWithProfileSearchEnhanced&quot;</span><span class="nt">&gt;</span>
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">   </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;ldapRoleConverters&quot;</span><span class="nt">&gt;</span>
@@ -2972,12 +3752,12 @@
 </span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>cas.logout.url=${cas.baseURL}/logout?url=${geonetwork.https.url}/
 </span></code></pre></div>
 <h2 id="authentication-openid">Configuring OAUTH2 OpenID Connect</h2>
-<p><a href="https://openid.net/connect/">OAUTH2 OpenID Connect</a> is an authentication and authorization system based on OAUTH2. Geonetwork's OpenID Connect plugin has been tested with <a href="https://keycloak.org">Keycloak</a> and <a href="https://azure.microsoft.com/en-ca/services/active-directory/">Azure AD</a>, but should work with any provider.</p>
+<p><a href="https://openid.net/connect/">OAUTH2 OpenID Connect</a> is an authentication and authorization system based on OAUTH2. GeoNetwork's OpenID Connect plugin has been tested with <a href="https://keycloak.org">Keycloak</a> and <a href="https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id">Microsoft Entra ID</a> (formerly Azure AD), but should work with any provider.</p>
 <p>Basic Setup Steps:</p>
 <ol>
 <li>Configure your IDP Server (i.e. Keycloak or Azure AD)<ol>
 <li>Ensure that the ID Token provides role/group information</li>
-<li>Authorize your Geonetwork URLs for redirects (i.e. <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oicd</code>)</li>
+<li>Authorize your Geonetwork URLs for redirects (i.e. <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oidc</code>)</li>
 <li>Record the Client ID</li>
 <li>Record the Client Secret</li>
 <li>Get the Server's JSON metadata document</li>
@@ -2985,14 +3765,14 @@
 </li>
 <li>Configure Geonetwork via environment variables<ol>
 <li><code>GEONETWORK_SECURITY_TYPE=openidconnect</code></li>
-<li><code>OPENIDCONNECT_CLIENTSECRET=\...</code> (from your IDP server)</li>
-<li><code>OPENIDCONNECT_CLIENTID=\...</code> (from your IDP server)</li>
-<li><code>OPENIDCONNECT_SERVERMETADATA_JSON_TEXT='\...'</code> (the text of your Server's JSON metadata document)</li>
-<li><code>OPENIDCONNECT_IDTOKENROLELOCATION=\...</code> (location of the user's roles in the ID Token)</li>
+<li><code>OPENIDCONNECT_CLIENTSECRET=...</code> (from your IDP server)</li>
+<li><code>OPENIDCONNECT_CLIENTID=...</code> (from your IDP server)</li>
+<li><code>OPENIDCONNECT_SERVERMETADATA_JSON_TEXT='...'</code> (the text of your Server's JSON metadata document)</li>
+<li><code>OPENIDCONNECT_IDTOKENROLELOCATION=...</code> (location of the user's roles in the ID Token)</li>
 </ol>
 </li>
 </ol>
-<p>Geonetwork's Open ID Connect plugin has a lot of configuration options - please see the <code>WEB-INF/config-security/config-security-openidconnect.xml</code> and <code>WEB-INF/config-security/config-security-openidconnect-overrides.properties</code> files.</p>
+<p>GeoNetwork's Open ID Connect plugin has a lot of configuration options - please see the <code>WEB-INF/config-security/config-security-openidconnect.xml</code> and <code>WEB-INF/config-security/config-security-openidconnect-overrides.properties</code> files.</p>
 <h3 id="environment-variable-and-meaning">Environment Variable and Meaning</h3>
 <p><strong>GEONETWORK_SECURITY_TYPE</strong></p>
 <p>Should be <code>openidconnect</code>.</p>
@@ -3024,10 +3804,10 @@
 <p>Every user who authenticates against the OpenID server will be given this role.</p>
 <p>Default is <code>"RegisteredUser"</code>.</p>
 <p><strong>OPENIDCONNECT_USERPROFILEUPDATEENABLED</strong></p>
-<p>When a user logs on, update their Geotwork profile from the OpenID server's ID Token.</p>
+<p>When a user logs on, update their GeoNetwork profile from the OpenID server's ID Token.</p>
 <p>Default is <code>"true"</code>.</p>
 <p><strong>OPENIDCONNECT_USERGROUPUPDATEENABLED</strong></p>
-<p>When a user logs on, update their Geotwork group/role permissions.</p>
+<p>When a user logs on, update their GeoNetwork group/role permissions.</p>
 <p>Default is <code>"true"</code>.</p>
 <p><strong>OPENIDCONNECT_SCOPES</strong></p>
 <p>Limit the requested scope access to the OpenID server.</p>
@@ -3043,7 +3823,7 @@
 <p>We try not to log very sensitive information - we don't log the full access or id token (just the claims part). We log the single-use CODE, but it should have already been deactivated by the server before we log it.</p>
 <p>The access token, userinfo, and id token contain sensitive information (i.e. real names, email address, etc...)</p>
 <h3 id="configuration-for-a-keycloak-server">Configuration for a Keycloak Server</h3>
-<p>It's outside the scope of this document to fully describe the steps to configure keycloak, but this should serve as a guide.</p>
+<p>It's outside the scope of this document to fully describe the steps to configure Keycloak, but this should serve as a guide.</p>
 <p>This will configure keycloak backed by <strong>another OpenID IDP</strong> (for example, by an Azure AD). In keycloak:</p>
 <ol>
 <li>Create a realm (i.e. <code>myrealm</code>)</li>
@@ -3080,7 +3860,7 @@
 </li>
 </ol>
 <p>You should have Keycloak's Client id ("myclient") and the client secret. The configuration JSON is available at <code>https://YOUR_KEYCLOAK_HOST/realms/{YOUR REALM NAME}/.well-known/openid-configuration</code></p>
-<p>Your environment variables will looks like this:</p>
+<p>Your environment variables will look like this:</p>
 <div class="language-properties highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="na">GEONETWORK_SECURITY_TYPE</span><span class="o">=</span><span class="s">openidconnect</span>
 </span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="na">OPENIDCONNECT_CLIENTSECRET</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
 </span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="na">OPENIDCONNECT_CLIENTID</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
@@ -3093,7 +3873,7 @@
 <p>Setup the Azure Application:</p>
 <ol>
 <li>Create a new <code>App Registration</code></li>
-<li>use <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oicd</code> as a redirect URIs</li>
+<li>use <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oidc</code> as a redirect URIs</li>
 <li>On the "Certificates &amp; Secrets" add a new secret and record it (make sure you get the secret value and NOT the object id)</li>
 <li>Make sure the groups are in the ID token - on the "Manifest" tab, edit the JSON so that "groupMembershipClaims": "SecurityGroup" is set</li>
 <li>On the summary page, get the Application (client) ID</li>
@@ -3105,7 +3885,7 @@
 <li>Add new Groups - "geonetworkAdmin", "geonetworkReviewer", etc... Record the name and the group's <strong>Object ID</strong></li>
 <li>Edit a User, and choose Groups, and add them to appropriate group.</li>
 </ol>
-<p>Your environment variables will looks like this:</p>
+<p>Your environment variables will look like this:</p>
 <div class="language-properties highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="na">GEONETWORK_SECURITY_TYPE</span><span class="o">=</span><span class="s">openidconnect</span>
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="na">OPENIDCONNECT_CLIENTSECRET</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="na">OPENIDCONNECT_CLIENTID</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
@@ -3125,7 +3905,7 @@
 <p>Setup the Azure Application:</p>
 <ol>
 <li>Create a new Enterprise application</li>
-<li>use <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oicd</code> as a redirect URIs</li>
+<li>use <code>http://localhost:8080/geonetwork/login/oauth2/code/geonetwork-oidc</code> as a redirect URIs</li>
 <li>On the "Certificates &amp; Secrets" add a new secret and record it (make sure you get the secret value and NOT the object id)</li>
 <li>Make sure the groups are in the ID token - on the "Manifest" tab, edit the JSON so that "groupMembershipClaims": "ApplicationGroup" is set</li>
 <li>On the summary page, get the Application (client) ID</li>
@@ -3145,7 +3925,7 @@
 <li>Press "None Selected" (Under Select a Role) and choose some roles</li>
 <li>Configure all your users with roles</li>
 </ol>
-<p>Your environment variables will looks like this:</p>
+<p>Your environment variables will look like this:</p>
 <div class="language-properties highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="na">GEONETWORK_SECURITY_TYPE</span><span class="o">=</span><span class="s">openidconnect</span>
 </span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="na">OPENIDCONNECT_CLIENTSECRET</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
 </span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="na">OPENIDCONNECT_CLIENTID</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
@@ -3189,6 +3969,22 @@
 <li>If you are using Azure AD (MS Graph API for the user's groups), then then uncomment the <code>MSGraphUserRolesResolver</code> bean and comment out the <code>UserInfoAccessTokenRolesResolver</code> bean.</li>
 </ol>
 <p>The easiest way to test is to obtain a Bearer Token, and then use a browser plugin to add the <code>Authorization: Bearer &lt;token&gt;</code> header to all requests. When you visit the Geonetwork website, you should see yourself logged in with the appropriate permissions.</p>
+<h4 id="service_account_configuration">Service account Configuration</h4>
+<p>If using background jobs such as harvester and there is a requirement to connect to external services which are also authenticated by the same provider then service accounts may be required.</p>
+<p>To enable service accounts use <code>OPENIDCONNECT_SERVICE_ACCOUNT_ENABLED=true</code>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will currently only work with <code>GEONETWORK_SECURITY_TYPE=openidconnectbearer</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The service account client must be configured in the IDP to allow the <code>client_credentials</code> grant type.</p>
+</div>
+<p>By default the same client as used for user authentication will be used for service accounts. To configure a different client for service accounts then use the following environment variables:</p>
+<p><div class="language-properties highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="na">OPENIDCONNECT_SERVICE_ACCOUNT_CLIENTSECRET</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="na">OPENIDCONNECT_SERVICE_ACCOUNT_CLIENTID</span><span class="o">=</span><span class="s">&#39;...&#39;</span>
+</span></code></pre></div>
+If special scope is required for the service account then the following environment variable can be used <code>OPENIDCONNECT_SERVICE_ACCOUNT_SCOPES</code></p>
 <h4 id="other-providers">Other Providers</h4>
 <p>This has been tested with Azure AD (groups in the MS Graph API) and KeyCloak (groups in the <code>userinfo</code>).</p>
 <p>For other IDP, you might have to make some modifications.</p>
@@ -3198,13 +3994,13 @@
 </ol>
 <h2 id="authentication-keycloak">Configuring Keycloak</h2>
 <p><a href="https://keycloak.org">Keycloak</a> is a software solution to facilitate storage of authentication details, user federation, identity brokering and social login. GeoNetwork can be set up to use a keycloak instance for authentication.</p>
-<p>Install keycloak from its instructions or use this example setup in docker <a href="https://www.keycloak.org/getting-started/getting-started-docker">https://www.keycloak.org/getting-started/getting-started-docker</a></p>
+<p>Install Keycloak from its instructions or use the <a href="https://www.keycloak.org/getting-started/getting-started-docker">Getting started with Keycloak on Docker</a> guide.</p>
 <p>Keycloak details are defined via environment variables</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>KEYCLOAK_AUTH_SERVER_URL={keycloak url}
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>KEYCLOAK_REALM={realm name}
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>KEYCLOAK_RESOURCE={client name}
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>KEYCLOAK_SECRET={client secret}
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>KEYCLOAK_DISABLE_TRUST_MANAGER={true|false}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>KEYCLOAK_AUTH_SERVER_URL={keycloak url}
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>KEYCLOAK_REALM={realm name}
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>KEYCLOAK_RESOURCE={client name}
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>KEYCLOAK_SECRET={client secret}
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>KEYCLOAK_DISABLE_TRUST_MANAGER={true|false}
 </span></code></pre></div>
 <p>You can setup more advance keycloak settings by editing the file <strong><code>WEB-INF/config-security/keycloak.json</code></strong></p>
 <h3 id="geonetwork-client-url-configuration">Geonetwork client URL configuration</h3>
@@ -3212,13 +4008,13 @@
 <h3 id="sample-userrolegroup-setup">Sample user/role/group setup</h3>
 <h4 id="sample-role-setup">Sample Role setup</h4>
 <p>In your client role settings (clients -&gt; myclient -&gt; roles). Add the following roles</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Administrator
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>RegisteredUser
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>Guest
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>sample:UserAdmin
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>sample:Reviewer
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>sample:Editor
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>sample:RegisteredUser
+<div class="language-text highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Administrator
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>RegisteredUser
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Guest
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>sample:UserAdmin
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>sample:Reviewer
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>sample:Editor
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>sample:RegisteredUser
 </span></code></pre></div>
 <h4 id="sample-group-configuration">Sample Group configuration</h4>
 <ol>
@@ -3232,20 +4028,294 @@
 <li>Add or select existing user. Then go to that user.</li>
 <li>Go to role Mappings -&gt; Client Roles (myclient) -&gt; select the available roles to be applied and click on "Add selected" or go to Groups -&gt; Available Groups -&gt; Click on the Administrator Group and then click on "Join"</li>
 </ol>
-<p>A similar setup is described for geoserver in the <a href="https://docs.geoserver.org/latest/en/user/community/keycloak/index.html">geoserver documentation</a>.</p>
+<p>A similar setup is described for GeoServer in the <a href="https://docs.geoserver.org/latest/en/user/community/oidc/oauth2/keycloak/">GeoServer documentation</a>.</p>
+<h2 id="jwt-headers">Configuring JWT/JSON Headers</h2>
+<p>The JWT Headers module provides a security module for header based security. It is equivalent to GeoServer's JWT Headers Module (both GeoServer and GeoNetwork share a code library to make them equivalent). </p>
+<p>This module allows  <a href="https://en.wikipedia.org/wiki/JSON">JSON-based</a> headers (for username and roles) as well as <a href="https://en.wikipedia.org/wiki/JSON_Web_Token">JWT-based</a> headers (for username and roles). It also allows for validating JWT-based access tokens (i.e. via <a href="https://en.wikipedia.org/wiki/OAuth">OAUTH2</a>/<a href="https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)">OpenID Connect</a>).</p>
+<p>If you are using something like <a href="https://github.com/OpenIDC/mod_auth_openidc">Apache's mod_auth_openidc</a>, then this module will allow you to;</p>
+<ol>
+<li>Get the username from an Apache-provided <code>OIDC_*</code> header (either as simple-strings or as a component of a JSON object).</li>
+<li>Get the user's roles from an Apache-provided <code>OIDC_*</code> header (as a component of a JSON object).</li>
+<li>The user's roles can also come from the GeoNetwork Database (managed by the administrator in the GeoNetwork GUI).</li>
+</ol>
+<p>If you are using <a href="https://www.oauth.com/oauth2-servers/access-tokens/">OAUTH2/OIDC Access Tokens</a>:</p>
+<ol>
+<li>Get the username from the attached JWT Access Token (via a path into the <a href="https://auth0.com/docs/authenticate/login/oidc-conformant-authentication/oidc-adoption-access-tokens/">Access Token's JSON Claims</a>).</li>
+<li>Get the user's roles from the JWT Access Token (via a path into the Token's JSON Claims).</li>
+<li>
+<p>Validate the Access Token</p>
+</li>
+<li>
+<p>Validate its Signature</p>
+</li>
+<li>Validate that it hasn't expired</li>
+<li>Validate the token against a token verifier URL ("userinfo_endpoint") and check that subjects match</li>
+<li>
+<p>Validate components of the Access Token (like <a href="https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims">aud (audience)</a>)</p>
+</li>
+<li>
+<p>The user's roles can also come from the GeoNetwork Database (managed by the administrator in the GeoNetwork GUI).</p>
+</li>
+<li>You can also extract roles from the JWT Access Token (via a JSON path).</li>
+</ol>
+<h3 id="jwt-headers-configuration">JWT Headers configuration</h3>
+<p>The JWT Headers module covers three main use cases:</p>
+<ol>
+<li>Simple Text, JSON, or JWT headers for the username</li>
+<li>Verification of JWT Access Tokens</li>
+<li>Getting roles from a JSON header or an attached JWT Access Token claim</li>
+</ol>
+<h4 id="configuration-options">Configuration Options</h4>
+<p>You must turn on JWT Header Support by setting the <code>GEONETWORK_SECURITY_TYPE</code> environment variable to <code>jwt-headers</code>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>GEONETWORK_SECURITY_TYPE=jwt-headers
+</span></code></pre></div>
+<p>Please see these files for more detailed configuration:
+* <code>config-security-jwt-header.xml</code>
+* <code>config-security-jwt-header-overrides.properties</code></p>
+<h5 id="user-name-options">User Name Options</h5>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JWTHEADERS_UserNameHeaderFormat</td>
+<td>The name of the HTTP header item that contains the user name.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_UserNameFormat</td>
+<td>Format that the user name is in: <br> <code>STRING</code> - user name is the header's value.<br><code>JSON</code> - The header is a JSON string.  Use "JSON path" for where the user name is in the JSON. <br> <code>JWT</code> -  The header is a JWT (base64) string.  Use "JSON path" for where the user name is in the JWT claims.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_UserNameJsonPath</td>
+<td>JSON path for the User Name. If the user name is in JSON or JWT format, this is the JSON path to the user's name.</td>
+</tr>
+</tbody>
+</table>
+<p>If you are using <a href="https://github.com/OpenIDC/mod_auth_openidc">Apache's mod_auth_openidc</a>, then Apache will typically add:</p>
+<ul>
+<li>an <code>OIDC_id_token_payload</code> header item (containing a JSON string of the ID token claims)</li>
+<li>an <code>OIDC_access_token</code> header item (containing a base64 JWT Access Token)</li>
+<li>optionally, a simple header item with individual claim values (i.e. <code>OIDC_access_token</code>)</li>
+</ul>
+<p>Here are some example values;</p>
+<p>STRING
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>OIDC_preferred_username: david.blasby@geocat.net
+</span></code></pre></div></p>
+<p>JSON
+<div class="language-text highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>OIDC_id_token_payload: {&quot;exp&quot;:1708555947,&quot;iat&quot;:1708555647,&quot;auth_time&quot;:1708555288,&quot;jti&quot;:&quot;42ee833e-89d3-4779-bd9d-06b979329c9f&quot;,&quot;iss&quot;:&quot;http://localhost:7777/realms/dave-test2&quot;,&quot;aud&quot;:&quot;live-key2&quot;,&quot;sub&quot;:&quot;98cfe060-f980-4a05-8612-6c609219ffe9&quot;,&quot;typ&quot;:&quot;ID&quot;,&quot;azp&quot;:&quot;live-key2&quot;,&quot;nonce&quot;:&quot;4PhqmZSJ355KBtJPbAP_PdwqiLnc7B1lA2SGpB0zXr4&quot;,&quot;session_state&quot;:&quot;7712b364-339a-4053-ae0c-7d3adfca9005&quot;,&quot;at_hash&quot;:&quot;2Tyw8q4ZMewuYrD38alCug&quot;,&quot;acr&quot;:&quot;0&quot;,&quot;sid&quot;:&quot;7712b364-339a-4053-ae0c-7d3adfca9005&quot;,&quot;upn&quot;:&quot;david.blasby@geocat.net&quot;,&quot;resource_access&quot;:{&quot;live-key2&quot;:{&quot;roles&quot;:[&quot;GeonetworkAdministrator&quot;,&quot;GeoserverAdministrator&quot;]}},&quot;email_verified&quot;:false,&quot;address&quot;:{},&quot;name&quot;:&quot;david blasby&quot;,&quot;groups&quot;:[&quot;default-roles-dave-test2&quot;,&quot;offline_access&quot;,&quot;uma_authorization&quot;],&quot;preferred_username&quot;:&quot;david.blasby@geocat.net&quot;,&quot;given_name&quot;:&quot;david&quot;,&quot;family_name&quot;:&quot;blasby&quot;,&quot;email&quot;:&quot;david.blasby@geocat.net&quot;}
+</span></code></pre></div></p>
+<p>JWT
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>OIDC_access_token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICItb0QyZXphcjF3ZHBUUmZCS0NqMFY4cm5ZVkJGQmxJLW5ldzFEREJCNTJrIn0.eyJleHAiOjE3MDg1NTU5NDcsImlhdCI6MTcwODU1NTY0NywiYXV0aF90aW1lIjoxNzA4NTU1Mjg4LCJqdGkiOiI0M2UyYjUwZS1hYjJkLTQ2OWQtYWJjOC01Nzc1YTY0MTMwNTkiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0Ojc3NzcvcmVhbG1zL2RhdmUtdGVzdDIiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiOThjZmUwNjAtZjk4MC00YTA1LTg2MTItNmM2MDkyMTlmZmU5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibGl2ZS1rZXkyIiwibm9uY2UiOiI0UGhxbVpTSjM1NUtCdEpQYkFQX1Bkd3FpTG5jN0IxbEEyU0dwQjB6WHI0Iiwic2Vzc2lvbl9zdGF0ZSI6Ijc3MTJiMzY0LTMzOWEtNDA1My1hZTBjLTdkM2FkZmNhOTAwNSIsImFjciI6IjAiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiZGVmYXVsdC1yb2xlcy1kYXZlLXRlc3QyIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImxpdmUta2V5MiI6eyJyb2xlcyI6WyJHZW9uZXR3b3JrQWRtaW5pc3RyYXRvciIsIkdlb3NlcnZlckFkbWluaXN0cmF0b3IiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHBob25lIG9mZmxpbmVfYWNjZXNzIG1pY3JvcHJvZmlsZS1qd3QgcHJvZmlsZSBhZGRyZXNzIGVtYWlsIiwic2lkIjoiNzcxMmIzNjQtMzM5YS00MDUzLWFlMGMtN2QzYWRmY2E5MDA1IiwidXBuIjoiZGF2aWQuYmxhc2J5QGdlb2NhdC5uZXQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFkZHJlc3MiOnt9LCJuYW1lIjoiZGF2aWQgYmxhc2J5IiwiZ3JvdXBzIjpbImRlZmF1bHQtcm9sZXMtZGF2ZS10ZXN0MiIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXSwicHJlZmVycmVkX3VzZXJuYW1lIjoiZGF2aWQuYmxhc2J5QGdlb2NhdC5uZXQiLCJnaXZlbl9uYW1lIjoiZGF2aWQiLCJmYW1pbHlfbmFtZSI6ImJsYXNieSIsImVtYWlsIjoiZGF2aWQuYmxhc2J5QGdlb2NhdC5uZXQifQ.Iq8YJ99s_HBd-gU2zaDqGbJadCE--7PlS2kRHaegYTil7WoNKfjfcH-K-59mHGzJm-V_SefE-iWG63z2c6ChddzhvG8I_O5vDNFoGlGOQFunZC379SqhqhCEdwscEUDkNA3iTTXvK9vn0muStDiv9OzpJ1zcpqYqsgxGbolGgLJgeuK8yNDH7kzDtoRzHiHw2rx4seeVpxUYAjyg_cCkEjRt3wzud7H3xlfQWRx75YfpJ0pnVphuXYR7Z8x9p6hCPtrBfDeriudm-wkwXtcV2LNlXrZ2zpKS_6Zdxzza2lN30q_6DQXHGo8EAIr8SiiQrxPQulNiX9r8XmQ917Ep0g
+</span></code></pre></div></p>
+<p>It is recommended to either use the <code>OIDC_id_token_payload</code> (JSON) or <code>OIDC_access_token</code> (JWT) header.</p>
+<p>For <code>OIDC_id_token_payload</code>:</p>
+<ul>
+<li>Request header attribute for User Name: <code>OIDC_id_token_payload</code></li>
+<li>Format the Header value is in: <code>JSON</code></li>
+<li>JSON path for the User Name: <code>preferred_username</code></li>
+</ul>
+<p>For <code>OIDC_access_token</code>:</p>
+<ul>
+<li>Request header attribute for User Name: <code>OIDC_access_token</code></li>
+<li>Format the Header value is in: <code>JWT</code></li>
+<li>JSON path for the User Name: <code>preferred_username</code></li>
+</ul>
+<h4 id="role-source-options">Role Source Options</h4>
+<p>You can use the standard role source options in GeoNetwork (<code>Request Header</code>, <code>User Group Service</code>, or <code>Role Service</code>).  The JWT Headers module adds two more role sources - <code>Header Containing JSON String</code> and <code>Header containing JWT</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JWTHEADERS_RolesHeaderName</td>
+<td>Name of the header item the JSON or JWT is contained in</td>
+</tr>
+<tr>
+<td>JWTHEADERS_JwtHeaderRoleSource</td>
+<td>Which Role Source to use:<br> <code>JSON</code> - The header is a JSON string.  Use "JSON path" for where the roles are in the JSON. <br> <code>JWT</code> -  The header is a JWT (base64) string.  Use "JSON path" for where the roles are in the JWT claims.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_RolesJsonPath</td>
+<td>Path in the JSON object or JWT claims that contains the roles.  This should either be a simple string (single role) or a list of strings.</td>
+</tr>
+</tbody>
+</table>
+<p>Using the example <code>OIDC_id_token_payload</code> (JSON) or <code>OIDC_access_token</code> (JWT) shown above, the claims are:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>   {
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>       &quot;exp&quot;: 1708555947,
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>       &quot;iat&quot;: 1708555647,
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>       &quot;auth_time&quot;: 1708555288,
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>       &quot;jti&quot;: &quot;42ee833e-89d3-4779-bd9d-06b979329c9f&quot;,
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>       &quot;iss&quot;: &quot;http://localhost:7777/realms/dave-test2&quot;,
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>       &quot;aud&quot;: &quot;live-key2&quot;,
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>       &quot;sub&quot;: &quot;98cfe060-f980-4a05-8612-6c609219ffe9&quot;,
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>       &quot;typ&quot;: &quot;ID&quot;,
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>       &quot;azp&quot;: &quot;live-key2&quot;,
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>       &quot;nonce&quot;: &quot;4PhqmZSJ355KBtJPbAP_PdwqiLnc7B1lA2SGpB0zXr4&quot;,
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>       &quot;session_state&quot;: &quot;7712b364-339a-4053-ae0c-7d3adfca9005&quot;,
+</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>       &quot;at_hash&quot;: &quot;2Tyw8q4ZMewuYrD38alCug&quot;,
+</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a>       &quot;acr&quot;: &quot;0&quot;,
+</span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a>       &quot;sid&quot;: &quot;7712b364-339a-4053-ae0c-7d3adfca9005&quot;,
+</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a>       &quot;upn&quot;: &quot;david.blasby@geocat.net&quot;,
+</span><span id="__span-37-17"><a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a>       &quot;resource_access&quot;:
+</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a>       {
+</span><span id="__span-37-19"><a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a>           &quot;live-key2&quot;:
+</span><span id="__span-37-20"><a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a>           {
+</span><span id="__span-37-21"><a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a>                &quot;roles&quot;: 
+</span><span id="__span-37-22"><a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a>                    [
+</span><span id="__span-37-23"><a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a>                        &quot;GeonetworkAdministrator&quot;, 
+</span><span id="__span-37-24"><a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a>                        &quot;GeoserverAdministrator&quot;
+</span><span id="__span-37-25"><a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a>                    ]
+</span><span id="__span-37-26"><a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a>           }
+</span><span id="__span-37-27"><a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a>       },
+</span><span id="__span-37-28"><a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a>       &quot;email_verified&quot;: false,
+</span><span id="__span-37-29"><a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a>       &quot;address&quot;: { },
+</span><span id="__span-37-30"><a id="__codelineno-37-30" name="__codelineno-37-30" href="#__codelineno-37-30"></a>       &quot;name&quot;: &quot;david blasby&quot;,
+</span><span id="__span-37-31"><a id="__codelineno-37-31" name="__codelineno-37-31" href="#__codelineno-37-31"></a>       &quot;groups&quot;: [&quot;default-roles-dave-test2&quot;, &quot;offline_access&quot;, &quot;uma_authorization&quot;],
+</span><span id="__span-37-32"><a id="__codelineno-37-32" name="__codelineno-37-32" href="#__codelineno-37-32"></a>       &quot;preferred_username&quot;: &quot;david.blasby@geocat.net&quot;,
+</span><span id="__span-37-33"><a id="__codelineno-37-33" name="__codelineno-37-33" href="#__codelineno-37-33"></a>       &quot;given_name&quot;: &quot;david&quot;,
+</span><span id="__span-37-34"><a id="__codelineno-37-34" name="__codelineno-37-34" href="#__codelineno-37-34"></a>       &quot;family_name&quot;: &quot;blasby&quot;,
+</span><span id="__span-37-35"><a id="__codelineno-37-35" name="__codelineno-37-35" href="#__codelineno-37-35"></a>       &quot;email&quot;: &quot;david.blasby@geocat.net&quot;
+</span><span id="__span-37-36"><a id="__codelineno-37-36" name="__codelineno-37-36" href="#__codelineno-37-36"></a>   }
+</span></code></pre></div>
+<p>In this JSON set of claims (mirrored in the JWT claims of the Access Token), and the two roles from the IDP are  "GeonetworkAdministrator", and "GeoserverAdministrator".  The JSON path to the roles is <code>resource_access.live-key2.roles</code>.</p>
+<h4 id="role-conversion">Role Conversion</h4>
+<p>The JWT Headers module also allows for converting roles (from the external IDP) to the GeoNetwork internal role names.</p>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JWTHEADERS_RoleConverterString</td>
+<td>Role Converter Map from External Roles to GeoNetwork Roles. <br> This is a ";" delimited map in the form of: <br> <code>ExternalRole1=GeoNetworkRole1;ExternalRole2=GeoNetworkRole2</code></td>
+</tr>
+<tr>
+<td>JWTHEADERS_OnlyExternalListedRoles</td>
+<td>Only allow External Roles that are explicitly named above. <br>If true, external roles that are not mentioned in the conversion map will be ignored.  If false, those external roles will be turned into GeoNetwork roles of the same name. <br>These roles should either be a Profile ("Administrator", "Reviewer", etc..) or group-based permissions ("GroupName:ProfileName")</td>
+</tr>
+</tbody>
+</table>
+<p>For example, a conversion map like <code>GeonetworkAdministrator=ADMINISTRATOR</code> will convert our IDP "GeonetworkAdministrator" to the "ADMINISTRATOR" Profile...</p>
+<p>In our example, the user has two roles "GeoserverAdministrator" and "GeonetworkAdministrator". If "Only allow External Roles that are explicitly named above" is true, then GeoNetwork will only see the "ADMINISTRATOR" role. If false, it will see "ADMINISTRATOR" and "GeoserverAdministrator". In neither case will the original "GeonetworkAdministrator" role name be visible, as it has been converted.</p>
+<h5 id="groups">Groups</h5>
+<p>As equivalent with the OIDC and Keycloak providers, specify group permissions in the <code>&lt;groupName&gt;:&lt;Profile&gt;</code> format.</p>
+<h3 id="jwt-validation">JWT Validation</h3>
+<p>If you are using Apache's <code>mod_auth_openidc</code> module, then you do <em>not</em> have to do JWT validation - Apache will ensure they are valid when it attaches the headers to the request.</p>
+<p>However, if you are using robot access to GeoNetwork, you can attach an Access Token to the request header for access.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>Authentication: Bearer `base64 JWT Access Token`
+</span></code></pre></div>
+<p>OR </p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>Authentication: `base64 JWT Access Token`
+</span></code></pre></div>
+<p>You would then setup the user name to come from a JWT token in the <code>Authentication</code> header with a JSON path like <code>preferred_username</code>.</p>
+<p>You can also extract roles from the Access Token in a similar manner - make sure your IDP imbeds roles inside the Access Token.</p>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JWTHEADERS_ValidateToken</td>
+<td>Validate JWT (Access Token). <Br>If false, do not do any validation.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenExpiry</td>
+<td>Validate Token Expiry. <br>If true, validate the <code>exp</code> claim in the JWT and ensure it is in the future.  This should always be true so you do not allow expired tokens.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenSignature</td>
+<td>Validate JWT (Access Token) Signature.<br>If true, validate the Token's Signature</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenSignatureURL</td>
+<td>JSON Web Key Set URL (jwks_uri).<br>URL for a JWK Set.  This is typically called <code>jwks_uri</code> in the OIDC metadata configuration.  This will be downloaded and used to check the JWT's signature.  This should always be true to ensure that the JWT has not been modified.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenAgainstURL</td>
+<td>Validate JWT (Access Token) Against Endpoint.<br>If true, validate the access token against an IDP's token verification URL.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenAgainstURLEndpoint</td>
+<td>URL (userinfo_endpoint). <br>IDP's token validation URL.  This URL will be retrieved by adding the Access Token to the <code>Authentiation: Bearer &lt;access token&gt;</code> header.  It should return a HTTP 200 status code if the token is valid.  This is recommened by the OIDC specification.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateSubjectWithEndpoint</td>
+<td>Also validate Subject.<br>If true, the <code>sub</code> claim of the Access Token and the "userinfo_endpoint" <code>sub</code> claim will be checked to ensure they are equal.  This is recommened by the OIDC specification.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenAudience</td>
+<td>Validate JWT (Access Token) Audience. <br> If true, the audience of the Access Token is checked. This is recommened by the OIDC specification since this verifies that the Access Token is meant for us.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenAudienceClaimName</td>
+<td>Claim Name.<br>The name of the claim the audience is in (<code>aud</code>, <code>azp</code>, or <code>appid</code> claim) the Access Token.</td>
+</tr>
+<tr>
+<td>JWTHEADERS_ValidateTokenAudienceClaimValue</td>
+<td>Required Claim Value. <br>The value this claim must be (if the claim is a list of string, then it must contain this value).</td>
+</tr>
+</tbody>
+</table>
+<h4 id="using-headers-or-geonetwork-database-for-profiles-profile-groups">Using Headers or GeoNetwork Database for Profiles &amp; Profile Groups</h4>
+<p>Inside <code>JwtHeaderSecurityConfig</code>, use these values to determine where Profile and ProfileGroups come from.  </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>updateProfile</td>
+<td>true -&gt; update the DB with the information from OIDC (don't allow user to edit profile in the UI)<br>false -&gt; don't update the DB (user must edit profile in UI).</td>
+</tr>
+<tr>
+<td>updateGroup</td>
+<td>true -&gt; update the DB (user's group) with the information from OIDC (don't allow admin to edit user's groups in the UI)<br>false -&gt; don't update the DB (admin must edit groups in UI).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="using-jwt-headers-for-both-oidc-and-oauth2-simultaneously">Using JWT Headers for both OIDC and OAUTH2 (Simultaneously)</h3>
+<p>Using the above configuration, you can configure JWT Headers for either OIDC-based browser access (i.e. with Apache <code>mod_auth_openidc</code>) <strong><em>or</em></strong> for OAUTH2 based Bearer Token access.  However, you cannot do both at the same time.</p>
+<p>To configure JWT Headers to simultaneously provide OIDC and OAUTH2 access, you can use the <code>jwt-headers-multi</code> configuration.</p>
+<p>To use this, set the <code>GEONETWORK_SECURITY_TYPE</code> to <code>jwt-headers-multi</code></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>GEONETWORK_SECURITY_TYPE=jwt-headers-multi
+</span></code></pre></div>
+<p>Please see these files for more detailed configuration:
+* <code>config-security-jwt-header-multi.xml</code>
+* <code>config-security-jwt-header-multi-overrides.properties</code></p>
+<p>This creates two JWT Header authentication filters for GeoNetwork - one for OIDC based Browser access, and one for OAUTH2 based Robot access.</p>
+<p>You configure each of these independently using the same environment variables described above. 
+For the first filter, use the environment variables defined above (ie. <code>JWTHEADERS_UserNameFormat</code>).  For the second filter, add a <code>2</code> at the end of the environment variable (i.e. <code>JWTHEADERS_UserNameFormat2</code>).</p>
 <h2 id="authentication-ecas">Configuring EU Login</h2>
-<p>EU Login is the central login mechanism of the European Commission. You can enable login against that central service in case your intended users have ar can acquire a EU Login.</p>
+<p>EU Login is the central login mechanism of the European Commission. You can enable login against that central service in case your intended users have or can acquire an EU Login.</p>
 <p>To enable EU Login, set up authentication by including <code>WEB-INF/config-security/config-security-ecas.xml</code> in <code>WEB-INF/config-security/config-security.xml</code>, uncommenting the following line:</p>
-<div class="language-xml highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nt">&lt;import</span><span class="w"> </span><span class="na">resource=</span><span class="s">&quot;config-security-ecas.xml&quot;</span><span class="nt">/&gt;</span>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">&lt;import</span><span class="w"> </span><span class="na">resource=</span><span class="s">&quot;config-security-ecas.xml&quot;</span><span class="nt">/&gt;</span>
 </span></code></pre></div>
 <p>EU-login requires an ecas-plugin provided by the European Union. The ecas plugin is available via <a href="https://citnet.tech.ec.europa.eu/CITnet/nexus">CITnet</a> for various java containers, such as Tomcat and JBoss.</p>
 <p>For tomcat, add two files to the tomcat lib folder: ecas-tomcat-x.y.z.jar and log4j-x.y.z.jar. Inside the lib folder copy two folders from <strong><code>eulogin-tomcat-x.y.z-config.zip</code></strong>: <strong><code>org/apache/catalina/authenticator</code></strong> and <strong><code>org/apache/catalina/startup</code></strong>. The mbeans folder contains a file <strong><code>mbeans-descriptors.xml</code></strong>. The startup folder contains a file <strong><code>Authenticators.properties</code></strong>. Verify that the JDK trusts the <a href="https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates">ECAS certificates</a> else import them on the keystore of the JVM.</p>
 <p>The EU Login configuration is defined in <strong><code>WEB-INF/config-security/config-security.properties</code></strong>. You can configure your environment by updating the previous file or by defining property overrides in the file <strong><code>WEB-INF/config-security/config-security-overrides.properties</code></strong>:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>cas.baseURL=https://webgate.ec.europa.eu/cas
+<div class="language-text highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>cas.baseURL=https://webgate.ec.europa.eu/cas
 </span></code></pre></div>
-<p>Restart the service and check the authentication menchanism.</p>
+<p>Restart the service and check the authentication mechanism.</p>
 <h2 id="authentication-shibboleth">Configuring Shibboleth</h2>
-<p>The catalog can operate in a SAML secured federation. Shibboleth should be installed in Apache as described <a href="https://wiki.shibboleth.net/confluence/display/SHIB2/Installation">here</a>. The catalog is accessed via Apache. Setup Shibboleth authentication by including <code>WEB-INF/config-security/config-security-shibboleth.xml</code> in <code>WEB-INF/config-security/config-security.xml</code>. You can then configure your environment in <code>config-security-shibboleth-overrides.properties</code>.</p>
+<p>The catalog can operate in a SAML secured federation. Shibboleth should be installed in Apache as described in the <a href="https://wiki.shibboleth.net/confluence/display/SHIB2/Installation">Shibboleth installation guide</a>. The catalog is accessed via Apache. Setup Shibboleth authentication by including <code>WEB-INF/config-security/config-security-shibboleth.xml</code> in <code>WEB-INF/config-security/config-security.xml</code>. You can then configure your environment in <code>config-security-shibboleth-overrides.properties</code>.</p>
 
 
 
@@ -3263,14 +4333,14 @@
             </div>
           
           
-  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
 
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
   Retour en haut de la page
 </button>
         
@@ -3286,7 +4356,7 @@
           <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Managing users and groups">
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
             </div>
             <div class="md-footer__title">
               <span class="md-footer__direction">
@@ -3311,7 +4381,7 @@
             </div>
             <div class="md-footer__button md-icon">
               
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
             </div>
           </a>
         
@@ -3343,7 +4413,7 @@
 <div class="md-copyright">
   
   <span class="md-copyright__highlight">
-    Copyright &copy; 2001 - 2024 FAO-UN and others
+    Copyright &copy; 2001 - 2026 FAO-UN and others
   </span>
   
   
@@ -3362,7 +4432,8 @@
   
 </div>
       
-        <div class="md-social">
+        
+<div class="md-social">
   
     
     
@@ -3372,7 +4443,7 @@
       
     
     <a href="https://github.com/geonetwork" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   
     
@@ -3383,7 +4454,7 @@
       
     
     <a href="https://hub.docker.com/_/geonetwork" target="_blank" rel="noopener" title="hub.docker.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M349.9 236.3h-66.1v-59.4h66.1zm0-204.3h-66.1v60.7h66.1zm78.2 144.8H362v59.4h66.1zm-156.3-72.1h-66.1v60.1h66.1zm78.1 0h-66.1v60.1h66.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1zm78.1 0h-66.1v59.4h66.1zm-78.1-72.1h-66.1v60.1h66.1z"/></svg>
     </a>
   
     
@@ -3420,10 +4491,13 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.action.view", "content.action.edit", "content.code.copy", "content.tabs.link", "navigation.tabs", "navigation.tracking", "navigation.prune", "navigation.indexes", "toc.follow", "navigation.top", "navigation.footer", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"default": "stable", "provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["toc.follow", "navigation.tracking", "navigation.top", "navigation.tabs", "navigation.prune", "navigation.indexes", "navigation.footer", "header.autohide", "content.tabs.link", "content.code.copy", "content.action.view", "content.action.edit", "announce.dismiss"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "default": "stable", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
